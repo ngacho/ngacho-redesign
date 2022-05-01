@@ -70,4 +70,12 @@ window.onload = function () {
         }
     }
 
+    // INJECT CSS
+    var css = document.createElement("style");
+    css.type = "text/css";
+    css.innerHTML = " .wrap { border-right: 0.08em solid #28807a}";
+    document.body.appendChild(css);
+
 };
+
+
