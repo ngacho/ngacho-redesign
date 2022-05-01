@@ -76,6 +76,26 @@ a {
     background-color: white;
 }
 
+.intro-container {
+    display: table;
+    width: 100%;
+    text-align: center;
+    height: 100vh;
+    min-height: 100vh;
+}
+
+.intro-wrapper {
+    color: #03312E;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.intro{
+    padding: 10px;
+    font-weight: 400;
+    font-size: 5em;
+}
+
 @media only screen and (max-width: 768px) {
     .nav-menu {
         position: fixed;
@@ -83,6 +103,7 @@ a {
         top: 4.2rem;
         flex-direction: column;
         background-color: #03312E;
+        align-items: center;
         width: 100%;
         padding-top: 20px;
         padding-bottom: 20px;
@@ -96,11 +117,15 @@ a {
     }
 
     .nav-item {
-        margin: 2.5rem 0;
+        margin: 1rem 0;
 
     }
+
     .nav-bar>ul li:not(:last-child) {
+        width: 100%;
+        padding-bottom: 1rem;
         border-right: none;
+        border-bottom: 1.5px solid #F3DFBF;
     }
 
     .hamburger-menu {
@@ -120,5 +145,11 @@ a {
     .hamburger-menu.active .bar:nth-child(3) {
         -webkit-transform: translateY(-8px) rotate(-45deg);
         transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .intro{
+        padding: 10px;
+        font-weight: 300;
+        font-size: 3em;
     }
 }
