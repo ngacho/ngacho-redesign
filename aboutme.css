@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Source+Code+Pro:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;500&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Montserrat, sans-serif;
+    overflow: hidden;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.descript-container {
+    display: table;
+    width: 60%;
+    margin: 0 auto;
+    height: calc(100vh - 6.5rem);
+    min-height: calc(100vh - 6.5rem);
+}
+
+.descript-wrapper {
+    color: #03312E;
+    vertical-align: middle;
+    display: table-cell;
+
+}
+
+.descript {
+    font-family: 'Montserrat', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 200;
+    margin: auto 0 auto 2em;
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #03312E;
+
+}
+
+.description {
+    padding: 10px;
+}
+
+.tools-intro {
+    font-size: 0.8em;
+    margin-top: 1em;
+}
+
+.tools-list {
+    font-size: 0.7em;
+    padding: 0 10px;
+
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+
+
+}
+
+
+.profile-photo {
+    max-width: 40%;
+    height: auto;
+    float: right;
+
+    margin-left: 2em;
+}
+
+@media only screen and (max-width: 768px) {
+
+    html {
+        overflow: scroll;
+    }
+
+
+    .descript-container {
+        display: flex;
+        width: 100%;
+        text-align: justify;
+        text-justify: auto;
+        height: calc(100vh - 7rem);
+        min-height: calc(100vh - 7rem);
+    }
+
+    .descript-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .descript {
+        order: 2;
+        margin: 5px;
+        font-size: 1em;
+        line-height: 1.2;
+        color: #03312E;
+    }
+
+
+
+    .profile-photo {
+        order: 1;
+        margin: 10px;
+        flex-shrink: 0;
+
+        float: bottom;
+    }
+
+    .tools-list {
+        font-size: 0.7em;
+        padding: 0 10px;
+    }
+}

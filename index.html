@@ -4,9 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <title>Ngacho Home</title>
+    <title>Home</title>
     <meta name="viewport" content="device-width, initial-scale=1">
     <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="nav-bar.css">
+    <link rel="stylesheet" href="footer.css">
     <!-- icon css sheet-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -18,6 +20,12 @@
 <body>
     <header class="main-navigation">
         <nav class="nav-bar">
+            <div class="hamburger-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
             <a href="#" class="nav-logo">Brandon Ngacho</a>
             <ul class="nav-menu">
                 <li class="nav-item">
@@ -34,23 +42,31 @@
                 </li>
             </ul>
 
-            <div class="hamburger-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
         </nav>
 
     </header>
 
     <div class="intro-container">
         <div class="intro-wrapper">
-            <p href="" class="typewrite intro" data-period="2000" data-type='[ "Hi, I&#39;m Ngacho.", "I make Android and Web applications."]'>
+            <p href="" class="typewrite intro" data-period="2000"
+                data-type='[ "Hi, I&#39;m Ngacho.", "I make Android and Web applications."]'>
                 <span class="wrap"></span>
             </p>
         </div>
     </div>
+
+
+    <footer class="main-footer">
+        <p> Designed & Built by Brandon Ngacho. Copyright &copy;
+            <script>document.write(new Date().getFullYear())</script>. All Rights Reserved.
+        </p>
+    </footer>
+
+    <noscript>
+        You must have javascript enabled to view this content.
+    </noscript>
     <script src="homepage.js"></script>
+    <script src="navigation.js"></script>
 
 </body>
 

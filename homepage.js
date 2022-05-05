@@ -1,21 +1,3 @@
-const hamburger = document.querySelector(".hamburger-menu");
-const navMenu = document.querySelector(".nav-menu");
-const navLink = document.querySelectorAll(".nav-link");
-
-console.log(hamburger.nodeType);
-
-hamburger.addEventListener("click", mobileMenu);
-navLink.forEach(n => n.addEventListener("click", closeMenu));
-
-function mobileMenu() {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
-}
-
-function closeMenu() {
-    hamburger.classList.remove("active");
-    navMenu.classList.remove("active");
-}
 
 // type writer
 
@@ -69,12 +51,6 @@ window.onload = function () {
             new textType(elements[i], JSON.parse(toRotate), period);
         }
     }
-
-    // INJECT CSS
-    var css = document.createElement("style");
-    css.type = "text/css";
-    css.innerHTML = " .wrap { border-right: 0.08em solid #28807a}";
-    document.body.appendChild(css);
 
 };
 
