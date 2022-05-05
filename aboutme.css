@@ -81,6 +81,13 @@ a {
         overflow: scroll;
     }
 
+    .profile-photo {
+        max-width: 95%;
+        height: auto;
+        margin: 0 auto 0 auto;
+        flex-shrink: 0;
+        order: 0;
+    }
 
     .descript-container {
         display: flex;
@@ -94,27 +101,19 @@ a {
     .descript-wrapper {
         display: flex;
         flex-direction: column;
+        overflow: auto;
         align-items: center;
         justify-content: center;
     }
 
     .descript {
-        order: 2;
-        margin: 5px;
         font-size: 1em;
+        margin: auto;
         line-height: 1.2;
         color: #03312E;
-    }
-
-
-
-    .profile-photo {
         order: 1;
-        margin: 10px;
-        flex-shrink: 0;
-
-        float: bottom;
     }
+
 
     .tools-list {
         font-size: 0.7em;
