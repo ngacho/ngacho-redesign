@@ -82,7 +82,7 @@ a {
     }
 
     .profile-photo {
-        max-width: 95%;
+        max-width: 70%;
         height: auto;
         margin: 0 auto 0 auto;
         flex-shrink: 0;
@@ -118,5 +118,16 @@ a {
     .tools-list {
         font-size: 0.7em;
         padding: 0 10px;
+    }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 770px) {
+    .descript-container {
+        display: flex;
+        width: 100%;
+        text-align: justify;
+        text-justify: auto;
+        height: calc(100vh - 6.5rem);
+        min-height: calc(100vh - 6.5rem);
     }
 }

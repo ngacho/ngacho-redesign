@@ -59,3 +59,11 @@ a {
     }
 
 }
+
+@media only screen and (min-width: 500px) and (max-width: 770px) {
+    /*Fixes weird behavior of containers*/
+    .intro-container{
+        height: calc(100vh - 6.5rem);
+        min-height: calc(100vh - 6.5rem);
+    }
+}
