@@ -32,13 +32,23 @@ a {
     vertical-align: middle;
     display: table-cell;
     margin: 10px;
+    margin: auto;
 }
 
-.projects-items-wrapper {
-    color: #03312E;
-    width: calc((3*350px) + 80px);
+.projects-items-wrapper{
     margin: auto;
     display: flex;
+    width: calc((3*350px) + (12 * 20px));
+    align-items: center;
+    flex-direction: row;
+
+}
+
+.projects-carousel {
+    color: #03312E;
+    margin: auto;
+    display: flex;
+    width: calc((3*350px) + (6 * 20px));
     align-items: center;
     flex-direction: row;
 }
@@ -131,20 +141,25 @@ a {
 }
 
 .carousel-control {
-    top: 50%;
-    bottom: auto;
     width: 50px;
     height: 50px;
-    border: 1px solid #000;
-    background-color: #000;
+    border: 1px solid #03312E;
+    background-color: #03312E;
     font-size: 30px;
     color: #fff;
     text-align: center;
     line-height: 44px;
     text-shadow: none;
-    opacity: 0.8;
+    opacity: 1;
 }
 
+.left-control{
+    margin-left: 10px;
+}
+
+.right-control{
+    margin-right: 10px;
+}
 
 @media only screen and (max-width: 517px) {
 
