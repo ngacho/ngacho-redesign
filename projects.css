@@ -56,7 +56,7 @@ a {
 .project-card {
     position: relative;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-    height: 450px;
+    height: 420px;
     overflow: hidden;
     margin: 0 20px 0 20px;
     width: 350px;
@@ -97,7 +97,7 @@ a {
 
 .project-card:hover .project-details {
     box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3);
-    top: 69%;
+    top: 65%;
 }
 
 .project-details>.min-details {
@@ -151,6 +151,10 @@ a {
     line-height: 44px;
     text-shadow: none;
     opacity: 1;
+}
+
+.carousel-control:hover{
+    cursor: pointer;
 }
 
 .left-control{
