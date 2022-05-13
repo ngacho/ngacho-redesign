@@ -28,16 +28,18 @@ a {
     min-height: calc(100vh - 6.5rem);
 }
 
-.projects-wrapper{
+.projects-wrapper {
     vertical-align: middle;
     display: table-cell;
+    margin: 10px;
 }
 
 .projects-items-wrapper {
     color: #03312E;
-    width: 75%;
+    width: calc((3*350px) + 80px);
     margin: auto;
     display: flex;
+    align-items: center;
     flex-direction: row;
 }
 
@@ -46,7 +48,7 @@ a {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
     height: 450px;
     overflow: hidden;
-    margin: auto;
+    margin: 0 20px 0 20px;
     width: 350px;
 }
 
@@ -127,6 +129,22 @@ a {
     box-shadow: 0 5px 10px rgba(0, 0, 0, .3);
     transform: translateY(-2px);
 }
+
+.carousel-control {
+    top: 50%;
+    bottom: auto;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #000;
+    background-color: #000;
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    line-height: 44px;
+    text-shadow: none;
+    opacity: 0.8;
+}
+
 
 @media only screen and (max-width: 517px) {
 
