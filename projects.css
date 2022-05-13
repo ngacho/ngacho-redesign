@@ -23,17 +23,22 @@ a {
 .projects-container {
     display: table;
     width: 100%;
-    text-align: center;
     height: 100vh;
     height: calc(100vh - 6.5rem);
     min-height: calc(100vh - 6.5rem);
 }
 
-
-.projects-wrapper {
-    color: #03312E;
+.projects-wrapper{
     vertical-align: middle;
     display: table-cell;
+}
+
+.projects-items-wrapper {
+    color: #03312E;
+    width: 75%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
 }
 
 .project-card {
@@ -42,7 +47,7 @@ a {
     height: 450px;
     overflow: hidden;
     margin: auto;
-    width: 400px;
+    width: 350px;
 }
 
 .project-card>figure {
@@ -55,16 +60,16 @@ a {
     width: 100%;
     transition: box-shadow .7s ease-in-out,
         top .7s ease-in-out;
-    -webkit-filter: grayscale(40%);
+    -webkit-filter: grayscale(80%);
     /* Safari 6.0 - 9.0 */
-    filter: grayscale(40%);
+    filter: grayscale(80%);
 }
 
 .project-card:hover img {
     -webkit-filter: grayscale(0%);
     /* Safari 6.0 - 9.0 */
     filter: grayscale(0%);
-    filter: saturate(2);
+    filter: saturate(1.5);
 
 }
 
@@ -98,6 +103,10 @@ a {
     text-align: start;
     font-size: .9rem;
     font-weight: 400;
+}
+
+.project-details>.min-details>span {
+    font-family: 'Source Code Pro', sans-serif;
 }
 
 .btn {
