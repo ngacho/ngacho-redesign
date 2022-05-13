@@ -56,7 +56,7 @@ a {
 .project-card {
     position: relative;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-    height: 420px;
+    height: 400px;
     overflow: hidden;
     margin: 0 20px 0 20px;
     width: 350px;
@@ -89,7 +89,7 @@ a {
     background-color: #FFF;
     padding: 20px;
     position: absolute;
-    top: 84%;
+    top: 83%;
     width: 100%;
     transition: box-shadow .3s ease-in-out,
         top .3s ease-in-out;
