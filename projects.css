@@ -29,6 +29,96 @@ a {
     min-height: calc(100vh - 6.5rem);
 }
 
+
+.projects-wrapper {
+    color: #03312E;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.project-card {
+    position: relative;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    height: 450px;
+    overflow: hidden;
+    margin: auto;
+    width: 400px;
+}
+
+.project-card>figure {
+    width: 100%;
+    margin: 0 auto 0 auto;
+    background-position: center center;
+}
+
+.project-card>figure>img {
+    width: 100%;
+    transition: box-shadow .7s ease-in-out,
+        top .7s ease-in-out;
+    -webkit-filter: grayscale(40%);
+    /* Safari 6.0 - 9.0 */
+    filter: grayscale(40%);
+}
+
+.project-card:hover img {
+    -webkit-filter: grayscale(0%);
+    /* Safari 6.0 - 9.0 */
+    filter: grayscale(0%);
+    filter: saturate(2);
+
+}
+
+.project-details {
+    background-color: #FFF;
+    padding: 20px;
+    position: absolute;
+    top: 84%;
+    width: 100%;
+    transition: box-shadow .3s ease-in-out,
+        top .3s ease-in-out;
+}
+
+.project-card:hover .project-details {
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3);
+    top: 69%;
+}
+
+.project-details>.min-details {
+    margin-bottom: 20px;
+}
+
+.project-details>.min-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.project-details>.min-details>h1>span {
+    color: #7B7B7B;
+    display: block;
+    text-align: start;
+    font-size: .9rem;
+    font-weight: 400;
+}
+
+.btn {
+    background-color: #03312E;
+    border-radius: 5px;
+    color: #FFF;
+    display: block;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: capitalize;
+    width: 100%;
+    transition: box-shadow .3s ease-in-out,
+        transform .3s ease-in-out;
+}
+
+.btn:hover {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .3);
+    transform: translateY(-2px);
+}
+
 @media only screen and (max-width: 517px) {
 
     .projects-container {
@@ -39,7 +129,4 @@ a {
         height: calc(100vh - 7rem);
         min-height: calc(100vh - 7rem);
     }
-
 }
-
-
