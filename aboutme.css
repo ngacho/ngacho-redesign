@@ -94,8 +94,8 @@ a {
         width: 100%;
         text-align: justify;
         text-justify: auto;
-        height: calc(100vh - 7rem);
-        min-height: calc(100vh - 7rem);
+        height: calc(100vh - 6.5rem);
+        min-height: calc(100vh - 6.5rem);
     }
 
     .descript-wrapper {
@@ -127,7 +127,19 @@ a {
         width: 100%;
         text-align: justify;
         text-justify: auto;
-        height: calc(100vh - 6.5rem);
-        min-height: calc(100vh - 6.5rem);
     }
+}
+
+@media only screen and (max-width: 517px) {
+
+    /*footer issues on smaller devices*/
+    .descript-container {
+        display: flex;
+        width: 100%;
+        text-align: justify;
+        text-justify: auto;
+        height: calc(100vh - 7rem);
+        min-height: calc(100vh - 7rem);
+    }
+
 }

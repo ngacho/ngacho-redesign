@@ -20,7 +20,7 @@ a {
     text-decoration: none;
 }
 
-.intro-container {
+.projects-container {
     display: table;
     width: 100%;
     text-align: center;
@@ -29,36 +29,9 @@ a {
     min-height: calc(100vh - 6.5rem);
 }
 
-.intro-wrapper {
-    color: #03312E;
-    vertical-align: middle;
-    display: table-cell;
-}
-
-.intro {
-    padding: 10px;
-    font-weight: 400;
-    font-size: 5em;
-}
-
-.wrap {
-    border-right: 0.08em solid #28807a
-}
-
-@media only screen and (max-width: 768px) {
-
-    .intro {
-        padding: 10px;
-        font-weight: 300;
-        font-size: 3em;
-    }
-
-}
-
 @media only screen and (max-width: 517px) {
 
-    /*footer issues on smaller devices*/
-    .intro-container {
+    .projects-container {
         display: table;
         width: 100%;
         text-align: center;
@@ -66,4 +39,7 @@ a {
         height: calc(100vh - 7rem);
         min-height: calc(100vh - 7rem);
     }
+
 }
+
+
