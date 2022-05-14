@@ -2,8 +2,6 @@ const carousel = document.querySelector(".projects-carousel");
 
 var project_card = document.querySelector(".project-card");
 
-
-
 var scrollAmount = 0;
 
 // get style object to use for calculating margins.

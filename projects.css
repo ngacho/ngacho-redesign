@@ -34,7 +34,7 @@ a {
     margin: auto;
 }
 
-.projects-items-wrapper{
+.projects-items-wrapper {
     margin: auto;
     display: flex;
     width: calc((3*350px) + (12 * 20px));
@@ -52,14 +52,17 @@ a {
     flex-direction: row;
     width: calc((3*350px) + (6 * 20px));
     align-items: center;
-    -ms-overflow-style: none; /* for Internet Explorer, Edge */
-    scrollbar-width: none; /* for Firefox */
-    
+    -ms-overflow-style: none;
+    /* for Internet Explorer, Edge */
+    scrollbar-width: none;
+    /* for Firefox */
+
 
 }
 
 .projects-carousel::-webkit-scrollbar {
-    display: none; /* for Chrome, Safari, and Opera */
+    display: none;
+    /* for Chrome, Safari, and Opera */
 }
 
 .project-card {
@@ -157,32 +160,127 @@ a {
     background-color: #03312E;
     font-size: 30px;
     color: #fff;
+    margin: 0 10px 0 10px;
     text-align: center;
     line-height: 44px;
     text-shadow: none;
     opacity: 1;
 }
 
-.carousel-control:hover{
+.carousel-control:hover {
     cursor: pointer;
 }
 
-.left-control{
-    margin-left: 10px;
-}
-
-.right-control{
-    margin-right: 10px;
-}
 
 @media only screen and (max-width: 517px) {
 
     .projects-container {
         display: table;
-        width: 100%;
         text-align: center;
         height: 100vh;
         height: calc(100vh - 7rem);
         min-height: calc(100vh - 7rem);
     }
+
+}
+
+@media screen and (max-width: 630px) {
+
+    /*
+    Projects-wrapper >> project-items-wrapper >> projects-carousel
+    */
+
+    /*flow is column here*/
+    .projects-items-wrapper {
+        width: 100%;
+        position: absolute;
+        top: 4.5em;
+        bottom: 2em;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 0;
+    }
+
+
+    .projects-carousel {
+        max-width: 360px;
+        flex: 1;
+        flex-wrap: wrap;
+        overflow-y: auto;
+    }
+
+    .project-card {
+        position: relative;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        height: 345px;
+        flex-shrink: 0;
+        overflow: hidden;
+        margin: 10px;
+        width: 340px;
+    }
+
+    .project-details {
+        top: 60%;
+    }
+
+    .project-card:hover .project-details {
+        box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3);
+        top: 58%;
+    }
+
+    .project-details>.min-details>h1>span {
+        font-size: .7rem;
+        font-weight: 250;
+    }
+
+    /** hide carousel control **/
+    .carousel-control {
+        display: none;
+    }
+
+}
+
+@media only screen and (min-width: 630px) and (max-width: 850px) {
+
+    .projects-items-wrapper {
+        width: calc((14*10px) + (2*90px) + 270px);
+    }
+
+    .projects-carousel {
+        width: calc((2*90px) + (4 * 10px) + 270px);
+
+    }
+
+    .project-card {
+        width: 270px;
+        margin: 10px;
+    }
+
+    .project-details>.min-details>h1>span {
+        font-size: .7rem;
+        font-weight: 250;
+    }
+
+}
+
+@media only screen and (min-width: 851px) and (max-width: 1290px) {
+
+    .projects-items-wrapper {
+        width: calc((12*20px) + (2*300px) + 10px);
+    }
+
+    .projects-carousel {
+        width: calc((2*300px) + (4 * 20px));
+
+    }
+
+    .project-card {
+        width: 300px;
+    }
+
+
+    .project-details {
+        top: 65%;
+    }
+
 }
