@@ -122,6 +122,11 @@ a {
         grid-template-columns: 1fr;
         padding: 0rem 3rem 2rem 3rem;
     }   
+
+    .blog-item:last-child{
+        border-bottom: 1px solid rgba(3, 49, 46, 0.2);
+        border-top: none;
+    }
 }
 
 @media screen and (max-width: 630px) {
