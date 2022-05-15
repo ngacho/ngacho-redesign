@@ -20,6 +20,12 @@ a {
     text-decoration: none;
 }
 
+.blog-container {
+    height: calc(100vh - 6.5rem);
+    min-height: calc(100vh - 6.5rem);
+    overflow: auto;
+}
+
 .blog-heading-wrapper {
     height: 120px;
     text-align: center;
@@ -44,6 +50,10 @@ a {
     padding: 2rem 0rem 2rem 0rem;
 }
 
+.blog-item:nth-last-child(-n+2) {
+    border-bottom: 1px solid rgba(3, 49, 46, 0.2);
+}
+
 .blog-item>time {
     color: rgba(67, 82, 81, 0.7);
     font-size: .75rem;
@@ -55,6 +65,10 @@ a {
     line-height: 1.75rem;
     letter-spacing: -.02em;
     font-weight: 600;
+}
+
+.blog-item > .post-title, .post-short-desc, .tags>a{
+    cursor: pointer;
 }
 
 .blog-item>.post-short-desc {
