@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Source+Code+Pro:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Source+Code+Pro:wght@300;500&display=swap');
 
 * {
     margin: 0;
@@ -102,7 +103,7 @@ a {
     background-color: #FFF;
     padding: 20px;
     position: absolute;
-    top: 83%;
+    top: 80%;
     width: 100%;
     transition: box-shadow .3s ease-in-out,
         top .3s ease-in-out;
@@ -110,7 +111,7 @@ a {
 
 .project-card:hover .project-details {
     box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3);
-    top: 65%;
+    top: 62%;
 }
 
 .project-details>.min-details {
@@ -120,6 +121,7 @@ a {
 .project-details>.min-details {
     display: flex;
     justify-content: space-between;
+    font-family: 'Poppins', sans-serif;
 }
 
 .project-details>.min-details>h1>span {
@@ -220,12 +222,12 @@ a {
     }
 
     .project-details {
-        top: 60%;
+        top: 58%;
     }
 
     .project-card:hover .project-details {
         box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3);
-        top: 58%;
+        top: 56%;
     }
 
     .project-details>.min-details>h1>span {
@@ -284,7 +286,7 @@ a {
 
 
     .project-details {
-        top: 65%;
+        top: 63%;
     }
 
 }
