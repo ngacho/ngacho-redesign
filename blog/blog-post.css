@@ -47,6 +47,7 @@ a {
     text-align: center;
     width: 80%;
     margin: auto;
+    line-height: 1.5em;
 }
 
 
@@ -109,6 +110,7 @@ a {
     .blog-content {
 
         width: 95%;
+        line-height: 1.3em;
 
     }
 
@@ -128,5 +130,6 @@ a {
 
     .blog-content {
         width: 100%;
+        line-height: 1.3em;
     }
 }
