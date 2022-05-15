@@ -68,3 +68,14 @@ a {
     margin-top: .75rem;
     color: rgba(6, 10, 9, 0.6);
 }
+
+.blog-item>.tags {
+    display: flex;
+    flex-direction: row;
+    font-weight: 300;
+    font-size: .75rem;
+    line-height: 1rem;
+    align-items: center;
+    margin-top: 1.5rem;
+    gap: 1em;
+}
