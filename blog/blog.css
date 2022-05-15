@@ -29,3 +29,42 @@ a {
     background-image: url('../images/graph-background.png');
     color: #03312E;
 }
+
+.blogs-wrapper {
+    width: 75%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 3em;
+    padding: 0rem 3rem 2rem 3rem;
+}
+
+.blog-item {
+    border-top: 1px solid rgba(3, 49, 46, 0.2);
+    padding: 2rem 0rem 2rem 0rem;
+}
+
+.blog-item>time {
+    color: rgba(67, 82, 81, 0.7);
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.blog-item>.post-title {
+    font-size: 1.2rem;
+    line-height: 1.75rem;
+    letter-spacing: -.02em;
+    font-weight: 600;
+}
+
+.blog-item>.post-short-desc {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    margin-top: .75rem;
+    color: rgba(6, 10, 9, 0.6);
+}
