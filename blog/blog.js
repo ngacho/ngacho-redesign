@@ -43,7 +43,6 @@ var posts_data = {
 
 
 var blogs_wrapper = document.querySelector(".blogs-wrapper");
-console.log(blogs_wrapper.children);
 
 var posts = posts_data["posts"];
 for (const post of posts) {
@@ -66,6 +65,44 @@ for (const post of posts) {
     var description = document.createTextNode(post["post-descript"]);
     post_desc.appendChild(description);
 
+    post_title.onclick = function () {
+
+        console.log('clicked item')
+
+        // open the new window.
+        var blog_post_window = window.open("blog_post.html", "_self");
+
+        /** 
+        console.log(blog_post_window.document.children);
+        // add the title to the window.
+        var title_header = blog_post_window.document.querySelector('blog-heading-wrapper');
+        // add title of the text.
+        var title_h1 = document.createElement('h1');
+        title_h1.className = 'blog-heading';
+        title_h1.appendChild(title);
+        title_header.appendChild(title_h1);
+
+        // add blog contents
+        var blog_content_container = blog_post_window.document.querySelector('blog-content');
+
+        // add date
+        var blog_date = document.createElement('time');
+        blog_date.appendChild(date);
+        // blog descriptions
+        var blog_description = document.createElement('blockquote');
+        blog_description.appendChild(description);
+        // blog article
+        var blog_article = document.createElement('blog-post');
+        blog_article.appendChild(post["post"]);
+
+        blog_content_container.appendChild(blog_date);
+        blog_content_container.appendChild(blog_description);
+        blog_content_container.appendChild(blog_article);
+
+        **/
+
+    }
+
     var tags = document.createElement('div');
     tags.className = 'tags';
     var post_tags = post["tags"];
@@ -80,12 +117,11 @@ for (const post of posts) {
     // append all elements to the div
     blog_item.appendChild(time_item);
     blog_item.appendChild(post_title);
-    blog_item.appendChild(post_title);
     blog_item.appendChild(post_desc);
     blog_item.appendChild(tags);
 
+    // append the blog item to the blog wrappers.
     blogs_wrapper.appendChild(blog_item);
-    console.log(blog_item.className);
 }
 
 
