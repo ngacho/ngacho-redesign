@@ -131,15 +131,16 @@ a {
 
 @media screen and (max-width: 630px) {
 
-    .blogs-wrapper{
-        width: 95%;
-    }
-
     .blog-heading-wrapper{
         height: 100px;
         font-size: 0.8rem;
         line-height: 1.4rem;
     }
+
+    .blogs-wrapper{
+        width: 95%;
+    }
+    
     .blog-item>.post-title{
         font-size: 1rem;
         line-height: 1.5rem;
