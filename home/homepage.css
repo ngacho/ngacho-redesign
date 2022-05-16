@@ -21,7 +21,9 @@ a {
 }
 
 .intro-container {
-    display: table;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     text-align: center;
     height: 100vh;
@@ -31,8 +33,6 @@ a {
 
 .intro-wrapper {
     color: #03312E;
-    vertical-align: middle;
-    display: table-cell;
 }
 
 .intro {
