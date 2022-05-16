@@ -26,6 +26,7 @@ a {
     margin: auto;
     text-align: center;
     padding: 2rem;
+    overflow: auto;
     line-height: 1.7rem;
     height: calc(100vh - 6.5rem);
     min-height: calc(100vh - 6.5rem);
@@ -102,5 +103,52 @@ textarea {
 
 .contact-me-places>.social-media-contacts>.social-logos > a{
     margin: 1rem;
+}
+
+@media only screen and (max-width: 1050px) {
+    .contact-me-container {
+        width: 95%;
+    }
+
+}
+
+@media screen and (max-width: 815px) {
+
+    .contact-me-container {
+        width: 98%;
+    }
+
+    .contact-me-places {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .social-media-contacts{
+        margin-top: 2rem;
+    }
+    
+}
+
+@media  screen and (max-width: 520px) {
+
+    .contact-me-container>.contact-me-intro>.open-invite {
+        font-size: 1.2rem;
+    }
+    
+    .contact-me-container>.contact-me-intro>.contact-me-text {
+        font-size: 0.8rem;
+    }
+
+    .contact-me-places>.contact-form-wrapper>input.send-message {
+        width: 100%;
+    }
+
+    .contact-me-places>.social-media-contacts>h1.follow-me-prompt {
+        font-weight: 150;
+        font-size: 1em;
+    }
+
+
+    
 }
 
