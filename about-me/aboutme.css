@@ -24,6 +24,7 @@ a {
 .descript-container {
     display: table;
     width: 60%;
+    overflow: scroll;
     margin: 0 auto;
     height: calc(100vh - 6.5rem);
     min-height: calc(100vh - 6.5rem);
@@ -40,10 +41,10 @@ a {
     font-family: 'Montserrat', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: 200;
     margin: auto 0 auto 2em;
-    font-size: 1.2em;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.7em;
+    padding: 0.5rem;
     color: #03312E;
-
 }
 
 .description {
@@ -58,12 +59,9 @@ a {
 .tools-list {
     font-size: 0.7em;
     padding: 0 10px;
-
     columns: 2;
     -webkit-columns: 2;
     -moz-columns: 2;
-
-
 }
 
 
@@ -71,64 +69,89 @@ a {
     max-width: 40%;
     height: auto;
     float: right;
-
     margin-left: 2em;
+    padding: 1rem;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 530px) {
 
-    html {
-        overflow: scroll;
+    .descript-wrapper {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    .descript {
+        margin: auto;
+        padding: 1.2rem;
     }
 
     .profile-photo {
-        max-width: 70%;
-        height: auto;
+        max-width: 80%;
         margin: 0 auto 0 auto;
-        flex-shrink: 0;
-        order: 0;
+        padding-top: 1.2rem;
     }
 
+
+
+}
+
+@media only screen and (min-width: 530px) and (max-width: 600px) {
+
     .descript-container {
+        width: 95%;
         display: flex;
-        width: 100%;
+        margin: auto;
         text-align: justify;
         text-justify: auto;
-        height: calc(100vh - 6.5rem);
-        min-height: calc(100vh - 6.5rem);
     }
 
     .descript-wrapper {
         display: flex;
         flex-direction: column;
-        overflow: auto;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .descript {
-        font-size: 1em;
-        margin: auto;
-        line-height: 1.2;
-        color: #03312E;
-        order: 1;
-    }
-
-
-    .tools-list {
-        font-size: 0.7em;
-        padding: 0 10px;
-    }
-}
-
-@media only screen and (min-width: 500px) and (max-width: 770px) {
-    .descript-container {
-        display: flex;
-        width: 100%;
         text-align: justify;
         text-justify: auto;
     }
+
+    .descript {
+        margin: auto;
+        padding: 1.2rem;
+        width: 100%;
+        font-size: 1rem;
+        line-height: 1.6rem;
+    }
+
+    .tools-list {
+        font-size: 0.8em;
+    }
+
+
+    .profile-photo {
+        max-width: 50%;
+        margin: auto;
+        padding-top: 1rem;
+    }
 }
+
+@media screen and (min-width: 600px) and (max-width: 950px) {
+
+    .descript-container {
+        width: 95%;
+    }
+
+    .profile-photo {
+        max-width: 50%;
+        margin: auto;
+        padding-top: 1rem;
+    }
+
+
+
+}
+
 
 @media only screen and (max-width: 517px) {
 
