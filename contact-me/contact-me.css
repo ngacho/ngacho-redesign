@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Source+Code+Pro:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Source+Code+Pro:wght@300;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.contact-me-container {
+    width: 75%;
+    margin: auto;
+    text-align: center;
+    padding: 2rem;
+    line-height: 1.7rem;
+    height: calc(100vh - 6.5rem);
+    min-height: calc(100vh - 6.5rem);
+}
+
+.contact-me-container>.contact-me-intro>.open-invite {
+    margin-bottom: 0.8rem;
+}
+
+.contact-me-container>.contact-me-intro>.contact-me-text {
+    text-align: left;
+}
+
+.contact-me-container>.contact-me-intro>.contact-me-text>a {
+    text-decoration-line: underline;
+    text-decoration-style: dashed;
+    text-decoration-color: #03312E;
+    font-weight: 700;
+    text-decoration-thickness: 1.5px;
+    color: #03312E;
+}
+
+.contact-me-places {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3rem;
+    margin-top: 3rem;
+}
+
+
+.contact-me-places>.contact-form-wrapper input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #03312E;
+    box-sizing: border-box;
+    color: #03312E;
+    font-family: 'Source Code Pro', sans-serif;
+    margin: 10px;
+}
+
+.contact-me-places>.contact-form-wrapper textarea {
+    resize: vertical;
+}
+
+
+
+.contact-me-places>.contact-form-wrapper>input.send-message {
+    width: 40%;
+    color: #fff;
+    background-color: #03312E;
+    padding: 10px;
+    font-size: 16px;
+    transition: transform .2s;
+    background-repeat: no-repeat;
+}
+
+.contact-me-places>.contact-form-wrapper>input.send-message:hover {
+    background-color: #5dfdcb;
+    color: #03312E;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.contact-me-places>.social-media-contacts>h1.follow-me-prompt {
+    font-weight: 150;
+    font-size: 1.4em;
+    font-style: bold;
+}
+
+.contact-me-places>.social-media-contacts>.social-logos {
+    margin: 1rem;
+}
+
+.contact-me-places>.social-media-contacts>.social-logos > a{
+    margin: 1rem;
+}
+
