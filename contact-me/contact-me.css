@@ -87,7 +87,7 @@ textarea {
 .contact-me-places>.contact-form-wrapper>input.send-message:hover {
     background-color: #5dfdcb;
     color: #03312E;
-    transform: scale(1.2);
+    transform: scale(1.1);
     cursor: pointer;
 }
 
@@ -146,6 +146,14 @@ textarea {
     .contact-me-places>.social-media-contacts>h1.follow-me-prompt {
         font-weight: 150;
         font-size: 1em;
+    }
+
+
+    .contact-me-places>.contact-form-wrapper>input.send-message:hover {
+        background-color: #5dfdcb;
+        color: #03312E;
+        transform: scale(1.05);
+        cursor: pointer;
     }
 
 
