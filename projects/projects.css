@@ -22,17 +22,20 @@ a {
 }
 
 .projects-container {
-    display: table;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    overflow: auto;
     height: 100vh;
     height: calc(100vh - 6.5rem);
     min-height: calc(100vh - 6.5rem);
 }
 
 .projects-wrapper {
-    vertical-align: middle;
-    display: table-cell;
     margin: auto;
+    overflow-y: auto;
+    /** create layout for project items **/
 }
 
 .projects-items-wrapper {
