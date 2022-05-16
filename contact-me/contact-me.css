@@ -26,28 +26,25 @@ a {
     margin: auto;
     text-align: center;
     padding: 2rem;
-    display: table;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: auto;
     line-height: 1.7rem;
     height: calc(100vh - 6.5rem);
     min-height: calc(100vh - 6.5rem);
 }
 
-.contact-me-wrapper{
-    vertical-align: middle;
-    display: table-cell;
-}
-
-.contact-me-container> .contact-me-wrapper > .contact-me-intro>.open-invite {
+.contact-me-container>.contact-me-wrapper>.contact-me-intro>.open-invite {
     margin-top: 0.8rem;
     margin-bottom: 0.8rem;
 }
 
-.contact-me-container> .contact-me-wrapper >  .contact-me-intro>.contact-me-text {
+.contact-me-container>.contact-me-wrapper>.contact-me-intro>.contact-me-text {
     text-align: left;
 }
 
-.contact-me-container> .contact-me-wrapper > .contact-me-intro>.contact-me-text>a {
+.contact-me-container>.contact-me-wrapper>.contact-me-intro>.contact-me-text>a {
     text-decoration-line: underline;
     text-decoration-style: dashed;
     text-decoration-color: #03312E;
@@ -108,7 +105,7 @@ textarea {
     margin: 1rem;
 }
 
-.contact-me-places>.social-media-contacts>.social-logos > a{
+.contact-me-places>.social-media-contacts>.social-logos>a {
     margin: 1rem;
 }
 
@@ -130,19 +127,19 @@ textarea {
         grid-template-columns: 1fr;
     }
 
-    .social-media-contacts{
+    .social-media-contacts {
         margin-top: 2rem;
     }
-    
+
 }
 
-@media  screen and (max-width: 520px) {
+@media screen and (max-width: 520px) {
 
-    .contact-me-container>.contact-me-wrapper > .contact-me-intro>.open-invite {
+    .contact-me-container>.contact-me-wrapper>.contact-me-intro>.open-invite {
         font-size: 1.2rem;
     }
-    
-    .contact-me-container>.contact-me-wrapper > .contact-me-intro>.contact-me-text {
+
+    .contact-me-container>.contact-me-wrapper>.contact-me-intro>.contact-me-text {
         font-size: 0.8rem;
     }
 
@@ -164,6 +161,5 @@ textarea {
     }
 
 
-    
-}
 
+}

@@ -22,7 +22,9 @@ a {
 }
 
 .descript-container {
-    display: table;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 60%;
     overflow: scroll;
     margin: 0 auto;
@@ -32,8 +34,7 @@ a {
 
 .descript-wrapper {
     color: #03312E;
-    vertical-align: middle;
-    display: table-cell;
+    
 }
 
 .descript {
