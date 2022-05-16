@@ -26,7 +26,6 @@ a {
     justify-content: center;
     width: 100%;
     text-align: center;
-    height: 100vh;
     height: calc(100vh - 6.5rem);
     min-height: calc(100vh - 6.5rem);
 }
@@ -59,11 +58,12 @@ a {
 
     /*footer issues on smaller devices*/
     .intro-container {
-        display: table;
-        width: 100%;
-        text-align: center;
-        height: 100vh;
         height: calc(100vh - 7rem);
         min-height: calc(100vh - 7rem);
+    }
+    
+
+    .intro-wrapper{
+        outline: 1px solid red;
     }
 }
