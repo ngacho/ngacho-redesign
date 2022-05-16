@@ -153,6 +153,20 @@ a {
 }
 
 
+@media screen and (min-width: 950px) and (max-width: 1250px){
+    .descript-container {
+        width: 83%;
+    }
+
+    .profile-photo {
+        max-width: 40%;
+        margin: auto;
+        padding-top: 1rem;
+    }
+}
+
+
+
 @media only screen and (max-width: 517px) {
 
     /*footer issues on smaller devices*/
