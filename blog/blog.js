@@ -48,7 +48,7 @@ var posts = posts_data["posts"];
 for (const post of posts) {
     // Your existing code unmodified...
     var blog_item = document.createElement('div');
-    blog_item.className = 'blog-item';
+    blog_item.className = 'blog-item animate-entry';
 
     var time_item = document.createElement('time');
     time_item.className = 'post-date';
