@@ -1,4 +1,4 @@
-// get the posts
+// get the projects
 var projects_data = {
     "projects": [
         {
@@ -33,22 +33,19 @@ for (let i = 0; i < 4; i++) {
         var project_card = document.createElement('div');
         // class name
         project_card.className = 'project-card animate-entry';
-
         //  create figure element
         var img_figure = document.createElement('figure');
-
         // create img, append src, create alt.
         var project_poster = document.createElement('img');
         project_poster.src = project["poster-url"];
         project_poster.alt = `photo of ${project["project-name"]}`
-
         // put image in figure element
         img_figure.appendChild(project_poster);
 
+        
         // create a section, project-details
         var project_details = document.createElement('section');
         project_details.className = "project-details";
-
         // create div, min-details.
         var minimized_details = document.createElement('div');
         minimized_details.className = "min-details"
@@ -100,7 +97,7 @@ var style = project_card.currentStyle || window.getComputedStyle(project_card);
 var scrollPerClick = project_card.clientWidth + parseFloat(style.marginRight) + parseFloat(style.marginLeft);
 
 function scrollTowardsLeft() {
-    carousel.scrollTo({
+    projects_carousel.scrollTo({
         top: 0,
         left: (scrollAmount -= scrollPerClick),
         behavior: "smooth"
@@ -110,8 +107,9 @@ function scrollTowardsLeft() {
 }
 
 function scrollTowardsRight() {
-    if (scrollAmount <= carousel.scrollWidth - carousel.clientWidth) {
-        carousel.scrollTo({
+    console.log("clicked");
+    if (scrollAmount <= projects_carousel.scrollWidth - projects_carousel.clientWidth) {
+        projects_carousel.scrollTo({
             top: 0,
             left: (scrollAmount += scrollPerClick),
             behavior: "smooth"
