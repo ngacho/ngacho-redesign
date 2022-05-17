@@ -15,7 +15,7 @@ var projects_data = {
         },
         {
             "project-name": "Phantom Runner",
-            "programming-language": "Kotlin",
+            "programming-language": "Kotlin, Javascript",
             "poster-url": "../images/phantom-runner.png",
             "project-link" : "https://github.com/LovemoreNyaumwe/Phantom-Runner"
         }
@@ -42,7 +42,7 @@ for (let i = 0; i < 4; i++) {
         // put image in figure element
         img_figure.appendChild(project_poster);
 
-        
+
         // create a section, project-details
         var project_details = document.createElement('section');
         project_details.className = "project-details";
@@ -55,6 +55,7 @@ for (let i = 0; i < 4; i++) {
         project_title.appendChild(title);
 
         var project_language = document.createElement('span');
+        var langs = project["programming-language"];
         var lang = document.createTextNode(project["programming-language"]);
         project_language.appendChild(lang);
 
