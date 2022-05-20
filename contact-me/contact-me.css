@@ -23,15 +23,21 @@ a {
 
 .contact-me-container {
     width: 75%;
+    top: 4.2rem;
+    height: calc(100vh - 5rem);
     margin: auto;
-    text-align: center;
-    padding: 2rem;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    overflow: scroll;
+    overflow-y: scroll;
+    align-items: center;
     line-height: 1.7rem;
-    height: calc(100vh - 6.5rem);
+    text-align: center;
+}
+
+.contact-me-wrapper {
+    padding: 1rem;
+    overflow-y: scroll;
 }
 
 .contact-form-wrapper {
@@ -107,6 +113,7 @@ textarea {
 
 .contact-me-places>.social-media-contacts>.social-logos {
     margin: 1rem;
+    padding: 1rem;
 }
 
 .contact-me-places>.social-media-contacts>.social-logos>a {
@@ -185,15 +192,15 @@ textarea {
         width: 95%;
     }
 
-    .contact-form-wrapper{
+    .contact-form-wrapper {
         width: 90%;
-        margin: auto;
+        margin: 0 auto 0 auto;
     }
 
 }
 
 @media screen and (max-width: 815px) {
-    .contact-form-wrapper{
+    .contact-form-wrapper {
         width: 85%;
         margin: auto;
     }
@@ -218,7 +225,7 @@ textarea {
     .contact-me-container {
         width: 98%;
         top: 6rem;
-        
+
     }
 
     .contact-me-container>.contact-me-wrapper>.contact-me-intro>.open-invite {
@@ -234,7 +241,7 @@ textarea {
         margin: auto;
     }
 
-    .contact-form-wrapper{
+    .contact-form-wrapper {
         width: 80%;
         margin: auto;
     }
@@ -252,7 +259,5 @@ textarea {
         transform: scale(1.05);
         cursor: pointer;
     }
-
-
 
 }
