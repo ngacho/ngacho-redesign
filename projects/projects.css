@@ -360,3 +360,24 @@ a {
     }
 
 }
+
+@media screen and (max-height: 545px) {
+
+    .project-card{
+        height: 155px;
+    }
+
+
+    .project-card > .project-details{
+        top: 0%;
+    }
+    .project-card > figure{
+        display: none;
+    }
+
+    .project-card:hover .project-details {
+        box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3);
+        top: 0%;
+    }
+    
+}
