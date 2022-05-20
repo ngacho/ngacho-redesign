@@ -363,15 +363,15 @@ a {
 
 @media screen and (max-height: 545px) {
 
-    .project-card{
+    .project-card {
         height: 155px;
     }
 
-
-    .project-card > .project-details{
+    .project-card>.project-details {
         top: 0%;
     }
-    .project-card > figure{
+
+    .project-card>figure {
         display: none;
     }
 
@@ -379,5 +379,5 @@ a {
         box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3);
         top: 0%;
     }
-    
+
 }

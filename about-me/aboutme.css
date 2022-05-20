@@ -74,6 +74,7 @@ a {
     float: right;
     margin-left: 2em;
     padding: 1rem;
+    object-fit: contain;
 }
 
 .animate-entry {
