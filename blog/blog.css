@@ -105,6 +105,24 @@ a {
     gap: 1em;
 }
 
+
+.floating-button {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 3rem;
+    right: 2rem;
+    background-color: #03312E;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+}
+
+.my-float {
+    margin-top: 22px;
+}
+
 .animate-entry {
     -webkit-animation: fadein 2s;
     /* Safari, Chrome and Opera > 12.1 */
@@ -232,5 +250,10 @@ a {
     .blog-item>.tags {
         margin-top: 0.5rem;
         font-size: 0.6rem;
+    }
+
+    .floating-button {
+        bottom: 4rem;
+        right: 1.5rem;
     }
 }

@@ -1,0 +1,26 @@
+{
+  "name": "ngacho-new",
+  "version": "1.0.0",
+  "description": "A redesign of my web portfolio",
+  "main": "homepage.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngacho/ngacho-redesign.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ngacho/ngacho-redesign/issues"
+  },
+  "homepage": "https://github.com/ngacho/ngacho-redesign#readme",
+  "dependencies": {
+    "express-fileupload": "^1.3.1",
+    "express.js": "^1.0.0",
+    "firebase": "^9.8.1",
+    "nodemon": "^2.0.16"
+  }
+}

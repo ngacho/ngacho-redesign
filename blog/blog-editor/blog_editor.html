@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../navigation/nav-bar.css">
+    <link rel="stylesheet" href="blog-editor.css">
+    <script src="../firebase.js" type="module"></script>
+    <!-- icon css sheet-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Edit a Blog</title>
+</head>
+
+<body>
+    <header class="main-navigation">
+        <nav class="nav-bar">
+            <div class="hamburger-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+            <a href="#" class="nav-logo">Brandon Ngacho</a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../projects/projects.html">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../blog/blog.html">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../about-me/aboutme.html">About Me</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../contact-me/contact.html">Contact Me</a>
+                </li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <div class="blog-editor-wrapper">
+        <div class="blog">
+            <textarea type="text" class="title" placeholder="Blog title..."></textarea>
+            <textarea type="text" class="tags" placeholder="Enter tags here. Separate multiple tags with commas..."></textarea>
+            <textarea type="text" class="article" placeholder="Start writing here..."></textarea>
+            
+
+            <div class="blog-options">
+                <button class="btn dark publish-btn">Publish</button>
+                <input type="file" accept="image/*" id="image-upload" hidden>
+                <label for="image-upload" class="btn grey upload-btn">Upload Image</label>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+
+    <script src="../../navigation/navigation.js"></script>
+    <script src="blog-editor.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js" type="module"></script>
+</body>
+
+</html>
