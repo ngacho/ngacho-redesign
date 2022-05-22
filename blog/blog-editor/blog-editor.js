@@ -2,6 +2,7 @@ import { db, collection, doc, setDoc } from '../firebase.js'
 
 const blogTitleField = document.querySelector('.title');
 const articleField = document.querySelector('.article');
+const postDescriptField = document.querySelector('.post-descript');
 const tagsField = document.querySelector('.tags');
 
 const publishBtn = document.querySelector('.publish-btn');
@@ -60,13 +61,17 @@ publishBtn.addEventListener('click', () => {
 
         var data = {
             title: blogTitleField.value,
-            tags : tagsField.value.split(',');
+            tags : tagsField.value.split(','),
+            descript : postDescriptField.value,
             article: articleField.value,
             publishedAt: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
         }
 
-        let docRef = setDoc(doc(db, "blogs", docName), data).then(() => {
-            console.log("Successful")
+        setDoc(doc(db, "blogs", docName), data).then((ref) => {
+            blogTitleField.value = "";
+            tagsField.value = "";
+            postDescriptField.value = "";
+            articleField.value = "";
         }).catch((error) => {
             console.log(`Unsuccessful returned error ${error}`)
         });

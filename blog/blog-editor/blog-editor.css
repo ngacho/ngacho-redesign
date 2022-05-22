@@ -58,9 +58,8 @@ textarea::-webkit-scrollbar-thumb {
 
 .title,
 .article, 
-.tags {
+.tags, .post-descript {
     width: 100%;
-    min-height: 100px;
     height: auto;
     outline: none;
     font-size: 50px;
@@ -80,7 +79,7 @@ textarea::-webkit-scrollbar-thumb {
 .article {
     height: 500px;
     font-size: 20px;
-    margin-top: 0px;
+    margin-top: 10px;
     line-height: 20px;
     font-weight: 500;
     padding-bottom: 100px;
@@ -89,8 +88,17 @@ textarea::-webkit-scrollbar-thumb {
 
 .tags{
     font-size: 1rem;
+    line-height: 1rem;
+    font-weight: 200;
+    white-space: pre-wrap;
+}
+
+.post-descript{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1rem;
     line-height: 1.2rem;
-    font-weight: 300;
+    font-weight: 200;
     white-space: pre-wrap;
 }
 
@@ -117,4 +125,8 @@ textarea::-webkit-scrollbar-thumb {
     font-size: 12px;
     background: rgba(3, 49, 46, 1);
     color: #fff;
+}
+
+.upload-btn{
+    display: none;
 }
