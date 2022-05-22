@@ -53,6 +53,7 @@ const setupBlog = (data) => {
         var break_element = document.createElement('br');
         var second_break = document.createElement('br');
 
+        blogel = blogel.trim();
 
         // check for heading.
         if (blogel[0] == '#') {
@@ -83,12 +84,16 @@ const setupBlog = (data) => {
                 var link_text = link_el_array[0];
                 // actual link is at the second part.
                 var link_href = link_el_array[1];
+                if(link_href.substr(0,5) !== 'https'){
+                    link_href = "https://" + link_href;
+                }
 
                 // create link documents.
                 var link_tag = document.createElement('a');
                 var link_text_element = document.createTextNode(link_text);
                 link_tag.href = link_href;
                 link_tag.target = "_blank"
+                link_tag.rel = "noopener noreferrer"
                 link_tag.appendChild(link_text_element);
                 article_element.appendChild(link_tag);
 
