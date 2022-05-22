@@ -21,8 +21,8 @@ app.listen("3000", () => {
     console.log('listening......');
 });
 
-app.get('/blog/blog-editor', (req, res) => {
-    res.sendFile(path.join(initial_path, "blog_editor.html"));
+app.get('/admin/blog-editor', (req, res) => {
+    res.sendFile(path.join(initial_path, "/admin/blog-editor/blog_editor.html"));
 });
 
 app.post('/upload', (req, res) => {
@@ -44,12 +44,30 @@ app.post('/upload', (req, res) => {
     })
 });
 
-app.get("/:blog", (req, res) => {
-    res.sendFile(path.join(initial_path, "blog.html"));
-})
+// blog page
+app.get('/blog', (req, res)=>{
+    res.sendFile(path.join(initial_path, "/blog/blog.html"));
+});
+
+app.get('/projects', (req, res)=>{
+    res.sendFile(path.join(initial_path, "/projects/projects.html"));
+});
+
+app.get('/aboutme', (req, res)=>{
+    res.sendFile(path.join(initial_path, "/about-me/aboutme.html"));
+});
+
+app.get('/contactme', (req, res)=>{
+    res.sendFile(path.join(initial_path, "/contact-me/contact.html"));
+});
+
+// listen for the blog-post page
+app.get('/blog-post', (req, res) => {
+    res.sendFile(path.join(initial_path, "/blog/blog_post.html"));
+});
 
 app.use((req, res) => {
-    res.json("404");
+    res.json("404: Not found");
 })
 
 

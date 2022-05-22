@@ -1,4 +1,4 @@
-import { db, collection, doc as fetchDoc, getDoc, setDoc, getDocs } from './firebase.js'
+import { db, collection, doc as fetchDoc, getDoc, setDoc, getDocs } from '../admin/firebase.js'
 
 function openPage(pageUrl) {
     window.open(pageUrl, "_self");
@@ -9,7 +9,9 @@ var posts_data = await getDocs(collection(db, "blogs"));
 var posts = [];
 posts_data.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots
-    posts.push(doc.data());
+    var blog_post = doc.data();
+    blog_post["blogId"] = doc.id; 
+    posts.push(blog_post);
 })
 
 
@@ -17,7 +19,6 @@ var blogs_wrapper = document.querySelector(".blogs-wrapper");
 
 if (posts) {
     for (const post of posts) {
-        console.log(post);
         // Your existing code unmodified...
         var blog_item = document.createElement('div');
         blog_item.className = 'blog-item animate-entry';
@@ -37,13 +38,13 @@ if (posts) {
         var description = document.createTextNode(post["descript"]);
         post_desc.appendChild(description);
 
-        post_title.onclick = function () {
-            // open the new window.
-            var blog_post_window = window.open("blog_post.html", "_self");
-        }
+        post_title.addEventListener('click', function() {
+            console.log("Clicked title");
+            location.href = `/blog-post/?${post["blogId"]}`;
+        });
 
         post_desc.onclick = function () {
-            var blog_post_window = window.open("blog_post.html", "_self");
+            // var blog_post_window = window.open("blog_post.html", "_self");
         }
 
         var tags = document.createElement('div');
