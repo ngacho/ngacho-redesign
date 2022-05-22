@@ -3,6 +3,9 @@ const express = require('express');
 const path = require('path');
 const fileupload = require('express-fileupload');
 
+// Obsfucation of code
+// https://www.creativebloq.com/how-to/hide-your-javascript-code-from-view-source
+
 
 // initial folders
 let initial_path = path.join(__dirname, "");

@@ -84,6 +84,7 @@ const setupBlog = (data) => {
                 var link_text = link_el_array[0];
                 // actual link is at the second part.
                 var link_href = link_el_array[1];
+                link_href.replace('http://','https://');
                 if(link_href.substr(0,5) !== 'https'){
                     link_href = "https://" + link_href;
                 }
