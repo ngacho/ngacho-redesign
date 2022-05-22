@@ -43,6 +43,15 @@ a {
     margin-bottom: 3em;
 }
 
+.blog-container > .blog-content > article > a{
+    text-decoration-line: underline;
+    text-decoration-style: dashed;
+    text-decoration-color: #03312E;
+    font-weight: 700;
+    text-decoration-thickness: 1.5px;
+    color: #03312E;
+}
+
 .blog-content {
     text-align: center;
     width: 80%;

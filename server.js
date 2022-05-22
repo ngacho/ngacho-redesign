@@ -38,7 +38,7 @@ app.get('/admin', (req, res) => {
 
     const [username, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':')
 
-    if (!(login && password && login === auth.login && password === auth.password)) {
+    if (!(username && password && username === auth.login && password === auth.password)) {
         return reject()
     }
 
