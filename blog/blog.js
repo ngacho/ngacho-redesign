@@ -1,4 +1,4 @@
-import { db, collection, doc as fetchDoc, getDoc, setDoc, getDocs } from '../admin/firebase.js'
+import { db, collection, doc, getDoc, setDoc, getDocs } from '../admin/firebase.js'
 
 function openPage(pageUrl) {
     window.open(pageUrl, "_self");
@@ -39,12 +39,12 @@ if (posts) {
         post_desc.appendChild(description);
 
         post_title.addEventListener('click', function() {
-            console.log("Clicked title");
             location.href = `/blog-post/?${post["blogId"]}`;
         });
 
         post_desc.onclick = function () {
             // var blog_post_window = window.open("blog_post.html", "_self");
+            location.href = `/blog-post/?${post["blogId"]}`;
         }
 
         var tags = document.createElement('div');

@@ -63,6 +63,7 @@ app.get('/contactme', (req, res)=>{
 
 // listen for the blog-post page
 app.get('/blog-post', (req, res) => {
+    req.originalUrl;
     res.sendFile(path.join(initial_path, "/blog/blog_post.html"));
 });
 
