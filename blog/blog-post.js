@@ -77,18 +77,22 @@ const setupBlog = (data) => {
             if (paragraph_collection.length > 1) {
                 // split into two, the elements we want and the rest of the paragraph.
                 var paragraph_el_array = paragraph_collection[1].split(')]');
+                // take the first part, that's our text and the link
                 var link_el_array = paragraph_el_array[0].split('|(');
-
-                var link_text = link_el_array[0]
+                // text is at the first part
+                var link_text = link_el_array[0];
+                // actual link is at the second part.
                 var link_href = link_el_array[1];
 
+                // create link documents.
                 var link_tag = document.createElement('a');
                 var link_text_element = document.createTextNode(link_text);
                 link_tag.href = link_href;
+                link_tag.target = "_blank"
                 link_tag.appendChild(link_text_element);
                 article_element.appendChild(link_tag);
 
-                // post link tag
+                // post link text, second part which is continuation of our paragraph.
                 var post_link_text = paragraph_el_array[1];
                 var post_link_text_el = document.createTextNode(post_link_text);
                 article_element.appendChild(post_link_text_el);
@@ -97,25 +101,6 @@ const setupBlog = (data) => {
                 article_element.appendChild(second_break);
             }
         }
-
-
-
-
-        // else if (blogel[0] == "!" && blogel[1] == "[") {
-        //     // ![hello world|(https://stackoverflow.com/questions/498461/how-to-save-user-entered-line-breaks-from-a-textarea-to-a-database)]
-        //     let link_full = blogel.slice(2, -1);
-
-        //     let link_array = link_full.split("|");
-        //     let text = link_array[0]; // text
-        //     let link_text = link_array[1].split(1, -1); // link itself.
-        //     console.log(link_text);
-
-        //     let link_tag = document.createElement('a');
-        //     link_tag.href = link_text;
-        //     let link_text_element = document.createTextNode(text);
-        //     link_tag.appendChild(link_text_element);
-        // }
-
 
     }
     blog_content_container.appendChild(article_element);
