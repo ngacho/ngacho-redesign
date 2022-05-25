@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Source+Code+Pro:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Source+Code+Pro:wght@300;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.blog-posts-container {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.blog-posts-header {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+
+.blog-title-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: transform .2s;
+}
+
+.blog-title-cell:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    text-decoration:underline;
+}
+
+
+
+.fa-trash:hover{
+    transform: scale(1.3);
+}
+
+.fa-pencil:hover{
+    transform: scale(1.3);
+}
+
+.fa{
+    transition: transform .3s;
+}
+
+td{
+    padding: 1rem;
+}
+
+.blog-item > a:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+tr{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.blog-title-cell{
+    width: 80%;
+}

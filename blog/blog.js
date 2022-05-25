@@ -1,9 +1,5 @@
 import { db, collection, doc, getDoc, setDoc, getDocs } from '../admin/firebase.js'
 
-function openPage(pageUrl) {
-    window.open(pageUrl, "_self");
-}
-
 // get the posts
 var posts_data = await getDocs(collection(db, "blogs"));
 var posts = [];
