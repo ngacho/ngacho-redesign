@@ -28,6 +28,20 @@ a {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    height: calc(100vh - 5rem);
+    overflow-y: scroll;
+}
+
+.blog-list-container{
+    overflow-y: scroll;
+}
+
+.blog-items-table{
+    overflow-y: auto;
+}
+
+tbody{
+    overflow-y: auto;
 }
 
 .blog-posts-header {
@@ -81,6 +95,7 @@ tr {
 
 tr.hide {
     opacity: 0;
+    height: 0;
 }
 
 .blog-title-cell {

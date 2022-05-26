@@ -18,9 +18,11 @@ const deleteBlog = async (id) => {
             var row = document.getElementById(id);
             // toggle hide animation.
             row.classList.toggle('hide');
+            var table = document.querySelector('.blog-items-table');
+            table.deleteRow(row.rowIndex);
             setTimeout(() => {
                 // remove the row after timeout.
-                var table = row.parentNode;
+                
                 while (table && table.tagName != 'TABLE')
                     table = table.parentNode;
                 if (!table)
@@ -35,7 +37,7 @@ const deleteBlog = async (id) => {
     }
 };
 
-var blogs_wrapper = document.querySelector(".blog-items-table");
+var blogs_wrapper = document.querySelector(".table-body");
 
 
 if (posts) {

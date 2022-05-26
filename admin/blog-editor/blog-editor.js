@@ -95,7 +95,7 @@ publishBtn.addEventListener('click', () => {
             // append the edit to the div.
             blog_div.appendChild(edit_snack_bar);
 
-            snack_bar = document.querySelector('edit-snack-bar');
+            snack_bar = document.querySelector('.edit-snack-bar');
 
         }
 
