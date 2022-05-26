@@ -6,6 +6,16 @@ const postDescriptField = document.querySelector('.post-descript');
 const tagsField = document.querySelector('.tags');
 
 const publishBtn = document.querySelector('.publish-btn');
+const blog_options = document.querySelector('.blog-options');
+
+const blog_div = document.querySelector('.blog');
+
+var error_snack_bar = document.createElement('div');
+error_snack_bar.id = "snackbar"
+error_snack_bar.className = 'error-snack-bar';
+var error_text = document.createTextNode('Oops. Something wen\'t wrong.');
+error_snack_bar.appendChild(error_text);
+blog_div.appendChild(error_snack_bar);
 
 var new_blog = true;
 
@@ -42,10 +52,14 @@ const setupBlog = (data) => {
     tagsField.value = tags_List;
     postDescriptField.value = data["descript"];
     articleField.value = data["article"];
+
 }
 
 publishBtn.addEventListener('click', () => {
     if (articleField.value.length && blogTitleField.value.length) {
+
+        // Get the snackbar DIV
+        var snack_bar = document.querySelector(".error-snack-bar");
 
         var docName = ''
         // if new blog
@@ -59,10 +73,29 @@ publishBtn.addEventListener('click', () => {
             }
             docName = `${blogTitle}-${id}`;
 
-        // else we're editing
+            var publish_snack_bar = document.createElement('div');
+            publish_snack_bar.id = "snackbar"
+            publish_snack_bar.className = 'publish-snack-bar';
+            var new_blog_text = document.createTextNode("Blog published");
+            publish_snack_bar.appendChild(new_blog_text);
+
+            blog_div.appendChild(publish_snack_bar);
+
+            snack_bar = document.querySelector('.publish-snack-bar');
+            // else we're editing
         } else {
             // old id
             docName = blogId;
+
+            var edit_snack_bar = document.createElement('div');
+            edit_snack_bar.id = "snackbar"
+            edit_snack_bar.className = 'edit-snack-bar';
+            var edit_blog_text = document.createTextNode('Edits Published');
+            edit_snack_bar.appendChild(edit_blog_text);
+            // append the edit to the div.
+            blog_div.appendChild(edit_snack_bar);
+
+            snack_bar = document.querySelector('edit-snack-bar');
 
         }
 
@@ -82,7 +115,19 @@ publishBtn.addEventListener('click', () => {
             tagsField.value = "";
             postDescriptField.value = "";
             articleField.value = "";
+
+            // Add the "show" class to DIV
+            snack_bar.className = "show";
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function () { snack_bar.className = snack_bar.className.replace("show", ""); }, 3000);
         }).catch((error) => {
+            // Get the snackbar DIV
+            snack_bar = document.querySelector(".error-snack-bar");
+            // Add the "show" class to DIV
+            snack_bar.className = "show";
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function () { snack_bar.className = snack_bar.className.replace("show", ""); }, 3000);
+
             console.log(`Unsuccessful returned error ${error}`)
         });
     }
