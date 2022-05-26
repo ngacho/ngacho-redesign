@@ -67,7 +67,7 @@ td{
     padding: 1rem;
 }
 
-.blog-item > a:hover {
+.blog-delete-icon-cell > a:hover {
     cursor: pointer;
     transform: scale(1.1);
 }

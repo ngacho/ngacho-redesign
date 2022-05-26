@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../navigation/nav-bar.css">
-    <link rel="stylesheet" href="blog-editor.css">
-    <script src="../firebase.js" type="module"></script>
+    <link rel="stylesheet" href="../../admin/blog-editor/blog-editor.css">
+    <script src="../../admin/firebase.js" type="module"></script>
     <!-- icon css sheet-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Edit a Blog</title>
+    <title>Write/Edit a Blog</title>
 </head>
 
 <body>
@@ -57,21 +57,14 @@
             <div class="blog-options">
                 <button class="btn dark publish-btn">Publish</button>
                 <input type="file" accept="image/*" id="image-upload" hidden>
-                <label for="image-upload" class="btn grey upload-btn">Upload Image</label>
             </div>
 
         </div>
-
-
-
-
     </div>
 
 
     <script src="../../navigation/navigation.js"></script>
-    <script src="blog-editor.js" type="module"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js" type="module"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js" type="module"></script>
+    <script src="../../admin/blog-editor/blog-editor.js" type="module"></script> <!--common bug with not found cors because of lazy referencing.-->
 </body>
 
 </html>

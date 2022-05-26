@@ -1,4 +1,4 @@
-import { db, collection, doc, getDoc } from '../admin/firebase.js'
+import { db, doc, getDoc } from '../admin/firebase.js'
 
 let path_extension = decodeURI(location.search);
 var blogId = path_extension.slice(1);

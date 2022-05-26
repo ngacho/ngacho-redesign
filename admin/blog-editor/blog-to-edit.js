@@ -1,4 +1,4 @@
-import { db, collection, doc, getDoc, setDoc, getDocs } from '../firebase.js'
+import { db, collection, doc, deleteDoc, getDocs } from '../firebase.js';
 
 // get the posts
 var posts_data = await getDocs(collection(db, "blogs"));
@@ -16,7 +16,6 @@ var blogs_wrapper = document.querySelector(".blog-items-table");
 
 if (posts) {
     for (const post of posts) {
-        console.log(post["title"]);
         // Your existing code unmodified...
         var blog_item = document.createElement('tr');
         blog_item.className = 'blog-item';
@@ -41,7 +40,7 @@ if (posts) {
         blog_title_cell.appendChild(post_title);
 
         post_title.addEventListener('click', function() {
-            location.href = `../../blog-post/?${post["blogId"]}`;
+            location.href = `/edit-blog/?${post["blogId"]}`;
         });
 
         var blog_delete_icon_cell = document.createElement('td');
@@ -52,6 +51,9 @@ if (posts) {
         trash_icon.className = 'fa fa-trash';
         trash_icon.style = 'color: rgba(153, 15, 2, 1)';
         trash_icon.ariaHidden = true;
+        trash_element.addEventListener('click', function(){
+            deleteBlog(post["id"]);
+        });
 
         trash_element.appendChild(trash_icon);
         blog_delete_icon_cell.appendChild(trash_element);
@@ -65,3 +67,12 @@ if (posts) {
         blogs_wrapper.appendChild(blog_item);
     }
 }
+
+// delete doc
+const deleteBlog = async (id) => {
+    await deleteDoc(doc(db, "blogs", id))
+        .catch((err) => {
+            console.log(err);
+        });
+
+};

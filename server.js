@@ -90,6 +90,12 @@ app.get('/blog-post', (req, res) => {
     res.sendFile(path.join(initial_path, "/blog/blog_post.html"));
 });
 
+// listen for edit blog page
+app.get('/edit-blog', (req, res) => {
+    req.originalUrl;
+    res.sendFile(path.join(initial_path, "/admin/blog-editor/blog_editor.html"))
+});
+
 app.use((req, res) => {
     res.sendStatus(404);
 })
