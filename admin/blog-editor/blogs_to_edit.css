@@ -46,38 +46,43 @@ a {
 .blog-title-cell:hover {
     transform: scale(1.05);
     cursor: pointer;
-    text-decoration:underline;
+    text-decoration: underline;
 }
 
 
 
-.fa-trash:hover{
+.fa-trash:hover {
     transform: scale(1.3);
 }
 
-.fa-pencil:hover{
+.fa-pencil:hover {
     transform: scale(1.3);
 }
 
-.fa{
+.fa {
     transition: transform .3s;
 }
 
-td{
+td {
     padding: 1rem;
 }
 
-.blog-delete-icon-cell > a:hover {
+.blog-delete-icon-cell>a:hover {
     cursor: pointer;
     transform: scale(1.1);
 }
 
-tr{
+tr {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: opacity 0.5s linear;
 }
 
-.blog-title-cell{
+tr.hide {
+    opacity: 0;
+}
+
+.blog-title-cell {
     width: 80%;
 }

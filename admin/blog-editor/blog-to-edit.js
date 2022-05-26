@@ -6,10 +6,34 @@ var posts = [];
 posts_data.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots
     var blog_post = doc.data();
-    blog_post["blogId"] = doc.id; 
+    blog_post["blogId"] = doc.id;
     posts.push(blog_post);
 })
 
+// delete method
+// delete doc
+const deleteBlog = async (id) => {
+    try {
+        await deleteDoc(doc(db, "blogs", id)).then((ref) => {
+            var row = document.getElementById(id);
+            // toggle hide animation.
+            row.classList.toggle('hide');
+            setTimeout(() => {
+                // remove the row after timeout.
+                var table = row.parentNode;
+                while (table && table.tagName != 'TABLE')
+                    table = table.parentNode;
+                if (!table)
+                    return;
+                table.deleteRow(row.rowIndex);
+            }, 5000);
+        }).catch((err) => {
+            console.log(err);
+        });
+    } catch (err) {
+        console.log(err)
+    }
+};
 
 var blogs_wrapper = document.querySelector(".blog-items-table");
 
@@ -19,6 +43,7 @@ if (posts) {
         // Your existing code unmodified...
         var blog_item = document.createElement('tr');
         blog_item.className = 'blog-item';
+        blog_item.id = post["blogId"]
 
         var blog_time_cell = document.createElement('td');
         blog_time_cell.className = "blog-time-cell";
@@ -39,7 +64,7 @@ if (posts) {
         post_title.appendChild(title);
         blog_title_cell.appendChild(post_title);
 
-        post_title.addEventListener('click', function() {
+        post_title.addEventListener('click', function () {
             location.href = `/edit-blog/?${post["blogId"]}`;
         });
 
@@ -51,8 +76,8 @@ if (posts) {
         trash_icon.className = 'fa fa-trash';
         trash_icon.style = 'color: rgba(153, 15, 2, 1)';
         trash_icon.ariaHidden = true;
-        trash_element.addEventListener('click', function(){
-            deleteBlog(post["id"]);
+        trash_element.addEventListener('click', function () {
+            deleteBlog(post["blogId"]);
         });
 
         trash_element.appendChild(trash_icon);
@@ -67,12 +92,3 @@ if (posts) {
         blogs_wrapper.appendChild(blog_item);
     }
 }
-
-// delete doc
-const deleteBlog = async (id) => {
-    await deleteDoc(doc(db, "blogs", id))
-        .catch((err) => {
-            console.log(err);
-        });
-
-};
