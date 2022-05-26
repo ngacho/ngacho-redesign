@@ -25,6 +25,7 @@ a {
     width: 75%;
     top: 4.2rem;
     height: calc(100vh - 5rem);
+    min-height: calc(100vh - 5rem);
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -84,6 +85,13 @@ textarea {
 
 .contact-me-places>.contact-form-wrapper textarea {
     resize: vertical;
+}
+
+.attribution{
+    font-size: 0.7rem;
+    padding: 2px;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
 }
 
 

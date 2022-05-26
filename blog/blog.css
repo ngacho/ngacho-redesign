@@ -22,8 +22,8 @@ a {
 }
 
 .blog-container {
-    height: calc(100vh - 6.5rem);
-    min-height: calc(100vh - 6.5rem);
+    height: calc(100vh - 5rem);
+    min-height: calc(100vh - 5rem);
     overflow: auto;
 }
 

@@ -28,8 +28,8 @@ a {
     width: 100%;
     overflow: auto;
     height: 100vh;
-    height: calc(100vh - 6.5rem);
-    min-height: calc(100vh - 6.5rem);
+    height: calc(100vh - 5rem);
+    min-height: calc(100vh - 5rem);
 }
 
 .projects-wrapper {
@@ -250,8 +250,8 @@ a {
         display: table;
         text-align: center;
         height: 100vh;
-        height: calc(100vh - 7rem);
-        min-height: calc(100vh - 7rem);
+        height: calc(100vh - 5rem);
+        min-height: calc(100vh - 5rem);
     }
 
 }
@@ -267,7 +267,7 @@ a {
         width: 100%;
         position: absolute;
         top: 4.5em;
-        bottom: 2em;
+        bottom: 1em;
         flex-direction: column;
         justify-content: center;
         min-height: 0;
