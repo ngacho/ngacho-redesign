@@ -19,7 +19,7 @@ export class BlogListController {
     }
 
     onBlogListChanged = (blogs) => {
-        this.view.diplayBlogs(blogs)
+        this.view.displayBlogs(blogs)
     }
 
 }
