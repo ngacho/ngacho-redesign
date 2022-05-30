@@ -3,7 +3,6 @@ import { db, doc, collection, getDocs, getDoc, setDoc, query, onSnapshot } from 
 export class Model {
 
     constructor() {
-        console.log("Constructor called.")
         // empty blogs
         this.blogKeys = [];
         this.writtenToStorage = this.Bool(false);
@@ -12,17 +11,16 @@ export class Model {
     }
 
     init() {
-        console.log("Init blogs called.");
-
         const q = query(collection(db, "blogs"));
         const blogSnapshots = onSnapshot(q, (querySnapshot) => {
             const blogKeys = [];
             querySnapshot.forEach((blog_data) => {
                 let blog = blog_data.data();
+                blog["blogId"] = blog_data.id;
                 // store keys
-                blogKeys.push(blog["title"]);
+                blogKeys.push(blog["blogId"]);
                 // write to local storage.
-                window.sessionStorage.setItem(blog["title"], JSON.stringify(blog));
+                window.sessionStorage.setItem(blog["blogId"], JSON.stringify(blog));
             });
 
             this.blogKeys = blogKeys;

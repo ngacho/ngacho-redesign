@@ -18,11 +18,3 @@ export class BlogListModel extends Model {
         return super.getBlogsByTags();
     }
 }
-
-var blogListModel = new BlogListModel();
-blogListModel.getBlogList().then((data)=>{    
-    data.forEach(element => {
-        console.log(element["title"]);
-    });
-    console.log(`Function call : ${data.length}`)
-})

@@ -12,7 +12,7 @@ export class BlogListController {
         this.model.getBlogList().then((blogData) => {
             this.onBlogListChanged(blogData);
             blogData.forEach(element => {
-                console.log(element["title"]);
+                console.log("Blog Id " + element["blogId"]);
             });
 
         })
