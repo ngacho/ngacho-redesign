@@ -45,7 +45,7 @@ if (posts) {
         // Your existing code unmodified...
         var blog_item = document.createElement('tr');
         blog_item.className = 'blog-item';
-        blog_item.id = post["blogId"]
+        blog_item.id = post["blogId"];
 
         var blog_time_cell = document.createElement('td');
         blog_time_cell.className = "blog-time-cell";

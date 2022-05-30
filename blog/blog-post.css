@@ -85,19 +85,6 @@ a {
     padding: 2em;
 }
 
-.blog-footer {
-    margin-bottom: 3em;
-    width: 100%;
-    text-align: center;
-    background-color: #0c312e;
-    color: white;
-    padding: 10px;
-    font-weight: 150;
-    font-size: 0.7em;
-    font-family: 'Source Code Pro', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    z-index: 99999;
-}
-
 
 @media only screen and (max-width: 880px) {
     .blog-heading-wrapper {
