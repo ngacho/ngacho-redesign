@@ -97,35 +97,38 @@ export class Model {
     }
 
     // pass me an edited blog, it should have a blog id.
-    editBlog(editedBlog) {
-        const docName = blog["blogId"];
-        if (docName) {
-            // pass the blog with the docName as id
-            setDoc(doc(db, "blogs", docName), editedBlog).then((ref) => {
-                // map to do list
-                this.blogs = this.blogs.map((blog) => {
-                    blog["blogId"] === docName ? {
-                        blogId: docName,
-                        title: editedBlog["title"],
-                        tags: editedBlog["tags"],
-                        descript: editedBlog["descript"],
-                        article: editedBlog["article"],
-                        publishedAt: editedBlog["publishedAt"],
-                        lastModified: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
-                    } : blog
+    async editBlog(editedBlog) {
+        return new Promise((resolve, reject) => {
+            const docName = editedBlog["blogId"];
+            if (docName) {
+                // pass the blog with the docName as id
+                setDoc(doc(db, "blogs", docName), editedBlog).then((ref) => {
+                    // map to do list
+                    this.blogs = this.blogs.map((blog) => {
+                        blog["blogId"] === docName ? {
+                            blogId: docName,
+                            title: editedBlog["title"],
+                            tags: editedBlog["tags"],
+                            descript: editedBlog["descript"],
+                            article: editedBlog["article"],
+                            publishedAt: editedBlog["publishedAt"],
+                            lastModified: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
+                        } : blog
+                    })
+
+                    resolve("Successfully edited blog")
+
+                }).catch((err) => {
+                    // return error
+                    reject(err)
                 })
 
-                // return success.
+            } else {
+                // reject promises.
+                reject("No valid blog id.")
 
-            }).catch((err) => {
-                // return error
-            })
-
-        } else {
-            // reject promises.
-
-        }
-
+            }
+        });
     }
 
     async getBlogs() {
@@ -151,42 +154,37 @@ export class Model {
         });
     }
 
-
-
-
     // singular blog.
-    getBlog(blogId) {
-        var blog_data = async (id) => {
-            await getDoc(doc(db, "blogs", id));
-        }
-
-        blog_data(blogId).then((blogSnapshot) => {
-            if (blogSnapshot.exists()) {
-                // return the blog
-                console.log("Blog exists");
-            } else {
-                console.log("Blog doesn't exist");
-                // location.replace("/blog");
+    async getBlog(blogId) {
+        return new Promise((resolve, reject) => {
+           
+            // read from session storage.
+            var blog = JSON.parse(sessionStorage.getItem(blogId));
+            if(blog){
+                resolve(blog);
+            }else{
+                reject("Blog not found.");
             }
-        }).catch((err) => {
-            console.log(err);
         });
-
     }
 
-    deleteBlog(blogId) {
-        if (blogId) {
-            const blogRef = async (id) => {
-                await deleteDoc(doc(db, "blogs", id));
+    async deleteBlogById(blogId) {
+        return new Promise((resolve, reject) => {
+            if (blogId) {
+                const blogRef = async (id) => {
+                    await deleteDoc(doc(db, "blogs", id));
+                }
+                blogRef(blogId).then((ref) => {
+                    resolve(true)
+                }).catch((err) => {
+                    console.log(err);
+                    resolve(false);
+                });
+            } else {
+                console.log("blog doesn't exist.")
+                resolve(false);
             }
-            blogRef(blogId).then((ref) => {
-                console.log("blog deleted")
-            }).catch((err) => {
-                console.log(err);
-            });
-        } else {
-            console.log(err)
-        }
+        });
     }
 
     // filter blog by tags.
@@ -211,7 +209,7 @@ export class Model {
                 } else {
                     reject("Nothing was written to storage");
                 }
-            }).catch((err)=>{
+            }).catch((err) => {
                 console.log(err);
             });
 
