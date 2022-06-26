@@ -25,26 +25,7 @@ app.listen("3030", () => {
 });
 
 // admin page.
-app.get('/admin', (req, res) => {
-    const reject = () => {
-        res.setHeader('www-authenticate', 'Basic')
-        res.sendStatus(401)
-    }
-
-    const auth = {login: 'xxxxx', password: '12345'} // change this
-
-    const authorization = req.headers.authorization
-
-    if (!authorization) {
-        return reject()
-    }
-
-    const [username, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':')
-
-    if (!(username && password && username === auth.login && password === auth.password)) {
-        return reject()
-    }
-
+app.get('/admin',  authorizeAccess, (_, res) => {
     res.sendFile(path.join(initial_path, "/admin/admin_home.html"));
 })
 
@@ -101,5 +82,29 @@ app.use((req, res) => {
 })
 
 
+// authorize admin page.
+function authorizeAccess(req, res, next){
+    const reject = () => {
+        res.setHeader('www-authenticate', 'Basic')
+        res.sendStatus(401)
+    }
 
+    // auth factors stored in an encrypted file.
+    const auth = {login: 'xxxxx', password: '12345'} // change this
+
+    const authorization = req.headers.authorization
+
+    if (!authorization) {
+        return reject()
+    }
+
+    const [username, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':')
+
+    if (!(username && password && username === auth.login && password === auth.password)) {
+        return reject()
+    }
+
+    next();
+
+}
 

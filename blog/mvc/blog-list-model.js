@@ -14,7 +14,8 @@ export class BlogListModel extends Model {
         return blogList;
     }
 
-    getBlogListByTag() {
-        return super.getBlogsByTags();
+    async getBlogListByTag() {
+        var taggedBlogList = await this.getBlogsByTags();
+        return taggedBlogList;
     }
 }

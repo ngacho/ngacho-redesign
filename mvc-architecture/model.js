@@ -1,4 +1,4 @@
-import { db, doc, collection, getDocs, getDoc, setDoc, query, onSnapshot } from '../admin/firebase.js'
+import { db, doc, collection, getDoc, setDoc, query, onSnapshot } from '../admin/firebase.js'
 
 export class Model {
 
@@ -190,21 +190,32 @@ export class Model {
     }
 
     // filter blog by tags.
-    getBlogsByTags(tag) {
-        var blogsByTag = [];
-        if (!this.blogs) {
-            // attempt to get blog from server
-            this.getBlogs();
-        }
+    async getBlogsByTags(tag) {
+        return new Promise((resolve, reject) => {
+            // get from local storage.
+            this.writtenToStorage.addListener((writtenToStorageBool) => {
+                // if something has been written to storage.
+                if (writtenToStorageBool) {
+                    var blogsByTag = [];
 
-        // map to do list
-        this.blogs = this.blogs.map((blog) => {
-            if (blog["tags"].include(tag)) {
-                blogsByTag.push(blog);
-            }
+                    for (const blogKey of this.blogKeys) {
+                        var blog = JSON.parse(sessionStorage.getItem(blogKey));
+                        if (blog["tags"].include(tag)) {
+                            blogsByTag.push(blog);
+                        }
+
+                    }
+
+                    resolve(blogsByTag);
+                    // a key to indicate any new changes.
+                } else {
+                    reject("Nothing was written to storage");
+                }
+            }).catch((err)=>{
+                console.log(err);
+            });
+
         });
-
-        return blogsByTag;
     }
 
     // listen booleans
