@@ -24,7 +24,7 @@ export class EditBlogController {
     }
 
     fetchBlog(id) {
-        console.log(this.blogId);
+        
         this.model.fetchBlogFromDb(id).then(
             (blog) => this.viewSetUpBlog(blog)
         ).catch((errMessage) =>

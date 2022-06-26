@@ -38,15 +38,6 @@ a {
     color: #03312E;
 }
 
-.blog {
-    width: 80%;
-    min-width: 400px;
-    height: 100px;
-    display: block;
-    margin: auto;
-    padding: 50px 0;
-}
-
 textarea::-webkit-scrollbar {
     width: 10px;
 }
@@ -63,13 +54,15 @@ textarea::-webkit-scrollbar-thumb {
     width: 100%;
     height: auto;
     outline: none;
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 600;
     color: rgba(3, 49, 46, 0.9);
     resize: none;
     border: none;
     padding: 10px;
-    border-radius: 10px;
+    outline: 1px solid rgba(3, 49, 46, 0.2);
+    border-radius: 4px;
+    margin: 4px;
 }
 
 .title::placeholder,
@@ -83,14 +76,15 @@ textarea::-webkit-scrollbar-thumb {
     margin-top: 10px;
     line-height: 20px;
     font-weight: 500;
+    margin-bottom: 1rem;
     padding-bottom: 100px;
     white-space: pre-wrap;
 }
 
 .tags {
-    font-size: 1rem;
-    line-height: 1rem;
-    font-weight: 200;
+    font-size: 0.8rem;
+    line-height: 0.8rem;
+    font-weight: 100;
     white-space: pre-wrap;
 }
 
@@ -107,12 +101,9 @@ textarea::-webkit-scrollbar-thumb {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
-    background: #fff;
     z-index: 9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: table-cell;
+    width: auto;
     transition: opacity 0.5s linear;
 }
 
@@ -121,20 +112,34 @@ textarea::-webkit-scrollbar-thumb {
     outline: none;
     cursor: pointer;
     padding: 0.5rem;
-    margin: 20px;
+    margin: 0 20rem 1.5rem 20rem;
     border-radius: 3px;
-    font-size: 12px;
+    font-size: 20px;
     background: rgba(3, 49, 46, 1);
     color: #fff;
 }
 
-.blog-editor-wrapper{
-    display: flex;
+.blog-editor-wrapper {
+    display: grid;
+    column-gap: 20px;
+    height: 100%;
+    margin: 10px;
+    grid-template-columns: 2fr 1fr;
 }
 
-.blog{
-    flex: 1;
+.blog-preview-container {
+    height: 100%;
+    overflow-y: scroll;
 }
+
+.blog-content{
+    overflow-y: scroll;
+}
+
+.blog-post{
+    overflow-y: scroll;
+}
+
 
 
 /* The snackbar - position it at the bottom and in the middle of the screen */

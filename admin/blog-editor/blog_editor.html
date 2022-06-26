@@ -47,6 +47,7 @@
     </header>
 
     <div class="blog-editor-wrapper">
+
         <div class="blog">
             <textarea type="text" class="title" placeholder="Blog title..."></textarea>
             <textarea type="text" class="tags" placeholder="Enter tags here. Separate multiple tags with commas..."></textarea>
@@ -58,15 +59,19 @@
                 <button class="btn dark publish-btn">Publish</button>
             </div>
         </div>
-        <div class="blog-preview">
 
-            
+        <div class="blog-preview-container">
+            <div class="blog-content"></div>
+
+
+
         </div>
+        
     </div>
 
 
     <script src="../../navigation/navigation.js"></script>
-    <script src="../../admin/blog-editor/blog-editor.js" type="module"></script> <!--common bug with not found cors because of lazy referencing.-->
+    <script src="../../admin/blog-editor/edit-blog-mvc/edit-blog-app.js" type="module"></script> <!--common bug with not found cors because of lazy referencing.-->
 </body>
 
 </html>
