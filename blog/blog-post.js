@@ -48,7 +48,9 @@ const setupBlog = (data) => {
 
     var article_element = document.createElement('article');
     article_element.className = "blog-post";
-    var blog = data["article"].split("</br>");
+    var blog = data["article"]
+    
+    .split("</br>");
     for (let blogel of blog) {
         var break_element = document.createElement('br');
         var second_break = document.createElement('br');
