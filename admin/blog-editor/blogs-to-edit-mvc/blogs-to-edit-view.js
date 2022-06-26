@@ -46,10 +46,8 @@ export class BlogsToEditView{
                 trash_icon.className = 'fa fa-trash';
                 trash_icon.style = 'color: rgba(153, 15, 2, 1)';
                 trash_icon.ariaHidden = true;
-                trash_element.addEventListener('click', function () {
-                    // how to make controller add this to a view.
-                    deleteBlog(post["blogId"]);
-                });
+                trash_element.addEventListener('click', this.deleteBlog(post["blogId"]));
+                
         
                 trash_element.appendChild(trash_icon);
                 blog_delete_icon_cell.appendChild(trash_element);
@@ -68,6 +66,7 @@ export class BlogsToEditView{
 
     deleteBlog(id){
         // push this to controller somehow.
+        console.log("Deleted blog " + id)
 
     }
 }

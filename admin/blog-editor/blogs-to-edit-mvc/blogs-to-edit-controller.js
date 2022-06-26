@@ -22,4 +22,8 @@ export class BlogsToEditController {
         this.view.displayBlogs(blogs)
     }
 
+    handleDeleteTodo = (id) => {
+        this.model.deleteTodo(id);
+    }
+
 }
