@@ -7,6 +7,10 @@ export class EditBlogView {
         this.publishBtn = document.querySelector('.publish-btn');
         this.blog_options = document.querySelector('.blog-options');
         this.blog_div = document.querySelector('.blog');
+        
+        // blog options
+        this.blogId = '';
+        this.blogPublishedDate = '';
 
         this.blogPrevContainer = document.querySelector('.blog-content');
 
@@ -19,13 +23,61 @@ export class EditBlogView {
         this.tagsField.value = tags_List;
         this.postDescriptField.value = data["descript"];
         this.articleField.value = data["article"];
-
+        this.blogId = data["blogId"];
+        this.blogPublishedDate = data["publishedAt"];
         this.setUpPreviewBlogPreview(data);
+
+        this.articleField.addEventListener("input", ()=>{
+            var articleText = this.articleField.value;
+            this.makeChangesToText(articleText);
+        });
+
+        this.publishBtn.addEventListener("click", publishBlog());
+        
+    }
+
+    makeChangesToText(text){
+        console.log("changing article.")
+        var article_element = document.querySelector('.blog-post-preview');
+        // html string
+        const htmlStr = this.parseMarkdown(text);
+        article_element.innerHTML = htmlStr;
+        this.blogPrevContainer.appendChild(article_element);
+    }
+
+    publishBlog(){
+        if (this.articleField.value.length && this.blogTitleField.value.length) {
+
+            if(this.blogId){
+
+                var edit_snack_bar = document.createElement('div');
+                edit_snack_bar.id = "snackbar"
+                edit_snack_bar.className = 'edit-snack-bar';
+                var edit_blog_text = document.createTextNode('Edits Published');
+                edit_snack_bar.appendChild(edit_blog_text);
+                // append the edit to the div.
+                blog_div.appendChild(edit_snack_bar);
+    
+                snack_bar = document.querySelector('.edit-snack-bar');
+
+                var data = {
+                    title: blogTitleField.value,
+                    tags: tagsField.value.split(','),
+                    descript: postDescriptField.value,
+                    article: articleField.value,
+                    publishedAt : this.blogPublishedDate,
+                    lastModified : `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
+                }      
+                
+                // push this to the controller somehow.
+
+            }
+        }
     }
 
     setUpPreviewBlogPreview(data) {
         var heading_element = document.createElement('h1');
-        heading_element.className = "blog-heading";
+        heading_element.className = "blog-heading-preview";
         var heading = document.createTextNode(data["title"]);
         heading_element.appendChild(heading);
         this.blogPrevContainer.appendChild(heading_element);
@@ -39,14 +91,14 @@ export class EditBlogView {
         var descript = data["descript"];
         if (descript) {
             var blockQuote_element = document.createElement('blockquote');
-            blockQuote_element.className = "post-description";
+            blockQuote_element.className = "post-description-preview";
             var blockQuote = document.createTextNode(descript);
             blockQuote_element.appendChild(blockQuote);
             this.blogPrevContainer.appendChild(blockQuote_element);
         }
 
         var article_element = document.createElement('article');
-        article_element.className = "blog-post";
+        article_element.className = "blog-post-preview";
         var blog = data["article"]
 
         // html string
@@ -64,8 +116,8 @@ export class EditBlogView {
             .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
             .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
             .replace(/\*(.*)\*/gim, '<i>$1</i>')
-            .replace(/!\[(.*?)\]\((.*?)\)/gim, "<img alt='$1' src='$2' />")
-            .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
+            .replace(/!\[(.*?)\]\((.*?)\)/gim, "<img alt='$1' src='$2'/>")
+            .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2' target=\"_blank\" rel=\"noopener noreferrer\">$1</a>")
             .replace(/\n$/gim, '<br />')
 
 
