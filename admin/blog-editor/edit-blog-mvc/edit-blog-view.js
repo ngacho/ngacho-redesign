@@ -1,4 +1,5 @@
 export class EditBlogView {
+
     constructor() {
         this.blogTitleField = document.querySelector('.title');
         this.articleField = document.querySelector('.article');
@@ -7,12 +8,15 @@ export class EditBlogView {
         this.publishBtn = document.querySelector('.publish-btn');
         this.blog_options = document.querySelector('.blog-options');
         this.blog_div = document.querySelector('.blog');
-        
+
         // blog options
         this.blogId = '';
         this.blogPublishedDate = '';
+        // months
+        this.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
         this.blogPrevContainer = document.querySelector('.blog-content');
+
 
     }
 
@@ -27,17 +31,14 @@ export class EditBlogView {
         this.blogPublishedDate = data["publishedAt"];
         this.setUpPreviewBlogPreview(data);
 
-        this.articleField.addEventListener("input", ()=>{
+        this.articleField.addEventListener("input", () => {
             var articleText = this.articleField.value;
             this.makeChangesToText(articleText);
         });
 
-        this.publishBtn.addEventListener("click", publishBlog());
-        
     }
 
-    makeChangesToText(text){
-        console.log("changing article.")
+    makeChangesToText(text) {
         var article_element = document.querySelector('.blog-post-preview');
         // html string
         const htmlStr = this.parseMarkdown(text);
@@ -45,10 +46,10 @@ export class EditBlogView {
         this.blogPrevContainer.appendChild(article_element);
     }
 
-    publishBlog(){
+    publishBlog(handler) {
         if (this.articleField.value.length && this.blogTitleField.value.length) {
 
-            if(this.blogId){
+            if (this.blogId) {
 
                 var edit_snack_bar = document.createElement('div');
                 edit_snack_bar.id = "snackbar"
@@ -56,23 +57,42 @@ export class EditBlogView {
                 var edit_blog_text = document.createTextNode('Edits Published');
                 edit_snack_bar.appendChild(edit_blog_text);
                 // append the edit to the div.
-                blog_div.appendChild(edit_snack_bar);
-    
-                snack_bar = document.querySelector('.edit-snack-bar');
+                this.blog_div.appendChild(edit_snack_bar);
 
-                var data = {
-                    title: blogTitleField.value,
-                    tags: tagsField.value.split(','),
-                    descript: postDescriptField.value,
-                    article: articleField.value,
-                    publishedAt : this.blogPublishedDate,
-                    lastModified : `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
-                }      
-                
-                // push this to the controller somehow.
+
+                var snack_bar = document.querySelector('.edit-snack-bar');
+                let date = new Date();
+
+                var editedBlogData = {
+                    blogId: this.blogId,
+                    title: this.blogTitleField.value,
+                    tags: this.tagsField.value.split(','),
+                    descript: this.postDescriptField.value,
+                    article: this.articleField.value,
+                    publishedAt: this.blogPublishedDate,
+                    lastModified: `${date.getDate()} ${this.months[date.getMonth()]} ${date.getFullYear()}`
+                }
+
+                var status = handler(editedBlogData);
+
+                status.then((_) => {
+                    // Add the "show" class to DIV
+                    snack_bar.className = "show";
+                    // After 3 seconds, remove the show class from DIV
+                    setTimeout(function () { snack_bar.className = snack_bar.className.replace("show", ""); }, 1000);
+                    console.info('success');
+                }).catch((err) => {
+                    console.error(err)
+                });
 
             }
         }
+    }
+
+    bindHandlePublish(handler) {
+        this.publishBtn.addEventListener('click', _ => {
+            this.publishBlog(handler)
+        })
     }
 
     setUpPreviewBlogPreview(data) {
@@ -113,6 +133,8 @@ export class EditBlogView {
         const htmlText = rawMarkdown.replace(/^### (.*$)/gim, '<h3>$1</h3>')
             .replace(/^## (.*$)/gim, '<h2>$1</h2>')
             .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+            .replace(/^```\s*([^]+?.*?[^]+?[^]+?)```/gim, '<br/><pre><code>$1</code></pre><br/>')
+            .replace(/^`(.*?)`/gim, '<code>$1</code>')
             .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
             .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
             .replace(/\*(.*)\*/gim, '<i>$1</i>')
@@ -125,3 +147,4 @@ export class EditBlogView {
 
     }
 }
+

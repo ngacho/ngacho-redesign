@@ -17,14 +17,16 @@ export class EditBlogController {
 
         if (this.blogId) {
             this.isNewBlog = false
-            
+
 
             this.fetchBlog(this.blogId);
         };
+
+        this.view.bindHandlePublish(this.handleEditBlog);
     }
 
     fetchBlog(id) {
-        
+
         this.model.fetchBlogFromDb(id).then(
             (blog) => this.viewSetUpBlog(blog)
         ).catch((errMessage) =>
@@ -36,5 +38,10 @@ export class EditBlogController {
 
     viewSetUpBlog(data) {
         this.view.setUpBlog(data);
+    }
+
+    handleEditBlog = async (editedBlog) => {
+        this.model.updateBlog(editedBlog);
+
     }
 }

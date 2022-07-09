@@ -1,17 +1,17 @@
 import { Model } from "../../../mvc-architecture/model.js";
 
-export class EditBlogModel extends Model{
+export class EditBlogModel extends Model {
 
-    constructor(){
+    constructor() {
         super();
     }
 
-    async fetchBlogFromDb(id){
+    async fetchBlogFromDb(id) {
         var blogData = await this.getBlog(id);
         return blogData;
     }
 
-    async updateBlog(editedBlog){
+    async updateBlog(editedBlog) {
         var updateStatus = await this.editBlog(editedBlog);
 
         return updateStatus;
