@@ -1,4 +1,4 @@
-import { db, doc, collection, getDoc, setDoc, query, onSnapshot } from '../admin/firebase.js'
+import { db, doc, collection, getDoc, setDoc, deleteDoc, query, onSnapshot } from '../admin/firebase.js'
 
 export class Model {
 
@@ -102,22 +102,8 @@ export class Model {
             const docName = editedBlog["blogId"];
             if (docName) {
                 // pass the blog with the docName as id
-                setDoc(doc(db, "blogs", docName), editedBlog).then((ref) => {
-                    // map to do list
-                    this.blogs = this.blogs.map((blog) => {
-                        blog["blogId"] === docName ? {
-                            blogId: docName,
-                            title: editedBlog["title"],
-                            tags: editedBlog["tags"],
-                            descript: editedBlog["descript"],
-                            article: editedBlog["article"],
-                            publishedAt: editedBlog["publishedAt"],
-                            lastModified: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
-                        } : blog
-                    })
-
+                setDoc(doc(db, "blogs", docName), editedBlog).then((_) => {
                     resolve("Successfully edited blog")
-
                 }).catch((err) => {
                     // return error
                     reject(err)
@@ -178,11 +164,11 @@ export class Model {
                     resolve(true)
                 }).catch((err) => {
                     console.log(err);
-                    resolve(false);
+                    reject(false);
                 });
             } else {
                 console.log("blog doesn't exist.")
-                resolve(false);
+                reject(false);
             }
         });
     }
