@@ -17,4 +17,9 @@ export class EditBlogModel extends Model {
         return updateStatus;
     }
 
+    async publishNewBlog(blog){
+        var publishStatus = await this.addBlog(blog);
+        return publishStatus;
+    }
+
 }

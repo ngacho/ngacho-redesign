@@ -3,7 +3,6 @@ export class EditBlogController {
     constructor(blogListModel, blogListView) {
         this.model = blogListModel;
         this.view = blogListView;
-        this.isNewBlog = true;
         this.blogId = '';
 
         this.init();
@@ -16,13 +15,12 @@ export class EditBlogController {
         this.blogId = path_extension.slice(1);
 
         if (this.blogId) {
-            this.isNewBlog = false
-
-
             this.fetchBlog(this.blogId);
-        };
+            this.view.bindHandlePublish(this.handleEditBlog);
+        }else{
+            this.view.bindHandlePublish(this.handlePublishNewBlog)
+        }
 
-        this.view.bindHandlePublish(this.handleEditBlog);
     }
 
     fetchBlog(id) {
@@ -42,5 +40,10 @@ export class EditBlogController {
 
     handleEditBlog = async (editedBlog) => {
         this.model.updateBlog(editedBlog);
+    }
+
+    handlePublishNewBlog = async (newBlog) => {
+        this.model.publishNewBlog(newBlog);
+
     }
 }
