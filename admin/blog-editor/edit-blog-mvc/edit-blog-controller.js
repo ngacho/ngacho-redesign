@@ -42,6 +42,5 @@ export class EditBlogController {
 
     handleEditBlog = async (editedBlog) => {
         this.model.updateBlog(editedBlog);
-
     }
 }

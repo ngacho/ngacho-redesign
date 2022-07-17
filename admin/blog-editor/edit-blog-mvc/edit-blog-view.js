@@ -78,7 +78,7 @@ export class EditBlogView {
                 status.then((_) => {
                     // Add the "show" class to DIV
                     snack_bar.className = "show";
-                    // After 3 seconds, remove the show class from DIV
+                    // After 1 seconds, remove the show class from DIV
                     setTimeout(function () { snack_bar.className = snack_bar.className.replace("show", ""); }, 1000);
                     console.info('success');
                 }).catch((err) => {
