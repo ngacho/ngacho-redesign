@@ -106,14 +106,14 @@ export class EditBlogView {
             var blogData = this.blogId ? {
                 blogId: this.blogId,
                 title: this.blogTitleField.value,
-                tags: this.tagsField.value.split(','),
+                tags: this.tagsField.value.split(',').map((tag) => tag.trim()).filter(n => n),
                 descript: this.postDescriptField.value,
                 article: this.articleField.value,
                 publishedAt: this.blogPublishedDate,
                 lastModified: `${date.getDate()} ${this.months[date.getMonth()]} ${date.getFullYear()}`
             } : {
                 title: this.blogTitleField.value,
-                tags: this.tagsField.value.split(','),
+                tags: this.tagsField.value.split(',').map((tag) => tag.trim()).filter(n => n),
                 descript: this.postDescriptField.value,
                 article: this.articleField.value,
                 publishedAt: `${date.getDate()} ${this.months[date.getMonth()]} ${date.getFullYear()}`,
