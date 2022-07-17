@@ -20,7 +20,8 @@ export class BlogsToEditView {
 
                 var time_item = document.createElement('time');
                 time_item.className = 'last-edit-date';
-                var time = document.createTextNode(post["publishedAt"]);
+                var last_pub_date = post["lastModified"] || post["publishedAt"];
+                var time = document.createTextNode(last_pub_date);
                 time_item.appendChild(time);
                 blog_time_cell.appendChild(time_item);
 
