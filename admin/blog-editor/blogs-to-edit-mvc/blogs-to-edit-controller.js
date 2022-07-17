@@ -11,15 +11,17 @@ export class BlogsToEditController {
         // Display initial todos
         this.model.getBlogList().then((blogData) => {
             this.onBlogListChanged(blogData);
-        })
+        });
+
+        this.view.bindDeleteBlog(this.handleDeleteBlog);
     }
 
     onBlogListChanged = (blogs) => {
-        this.view.displayBlogs(blogs)
+        this.view.displayBlogs(blogs);
     }
 
-    handleDeleteTodo = (id) => {
-        this.model.deleteTodo(id);
+    handleDeleteBlog = async (blogId) => {
+        this.model.deleteBlog(id);
     }
 
 }
