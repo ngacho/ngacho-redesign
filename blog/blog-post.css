@@ -24,8 +24,9 @@ a {
 .blog-heading-wrapper {
     height:120px;
     text-align: center;
-    vertical-align: middle;
-    line-height: 120px;
+    display: table-cell;
+    padding: 15px;
+    line-height: 2.2rem;
     background-image: url('../images/graph-background.png');
     color: #03312E;
 }
@@ -84,6 +85,17 @@ a {
     text-align: left;
     padding: 2em;
 }
+
+@media only screen and (max-width: 1240px) {
+    .blog-heading-wrapper {
+        height: 140px;
+        padding: 15px;
+        display: table-cell;
+        line-height: 2.2rem;
+    }
+
+}
+
 
 
 @media only screen and (max-width: 880px) {
