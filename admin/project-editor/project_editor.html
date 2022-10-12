@@ -79,28 +79,6 @@
         </div>
     </div>
 
-
-    <script>
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    var project_cover = document.getElementById('project-cover')
-                    project_cover.setAttribute('src', e.target.result);
-
-                };
-
-                var image = input.files[0];
-
-                reader.readAsDataURL(image);
-            }
-        }
-
-
-    </script>
-
     <script src="../project-editor/edit-project-mvc/edit-project-app.js" type="module"></script>
 
 
