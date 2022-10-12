@@ -72,7 +72,8 @@ img{
 }
 
 .title,
-.languages 
+.languages,
+.extra-info
 {
     width: 360px;
     height: auto;
@@ -90,7 +91,7 @@ img{
 }
 
 .title::placeholder,
-.languages::placeholder {
+.languages::placeholder, .extra-info::placeholder {
     color: rgba(3, 49, 46, 0.7);
 }
 

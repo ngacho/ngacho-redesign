@@ -30,7 +30,8 @@ export class ProjectBaseModel {
 
                         var projectDataToWriteToDatabase = {
                             projectLanguages: projectData.projectLanguages,
-                            projectCoverUrl: url
+                            projectCoverUrl: url,
+                            projectInfoUrl : projectData.projectExtraInfoUrl
                         }
 
                         setDoc(doc(db, "projects", docName), projectDataToWriteToDatabase).then((_) => {

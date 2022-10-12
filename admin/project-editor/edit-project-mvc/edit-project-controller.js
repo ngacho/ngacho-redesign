@@ -7,14 +7,13 @@ export class EditProjectController{
     }    
 
     init(){
-        this.view.bindUploadProjectImage(this.handleUploadProjectImage);
+        this.view.bindUploadProject(this.handleUploadProject);
     }
 
 
 
 
 
-    handleUploadProjectImage = async (projectObject) => {
-        this.model.uploadProjectImage(projectObject);
-    }
+    handleUploadProject = async (projectObject) => this.model.uploadProject(projectObject);
+    
 }

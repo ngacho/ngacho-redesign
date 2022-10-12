@@ -6,16 +6,22 @@ export class EditProjectView {
         this.uploadImageInput = document.getElementById("image-upload-input");
         this.projectTitleInput = document.getElementById("project-title-input");
         this.projectLanguagesInput = document.getElementById("project-languages-input");
+        this.moreInfoUrl = document.getElementById("project-more-info-url");
 
         this.postProjectButton = document.getElementById("post-project-button");
+        // this.resetForm();
         this.validate();
 
         this.projectTitleInput.addEventListener("input", ()=>{
-            this.validate()
+            this.validate();
         })
 
         this.projectLanguagesInput.addEventListener("input", ()=>{
-            this.validate()
+            this.validate();
+        })
+
+        this.moreInfoUrl.addEventListener("input", ()=>{
+            this.validate();
         })
         
     }
@@ -23,7 +29,9 @@ export class EditProjectView {
     validate(){
         if(
             this.projectTitleInput.value.length != 0 &&
-            this.projectLanguagesInput.value.length != 0){
+            this.projectLanguagesInput.value.length != 0 &&
+            this.moreInfoUrl.value.length != 0
+            ){
             this.postProjectButton.disabled = false;
         }else{
             this.postProjectButton.disabled = true;
@@ -31,7 +39,7 @@ export class EditProjectView {
     }
 
 
-    bindUploadProjectImage(handler) {
+    bindUploadProject(handler) {
         let imageInput = this.uploadImageInput;
         let projectCoverFile = null;
 
@@ -56,12 +64,14 @@ export class EditProjectView {
                 var projectObject = {
                     projectCoverImage : projectCoverFile,
                     projectTitle : this.projectTitleInput.value,
-                    projectLanguages : this.projectLanguagesInput.value
+                    projectLanguages : this.projectLanguagesInput.value,
+                    projectExtraInfoUrl : this.moreInfoUrl.value
                 }
 
                 var status = handler(projectObject);
-                status.then((_)=>{
-                    // this.resetForm();
+                status.then((message)=>{
+                    console.log(message)
+                    this.resetForm();
                 }).catch((err)=>{
                     console.log('error ' + err);
                 })
