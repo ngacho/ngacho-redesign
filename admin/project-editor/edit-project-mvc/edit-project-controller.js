@@ -14,7 +14,7 @@ export class EditProjectController{
 
 
 
-    handleUploadProjectImage = async (imageFile) => {
-        this.model.uploadProjectImage(imageFile);
+    handleUploadProjectImage = async (projectObject) => {
+        this.model.uploadProjectImage(projectObject);
     }
 }

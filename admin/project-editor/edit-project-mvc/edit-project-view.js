@@ -1,6 +1,7 @@
 export class EditProjectView {
     constructor() {
         this.add_projects_wrapper = document.querySelector(".add_projects_wrapper");
+        this.projectForm = document.querySelector(".project-details-form");
 
         this.uploadImageInput = document.getElementById("image-upload-input");
         this.projectTitleInput = document.getElementById("project-title-input");
@@ -47,17 +48,34 @@ export class EditProjectView {
 
                 projectCoverFile = imageInput.files[0];
                 reader.readAsDataURL(projectCoverFile);
-
-                // handle uploading the project
-                handler(projectCoverFile);
             }
         });
 
+        this.postProjectButton.addEventListener("click", ()=>{
+            if(projectCoverFile){
+                var projectObject = {
+                    projectCoverImage : projectCoverFile,
+                    projectTitle : this.projectTitleInput.value,
+                    projectLanguages : this.projectLanguagesInput.value
+                }
 
-
-        // handler uploads the image.
-
+                var status = handler(projectObject);
+                status.then((_)=>{
+                    // this.resetForm();
+                }).catch((err)=>{
+                    console.log('error ' + err);
+                })
+            }else{
+                console.log("project cover file is null");
+            }
+        })
     }
+
+    resetForm(){
+        this.projectForm.submit();
+        return false;
+    }
+
 
 
 
