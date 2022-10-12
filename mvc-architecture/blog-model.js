@@ -54,45 +54,40 @@ export class Model {
 
 
     // pass me a new blog. I'll modify the id
-    addBlog(blog) {
+    async addBlog(blog) {
+        console.log(JSON.stringify(blog));
 
         // if it has a blog Id, then it's not a new blog then reject promise.
-        if (!blog["blodId"]) {
-            // generating id
-            var id = ''
-            let letters = 'abcdefghijklmnopqrstuvwxyz';
-            let blogTitle = blog["title"].split(" ").join("-");
-            for (let i = 0; i < 4; i++) {
-                id += letters[Math.floor(Math.random() * letters.length)];
+        return new Promise((resolve, reject) => {
+            if (!blog["blodId"]) {
+                // generating id
+                var id = ''
+                let letters = 'abcdefghijklmnopqrstuvwxyz';
+                let blogTitle = blog["title"].split(" ").join("-");
+                for (let i = 0; i < 4; i++) {
+                    id += letters[Math.floor(Math.random() * letters.length)];
+                }
+                var docName = `${blogTitle}-${id}`;
+
+                setDoc(doc(db, "blogs", docName), blog).then((ref) => {
+
+                    // store keys
+                    this.blogKeys.push(docName);
+                    // write to local storage.
+                    window.sessionStorage.setItem(docName, JSON.stringify(blog));
+
+                    // return success to function that called it.
+                    resolve('Blog Published Successfully')
+                }).catch((err) => {
+                    // return error
+                    reject(err)
+                })
+
+            } else {
+                reject('Not new blog');
             }
-            docName = `${blogTitle}-${id}`;
 
-            // new 
-            let date = new Date(); // for published at info
-
-            var new_blog = {
-                title: blog["title"],
-                tags: blog["tags"].split(','),
-                descript: blog["descript"],
-                article: blog["article"],
-                publishedAt: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`,
-                lastModified: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
-            }
-
-            setDoc(doc(db, "blogs", docName), new_blog).then((ref) => {
-                // add to blogs list
-                this.blogs.push(blog);
-
-                // return success to function that called it.
-
-            }).catch((err) => {
-                // return error
-            })
-
-        } else {
-            // return error.
-
-        }
+        });
 
     }
 
@@ -100,6 +95,7 @@ export class Model {
     async editBlog(editedBlog) {
         return new Promise((resolve, reject) => {
             const docName = editedBlog["blogId"];
+            console.log('edit blog model: ' + docName)
             if (docName) {
                 // pass the blog with the docName as id
                 setDoc(doc(db, "blogs", docName), editedBlog).then((_) => {
@@ -143,12 +139,12 @@ export class Model {
     // singular blog.
     async getBlog(blogId) {
         return new Promise((resolve, reject) => {
-           
+
             // read from session storage.
             var blog = JSON.parse(sessionStorage.getItem(blogId));
-            if(blog){
+            if (blog) {
                 resolve(blog);
-            }else{
+            } else {
                 reject("Blog not found.");
             }
         });
