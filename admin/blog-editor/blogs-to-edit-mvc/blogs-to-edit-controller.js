@@ -20,8 +20,7 @@ export class BlogsToEditController {
         this.view.displayBlogs(blogs);
     }
 
-    handleDeleteBlog = async (blogId) => {
-        this.model.deleteBlog(blogId);
-    }
+    handleDeleteBlog = async (blogId) => this.model.deleteBlog(blogId);
+
 
 }
