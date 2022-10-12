@@ -109,3 +109,8 @@ img{
     background: rgba(3, 49, 46, 1);
     color: #fff;
 }
+
+#post-project-button[disabled]{
+    background: rgba(3, 49, 46, 0.7);
+    cursor: not-allowed;
+}

@@ -4,4 +4,9 @@ export class EditProjectModel extends ProjectBaseModel {
     constructor(){
         super();
     }
+
+
+    uploadProjectImage(imageFile){
+        console.log("MODEL: " + imageFile.name);
+    }
 }

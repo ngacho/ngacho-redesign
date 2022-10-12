@@ -15,7 +15,6 @@ export class EditProjectController{
 
 
     handleUploadProjectImage = async (imageFile) => {
-        console.log('called handle with ');
-        // this.model.uploadProjectImage(imageFile);
+        this.model.uploadProjectImage(imageFile);
     }
 }
