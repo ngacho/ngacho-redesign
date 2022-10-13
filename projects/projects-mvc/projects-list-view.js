@@ -105,7 +105,6 @@ export class ProjectListView {
         // add width of the card + one of the margins.
         var scrollPerClick = project_card.clientWidth + parseFloat(style.marginRight) + parseFloat(style.marginLeft);
 
-        console.log("clicked");
         if (this.scrollAmount <= this.projects_carousel.scrollWidth - this.projects_carousel.clientWidth) {
             this.projects_carousel.scrollTo({
                 top: 0,
