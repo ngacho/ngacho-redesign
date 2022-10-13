@@ -15,7 +15,8 @@ export class ProjectBaseModel {
                 let project = project_data.data();
                 let projectId = project_data.id;
                 this.projectKeys.push(projectId);
-                window.sessionStorage.setItem(projectId, JSON.stringify(project))
+                let newProject = {...project, projectId:projectId}
+                window.sessionStorage.setItem(projectId, JSON.stringify(newProject))
             });
 
             if(this.projectKeys.length > 0) this.writtenToStorage(true);
