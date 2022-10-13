@@ -14,40 +14,50 @@ export class ProjectBaseModel {
     async postProjectToDB(projectData) {
         return new Promise((resolve, reject) => {
             const imageRef = ref(cloudStorage, 'project-cover-images/' + projectData.projectCoverImage.name);
-            uploadBytesResumable(imageRef, projectData.projectCoverImage)
-                .then((snapshot) => {
-                    console.log('Uploaded', snapshot.totalBytes, 'bytes.');
-                    // Let's get a download URL for the file.
-                    getDownloadURL(snapshot.ref).then((url) => {
+            const uploadTask = uploadBytesResumable(imageRef, projectData.projectCoverImage);
 
-                        var id = ''
-                        let letters = 'abcdefghijklmnopqrstuvwxyz';
-                        let projectTitle = projectData.projectTitle.split(" ").join("-");
-                        for (let i = 0; i < 4; i++) {
-                            id += letters[Math.floor(Math.random() * letters.length)];
-                        }
-                        var docName = `${projectTitle}-${id}`;
+            uploadTask.on('state_changed', (snapshot)=>{
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress.toFixed(2) + '% done');
+                switch (snapshot.state) {
+                    case 'paused':
+                      console.error('Upload is paused');
+                      break;
+                    case 'canceled':
+                        console.error('Upload is cancelled');
+                        break;
+                }
+            }, (error)=>{
+                console.error("uploading task error" + error);
+                reject("Error in uploading task");
+            }, ()=>{
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                    var id = ''
+                    let letters = 'abcdefghijklmnopqrstuvwxyz';
+                    let projectTitle = projectData.projectTitle.split(" ").join("-");
+                    for (let i = 0; i < 4; i++) {
+                        id += letters[Math.floor(Math.random() * letters.length)];
+                    }
+                    var docName = `${projectTitle}-${id}`;
 
-                        var projectDataToWriteToDatabase = {
-                            projectLanguages: projectData.projectLanguages,
-                            projectCoverUrl: url,
-                            projectInfoUrl : projectData.projectExtraInfoUrl
-                        }
+                    var projectDataToWriteToDatabase = {
+                        projectLanguages: projectData.projectLanguages,
+                        projectCoverUrl: url,
+                        projectInfoUrl : projectData.projectExtraInfoUrl
+                    }
 
-                        setDoc(doc(db, "projects", docName), projectDataToWriteToDatabase).then((_) => {
-                            resolve("Successfully uploaded project")
-                        }).catch((err) => {
-                            reject("Failed to write to database");
-                        });
+                    setDoc(doc(db, "projects", docName), projectDataToWriteToDatabase).then((_) => {
+                        resolve("Successfully uploaded project")
                     }).catch((err) => {
-                        reject("Failed to fetch url")
-                        console.error('writing to fetch url', err);
+                        console.error("Failed to write to db", err);
+                        reject("Failed to write to database");
                     });
-                }).catch((error) => {
-                    console.error('Upload failed', error);
-                    reject("Failed to upload Image")
+                }).catch((err) => {
+                    console.error('writing to fetch url', err);
+                    reject("Failed to fetch url");
                 });
 
+            });
         });
     }
 
@@ -81,9 +91,9 @@ export class ProjectBaseModel {
 
         // Delete the file
         deleteObject(desertRef).then(() => {
-        // File deleted successfully
+            // File deleted successfully
         }).catch((error) => {
-        // Uh-oh, an error occurred!
+            // Uh-oh, an error occurred!
         });
 
     }

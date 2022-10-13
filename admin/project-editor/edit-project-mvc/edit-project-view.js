@@ -71,7 +71,7 @@ export class EditProjectView {
                 var status = handler(projectObject);
                 status.then((message)=>{
                     console.log(message);
-                    this.resetForm();
+                    // this.resetForm();
                 }).catch((err)=>{
                     console.log('error ' + err);
                 })
