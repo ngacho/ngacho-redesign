@@ -43,6 +43,7 @@ export class ProjectBaseModel {
                     var projectDataToWriteToDatabase = {
                         projectLanguages: projectData.projectLanguages,
                         projectCoverUrl: url,
+                        projectCoverTitle: projectData.projectCoverImage.name,
                         projectInfoUrl : projectData.projectExtraInfoUrl
                     }
 
