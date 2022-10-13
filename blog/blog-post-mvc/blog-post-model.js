@@ -1,4 +1,4 @@
-import { Model } from "../../mvc-architecture/model.js";
+import { Model } from "../../mvc-architecture/blog-model.js";
 
 export class BlogPostModel extends Model{
     constructor(){

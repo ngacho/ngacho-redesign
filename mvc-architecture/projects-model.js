@@ -77,7 +77,7 @@ export class ProjectBaseModel {
      */
     deleteProject() {
         // Create a reference to the file to delete
-        const desertRef = ref(storage, 'images/desert.jpg');
+        const blogImage = ref(storage, 'images/desert.jpg');
 
         // Delete the file
         deleteObject(desertRef).then(() => {
