@@ -48,35 +48,46 @@ export class ProjectBaseModel {
                 console.error("uploading task error" + error);
                 reject("Error in uploading task");
             }, ()=>{
-                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                    var id = ''
-                    let letters = 'abcdefghijklmnopqrstuvwxyz';
-                    let projectTitle = projectData.projectTitle.split(" ").join("-");
-                    for (let i = 0; i < 4; i++) {
-                        id += letters[Math.floor(Math.random() * letters.length)];
-                    }
-                    var docName = `${projectTitle}-${id}`;
-
-                    var projectDataToWriteToDatabase = {
-                        projectLanguages: projectData.projectLanguages,
-                        projectCoverUrl: url,
-                        projectCoverTitle: projectData.projectCoverImage.name,
-                        projectInfoUrl : projectData.projectExtraInfoUrl
-                    }
-
-                    setDoc(doc(db, "projects", docName), projectDataToWriteToDatabase).then((_) => {
-                        resolve("Successfully uploaded project")
-                    }).catch((err) => {
-                        console.error("Failed to write to db", err);
-                        reject("Failed to write to database");
-                    });
-                }).catch((err) => {
-                    console.error('writing to fetch url', err);
-                    reject("Failed to fetch url");
+                this.writeProjectToDatabase(uploadTask.snapshot.ref, projectData).then((message)=>{
+                    resolve(message)
+                }).catch((err)=>{
+                    reject(err)
                 });
-
             });
         });
+    }
+
+    async writeProjectToDatabase(snapshotRef, projectData){
+        return new Promise((resolve, reject)=>{
+            getDownloadURL(snapshotRef).then((url) => {
+                var id = ''
+                let letters = 'abcdefghijklmnopqrstuvwxyz';
+                let projectTitle = projectData.projectTitle.split(" ").join("-");
+                for (let i = 0; i < 4; i++) {
+                    id += letters[Math.floor(Math.random() * letters.length)];
+                }
+                var docName = `${projectTitle}-${id}`;
+
+                var projectDataToWriteToDatabase = {
+                    projectLanguages: projectData.projectLanguages,
+                    projectCoverUrl: url,
+                    projectCoverTitle: projectData.projectCoverImage.name,
+                    projectInfoUrl : projectData.projectExtraInfoUrl
+                }
+
+                setDoc(doc(db, "projects", docName), projectDataToWriteToDatabase).then((_) => {
+                    resolve("Successfully uploaded project")
+                }).catch((err) => {
+                    console.error("Failed to write to db", err);
+                    reject("Failed to write to database");
+                });
+            }).catch((err) => {
+                console.error('writing to fetch url', err);
+                reject("Failed to fetch url");
+            });
+
+        })
+
     }
 
     /**
