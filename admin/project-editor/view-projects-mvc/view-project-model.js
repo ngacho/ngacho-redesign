@@ -5,16 +5,13 @@ export class ViewProjectModel extends ProjectBaseModel {
         super();
     }
 
-    deleteProject(projectObject){
-        // var blogImageUploadStatus = await this.postProjectToDB(projectObject);
-        // return blogImageUploadStatus;
+    async deleteProject(projectData){
+        var deleteProjectStatus = await this.deleteProject(projectData);
+        return deleteProjectStatus;
     }
 
     async fetchProjects(){
         var projects = await this.getProjects();
         return projects;
-    }
-
-    
-    
+    }  
 }

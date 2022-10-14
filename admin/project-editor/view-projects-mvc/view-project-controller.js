@@ -17,9 +17,6 @@ export class ViewProjectController{
     }
 
     onProjectListChanged = (projects) => {
-        for(const project of projects){
-            console.log(project);
-        }
-        // this.view.displayBlogs(projects);
+        this.view.displayProjects(projects);
     }
 }
