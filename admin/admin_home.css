@@ -31,6 +31,11 @@ a:focus {
     margin: auto;
     margin-top: 1rem;
     display: grid;
+    overflow-y: auto;
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 10px;
 }
@@ -39,6 +44,8 @@ a:focus {
     position: relative;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
     height: 180px;
+    outline: 1px solid rgba(3, 49, 46, 0.2);
+    overflow-wrap: break-word;
     display: table;
     overflow: hidden;
     text-align: center;
@@ -50,7 +57,7 @@ a:focus {
 
 .action-card:hover {
     cursor: pointer;
-    color: #03312E;
+    color: rgba(3, 49, 46, 1);
     transform: scale(1.05);
     cursor: pointer;
 }
@@ -61,6 +68,7 @@ a:focus {
     vertical-align: middle;
     background-color: #FFF;
     padding: 20px;
+    overflow-y: scroll;
     position: absolute;
     width: 100%;
 }
