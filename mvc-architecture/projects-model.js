@@ -140,7 +140,7 @@ export class ProjectBaseModel {
                     await deleteDoc(doc(db, "projects", id));
                 }
 
-                projectRef(blogId).then((ref) => {
+                projectRef(projectData.projectId).then((ref) => {
                     resolve(true)
                 }).catch((err) => {
                     console.log(err);

@@ -13,10 +13,14 @@ export class ViewProjectController{
         this.model.fetchProjects().then((projects) => {
             this.onProjectListChanged(projects);
         });
+
+        this.view.bindDeleteProject(this.handleDeleteProject);
         
     }
 
     onProjectListChanged = (projects) => {
         this.view.displayProjects(projects);
     }
+
+    handleDeleteProject = async (projectData) => this.model.deleteProject(projectData);
 }

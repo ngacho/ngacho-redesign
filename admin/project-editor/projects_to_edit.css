@@ -28,16 +28,18 @@ a {
     overflow: scroll;
 }
 
-.project-list-container{
+.project-list-container {
     height: calc(100vh - 5rem);
     overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
     width: 75%;
     margin: 10px auto 0 auto;
 }
 
-.header-wrapper{
+.header-wrapper {
     margin: auto;
     width: max-content;
 }
@@ -48,7 +50,7 @@ a {
 }
 
 
-.rounded-button{
+.rounded-button {
     background-color: #03312E;
     border-radius: 999em;
     width: 56px;
@@ -64,7 +66,7 @@ a {
     bottom: 0;
 }
 
-.rounded-button > i{
+.rounded-button>i {
     position: absolute;
     left: 0;
     top: 50%;
@@ -129,7 +131,7 @@ Flexbox and floats are used as a fallback so that browsers which don't support g
     height: auto;
 }
 
-.project-gallery-item > figure {
+.project-gallery-item>figure {
     width: 100%;
     margin: 0 auto 0 auto;
     background-position: center center;

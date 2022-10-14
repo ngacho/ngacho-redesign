@@ -14,6 +14,7 @@ export class ViewProjectView{
             const projectTitle = projectId.substring(0, projectId.length-5);
             
             const projectCoverUrl = project["projectCoverUrl"];
+            console.log(project);
 
 
             // create the parent item
@@ -45,12 +46,13 @@ export class ViewProjectView{
             edit_button.className = "fas fa-pen"
             edit_button.ariaHidden = true;
             edit_list_item.appendChild(edit_button);
-
+            
             var delete_list_item = document.createElement('li');
             delete_list_item.className = "project-gallery-item-delete"
 
             var delete_button = document.createElement('i');
-            delete_button.className = "fas fa-trash"
+            delete_button.className = `fas fa-trash ${project['projectCoverTitle']}`;
+            delete_button.id = project['projectId'];
             delete_button.ariaHidden = true;
             delete_list_item.appendChild(delete_button);
 
@@ -66,6 +68,30 @@ export class ViewProjectView{
             this.projectGallery.appendChild(project_gallery_item);
         
         }
+
+    }
+
+    bindDeleteProject(handler) {
+
+        this.projectGallery.addEventListener('click', e => {
+            if (e.target && e.target.nodeName == 'I') {
+                const projectCoverTitle = e.target.className.replace("fas fa-trash", '');
+                const projectId = e.target.id;
+                const projectData = {
+                    projectCoverTitle : projectCoverTitle,
+                    projectId : projectId
+                }
+
+                var deleteStatus = handler(projectData);
+                deleteStatus.then((_)=>{
+                    console.log("deleted successfully")
+                }).catch((err)=>{
+                    console.log("Failed to delete");
+
+                })
+                
+            }
+        });
 
     }
     

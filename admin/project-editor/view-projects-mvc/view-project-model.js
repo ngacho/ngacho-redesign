@@ -5,7 +5,7 @@ export class ViewProjectModel extends ProjectBaseModel {
         super();
     }
 
-    async deleteProject(projectData){
+    async deleteProject(projectData){   
         var deleteProjectStatus = await this.deleteProject(projectData);
         return deleteProjectStatus;
     }
