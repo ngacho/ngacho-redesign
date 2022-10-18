@@ -133,8 +133,6 @@ export class ProjectBaseModel {
     deleteProject(projectData) {
         return new Promise((resolve, reject)=>{
             const imageRef = ref(cloudStorage, projectData.projectUrl);
-            // const imageRef = ref(cloudStorage, 'project-cover-images/' + projectData['projectUrl']);
-            console.log(JSON.stringify(imageRef));
             // Delete the image
             deleteObject(imageRef).then(() => {
                 // File deleted successfully
