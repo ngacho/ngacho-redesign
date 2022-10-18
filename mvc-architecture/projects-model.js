@@ -132,11 +132,7 @@ export class ProjectBaseModel {
      */
     deleteProject(projectData) {
         return new Promise((resolve, reject)=>{
-            console.log(projectData.projectUrl);
-            console.log(encodeURIComponent(projectData.projectUrl));
             const imageRef = ref(cloudStorage, projectData.projectUrl);
-            
-            console.log(imageRef);
             // const imageRef = ref(cloudStorage, 'project-cover-images/' + projectData['projectUrl']);
             console.log(JSON.stringify(imageRef));
             // Delete the image
