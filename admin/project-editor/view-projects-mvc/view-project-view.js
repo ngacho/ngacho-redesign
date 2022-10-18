@@ -14,11 +14,11 @@ export class ViewProjectView{
             const projectTitle = projectId.substring(0, projectId.length-5);
             
             const projectCoverUrl = project["projectCoverUrl"];
-            console.log(project);
 
 
             // create the parent item
             var project_gallery_item = document.createElement('div');
+            project_gallery_item.id = projectId;
             project_gallery_item.className = 'project-gallery-item';
             project_gallery_item.tabIndex = 0;
 
@@ -52,7 +52,7 @@ export class ViewProjectView{
 
             var delete_button = document.createElement('i');
             delete_button.className = `fas fa-trash ${project['projectCoverTitle']}`;
-            delete_button.id = project['projectId'];
+            delete_button.id = `delete ${projectId}`;
             delete_button.ariaHidden = true;
             delete_list_item.appendChild(delete_button);
 
@@ -76,17 +76,29 @@ export class ViewProjectView{
         this.projectGallery.addEventListener('click', e => {
             if (e.target && e.target.nodeName == 'I') {
                 const projectCoverTitle = e.target.className.replace("fas fa-trash", '');
-                const projectId = e.target.id;
+                const projectId = e.target.id.replace("delete ", '');
+
+                const gallery_item = e.target.parentNode.parentNode.parentNode.parentNode;
+                const projectImageUrl = gallery_item.children[0].children[0].src;            
                 const projectData = {
                     projectCoverTitle : projectCoverTitle,
-                    projectId : projectId
+                    projectId : projectId,
+                    projectUrl : projectImageUrl
                 }
 
                 var deleteStatus = handler(projectData);
                 deleteStatus.then((_)=>{
+                    const gallery_item = document.getElementById(projectId);
+                    gallery_item.classList.toggle('hide');
+                    setTimeout(() => {
+                        // remove the item after timeout.
+                        gallery_item.remove();
+                        
+                    }, 1500);
                     console.log("deleted successfully")
                 }).catch((err)=>{
                     console.log("Failed to delete");
+                    console.log(err);
 
                 })
                 

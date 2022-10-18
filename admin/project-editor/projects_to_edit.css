@@ -50,6 +50,8 @@ a {
 }
 
 
+
+
 .rounded-button {
     background-color: #03312E;
     border-radius: 999em;
@@ -87,7 +89,6 @@ Flexbox and floats are used as a fallback so that browsers which don't support g
 
 */
 
-/* Base Styles */
 
 .btn {
     display: inline-block;
@@ -129,6 +130,11 @@ Flexbox and floats are used as a fallback so that browsers which don't support g
     cursor: pointer;
     width: 350px;
     height: auto;
+}
+
+.project-gallery-item.hide {
+    opacity: 0;
+    height: 0;
 }
 
 .project-gallery-item>figure {

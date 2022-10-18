@@ -22,5 +22,5 @@ export class ViewProjectController{
         this.view.displayProjects(projects);
     }
 
-    handleDeleteProject = async (projectData) => this.model.deleteProject(projectData);
+    handleDeleteProject = async (projectData) => this.model.deleteProjectFromDB(projectData);
 }

@@ -1,4 +1,4 @@
-import { db, setDoc, query, collection, onSnapshot, listAll, doc, cloudStorage, ref, uploadBytesResumable, getDownloadURL } from '../admin/firebase.js'
+import { db, setDoc, deleteObject, deleteDoc, query, collection, onSnapshot, doc, cloudStorage, ref, uploadBytesResumable, getDownloadURL } from '../admin/firebase.js'
 
 export class ProjectBaseModel {
 
@@ -132,7 +132,13 @@ export class ProjectBaseModel {
      */
     deleteProject(projectData) {
         return new Promise((resolve, reject)=>{
-            const imageRef = ref(cloudStorage, 'project-cover-images/' + projectData.projectCoverTitle);
+            console.log(projectData.projectUrl);
+            console.log(encodeURIComponent(projectData.projectUrl));
+            const imageRef = ref(cloudStorage, projectData.projectUrl);
+            
+            console.log(imageRef);
+            // const imageRef = ref(cloudStorage, 'project-cover-images/' + projectData['projectUrl']);
+            console.log(JSON.stringify(imageRef));
             // Delete the image
             deleteObject(imageRef).then(() => {
                 // File deleted successfully
@@ -141,6 +147,7 @@ export class ProjectBaseModel {
                 }
 
                 projectRef(projectData.projectId).then((ref) => {
+                    window.sessionStorage.removeItem(projectData.projectId);
                     resolve(true)
                 }).catch((err) => {
                     console.log(err);
