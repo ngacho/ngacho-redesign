@@ -15,6 +15,7 @@ export class ViewProjectController{
         });
 
         this.view.bindDeleteProject(this.handleDeleteProject);
+        this.view.bindEditProject(this.handleEditProject);
         
     }
 
@@ -23,4 +24,6 @@ export class ViewProjectController{
     }
 
     handleDeleteProject = async (projectData) => this.model.deleteProjectFromDB(projectData);
+
+    handleEditProject = async (projectData) => this.model.editProject(projectData);
 }

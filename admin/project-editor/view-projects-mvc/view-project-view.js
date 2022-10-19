@@ -43,7 +43,8 @@ export class ViewProjectView{
             edit_list_item.className = "project-gallery-item-edit"
 
             var edit_button = document.createElement('i');
-            edit_button.className = "fas fa-pen"
+            edit_button.className = `fas fa-pen ${project['projectCoverTitle']}`
+            edit_button.id = `edit ${projectId}`;
             edit_button.ariaHidden = true;
             edit_list_item.appendChild(edit_button);
             
@@ -74,7 +75,7 @@ export class ViewProjectView{
     bindDeleteProject(handler) {
 
         this.projectGallery.addEventListener('click', e => {
-            if (e.target && e.target.nodeName == 'I') {
+            if (e.target && e.target.nodeName == 'I' && e.target.className.includes("fas fa-trash")) {
                 const projectCoverTitle = e.target.className.replace("fas fa-trash", '');
                 const projectId = e.target.id.replace("delete ", '');
 
@@ -105,6 +106,16 @@ export class ViewProjectView{
             }
         });
 
+    }
+
+    bindEditProject(handler){
+        this.projectGallery.addEventListener('click', e => {
+            if (e.target && e.target.nodeName == 'I' && e.target.className.includes("fas fa-pen ")) {
+                const gallery_item = e.target.parentNode.parentNode.parentNode.parentNode;
+                const projectImageUrl = gallery_item.children[0].children[0].src;            
+                console.log(`edit project: ${projectImageUrl}`)
+            }
+        });
     }
     
 }
