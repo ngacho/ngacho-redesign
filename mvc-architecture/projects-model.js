@@ -116,8 +116,17 @@ export class ProjectBaseModel {
     /**
      * Singular project
      */
-    getProject() {
+    getProject(projectId) {
+        return new Promise((resolve, reject)=>{
+            const projectData = JSON.parse(window.sessionStorage.getItem(projectId));
 
+            if(projectData){
+                resolve(projectData)
+            }else{
+                reject({error : "Not found"})
+            }
+
+        })
     }
 
     /**

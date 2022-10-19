@@ -39,12 +39,11 @@ export class EditProjectView {
     }
 
 
-    bindUploadProject(handler) {
+    bindHandlePublishBlog(handler) {
         let imageInput = this.uploadImageInput;
         let projectCoverFile = null;
 
         imageInput.addEventListener("change", () => {
-            // this.readImageUrl(this.uploadImageInput, handler);
             if (imageInput.files && imageInput.files[0]) {
                 var reader = new FileReader();
 
@@ -81,6 +80,21 @@ export class EditProjectView {
         })
     }
 
+    setUpProject(projectData){
+        var projectUrl =  projectData.projectInfoUrl
+        var projectLanguages = projectData.projectLanguages
+        var projectCoverUrl = projectData.projectCoverUrl
+        var projectID = projectData.projectId
+
+        var project_cover = document.getElementById('project-cover');
+        project_cover.setAttribute('src', projectCoverUrl);
+
+        this.projectTitleInput.value = projectID.substr(0, projectID.length-5);
+        this.projectLanguagesInput.value = projectLanguages;
+        this.moreInfoUrl.value = projectUrl;
+
+        this.validate()
+    }
     resetForm(){
         this.projectForm.submit();
         return false;

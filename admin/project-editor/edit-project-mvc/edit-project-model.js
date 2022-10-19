@@ -6,8 +6,17 @@ export class EditProjectModel extends ProjectBaseModel {
     }
 
 
-    async uploadProject(projectObject){
+    async uploadNewProject(projectObject){
         var blogImageUploadStatus = await this.postProjectToDB(projectObject);
         return blogImageUploadStatus;
+    }
+
+    async uploadEditedProject(projectData){
+        return Promise.resolve("success");
+    }
+
+    async fetchSingleProject(projectId){
+        var projectData = await this.getProject(projectId);
+        return projectData;
     }
 }

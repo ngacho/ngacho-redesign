@@ -112,7 +112,7 @@ export class ViewProjectView{
         this.projectGallery.addEventListener('click', e => {
             if (e.target && e.target.nodeName == 'I' && e.target.className.includes("fas fa-pen ")) {
                 const projectId = e.target.id.replace("edit ", '');
-                location.href = `/admin/edit-project/${projectId}`;
+                location.href = `/admin/edit-project/?${projectId}`;
             }
         });
     }
