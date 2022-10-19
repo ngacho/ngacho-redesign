@@ -71,18 +71,13 @@ app.get('/blog-post', (req, res) => {
     res.sendFile(path.join(initial_path, "/blog/blog_post.html"));
 });
 
-app.get('/admin/write-blog', authorizeAccess, (req, res) => {
-    req.originalUrl;
-    res.sendFile(path.join(initial_path, "/admin/blog-editor/blog_editor.html"))
-});
-// listen for edit blog page
-app.get('/admin/edit-blog/*', authorizeAccess, (req, res) => {
+app.get(['/admin/write-blog', '/admin/edit-blog/*'], authorizeAccess, (req, res) => {
     req.originalUrl;
     res.sendFile(path.join(initial_path, "/admin/blog-editor/blog_editor.html"))
 });
 
-// listen for edit project page
-app.get('/admin/edit-project/*', authorizeAccess, (req, res) => {
+// listen for new project and edit project project page
+app.get(['/admin/new-project/', '/admin/edit-project/*'], authorizeAccess, (req, res) => {
     req.originalUrl;
     res.sendFile(path.join(initial_path, "/admin/project-editor/project_editor.html"))
 });
