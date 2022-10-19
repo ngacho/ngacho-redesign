@@ -13,9 +13,9 @@ export class EditProjectController{
 
         if (this.projectId) {
             this.fetchProject(this.projectId);
-            this.view.bindHandlePublishBlog(this.handlePublishEditedProject);
+            this.view.bindHandlePublishProject(this.handlePublishEditedProject);
         }else{
-            this.view.bindHandlePublishBlog(this.handlePublishNewProject);
+            this.view.bindHandlePublishProject(this.handlePublishNewProject);
         }
     }
 
@@ -29,5 +29,16 @@ export class EditProjectController{
     }
 
     handlePublishNewProject = async (projectObject) => this.model.uploadNewProject(projectObject);
-    handlePublishEditedProject = async (projectObject) => this.model.uploadEditedProject(projectObject);
+    handlePublishEditedProject = async (projectObject) => { 
+        // get project
+        this.model.fetchSingleProject(this.projectId).then((projectData) => {
+            var newProject = {...projectObject}
+            newProject.projectId = this.projectId;
+            newProject.projectCoverUrl = projectData.projectCoverUrl;
+            this.model.uploadEditedProject(newProject);
+        }).catch((err)=>{
+            console.error(err);
+        })
+        
+    };
 }

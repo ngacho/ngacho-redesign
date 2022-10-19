@@ -39,7 +39,7 @@ export class EditProjectView {
     }
 
 
-    bindHandlePublishBlog(handler) {
+    bindHandlePublishProject(handler) {
         let imageInput = this.uploadImageInput;
         let projectCoverFile = null;
 
