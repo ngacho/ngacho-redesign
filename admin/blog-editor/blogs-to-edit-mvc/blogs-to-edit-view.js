@@ -36,7 +36,7 @@ export class BlogsToEditView {
                 blog_title_cell.appendChild(post_title);
 
                 post_title.addEventListener('click', function () {
-                    location.href = `/edit-blog/?${post["blogId"]}`;
+                    location.href = `/admin/edit-blog/?${post["blogId"]}`;
                 });
 
                 var blog_delete_icon_cell = document.createElement('td');
