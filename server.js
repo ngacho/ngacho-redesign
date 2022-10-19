@@ -77,6 +77,13 @@ app.get('/edit-blog', (req, res) => {
     res.sendFile(path.join(initial_path, "/admin/blog-editor/blog_editor.html"))
 });
 
+// listen for edit project page
+app.get('/admin/edit-project/*', authorizeAccess, (req, res) => {
+    req.originalUrl;
+    res.sendFile(path.join(initial_path, "/admin/project-editor/project_editor.html"))
+});
+
+
 app.use((req, res) => {
     res.sendStatus(404);
 })

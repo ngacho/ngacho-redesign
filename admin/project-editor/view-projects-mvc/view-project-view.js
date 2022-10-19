@@ -111,9 +111,8 @@ export class ViewProjectView{
     bindEditProject(handler){
         this.projectGallery.addEventListener('click', e => {
             if (e.target && e.target.nodeName == 'I' && e.target.className.includes("fas fa-pen ")) {
-                const gallery_item = e.target.parentNode.parentNode.parentNode.parentNode;
-                const projectImageUrl = gallery_item.children[0].children[0].src;            
-                console.log(`edit project: ${projectImageUrl}`)
+                const projectId = e.target.id.replace("edit ", '');
+                location.href = `/admin/edit-project/${projectId}`;
             }
         });
     }
