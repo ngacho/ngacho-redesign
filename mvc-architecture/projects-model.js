@@ -60,13 +60,8 @@ export class ProjectBaseModel {
     async writeProjectToDatabase(snapshotRef, projectData){
         return new Promise((resolve, reject)=>{
             getDownloadURL(snapshotRef).then((url) => {
-                var id = ''
-                let letters = 'abcdefghijklmnopqrstuvwxyz';
-                let projectTitle = projectData.projectTitle.split(" ").join("-");
-                for (let i = 0; i < 4; i++) {
-                    id += letters[Math.floor(Math.random() * letters.length)];
-                }
-                var docName = `${projectTitle}-${id}`;
+
+                var docName = this.getProjectId(projectData);
 
                 var projectDataToWriteToDatabase = {
                     projectLanguages: projectData.projectLanguages,
@@ -132,7 +127,26 @@ export class ProjectBaseModel {
     /**
      * Edit Project
      */
-    editProject() {
+    editProject(projectData) {
+        return new Promise((resolve, reject) => {
+            console.log(JSON.stringify(projectData.projectCoverUrl));
+            const imageRef = ref(cloudStorage, projectData.projectCoverUrl);
+            // Delete the image
+            deleteObject(imageRef).then(() => {
+                // upload the new image.
+                this.postProjectToDB(projectData).then((_)=>{
+                    resolve("Edited Project Successfully");
+                }).catch((err)=>{
+                    console.error(err)
+                    resolve("Project editing unsucessful. Please try again");
+                });
+
+            }).catch((err)=> {
+                console.error(err)
+                resolve("Project editing unsucessful. Please try again");
+            })
+
+        });
 
     }
 
@@ -141,7 +155,8 @@ export class ProjectBaseModel {
      */
     deleteProject(projectData) {
         return new Promise((resolve, reject)=>{
-            const imageRef = ref(cloudStorage, projectData.projectUrl);
+            console.log(projectData.projectUrl)
+            const imageRef = ref(cloudStorage, projectData.projectCoverUrl);
             // Delete the image
             deleteObject(imageRef).then(() => {
                 // File deleted successfully
@@ -164,6 +179,24 @@ export class ProjectBaseModel {
 
         })
         
+
+    }
+
+    getProjectId(projectData){
+        if(projectData.projectId){
+            return projectId;
+        }else{
+            var id = ''
+            let letters = 'abcdefghijklmnopqrstuvwxyz';
+            // generate project id.
+            let projectTitle = projectData.projectTitle.split(" ").join("-");
+            for (let i = 0; i < 4; i++) {
+                id += letters[Math.floor(Math.random() * letters.length)];
+            }
+            var docName = `${projectTitle}-${id}`;
+
+            return docName;
+        }        
 
     }
 
