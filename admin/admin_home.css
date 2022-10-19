@@ -28,10 +28,11 @@ a:focus {
 
 .dash-board-container {
     width: 80%;
+    height: calc(100vh - 5rem);
     margin: auto;
     margin-top: 1rem;
     display: grid;
-    overflow-y: auto;
+    overflow-y: scroll;
     /* IE and Edge */
     -ms-overflow-style: none;
     /* Firefox */
