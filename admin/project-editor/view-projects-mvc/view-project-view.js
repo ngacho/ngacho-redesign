@@ -84,7 +84,7 @@ export class ViewProjectView{
                 const projectData = {
                     projectCoverTitle : projectCoverTitle,
                     projectId : projectId,
-                    projectUrl : projectImageUrl
+                    projectCoverUrl : projectImageUrl
                 }
 
                 var deleteStatus = handler(projectData);
