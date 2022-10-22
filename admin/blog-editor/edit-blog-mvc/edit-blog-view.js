@@ -159,6 +159,8 @@ export class EditBlogView {
         // html string
         const htmlStr = this.parseMarkdown(blog);
         this.blogPostPreviewField.innerHTML = htmlStr;
+
+        // texme.renderPage();
     }
 
     parseMarkdown(rawMarkdown) {
@@ -173,6 +175,7 @@ export class EditBlogView {
             .replace(/!\[(.*?)\]\((.*?)\)/gim, "<img alt='$1' src='$2'/>")
             .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2' target=\"_blank\" rel=\"noopener noreferrer\">$1</a>")
             .replace(/\n$/gim, '<br />')
+            .replace(/\\tex(.*)\\tex/gim, '<textarea>$1</textarea>')
 
 
         return htmlText.trim();

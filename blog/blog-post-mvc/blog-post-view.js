@@ -10,6 +10,7 @@ export class BlogPostView {
         var heading_element = document.createElement('h1');
         heading_element.className = "blog-heading";
         var heading = document.createTextNode(data["title"]);
+        document.title = data['title'];
         heading_element.appendChild(heading);
         this.blog_heading_container.appendChild(heading_element);
 
