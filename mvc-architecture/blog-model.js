@@ -1,6 +1,6 @@
 import { db, doc, collection, getDoc, setDoc, deleteDoc, query, onSnapshot } from '../admin/firebase.js'
 
-export class Model {
+export class BlogModel {
 
     constructor() {
         // empty blogs

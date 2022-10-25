@@ -1,6 +1,6 @@
-import { Model } from "../../../mvc-architecture/blog-model.js";
+import { BlogModel } from "../../../mvc-architecture/blog-model.js";
 
-export class EditBlogModel extends Model {
+export class EditBlogModel extends BlogModel {
 
     constructor() {
         super();
