@@ -86,6 +86,16 @@ app.get(['/admin/projects-to-edit'], authorizeAccess, (req, res)=>{
     res.sendFile(path.join(initial_path, "/admin/project-editor/projects_to_edit.html"))
 })
 
+app.get(['/admin/edit-bio'], authorizeAccess, (req, res) =>{
+    req.originalUrl
+    res.sendFile(path.join(initial_path, "/admin/bio-editor/edit-bio.html"))
+})
+
+app.get(['/admin/edit-contact-me'], authorizeAccess, (req, res)=>{
+    req.originalUrl
+    res.sendFile(path.join(initial_path, "/admin/contact-me-editor/edit-contact-me.html"))
+})
+
 // listen for new project and edit project project page
 app.get(['/admin/new-project/', '/admin/edit-project/*'], authorizeAccess, (req, res) => {
     req.originalUrl;
