@@ -24,7 +24,6 @@ export class BlogModel {
             });
 
             this.blogKeys = blogKeys;
-            console.log(this.blogKeys.length);
             this.writtenToStorage(true);
 
         });
@@ -95,7 +94,6 @@ export class BlogModel {
     async editBlog(editedBlog) {
         return new Promise((resolve, reject) => {
             const docName = editedBlog["blogId"];
-            console.log('edit blog model: ' + docName)
             if (docName) {
                 // pass the blog with the docName as id
                 setDoc(doc(db, "blogs", docName), editedBlog).then((_) => {
@@ -128,7 +126,7 @@ export class BlogModel {
                     resolve(blogs);
                     // a key to indicate any new changes.
                 } else {
-                    console.log("Nothing written to storage.")
+                    console.error("Nothing written to storage.")
                     reject("Nothing was written to storage");
                 }
             });
@@ -163,7 +161,7 @@ export class BlogModel {
                     reject(false);
                 });
             } else {
-                console.log("blog doesn't exist.")
+                console.error("blog doesn't exist.")
                 reject(false);
             }
         });
@@ -192,7 +190,7 @@ export class BlogModel {
                     reject("Nothing was written to storage");
                 }
             }).catch((err) => {
-                console.log(err);
+                console.error(err);
             });
 
         });
