@@ -1,6 +1,4 @@
-
-
-class ViewContactMeController{
+export class ViewContactMeController{
 
     constructor(model, view){
         this.model = model;

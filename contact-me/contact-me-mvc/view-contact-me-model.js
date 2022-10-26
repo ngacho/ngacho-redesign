@@ -1,6 +1,6 @@
-import { ContactMeModel } from "../../mvc-architecture/contact-me-model";
+import { ContactMeModel } from "../../mvc-architecture/contact-me-model.js";
 
-class ViewContactMeModel extends ContactMeModel{
+export class ViewContactMeModel extends ContactMeModel{
     constructor(){
         super();
     }

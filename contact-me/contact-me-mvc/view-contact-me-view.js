@@ -1,5 +1,5 @@
 
-class ViewContactMeView{
+export class ViewContactMeView{
     constructor(){
         this.contact_me_content = document.querySelector(".contact-me-intro");
     }
