@@ -35,7 +35,8 @@ export class EditContactMeView{
             console.log("form clicked");
             const contactMeObject = {
                 title : this.contactMeTitleInput.value,
-                text : this.contactMeTextInput.value
+                text : this.contactMeTextInput.value,
+                active : false
             }
 
             var status = handler(contactMeObject);
