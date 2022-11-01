@@ -66,6 +66,7 @@ export class ContactMeListView {
                     const id = e.target.className.replace("fa-solid fa-circle-check activate-", '');
                     var status = handler(id);
                     status.then((_) => {
+                        this.activateNewlySelectedTag(id);
                         console.log("success");
                     }).catch((err) => {
                         console.error(err)
@@ -73,6 +74,18 @@ export class ContactMeListView {
                 }
             }
         });
+    }
+
+    activateNewlySelectedTag(id){
+        var checkMarks = this.contactMeGallery.getElementsByClassName('fa-circle-check');
+        for(const checkMark of checkMarks){
+            const checkMarkId = checkMark.className.replace("fa-solid fa-circle-check activate-", '');
+            checkMark.className = checkMark.className.replace('active', '')
+            if(id === checkMarkId){
+                checkMark.className += " active"
+            }
+
+        }
     }
 
     bindDeleteContactMe(handler) {

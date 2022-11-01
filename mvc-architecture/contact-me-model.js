@@ -69,8 +69,8 @@ export class ContactMeModel {
 
                 this.valuesWritten(true);
                 resolve(true);
-            }, (error)=>{
-               
+            }, (error) => {
+
                 reject(error)
             });
         })
@@ -82,23 +82,30 @@ export class ContactMeModel {
         const batch = writeBatch(db);
 
         this.contactMeItems.forEach((value, key) => {
+            // get the items from map
+            let item = { ...JSON.parse(value)};
+            
             const updateRef = doc(db, "contact-me-texts", key);
+            var updatedItem;
+            
+            
             if (key == id) {
-                batch.set(updateRef, {...value, 'active': true });
+                updatedItem = {...item, 'active' : true}
+                batch.update(updateRef, {'active': true});
+            }else{
+                updatedItem = {...item, 'active' : false};
+                batch.update(updateRef, {'active' : false});
             }
 
-            batch.set(updateRef, { 'active': false });
-        })
+            this.contactMeItems.set(key, JSON.stringify(updatedItem));
+       
+        });
 
-        
 
         return new Promise((resolve, reject) => {
-            batch.commit().then((msg) => {
-                console.log(msg)
-                resolve("Update Successful");
-            }).catch((err) => {
+            batch.commit().then(() => resolve(("Successful commit"))).catch((err) => {
                 console.error(err)
-                reject("UpdateContactMe: Update Failed")
+                reject("Commit not successful");
             })
         });
     }
@@ -110,14 +117,14 @@ export class ContactMeModel {
                 const deleteRef = async (id) => {
                     await deleteDoc(doc(db, "contact-me-texts", id));
                 }
-    
+
                 deleteRef(contactMeId).then((_) => {
                     resolve(true)
                 }).catch((err) => {
                     console.log(err);
                     reject(false);
                 });
-    
+
             } else {
                 reject("Key not in maps");
             }
