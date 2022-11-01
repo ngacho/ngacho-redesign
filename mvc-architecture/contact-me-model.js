@@ -134,7 +134,7 @@ export class ContactMeModel {
 
 
     getContactMeId(contactMeObject) {
-        if (contactMeObject.projectId) {
+        if (contactMeObject.id) {
             return contactMeObject.id;
         } else {
             var id = ''
