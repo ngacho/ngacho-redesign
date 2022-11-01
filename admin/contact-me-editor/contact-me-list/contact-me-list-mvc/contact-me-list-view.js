@@ -8,6 +8,7 @@ export class ContactMeListView {
 
     setUpContactMePage(contactMes) {
         for (const contactMe of contactMes) {
+            let id = contactMe['id'];
             const contactMeItemWrapper = document.createElement('div');
             contactMeItemWrapper.className = "contact-me-item-wrapper";
 
@@ -21,13 +22,18 @@ export class ContactMeListView {
 
             const contactMeText = document.createElement('p');
             contactMeText.className = "contact-me-text";
+            contactMeText.onclick = function () {
+                location.href =  `/admin/edit-contact-me/${id}`;
+            }
             var text = document.createTextNode(contactMe['text']);
             contactMeText.appendChild(text);
+
+            
 
             const iconsWrapper = document.createElement('div');
             iconsWrapper.className = "icons-wrapper";
 
-            let id = contactMe['id'];
+            
 
             const checkMark = document.createElement('i');
             checkMark.className = `fa-solid fa-circle-check activate-${id}`;

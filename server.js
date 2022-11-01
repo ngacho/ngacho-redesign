@@ -96,7 +96,7 @@ app.get(['/admin/choose-contact-me-to-edit'], authorizeAccess, (req, res)=>{
     res.sendFile(path.join(initial_path, "/admin/contact-me-editor/contact-me-list.html"))
 })
 
-app.get(['/admin/add-contact-me'], authorizeAccess, (req, res)=>{
+app.get(['/admin/add-contact-me', '/admin/edit-contact-me/*'], authorizeAccess, (req, res)=>{
     req.originalUrl
     res.sendFile(path.join(initial_path, "/admin/contact-me-editor/edit-contact-me.html"))
 })
