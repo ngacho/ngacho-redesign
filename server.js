@@ -1,12 +1,19 @@
 // import packages
 const express = require('express');
 const path = require('path');
-const FirebaseHelperClass = require('./firebase-helper-class');
+const multer = require('multer')
+const FirebaseHelperClass = require('./firebase-helper');
 const firebaseHelper = new FirebaseHelperClass();
 
 // Obsfucation of code
 // https://www.creativebloq.com/how-to/hide-your-javascript-code-from-view-source
 
+const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+        fileSize: 5 * 1024 * 1024, // no larger than 5mb, you can change as needed.
+    }
+});
 
 // initial folders
 let initial_path = path.join(__dirname, "");
@@ -21,7 +28,6 @@ app.get('/', (req, res) => {
 })
 
 app.listen("3030", () => {
-    firebaseHelper.testMethod();
     console.log('listening......');
 });
 
@@ -29,7 +35,7 @@ app.listen("3030", () => {
  * Functions related to the admin page.
  * admin page.
  * */
-app.get('/admin',  authorizeAccess, (_, res) => {
+app.get('/admin', authorizeAccess, (_, res) => {
     res.sendFile(path.join(initial_path, "/admin/admin_home.html"));
 })
 
@@ -38,27 +44,27 @@ app.get(['/admin/write-blog', '/admin/edit-blog/*'], authorizeAccess, (req, res)
     res.sendFile(path.join(initial_path, "/admin/blog-editor/blog_editor.html"))
 });
 
-app.get(['/admin/blogs-to-edit'], authorizeAccess, (req, res)=>{
+app.get(['/admin/blogs-to-edit'], authorizeAccess, (req, res) => {
     req.originalUrl
     res.sendFile(path.join(initial_path, "/admin/blog-editor/blogs_to_edit.html"))
 })
 
-app.get(['/admin/projects-to-edit'], authorizeAccess, (req, res)=>{
+app.get(['/admin/projects-to-edit'], authorizeAccess, (req, res) => {
     req.originalUrl
     res.sendFile(path.join(initial_path, "/admin/project-editor/projects_to_edit.html"))
 })
 
-app.get(['/admin/edit-bio'], authorizeAccess, (req, res) =>{
+app.get(['/admin/edit-bio'], authorizeAccess, (req, res) => {
     req.originalUrl
     res.sendFile(path.join(initial_path, "/admin/bio-editor/edit-bio.html"))
 })
 
-app.get(['/admin/choose-contact-me-to-edit'], authorizeAccess, (req, res)=>{
+app.get(['/admin/choose-contact-me-to-edit'], authorizeAccess, (req, res) => {
     req.originalUrl
     res.sendFile(path.join(initial_path, "/admin/contact-me-editor/contact-me-list.html"))
 })
 
-app.get(['/admin/add-contact-me', '/admin/edit-contact-me/*'], authorizeAccess, (req, res)=>{
+app.get(['/admin/add-contact-me', '/admin/edit-contact-me/*'], authorizeAccess, (req, res) => {
     req.originalUrl
     res.sendFile(path.join(initial_path, "/admin/contact-me-editor/edit-contact-me.html"))
 })
@@ -95,21 +101,48 @@ app.get('/blog-post', (req, res) => {
 });
 
 
+// add a file
+app.post('/uploadFile', upload.single('file'), (req, res) => {
+    let file = req.file
+
+    let fileObject = {
+        title: req.body.projectname, 
+        infoUrl : req.body.projectinfourl, 
+        storageDest : req.body.storageDest,
+        projectLangs : req.body.projectlangs
+    }
+
+    firebaseHelper.postFileToStorage(file, fileObject).then((success)=>{
+        res.status(200).send({
+            message: 'successfully uploaded an image'
+        });
+    }).catch((error) => {
+        console.error(error);
+        res.status(417).send({
+            error : 'failed to upload image'
+        })
+    });
+
+})
+// get all files
+
+// delete a file
+
+// authorize admin page.
+
 
 app.use((req, res) => {
     res.sendStatus(404);
-})
+});
 
-
-// authorize admin page.
-function authorizeAccess(req, res, next){
+function authorizeAccess(req, res, next) {
     const reject = () => {
         res.setHeader('www-authenticate', 'Basic')
         res.sendStatus(401)
     }
 
     // auth factors stored in an encrypted file.
-    const auth = {login: 'xxxxx', password: '12345'} // change this
+    const auth = { login: 'xxxxx', password: '12345' } // change this
 
     const authorization = req.headers.authorization
 
