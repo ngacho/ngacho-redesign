@@ -19,7 +19,7 @@ module.exports = class FirebaseHelperClass {
     constructor() {
         initializeApp({
             credential: cert(serviceAccount),
-            storageBucket : 'ngacho-blog.appspot.com'
+            storageBucket: 'ngacho-blog.appspot.com'
         });
 
         this.db = getFirestore();
@@ -80,6 +80,8 @@ module.exports = class FirebaseHelperClass {
      */
     async updateDocOnFirebaseDatabase(database_name, updatedDoc) {
         const docName = this.getFileId(docObject);
+        const doc = { ...updatedDoc }
+        delete doc.id;
         const fileRef = this.db.collection(database_name).doc(docName);
 
         const updateRef = await fileRef.update(updatedDoc);
@@ -93,6 +95,31 @@ module.exports = class FirebaseHelperClass {
 
         })
 
+    }
+
+    /**
+     * 
+     * @param {name of database we're updating} database_name 
+     * @param {a list of docs containing the updated information} updatedDocs 
+     */
+    async updateMultipleDocsInFirebaseDatabase(database_name, updatedDocs) {
+        const batch = db.batch();
+        updatedDocs.forEach((doc) => {
+            let key = this.getFileId(doc);
+
+            let updatedDoc = { ...doc }
+            delete updatedDoc.id;
+
+            const updatedRef = db.collection(database_name).doc(key);
+            batch.update(updatedRef, updatedDoc);
+        });
+
+        return new Promise((resolve, reject) => {
+            batch.commit().then(() => resolve(("Batch updated successfully"))).catch((err) => {
+                
+                reject(err);
+            })
+        });
     }
 
 
@@ -160,7 +187,7 @@ module.exports = class FirebaseHelperClass {
                 metadata: {
                     contentType: file.mimetype
                 },
-                resumable : false,
+                resumable: false,
             });
 
             blobStream.on('error', (error) => {
@@ -172,16 +199,16 @@ module.exports = class FirebaseHelperClass {
             blobStream.on('finish', (_) => {
                 fileUpload.makePublic().then((_) => {
                     const publicUrl = fileUpload.publicUrl();
-                    let docObject = {...fileDataObject}
+                    let docObject = { ...fileDataObject }
                     docObject['publicUrl'] = publicUrl
                     docObject['fileName'] = file.originalname
-                    
-                    self.postDocToFirebaseDatabase(fileDataObject.storageDest, docObject).then((_)=>{
+
+                    self.postDocToFirebaseDatabase(fileDataObject.storageDest, docObject).then((_) => {
                         resolve("Successfully uploaded Image");
-                    }).catch((err)=>{
+                    }).catch((err) => {
                         reject(err);
                     })
-                }).catch((err)=>{
+                }).catch((err) => {
                     reject(err)
                 });
             });
@@ -200,20 +227,20 @@ module.exports = class FirebaseHelperClass {
      */
     async deleteFileFromStorage(fileObject) {
 
-        return new Promise((resolve, reject)=>{
+        return new Promise((resolve, reject) => {
             let fileToBeDeleted = this.bucket.file(`${fileObject.storageDest}/${file.fileName}`);
             let fileId = this.getFileId(fileObject);
 
             const self = this;
 
-            fileToBeDeleted.delete().then(()=>{
-                
-                self.deleteDocOnFirebaseDatabase(fileObject.storageDest, fileId).then(()=>{
+            fileToBeDeleted.delete().then(() => {
+
+                self.deleteDocOnFirebaseDatabase(fileObject.storageDest, fileId).then(() => {
                     resolve("Successfully deleted the file from storage");
-                }).catch((err)=>{
+                }).catch((err) => {
                     reject(err);
                 })
-            }).catch((err)=>{
+            }).catch((err) => {
                 reject(err);
             });
 
