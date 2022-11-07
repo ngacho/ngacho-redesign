@@ -129,7 +129,8 @@ const fetchAllDocs = (req, res) => {
 
 const fetchDocById = (req, res)=>{
     let id = req.params.id
-    firebaseHelper.getSpecificDocFromFirebase(req.storageName, req.params.id).then((data) => {
+    if(!id) res.status(400).send({error : "No id found in request"})
+    firebaseHelper.getSpecificDocFromFirebase(req.storageName, id).then((data) => {
         res.status(200).send(JSON.stringify(data));
     }).catch((err) => {
         console.error(err);
@@ -137,7 +138,19 @@ const fetchDocById = (req, res)=>{
             error: 'Failed to get necessary data'
         })
     })
+}
 
+const deleteDocById = (req, res)=>{
+    let id = req.params.id
+    if(!id) res.status(400).send({error : "No id found in request"})
+    firebaseHelper.deleteDocOnFirebaseDatabase(req.storageName, id).then((data) => {
+        res.status(204).send();
+    }).catch((err) => {
+        console.error(err);
+        res.status(502).send({
+            error: 'Failed to get necessary data'
+        });
+    });
 }
 // Read
 // GET. 	blogs/
@@ -160,14 +173,14 @@ app.get('/database/bios/:id', setStorageLocation('bios'), fetchDocById);
 // Update
 // PUT.       blogs/:id
 // PUT.       projects/:id
-// PUT.		      contactmes/:id
+// PUT.		  contactmes/:id
 // PUT.       bios/:id
 
 // Delete
-// DELETE.		blogs/
-// DELETE. 		projects/
-// DELETE.		contactmes/
-// DELETE.		bios/
+app.delete('/database/blogs/:id', setStorageLocation('blogs'), deleteDocById);
+app.delete('/database/projects/:id', setStorageLocation('projects'), deleteDocById);
+app.delete('/database/contact-me-texts/:id', setStorageLocation('contact-me-texts'), deleteDocById);
+app.delete('/database/bios/:id', setStorageLocation('bios'), deleteDocById);
 
 // add a file
 app.post('/uploadFile', upload.single('file'), (req, res) => {
