@@ -155,17 +155,19 @@ module.exports = class FirebaseHelperClass {
         const docName = id;
         const fileRef = this.db.collection(database_name).doc(docName);
 
-        const getRef = await fileRef.get();
+        return new Promise((resolve, reject)=>{
+            fileRef.get().then((doc) => {
+                if (!doc.exists) {
+                    reject("No such document exists")
+                } else {
+                    resolve(doc.data());
+                }
+            }).catch((err) => {
+                reject(err);
+            });
+        })
 
-        getRef.then((doc) => {
-            if (!doc.exists) {
-                reject("No such document exists")
-            } else {
-                resolve(doc.data());
-            }
-        }).catch((err) => {
-            reject(err);
-        });
+        
 
     }
 
