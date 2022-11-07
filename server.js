@@ -100,26 +100,94 @@ app.get('/blog-post', (req, res) => {
     res.sendFile(path.join(initial_path, "/blog/blog_post.html"));
 });
 
+//REST API routes
+// Create
+// POST.	blogs/
+// POST. 	projects/
+// POST.	contactmes
+// POST. 	bios
+
+const setStorageLocation = (storageName) => {
+    // middleware to set storage location of files.
+    return (req, res, next) => {
+        req.storageName = storageName;
+        next();
+    };
+};
+
+
+const fetchAllDocs = (req, res) => {
+    firebaseHelper.getDocsFromFirebaseDatabase(req.storageName).then((data) => {
+        res.status(200).send(JSON.stringify(data));
+    }).catch((err) => {
+        console.error(err);
+        res.status(502).send({
+            error: 'Failed to get necessary data'
+        })
+    })
+};
+
+const fetchDocById = (req, res)=>{
+    let id = req.params.id
+    firebaseHelper.getSpecificDocFromFirebase(req.storageName, req.params.id).then((data) => {
+        res.status(200).send(JSON.stringify(data));
+    }).catch((err) => {
+        console.error(err);
+        res.status(502).send({
+            error: 'Failed to get necessary data'
+        })
+    })
+
+}
+// Read
+// GET. 	blogs/
+app.get('/database/blogs', setStorageLocation('blogs'), fetchAllDocs);
+// GET. 	blogs/:id
+app.get('/database/blogs/:id', setStorageLocation('blogs'), fetchDocById)
+// GET.		projects/
+app.get('/database/projects', setStorageLocation('projects'), fetchAllDocs);
+// GET. 	projects/:id
+app.get('/database/projects/:id', setStorageLocation('projects'), fetchDocById);
+// GET.		contact-me-texts
+app.get('/database/contact-me-texts', setStorageLocation('contact-me-texts'), fetchAllDocs);
+// GET.		contact-me-texts/:id
+app.get('/database/contact-me-texts/:id', setStorageLocation('contact-me-texts'), fetchDocById);
+// GET.		bios
+app.get('/database/bios/:id', setStorageLocation('bios'), fetchAllDocs);
+// GET. 	bios/:id
+app.get('/database/bios/:id', setStorageLocation('bios'), fetchDocById);
+
+// Update
+// PUT.       blogs/:id
+// PUT.       projects/:id
+// PUT.		      contactmes/:id
+// PUT.       bios/:id
+
+// Delete
+// DELETE.		blogs/
+// DELETE. 		projects/
+// DELETE.		contactmes/
+// DELETE.		bios/
 
 // add a file
 app.post('/uploadFile', upload.single('file'), (req, res) => {
     let file = req.file
 
     let fileObject = {
-        title: req.body.projectname, 
-        infoUrl : req.body.projectinfourl, 
-        storageDest : req.body.storageDest,
-        projectLangs : req.body.projectlangs
+        title: req.body.projectname,
+        infoUrl: req.body.projectinfourl,
+        storageDest: req.body.storageDest,
+        projectLangs: req.body.projectlangs
     }
 
-    firebaseHelper.postFileToStorage(file, fileObject).then((success)=>{
+    firebaseHelper.postFileToStorage(file, fileObject).then((success) => {
         res.status(200).send({
             message: 'successfully uploaded an image'
         });
     }).catch((error) => {
         console.error(error);
         res.status(417).send({
-            error : 'failed to upload image'
+            error: 'failed to upload image'
         })
     });
 
