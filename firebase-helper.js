@@ -132,10 +132,8 @@ module.exports = class FirebaseHelperClass {
         const docName = id;
         const fileRef = this.db.collection(database_name).doc(docName);
 
-        const deleteRef = await fileRef.delete();
-
         return new Promise((resolve, reject) => {
-            deleteRef.then((_) => {
+            fileRef.delete().then((_) => {
                 resolve("Successfully deleted doc");
             }).catch((err) => {
                 reject(err);
