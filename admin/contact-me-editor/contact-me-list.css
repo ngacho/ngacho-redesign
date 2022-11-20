@@ -81,8 +81,7 @@ a {
 }
 
 
-.contact-me-item>.contact-me-title,
-.post-short-desc {
+.contact-me-item>.contact-me-title{
     cursor: pointer;
 }
 
