@@ -18,16 +18,15 @@ export class ContactMeListView {
             const contactMeTitle = document.createElement('h3');
             contactMeTitle.className = "contact-me-title"
             var title = document.createTextNode(contactMe['title']);
+            contactMeTitle.onclick = function () {
+                location.href =  `/admin/edit-contact-me/?${id}`;
+            }
             contactMeTitle.appendChild(title);
 
             const contactMeText = document.createElement('p');
             contactMeText.className = "contact-me-text";
-            contactMeText.onclick = function () {
-                location.href =  `/admin/edit-contact-me/${id}`;
-            }
             var text = document.createTextNode(contactMe['text']);
             contactMeText.appendChild(text);
-
             
 
             const iconsWrapper = document.createElement('div');
