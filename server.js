@@ -4,6 +4,7 @@ const path = require('path');
 const multer = require('multer')
 const FirebaseHelperClass = require('./firebase-helper');
 const firebaseHelper = new FirebaseHelperClass();
+// securing https : https://www.toptal.com/nodejs/secure-rest-api-in-nodejs
 
 // Obsfucation of code
 // https://www.creativebloq.com/how-to/hide-your-javascript-code-from-view-source
@@ -153,21 +154,13 @@ const deleteDocById = (req, res)=>{
     });
 }
 // Read
-// GET. 	blogs/
 app.get('/database/blogs', setStorageLocation('blogs'), fetchAllDocs);
-// GET. 	blogs/:id
 app.get('/database/blogs/:id', setStorageLocation('blogs'), fetchDocById)
-// GET.		projects/
 app.get('/database/projects', setStorageLocation('projects'), fetchAllDocs);
-// GET. 	projects/:id
 app.get('/database/projects/:id', setStorageLocation('projects'), fetchDocById);
-// GET.		contact-me-texts
 app.get('/database/contact-me-texts', setStorageLocation('contact-me-texts'), fetchAllDocs);
-// GET.		contact-me-texts/:id
 app.get('/database/contact-me-texts/:id', setStorageLocation('contact-me-texts'), fetchDocById);
-// GET.		bios
 app.get('/database/bios/:id', setStorageLocation('bios'), fetchAllDocs);
-// GET. 	bios/:id
 app.get('/database/bios/:id', setStorageLocation('bios'), fetchDocById);
 
 // Update
