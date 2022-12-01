@@ -162,9 +162,12 @@ const uploadFile = (req, res) => {
 // POST.	blogs/
 app.post('/database/blogs', authorizeAccess, serverController.postDoc);
 // POST. 	projects/
+app.post('/database/projects', upload.single('file'), uploadFile);
 // POST.	contactmes
 app.post('/database/contact-me-texts', authorizeAccess, serverController.postDoc);
 // POST. 	bios
+app.post('/database/bios', upload.single('file'), uploadFile);
+//POST. misc photos.
 app.post('/database/miscalleneous', upload.single('file'), uploadFile);
 
 // Read
