@@ -25,6 +25,17 @@ let initial_path = path.join(__dirname, "");
 const app = express();
 app.use(express.static(initial_path));
 
+let redisClient;
+
+(async () => {
+    redisClient = redis.createClient();
+
+    redisClient.on("error", (error) => console.error(error));
+
+    await redisClient.connect();
+})();
+
+const serverController = new ServerController(redisClient, firebaseHelper);
 
 // home page sending to port 3000.
 app.get('/', (req, res) => {
