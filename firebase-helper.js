@@ -103,14 +103,14 @@ module.exports = class FirebaseHelperClass {
      * @param {a list of docs containing the updated information} updatedDocs 
      */
     async updateMultipleDocsInFirebaseDatabase(database_name, updatedDocs) {
-        const batch = db.batch();
+        const batch = this.db.batch();
         updatedDocs.forEach((doc) => {
             let key = this.getFileId(doc);
 
             let updatedDoc = { ...doc }
             delete updatedDoc.id;
 
-            const updatedRef = db.collection(database_name).doc(key);
+            const updatedRef = this.db.collection(database_name).doc(key);
             batch.update(updatedRef, updatedDoc);
         });
 
