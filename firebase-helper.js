@@ -63,7 +63,7 @@ module.exports = class FirebaseHelperClass {
 
         return new Promise((resolve, reject) => {
             fileRef.doc(docName).set(docObject).then((_) => {
-                resolve("Successfully added to firestore")
+                resolve({ doc: { ...docObject, id: docName }, message: "Successfully added to firestore" })
             }).catch((err) => {
                 reject(err);
             })
