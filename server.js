@@ -2,6 +2,8 @@
 const express = require('express');
 const path = require('path');
 const multer = require('multer')
+const redis = require('redis');
+const ServerController = require('./server-controller');
 const FirebaseHelperClass = require('./firebase-helper');
 const firebaseHelper = new FirebaseHelperClass();
 // securing https : https://www.toptal.com/nodejs/secure-rest-api-in-nodejs
@@ -22,6 +24,7 @@ let initial_path = path.join(__dirname, "");
 //express js server with initial path.
 const app = express();
 app.use(express.static(initial_path));
+
 
 // home page sending to port 3000.
 app.get('/', (req, res) => {
