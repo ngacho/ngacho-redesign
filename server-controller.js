@@ -77,6 +77,26 @@ module.exports = class ServerController {
 
     }
 
+    updateDoc = async (req, res) => {
+        const storageName = req.url.split('/')[2];
+        let client = this.redisClient;
+        let id = req.params.id;
+        let updatedObject = JSON.parse(req.doc)
+
+        this.firebaseHelper.updateDocOnFirebaseDatabase(storageName, file).then((_) => {
+            client.hGet(storageName, id).then((data) => {
+                let obj = JSON.parse(data);
+                const newObj = {...obj, updatedObject}
+                client.hSet(storageName, data['id'], JSON.stringify(newObj));
+            }).catch((err) => {
+                console.error(err);
+                res.status(502).send({
+                    error: 'Failed to get necessary data'
+                });
+            });
+        }).catch((err) => res.status(500).send({ error: err }))
+
+    }
 
     deleteDoc = async (req, res) => {
         const storageName = req.url.split('/')[2];
