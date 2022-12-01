@@ -24,7 +24,6 @@ module.exports = class ServerController {
                 res.status(500).send({ error: err });
             });
         } else {
-            // replace this with storage name storageName
             this.firebaseHelper.getDocsFromFirebaseDatabase(storageName).then((data) => {
                 for (const doc of data) {
                     client.hSet(storageName, doc['id'], JSON.stringify(doc));
@@ -46,7 +45,7 @@ module.exports = class ServerController {
         let client = this.redisClient;
 
         let id = req.params.id;
-        if(!id) res.status(400).send({error : "No id found in request"})
+        if (!id) res.status(400).send({ error: "No id found in request" })
 
         let exists = client.exists(id);
         exists.then((reply) => {
@@ -57,7 +56,7 @@ module.exports = class ServerController {
                     res.status(502).send({
                         error: 'Failed to get necessary data'
                     });
-                })
+                });
             } else {
                 firebaseHelper.getSpecificDocFromFirebase(storageName, id).then((data) => {
                     client.hSet(storageName, data['id'], JSON.stringify(data));
@@ -77,6 +76,8 @@ module.exports = class ServerController {
         });
 
     }
+
+
     deleteDoc = async (req, res) => {
         const storageName = req.url.split('/')[2];
         let client = this.redisClient;
@@ -87,6 +88,7 @@ module.exports = class ServerController {
             deleteRef.then((_)=> {
                 res.status(200).send(({message : 'deleted successfully'}));
             }).catch((err)=>res.status(500).send({error :  err}))
+
     deleteFile = async (req, res) => {
         const storageName = req.url.split('/')[2];
         let client = this.redisClient;
@@ -110,6 +112,7 @@ module.exports = class ServerController {
         });
 
     }
+
     setSingleItemToActive = async (req, res) => {
         const storageName = req.url.split('/')[2];
         let client = this.redisClient;
