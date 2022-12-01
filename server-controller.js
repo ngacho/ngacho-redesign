@@ -110,6 +110,34 @@ module.exports = class ServerController {
         });
 
     }
+    setSingleItemToActive = async (req, res) => {
+        const storageName = req.url.split('/')[2];
+        let client = this.redisClient;
+        let id = req.params.id;
+
+        var updatedItems = []
+
+        let items = client.hGetAll(storageName)
+        items.then((data) => {
+            Object.keys(data).forEach(function (key) {
+                let oldItem = JSON.parse(data[key])
+                let newObject = {...oldItem, active : false}
+                
+                if(key === id){
+                    newObject = {...newObject, active : true}
+                }
+                updatedItems.push(newObject);
+                
+            });
+            this.firebaseHelper.updateMultipleDocsInFirebaseDatabase(storageName, updatedItems).then((_)=>{
+                res.status(200).send({message : 'Item set to active successfully'});
+            }).catch((err)=>{
+                res.status(500).send({error : `Error from db: ${err}`});
+            });
+        }).catch((err) => {
+            res.status(500).send({ error: `Error reading from cache: ${err}` });
+        }); 
+        
     }
     postDoc = async(req, res) => {
         const storageName = req.url.split('/')[2];
