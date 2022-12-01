@@ -157,4 +157,16 @@ module.exports = class ServerController {
             res.status(500).send({error : err});
         });
     }
+
+    cacheFileInfo(storageName, doc) {
+        let client = this.redisClient;
+        return new Promise((resolve, reject)=>{
+            try {
+                client.hSet(storageName, doc['id'], JSON.stringify(doc));
+                resolve({message : 'Successfully saved'});
+            } catch (error) {
+                reject({err : error});
+            }
+        });
+    }     
 }
