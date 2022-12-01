@@ -116,7 +116,6 @@ module.exports = class FirebaseHelperClass {
 
         return new Promise((resolve, reject) => {
             batch.commit().then(() => resolve(("Batch updated successfully"))).catch((err) => {
-                
                 reject(err);
             })
         });
@@ -222,8 +221,7 @@ module.exports = class FirebaseHelperClass {
     /**
      * Delete a file (image, document etc) from firebase.
      * 
-     * @param {storage to which our file is} storage_name 
-     * @param { id of the file we're deleting} id 
+     * @param { file we're deleting} fileObject
      */
     async deleteFileFromStorage(fileObject) {
 
