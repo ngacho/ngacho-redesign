@@ -164,7 +164,7 @@ module.exports = class FirebaseHelperClass {
             });
         })
 
-        
+
 
     }
 
@@ -200,7 +200,7 @@ module.exports = class FirebaseHelperClass {
                     const publicUrl = fileUpload.publicUrl();
                     let id = this.getFileId(fileDataObject)
                     let docWithId = { ...fileDataObject, id: id, fileName: file.originalname, publicUrl: publicUrl };
-
+                    
                     self.postDocToFirebaseDatabase(storageName, docWithId).then((_) => {
                         resolve({ doc: docWithId, message: 'successfully uploaded file' });
                     }).catch((err) => {
