@@ -168,14 +168,14 @@ const deleteDocById = (req, res)=>{
     });
 }
 // Read
-app.get('/database/blogs', setStorageLocation('blogs'), fetchAllDocs);
-app.get('/database/blogs/:id', setStorageLocation('blogs'), fetchDocById)
-app.get('/database/projects', setStorageLocation('projects'), fetchAllDocs);
-app.get('/database/projects/:id', setStorageLocation('projects'), fetchDocById);
-app.get('/database/contact-me-texts', setStorageLocation('contact-me-texts'), fetchAllDocs);
-app.get('/database/contact-me-texts/:id', setStorageLocation('contact-me-texts'), fetchDocById);
-app.get('/database/bios/:id', setStorageLocation('bios'), fetchAllDocs);
-app.get('/database/bios/:id', setStorageLocation('bios'), fetchDocById);
+app.get('/database/blogs', serverController.fetchAllDocs);
+app.get('/database/blogs/:id', serverController.fetchDocById);
+app.get('/database/projects', serverController.fetchAllDocs);
+app.get('/database/projects/:id', serverController.fetchDocById);
+app.get('/database/contact-me-texts', serverController.fetchAllDocs);
+app.get('/database/contact-me-texts/:id', serverController.fetchDocById);
+app.get('/database/bios/:id', serverController.fetchAllDocs);
+app.get('/database/bios/:id', serverController.fetchDocById);
 
 // Update
 // PUT.       blogs/:id
@@ -184,10 +184,11 @@ app.get('/database/bios/:id', setStorageLocation('bios'), fetchDocById);
 // PUT.       bios/:id
 
 // Delete
-app.delete('/database/blogs/:id', setStorageLocation('blogs'), deleteDocById);
-app.delete('/database/projects/:id', setStorageLocation('projects'), deleteDocById);
-app.delete('/database/contact-me-texts/:id', setStorageLocation('contact-me-texts'), deleteDocById);
-app.delete('/database/bios/:id', setStorageLocation('bios'), deleteDocById);
+app.delete('/database/blogs/:id', serverController.deleteDoc);
+app.delete('/database/projects/:id', serverController.deleteFile);
+app.delete('/database/contact-me-texts/:id', serverController.deleteDoc);
+app.delete('/database/bios/:id', serverController.deleteFile);
+app.delete('/database/miscalleneous/:id', serverController.deleteFile);
 
 // add a file
 app.post('/uploadFile', upload.single('file'), (req, res) => {
