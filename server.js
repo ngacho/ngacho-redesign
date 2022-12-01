@@ -186,7 +186,9 @@ app.get('/database/bios/:id', serverController.fetchDocById);
 // PUT.       blogs/:id
 // PUT.       projects/:id
 // PUT.		  contactmes/:id
+app.put('/database/contact-me-texts/:id', authorizeAccess, serverController.setSingleItemToActive);
 // PUT.       bios/:id
+app.put('/database/bios/:id', authorizeAccess, serverController.setSingleItemToActive);
 
 // Delete
 app.delete('/database/blogs/:id', serverController.deleteDoc);
