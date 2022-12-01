@@ -249,6 +249,11 @@ module.exports = class FirebaseHelperClass {
 
 
     getFileId(fileObject) {
+        if(typeof fileObject !== 'object'){
+            let obj = JSON.parse(fileObject);
+            fileObject = {...obj}
+        }
+        
         if (fileObject.id) {
             return fileObject.id;
         } else {
