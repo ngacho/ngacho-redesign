@@ -88,6 +88,8 @@ module.exports = class ServerController {
             deleteRef.then((_)=> {
                 res.status(200).send(({message : 'deleted successfully'}));
             }).catch((err)=>res.status(500).send({error :  err}))
+        }).catch((err)=> res.status(500).send({error : err}));
+    }
 
     deleteFile = async (req, res) => {
         const storageName = req.url.split('/')[2];
