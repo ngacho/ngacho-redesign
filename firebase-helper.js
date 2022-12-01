@@ -198,12 +198,11 @@ module.exports = class FirebaseHelperClass {
             blobStream.on('finish', (_) => {
                 fileUpload.makePublic().then((_) => {
                     const publicUrl = fileUpload.publicUrl();
-                    let docObject = { ...fileDataObject }
-                    docObject['publicUrl'] = publicUrl
-                    docObject['fileName'] = file.originalname
+                    let id = this.getFileId(fileDataObject)
+                    let docWithId = { ...fileDataObject, id: id, fileName: file.originalname, publicUrl: publicUrl };
 
-                    self.postDocToFirebaseDatabase(fileDataObject.storageDest, docObject).then((_) => {
-                        resolve("Successfully uploaded Image");
+                    self.postDocToFirebaseDatabase(storageName, docWithId).then((_) => {
+                        resolve({ doc: docWithId, message: 'successfully uploaded file' });
                     }).catch((err) => {
                         reject(err);
                     })
