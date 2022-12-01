@@ -148,6 +148,10 @@ app.put('/database/contact-me-texts/:id', authorizeAccess, serverController.setS
 app.put('/database/bios/:id', authorizeAccess, serverController.setSingleItemToActive);
 
 // Delete
+app.delete('/database/blogs/:id', authorizeAccess, serverController.deleteDoc);
+app.delete('/database/projects/:id', authorizeAccess, serverController.deleteFile);
+app.delete('/database/contact-me-texts/:id', authorizeAccess, serverController.deleteDoc);
+app.delete('/database/bios/:id', authorizeAccess, serverController.deleteFile);
 app.delete('/database/miscalleneous/:id', authorizeAccess, serverController.deleteFile);
 
 
