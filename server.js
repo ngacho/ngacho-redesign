@@ -28,6 +28,7 @@ app.use(express.static(initial_path));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// redis set up
 let redisClient;
 
 (async () => {
@@ -54,8 +55,8 @@ app.listen("3030", () => {
  * admin page.
  * */
 app.get('/admin', authorizeAccess, (_, res) => {
-    res.sendFile(path.join(initial_path, "/admin/admin_home.html"));
-})
+    res.sendFile(path.join(initial_path, "/admin/admin-home.html"));
+});
 
 app.get(['/admin/write-blog', '/admin/edit-blog/*'], authorizeAccess, (req, res) => {
     req.originalUrl;
@@ -70,7 +71,7 @@ app.get(['/admin/blogs-to-edit'], authorizeAccess, (req, res) => {
 app.get(['/admin/projects-to-edit'], authorizeAccess, (req, res) => {
     req.originalUrl
     res.sendFile(path.join(initial_path, "/admin/project-editor/projects_to_edit.html"))
-})
+});
 
 app.get(['/admin/edit-bio'], authorizeAccess, (req, res) => {
     req.originalUrl
@@ -80,12 +81,12 @@ app.get(['/admin/edit-bio'], authorizeAccess, (req, res) => {
 app.get(['/admin/choose-contact-me-to-edit'], authorizeAccess, (req, res) => {
     req.originalUrl
     res.sendFile(path.join(initial_path, "/admin/contact-me-editor/contact-me-list.html"))
-})
+});
 
 app.get(['/admin/add-contact-me', '/admin/edit-contact-me/*'], authorizeAccess, (req, res) => {
     req.originalUrl
     res.sendFile(path.join(initial_path, "/admin/contact-me-editor/edit-contact-me.html"))
-})
+});
 
 // listen for new project and edit project project page
 app.get(['/admin/new-project/', '/admin/edit-project/*'], authorizeAccess, (req, res) => {
@@ -126,52 +127,8 @@ app.post('/database/blogs', authorizeAccess, serverController.postDoc);
 // POST.	contactmes
 app.post('/database/contact-me-texts', authorizeAccess, serverController.postDoc);
 // POST. 	bios
+app.post('/database/miscalleneous', upload.single('file'), uploadFile);
 
-const setStorageLocation = (storageName) => {
-    // middleware to set storage location of files.
-    return (req, res, next) => {
-        req.storageName = storageName;
-        next();
-    };
-};
-
-
-const fetchAllDocs = (req, res) => {
-    firebaseHelper.getDocsFromFirebaseDatabase(req.storageName).then((data) => {
-        res.status(200).send(JSON.stringify(data));
-    }).catch((err) => {
-        console.error(err);
-        res.status(502).send({
-            error: 'Failed to get necessary data'
-        })
-    })
-};
-
-const fetchDocById = (req, res)=>{
-    let id = req.params.id
-    if(!id) res.status(400).send({error : "No id found in request"})
-    firebaseHelper.getSpecificDocFromFirebase(req.storageName, id).then((data) => {
-        res.status(200).send(JSON.stringify(data));
-    }).catch((err) => {
-        console.error(err);
-        res.status(502).send({
-            error: 'Failed to get necessary data'
-        })
-    })
-}
-
-const deleteDocById = (req, res)=>{
-    let id = req.params.id
-    if(!id) res.status(400).send({error : "No id found in request"})
-    firebaseHelper.deleteDocOnFirebaseDatabase(req.storageName, id).then((data) => {
-        res.status(204).send();
-    }).catch((err) => {
-        console.error(err);
-        res.status(502).send({
-            error: 'Failed to get necessary data'
-        });
-    });
-}
 // Read
 app.get('/database/blogs', serverController.fetchAllDocs);
 app.get('/database/blogs/:id', serverController.fetchDocById);
@@ -191,40 +148,12 @@ app.put('/database/contact-me-texts/:id', authorizeAccess, serverController.setS
 app.put('/database/bios/:id', authorizeAccess, serverController.setSingleItemToActive);
 
 // Delete
-app.delete('/database/blogs/:id', serverController.deleteDoc);
-app.delete('/database/projects/:id', serverController.deleteFile);
-app.delete('/database/contact-me-texts/:id', serverController.deleteDoc);
-app.delete('/database/bios/:id', serverController.deleteFile);
-app.delete('/database/miscalleneous/:id', serverController.deleteFile);
+app.delete('/database/miscalleneous/:id', authorizeAccess, serverController.deleteFile);
 
-// add a file
-app.post('/uploadFile', upload.single('file'), (req, res) => {
-    let file = req.file
 
-    let fileObject = {
-        title: req.body.projectname,
-        infoUrl: req.body.projectinfourl,
-        storageDest: req.body.storageDest,
-        projectLangs: req.body.projectlangs
-    }
-
-    firebaseHelper.postFileToStorage(file, fileObject).then((success) => {
-        res.status(200).send({
-            message: 'successfully uploaded an image'
-        });
-    }).catch((error) => {
-        console.error(error);
-        res.status(417).send({
-            error: 'failed to upload image'
-        })
-    });
-
-})
 // get all files
 
 // delete a file
-
-// authorize admin page.
 
 
 app.use((req, res) => {
