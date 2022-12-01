@@ -198,6 +198,11 @@ module.exports = class FirebaseHelperClass {
             blobStream.on('finish', (_) => {
                 fileUpload.makePublic().then((_) => {
                     const publicUrl = fileUpload.publicUrl();
+                    if(typeof fileDataObject !== 'object'){
+                        let obj = JSON.parse(fileDataObject);
+                        fileDataObject = {...obj}
+                    }
+                    
                     let id = this.getFileId(fileDataObject)
                     let docWithId = { ...fileDataObject, id: id, fileName: file.originalname, publicUrl: publicUrl };
                     
@@ -248,10 +253,6 @@ module.exports = class FirebaseHelperClass {
 
 
     getFileId(fileObject) {
-        if(typeof fileObject !== 'object'){
-            let obj = JSON.parse(fileObject);
-            fileObject = {...obj}
-        }
         
         if (fileObject.id) {
             return fileObject.id;
