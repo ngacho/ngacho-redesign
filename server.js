@@ -119,6 +119,35 @@ app.get('/blog-post', (req, res) => {
     res.sendFile(path.join(initial_path, "/blog/blog_post.html"));
 });
 
+// upload a file (move method to controller). Temporary fix ;-)
+const uploadFile = (req, res) => {
+
+    let fileObject = req.body.doc;
+    let file = req.file;
+    const storageName = req.url.split('/')[2];
+
+
+    firebaseHelper.postFileToStorage(file, fileObject, storageName).then((data) => {
+        let doc = data['doc'];
+
+        serverController.cacheFileInfo(storageName, doc).then((_) =>
+            res.status(200).send({
+                message: 'successfully uploaded an image'
+            })
+        ).catch((err) => {
+            console.error(err);
+            res.status(417).send({
+                error: 'failed to upload image'
+            });
+        })
+    }).catch((error) => {
+        console.error(error);
+        res.status(417).send({
+            error: 'failed to upload image'
+        });
+    });
+}
+
 //REST API routes
 // Create
 // POST.	blogs/
