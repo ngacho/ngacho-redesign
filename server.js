@@ -95,6 +95,10 @@ app.get(['/admin/new-project/', '/admin/edit-project/*'], authorizeAccess, (req,
 });
 
 
+app.get(['/admin/add-misc-photos'], authorizeAccess, (req, res) => {
+    req.originalUrl;
+    res.sendFile(path.join(initial_path, "/admin/project-editor/project-editor.html"))
+});
 
 // blog page
 app.get('/blog', (req, res) => {
