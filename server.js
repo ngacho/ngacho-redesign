@@ -121,10 +121,10 @@ app.get('/blog-post', (req, res) => {
 //REST API routes
 // Create
 // POST.	blogs/
-app.post('/database/blogs', serverController.postDoc);
+app.post('/database/blogs', authorizeAccess, serverController.postDoc);
 // POST. 	projects/
 // POST.	contactmes
-app.post('/database/contact-me-texts', serverController.postDoc);
+app.post('/database/contact-me-texts', authorizeAccess, serverController.postDoc);
 // POST. 	bios
 
 const setStorageLocation = (storageName) => {
