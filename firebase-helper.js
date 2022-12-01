@@ -173,14 +173,14 @@ module.exports = class FirebaseHelperClass {
      * 
      * @param {Storage to which we post firebase} storage_name 
      */
-    async postFileToStorage(file, fileDataObject) {
+    async postFileToStorage(file, fileDataObject, storageName) {
         return new Promise((resolve, reject) => {
             if (!file) {
                 reject('No image file');
             }
 
 
-            let fileUpload = this.bucket.file(`${fileDataObject.storageDest}/${file.originalname}`);
+            let fileUpload = this.bucket.file(`${storageName}/${file.originalname}`);
 
             const blobStream = fileUpload.createWriteStream({
                 metadata: {
