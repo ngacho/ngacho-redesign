@@ -91,7 +91,7 @@ app.get(['/admin/add-contact-me', '/admin/edit-contact-me/*'], authorizeAccess, 
 // listen for new project and edit project project page
 app.get(['/admin/new-project/', '/admin/edit-project/*'], authorizeAccess, (req, res) => {
     req.originalUrl;
-    res.sendFile(path.join(initial_path, "/admin/project-editor/project_editor.html"))
+    res.sendFile(path.join(initial_path, "/admin/project-editor/project-editor.html"));
 });
 
 
