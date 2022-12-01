@@ -77,4 +77,16 @@ module.exports = class ServerController {
         });
 
     }
+    deleteDoc = async (req, res) => {
+        const storageName = req.url.split('/')[2];
+        let client = this.redisClient;
+        let id = req.params.id;
+
+        this.firebaseHelper.deleteDocOnFirebaseDatabase(storageName, id).then((_)=>{
+            let deleteRef = client.del(id)
+            deleteRef.then((_)=> {
+                res.status(200).send(({message : 'deleted successfully'}));
+            }).catch((err)=>res.status(500).send({error :  err}))
+        }).catch((err)=> res.status(500).send({error : err}))
+    }
 }
