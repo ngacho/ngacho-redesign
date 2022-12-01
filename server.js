@@ -1,5 +1,6 @@
 // import packages
 const express = require('express');
+const bodyParser = require("body-parser");
 const path = require('path');
 const multer = require('multer')
 const redis = require('redis');
@@ -24,6 +25,8 @@ let initial_path = path.join(__dirname, "");
 //express js server with initial path.
 const app = express();
 app.use(express.static(initial_path));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 let redisClient;
 
@@ -118,8 +121,10 @@ app.get('/blog-post', (req, res) => {
 //REST API routes
 // Create
 // POST.	blogs/
+app.post('/database/blogs', serverController.postDoc);
 // POST. 	projects/
 // POST.	contactmes
+app.post('/database/contact-me-texts', serverController.postDoc);
 // POST. 	bios
 
 const setStorageLocation = (storageName) => {
