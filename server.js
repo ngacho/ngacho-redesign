@@ -78,6 +78,11 @@ app.get(['/admin/edit-bio'], authorizeAccess, (req, res) => {
     res.sendFile(path.join(initial_path, "/admin/bio-editor/bio-list/edit-bio.html"))
 })
 
+app.get(['/admin/add-bio', '/admin/edit-bio/*'], authorizeAccess, (req, res) => {
+    req.originalUrl
+    res.sendFile(path.join(initial_path, "/admin/bio-editor/edit-bio/bio-editor.html"));
+});
+
 app.get(['/admin/choose-contact-me-to-edit'], authorizeAccess, (req, res) => {
     req.originalUrl
     res.sendFile(path.join(initial_path, "/admin/contact-me-editor/contact-me-list.html"))
