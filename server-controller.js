@@ -159,6 +159,9 @@ module.exports = class ServerController {
     }
 
     cacheFileInfo(storageName, doc) {
+        /**
+         * Upload via controller was tricky so it's done in the server now.
+         */
         let client = this.redisClient;
         return new Promise((resolve, reject)=>{
             try {
