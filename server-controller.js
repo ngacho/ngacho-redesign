@@ -111,4 +111,18 @@ module.exports = class ServerController {
 
     }
     }
+    postDoc = async(req, res) => {
+        const storageName = req.url.split('/')[2];
+        let client = this.redisClient;
+        let doc = req.body;
+
+        this.firebaseHelper.postDocToFirebaseDatabase(storageName, doc).then((data)=>{
+            let doc = data['doc'];
+            
+            client.hSet(storageName, doc['id'], JSON.stringify(doc));
+            res.status(200).send({message : 'Posted successfully'});
+        }).catch((err)=>{
+            res.status(500).send({error : err});
+        });
+    }
 }
