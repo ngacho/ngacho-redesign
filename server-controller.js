@@ -81,7 +81,7 @@ module.exports = class ServerController {
         const storageName = req.url.split('/')[2];
         let client = this.redisClient;
         let id = req.params.id;
-        let updatedObject = JSON.parse(req.doc)
+        let updatedObject = JSON.parse(req.body.doc)
 
         this.firebaseHelper.updateDocOnFirebaseDatabase(storageName, file).then((_) => {
             client.hGet(storageName, id).then((data) => {
