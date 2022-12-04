@@ -251,11 +251,15 @@ app.get('/database/bios/:id', serverController.fetchDocById);
 
 // Update
 // PUT.       blogs/:id
+app.put('/database/projects/:id', serverController.updateDoc)
 // PUT.       projects/:id
+app.put('/database/projects/:id', upload.single('file'), updateFile);
 // PUT.		  contactmes/:id
 app.put('/database/contact-me-texts/:id', authorizeAccess, serverController.setSingleItemToActive);
 // PUT.       bios/:id
 app.put('/database/bios/:id', authorizeAccess, serverController.setSingleItemToActive);
+// PUT. misc 
+app.put('/database/miscalleneous/:id', upload.single('file'), updateFile);
 
 // Delete
 app.delete('/database/blogs/:id', authorizeAccess, serverController.deleteDoc);
