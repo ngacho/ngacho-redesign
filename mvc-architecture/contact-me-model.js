@@ -1,5 +1,3 @@
-import { db, doc, collection, writeBatch, getDoc, setDoc, deleteDoc, query, onSnapshot } from '../admin/firebase.js'
-
 export class ContactMeModel {
 
     constructor(){}
@@ -10,12 +8,12 @@ export class ContactMeModel {
                 .then(response => response.json())
                 .then(data => {
                     resolve(data);
-        })
+                })
                 .catch((err)=>{
                     reject(err);
+                    
+                });
 
         });
-
-                });
-            }
+    }
 }
