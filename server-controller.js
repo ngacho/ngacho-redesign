@@ -91,7 +91,12 @@ module.exports = class ServerController {
         this.firebaseHelper.updateDocOnFirebaseDatabase(storageName, file).then((_) => {
             client.hGet(storageName, id).then((data) => {
                 let obj = JSON.parse(data);
-                const newObj = {...obj, updatedObject}
+
+                // updating the object with the new one
+                let newObj = Object.keys(obj).reduce((accumulator, key) => {
+                    return { ...accumulator, [key]: updatedObject[key] ? updatedObject[key] : obj[key] };
+                }, {});
+                
                 client.hSet(storageName, data['id'], JSON.stringify(newObj));
             }).catch((err) => {
                 console.error(err);
