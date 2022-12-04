@@ -12,7 +12,8 @@ module.exports = class ServerController {
         const storageName = req.url.split('/')[2];
         let client = this.redisClient;
 
-        if (this.isCached) {
+        client.hGet('isCached', `cache-${storageName}`).then((isCached) => {
+            if (isCached === 'true') {
             let results = []
             let items = client.hGetAll(storageName)
             items.then((data) => {
@@ -23,20 +24,25 @@ module.exports = class ServerController {
             }).catch((err) => {
                 res.status(500).send({ error: err });
             });
-        } else {
+
+            }else{
             this.firebaseHelper.getDocsFromFirebaseDatabase(storageName).then((data) => {
                 for (const doc of data) {
                     client.hSet(storageName, doc['id'], JSON.stringify(doc));
                 }
-                this.isCached = true;
-                res.status(200).send(JSON.stringify(data));
+                    client.hSet('isCached', `cache-${storageName}`, 'true');
+                    res.status(200).send(data);
             }).catch((err) => {
                 console.error(err);
                 res.status(502).send({
                     error: 'Failed to get necessary data'
                 })
+                });
+            }
+
+
             })
-        };
+
     };
 
 
