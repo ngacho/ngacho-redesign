@@ -157,6 +157,74 @@ const uploadFile = (req, res) => {
     });
 }
 
+const updateFile = (req, res) => {
+    // delete the file first if there's a file.
+    let fileObject = req.body.doc;
+    let file = req.file;
+    const storageName = req.url.split('/')[2];
+
+    if (typeof fileObject !== 'object') {
+        try {
+            fileObject = JSON.parse(fileObject);
+        } catch (error) {
+            res.status(500).send({ error: "unable to parse file" })
+        }
+    }
+    let id = req.params.id;
+
+
+    if (file) {
+        redisClient.hGet(storageName, id).then((data) => {
+            if (data) {
+                let oldFile = JSON.parse(data);
+                //let newFileData = { ...oldFile, fileObject };
+
+                // updating the object with the new one
+                let newFileData = Object.keys(oldFile).reduce((accumulator, key) => {
+                    return {...accumulator, [key]: fileObject[key] ? fileObject[key] : oldFile[key]};
+                }, {});
+                // delete file
+                firebaseHelper.deleteFileFromStorage(storageName, oldFile).then((_) => {
+                    // upload new file with new data.
+                    redisClient.del(id);
+                    
+                    firebaseHelper.postFileToStorage(file, newFileData, storageName).then((data) => {
+                        let doc = data['doc'];
+                        fileObject = { ...doc };
+                        // update client cache
+                        redisClient.hSet(storageName, doc['id'], JSON.stringify(fileObject));            
+                    });
+                    res.status(200).send({error : "Successfully updated file"});
+                }).catch((err) => {
+                    console.error(err);
+                    res.status(500).send({ error: "failed to delete file" });
+                });
+            } else {
+                res.status(404).send({ error: "No such file exists" });
+
+            }
+
+        }).catch((err) => {
+            console.error(err);
+            res.status(500).send({ error: "Failed" });
+
+        });
+
+    } else {
+        firebaseHelper.updateDocOnFirebaseDatabase(storageName, fileObject).then((_) => {
+            // update client cache
+            redisClient.hSet(storageName, fileObject['id'], JSON.stringify(fileObject));
+
+        }).catch((err) => {
+            console.error(err);
+            res.status(500).send({ error: "failed to update file" });
+
+        })
+
+    }
+
+}
+
 //REST API routes
 // Create
 // POST.	blogs/
