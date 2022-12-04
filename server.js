@@ -213,8 +213,24 @@ const updateFile = (req, res) => {
 
     } else {
         firebaseHelper.updateDocOnFirebaseDatabase(storageName, fileObject).then((_) => {
+
+            redisClient.hGet(storageName, id).then((data) => {
+                if (data) {
+                    let oldFile = JSON.parse(data);
+                    //let newFileData = { ...oldFile, fileObject };
+    
+                    // updating the object with the new one
+                    let newFileData = Object.keys(oldFile).reduce((accumulator, key) => {
+                        return {...accumulator, [key]: fileObject[key] ? fileObject[key] : oldFile[key]};
+                    }, {});
+                    // delete new file with new data.
+                    redisClient.del(id);
+
             // update client cache
-            redisClient.hSet(storageName, fileObject['id'], JSON.stringify(fileObject));
+                    redisClient.hSet(storageName, id, JSON.stringify(newFileData));
+                }
+            });
+            
 
         }).catch((err) => {
             console.error(err);
