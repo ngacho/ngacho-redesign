@@ -7,7 +7,7 @@ const redis = require('redis');
 const ServerController = require('./server-controller');
 const FirebaseHelperClass = require('./firebase-helper');
 const firebaseHelper = new FirebaseHelperClass();
-const routes = require('./routes/routes.json');
+const restRoutes = require('./routes/rest-routes.json');
 // securing https : https://www.toptal.com/nodejs/secure-rest-api-in-nodejs
 
 // Obsfucation of code
@@ -245,23 +245,23 @@ const updateFile = (req, res) => {
 
 //REST API routes
 // Create
-app.post([routes.blogs, routes.contactMe], serverController.postDoc);
-app.post([routes.projects, routes.bios, routes.misc], upload.single('file'), uploadFile);
+app.post([restRoutes.blogs, restRoutes.contactMe], serverController.postDoc);
+app.post([restRoutes.projects, restRoutes.bios, restRoutes.misc], upload.single('file'), uploadFile);
 
 // Read
-app.get([routes.blogs, routes.projects, routes.contactMe, routes.bios, routes.misc], serverController.fetchAllDocs)
-app.get([routes.specificBlog, routes.specificProject, routes.specificContactMe, routes.specificBio, routes.specificMisc], serverController.fetchDocById);
+app.get([restRoutes.blogs, restRoutes.projects, restRoutes.contactMe, restRoutes.bios, restRoutes.misc], serverController.fetchAllDocs)
+app.get([restRoutes.specificBlog, restRoutes.specificProject, restRoutes.specificContactMe, restRoutes.specificBio, restRoutes.specificMisc], serverController.fetchDocById);
 
 
 // Update
-app.put([routes.specificBlog, routes.specificContactMe], serverController.updateDoc);
-app.put([routes.specificProject, routes.specificBio, routes.specificMisc], upload.single('file'), uploadFile);
-app.put([routes.setActiveContactme, routes.setActiveBio], serverController.setSingleItemToActive);
+app.put([restRoutes.specificBlog, restRoutes.specificContactMe], serverController.updateDoc);
+app.put([restRoutes.specificProject, restRoutes.specificBio, restRoutes.specificMisc], upload.single('file'), uploadFile);
+app.put([restRoutes.setActiveContactme, restRoutes.setActiveBio], serverController.setSingleItemToActive);
 
 
 // Delete
-app.delete([routes.specificBlog, routes.specificContactMe], authorizeAccess, serverController.deleteDoc);
-app.delete([routes.specificProject, routes.specificBio, routes.misc], authorizeAccess, serverController.deleteFile);
+app.delete([restRoutes.specificBlog, restRoutes.specificContactMe], authorizeAccess, serverController.deleteDoc);
+app.delete([restRoutes.specificProject, restRoutes.specificBio, restRoutes.misc], authorizeAccess, serverController.deleteFile);
 
 
 
