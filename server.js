@@ -7,6 +7,7 @@ const redis = require('redis');
 const ServerController = require('./server-controller');
 const FirebaseHelperClass = require('./firebase-helper');
 const firebaseHelper = new FirebaseHelperClass();
+const routes = require('./routes/routes.json');
 // securing https : https://www.toptal.com/nodejs/secure-rest-api-in-nodejs
 
 // Obsfucation of code
@@ -244,52 +245,24 @@ const updateFile = (req, res) => {
 
 //REST API routes
 // Create
-// POST.	blogs/
-app.post('/database/blogs', authorizeAccess, serverController.postDoc);
-// POST. 	projects/
-app.post('/database/projects', upload.single('file'), uploadFile);
-// POST.	contactmes
-app.post('/database/contact-me-texts', authorizeAccess, serverController.postDoc);
-// POST. 	bios
-app.post('/database/bios', upload.single('file'), uploadFile);
-//POST. misc photos.
-app.post('/database/miscalleneous', upload.single('file'), uploadFile);
+app.post([routes.blogs, routes.contactMe], serverController.postDoc);
+app.post([routes.projects, routes.bios, routes.misc], upload.single('file'), uploadFile);
 
 // Read
-app.get('/database/blogs', serverController.fetchAllDocs);
-app.get('/database/blogs/:id', serverController.fetchDocById);
-app.get('/database/projects', serverController.fetchAllDocs);
-app.get('/database/projects/:id', serverController.fetchDocById);
-app.get('/database/contact-me-texts', serverController.fetchAllDocs);
-app.get('/database/contact-me-texts/:id', serverController.fetchDocById);
-app.get('/database/bios/:id', serverController.fetchAllDocs);
-app.get('/database/bios/:id', serverController.fetchDocById);
-app.get('/database/miscalleneous/:id', serverController.fetchDocById);
-app.get('/database/miscalleneous', serverController.fetchAllDocs);
+app.get([routes.blogs, routes.projects, routes.contactMe, routes.bios, routes.misc], serverController.fetchAllDocs)
+app.get([routes.specificBlog, routes.specificProject, routes.specificContactMe, routes.specificBio, routes.specificMisc], serverController.fetchDocById);
+
 
 // Update
-// PUT.       blogs/:id
-app.put('/database/projects/:id', serverController.updateDoc)
-// PUT.       projects/:id
-app.put('/database/projects/:id', upload.single('file'), updateFile);
-// PUT.		  contactmes/:id
-app.put('/database/contact-me-texts/:id', authorizeAccess, serverController.setSingleItemToActive);
-// PUT.       bios/:id
-app.put('/database/bios/:id', authorizeAccess, serverController.setSingleItemToActive);
-// PUT. misc 
-app.put('/database/miscalleneous/:id', upload.single('file'), updateFile);
+app.put([routes.specificBlog, routes.specificContactMe], serverController.updateDoc);
+app.put([routes.specificProject, routes.specificBio, routes.specificMisc], upload.single('file'), uploadFile);
+app.put([routes.setActiveContactme, routes.setActiveBio], serverController.setSingleItemToActive);
+
 
 // Delete
-app.delete('/database/blogs/:id', authorizeAccess, serverController.deleteDoc);
-app.delete('/database/projects/:id', authorizeAccess, serverController.deleteFile);
-app.delete('/database/contact-me-texts/:id', authorizeAccess, serverController.deleteDoc);
-app.delete('/database/bios/:id', authorizeAccess, serverController.deleteFile);
-app.delete('/database/miscalleneous/:id', authorizeAccess, serverController.deleteFile);
+app.delete([routes.specificBlog, routes.specificContactMe], authorizeAccess, serverController.deleteDoc);
+app.delete([routes.specificProject, routes.specificBio, routes.misc], authorizeAccess, serverController.deleteFile);
 
-
-// get all files
-
-// delete a file
 
 
 app.use((req, res) => {

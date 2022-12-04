@@ -1,0 +1,14 @@
+{
+    "blogs": "/database/blogs",
+    "specificBlog": "/database/blogs/:id",
+    "projects": "/database/projects",
+    "specificProject": "/database/projects/:id",
+    "contactMe": "/database/contact-me-texts",
+    "setActiveContactme" : "/database/contact-me-texts/set-active/:id",
+    "specificContactMe": "/database/contact-me-texts/:id",
+    "bios": "/database/bios/:",
+    "setActiveBio" : "/database/bios/set-active/:id", 
+    "specificBio": "/database/bios/:id",
+    "specificMisc": "/database/miscalleneous/:id",
+    "misc": "/database/miscalleneous"
+  }
