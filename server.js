@@ -248,6 +248,8 @@ app.get('/database/contact-me-texts', serverController.fetchAllDocs);
 app.get('/database/contact-me-texts/:id', serverController.fetchDocById);
 app.get('/database/bios/:id', serverController.fetchAllDocs);
 app.get('/database/bios/:id', serverController.fetchDocById);
+app.get('/database/miscalleneous/:id', serverController.fetchDocById);
+app.get('/database/miscalleneous', serverController.fetchAllDocs);
 
 // Update
 // PUT.       blogs/:id
