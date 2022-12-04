@@ -157,6 +157,7 @@ const uploadFile = (req, res) => {
     });
 }
 
+// update File
 const updateFile = (req, res) => {
     // delete the file first if there's a file.
     let fileObject = req.body.doc;
