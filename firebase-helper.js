@@ -227,17 +227,17 @@ module.exports = class FirebaseHelperClass {
      * 
      * @param { file we're deleting} fileObject
      */
-    async deleteFileFromStorage(fileObject) {
+    async deleteFileFromStorage(storage_name, fileObject) {
 
         return new Promise((resolve, reject) => {
-            let fileToBeDeleted = this.bucket.file(`${fileObject.storageDest}/${file.fileName}`);
+            let fileToBeDeleted = this.bucket.file(`${storage_name}/${fileObject.fileName}`);
             let fileId = this.getFileId(fileObject);
 
             const self = this;
 
             fileToBeDeleted.delete().then(() => {
 
-                self.deleteDocOnFirebaseDatabase(fileObject.storageDest, fileId).then(() => {
+                self.deleteDocOnFirebaseDatabase(storage_name, fileId).then(() => {
                     resolve("Successfully deleted the file from storage");
                 }).catch((err) => {
                     reject(err);
