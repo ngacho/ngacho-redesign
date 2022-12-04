@@ -4,7 +4,6 @@ module.exports = class ServerController {
     constructor(redisClient, firebaseHelperClass) {
         this.firebaseHelper = firebaseHelperClass;
         this.redisClient = redisClient;
-        this.isCached = false;
     }
 
 
