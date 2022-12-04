@@ -189,12 +189,12 @@ const updateFile = (req, res) => {
                 firebaseHelper.deleteFileFromStorage(storageName, oldFile).then((_) => {
                     // upload new file with new data.
                     redisClient.del(id);
-                    
+
                     firebaseHelper.postFileToStorage(file, newFileData, storageName).then((data) => {
                         let doc = data['doc'];
                         fileObject = { ...doc };
                         // update client cache
-                        redisClient.hSet(storageName, doc['id'], JSON.stringify(fileObject));            
+                        redisClient.hSet(storageName, doc['id'], JSON.stringify(fileObject));
                     });
                     res.status(200).send({ error: "Successfully updated file" });
                 }).catch((err) => {
@@ -219,7 +219,7 @@ const updateFile = (req, res) => {
                 if (data) {
                     let oldFile = JSON.parse(data);
                     //let newFileData = { ...oldFile, fileObject };
-    
+
                     // updating the object with the new one
                     let newFileData = Object.keys(oldFile).reduce((accumulator, key) => {
                         return { ...accumulator, [key]: fileObject[key] ? fileObject[key] : oldFile[key] };
@@ -227,11 +227,11 @@ const updateFile = (req, res) => {
                     // delete new file with new data.
                     redisClient.del(id);
 
-            // update client cache
+                    // update client cache
                     redisClient.hSet(storageName, id, JSON.stringify(newFileData));
                 }
             });
-            
+
 
         }).catch((err) => {
             console.error(err);
