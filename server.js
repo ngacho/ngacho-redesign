@@ -183,7 +183,7 @@ const updateFile = (req, res) => {
 
                 // updating the object with the new one
                 let newFileData = Object.keys(oldFile).reduce((accumulator, key) => {
-                    return {...accumulator, [key]: fileObject[key] ? fileObject[key] : oldFile[key]};
+                    return { ...accumulator, [key]: fileObject[key] ? fileObject[key] : oldFile[key] };
                 }, {});
                 // delete file
                 firebaseHelper.deleteFileFromStorage(storageName, oldFile).then((_) => {
@@ -196,7 +196,7 @@ const updateFile = (req, res) => {
                         // update client cache
                         redisClient.hSet(storageName, doc['id'], JSON.stringify(fileObject));            
                     });
-                    res.status(200).send({error : "Successfully updated file"});
+                    res.status(200).send({ error: "Successfully updated file" });
                 }).catch((err) => {
                     console.error(err);
                     res.status(500).send({ error: "failed to delete file" });
@@ -222,7 +222,7 @@ const updateFile = (req, res) => {
     
                     // updating the object with the new one
                     let newFileData = Object.keys(oldFile).reduce((accumulator, key) => {
-                        return {...accumulator, [key]: fileObject[key] ? fileObject[key] : oldFile[key]};
+                        return { ...accumulator, [key]: fileObject[key] ? fileObject[key] : oldFile[key] };
                     }, {});
                     // delete new file with new data.
                     redisClient.del(id);
