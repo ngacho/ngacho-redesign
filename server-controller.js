@@ -53,7 +53,7 @@ module.exports = class ServerController {
         let id = req.params.id;
         if (!id) res.status(400).send({ error: "No id found in request" })
 
-        let exists = client.exists(id);
+        let exists = client.exists(storageName, id);
         exists.then((reply) => {
             if (reply == 1) {
                 client.hGet(storageName, id).then((data) => {
