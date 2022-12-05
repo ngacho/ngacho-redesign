@@ -64,9 +64,9 @@ module.exports = class ServerController {
                     });
                 });
             } else {
-                firebaseHelper.getSpecificDocFromFirebase(storageName, id).then((data) => {
-                    client.hSet(storageName, data['id'], JSON.stringify(data));
-                    res.status(200).send(JSON.parse(data));
+                this.firebaseHelper.getSpecificDocFromFirebase(storageName, id).then((data) => {
+                    client.hSet(storageName, id, JSON.stringify(data));
+                    res.status(200).send(data);
                 }).catch((err) => {
                     console.error(err);
                     res.status(502).send({
