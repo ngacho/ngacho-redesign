@@ -17,7 +17,8 @@ module.exports = class ServerController {
             let items = client.hGetAll(storageName)
             items.then((data) => {
                 Object.keys(data).forEach(function (key) {
-                    results.push(JSON.parse(data[key]))
+                        let file = {...JSON.parse(data[key]), id : key};
+                        results.push(file);
                 });
                 res.status(200).send(results);
             }).catch((err) => {
