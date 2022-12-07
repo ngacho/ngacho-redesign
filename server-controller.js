@@ -200,12 +200,12 @@ module.exports = class ServerController {
          * Upload via controller was tricky so it's done in the server now.
          */
         let client = this.redisClient;
-        return new Promise((resolve, reject)=>{
+        return new Promise((resolve, reject) => {
             try {
                 client.hSet(storageName, doc['id'], JSON.stringify(doc));
-                resolve({message : 'Successfully saved'});
+                resolve({ message: 'Successfully saved' });
             } catch (error) {
-                reject({err : error});
+                reject({ err: error });
             }
         });
     }     
