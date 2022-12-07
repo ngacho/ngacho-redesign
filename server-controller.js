@@ -183,7 +183,7 @@ module.exports = class ServerController {
     postDoc = async(req, res) => {
         const storageName = req.url.split('/')[2];
         let client = this.redisClient;
-        let doc = req.body;
+        let doc = req.body.doc;
 
         this.firebaseHelper.postDocToFirebaseDatabase(storageName, doc).then((data)=>{
             let doc = data['doc'];
