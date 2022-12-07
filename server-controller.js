@@ -131,12 +131,12 @@ module.exports = class ServerController {
         client.hGet(storageName, id).then((data) => {
             let file = JSON.parse(data);
 
-            this.firebaseHelper.deleteFileFromStorage(file).then((_)=>{
+            this.firebaseHelper.deleteFileFromStorage(file).then((_) => {
                 let deleteRef = client.del(id)
-                deleteRef.then((_)=> {
-                    res.status(200).send(({message : 'deleted successfully'}));
-                }).catch((err)=>res.status(500).send({error :  err}))
-            }).catch((err)=> res.status(500).send({error : err}));
+                deleteRef.then((_) => {
+                    res.status(200).send(({ message: 'deleted successfully' }));
+                }).catch((err) => res.status(500).send({ error: err }))
+            }).catch((err) => res.status(500).send({ error: err }));
            
         }).catch((err) => {
             console.error(err);
