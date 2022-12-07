@@ -60,7 +60,8 @@ export class EditBioView {
 
                 let bioObject = {
                     "title" : this.bioTitleInput.value,
-                    "text" : this.bioTitleInput.value
+                    "text" : this.bioTitleInput.value,
+                    active : false
                 }
                 
         
