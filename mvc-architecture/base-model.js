@@ -74,7 +74,41 @@ export class BaseModel{
         });
     }
 
-    async createFileItem(itemObject, fileItemObject){
+    async createFileItem(file, itemObject){
+        
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('doc', JSON.stringify(itemObject));
+
+
+        const requestOptions = {
+            method: 'POST',
+            body: formData
+        }
+
+
+        return new Promise((resolve, reject) => {
+            fetch(this.baseUrl, requestOptions).then(response => {
+                // Process the response body and status code simultaneously
+                Promise.all([response.text(), response.status])
+                    .then(([_, status]) => {
+                        if (status === 200) {
+                            resolve("Success");
+                        } else {
+                            reject(`Failed with response ${status}`)
+                        }
+                    }).catch((err) => {
+                        console.error(`ERROR LEVEL 2: ${err}`);
+                        reject("Failed response");
+                    });
+            }).catch((err) => {
+                console.error(`ERROR LEVEL 1: ${err}`);
+                reject("Failed response.")
+            });
+        });
+
+        
+
 
     }
 
