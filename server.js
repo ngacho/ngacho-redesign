@@ -255,7 +255,7 @@ app.get([restRoutes.specificBlog, restRoutes.specificProject, restRoutes.specifi
 
 // Update
 app.put([restRoutes.specificBlog, restRoutes.specificContactMe], serverController.updateDoc);
-app.put([restRoutes.specificProject, restRoutes.specificBio, restRoutes.specificMisc], upload.single('file'), uploadFile);
+app.put([restRoutes.specificProject, restRoutes.specificBio, restRoutes.specificMisc], upload.single('file'), updateFile);
 app.put([restRoutes.setActiveContactme, restRoutes.setActiveBio], serverController.setSingleItemToActive);
 
 
