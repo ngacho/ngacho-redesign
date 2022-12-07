@@ -13,35 +13,35 @@ module.exports = class ServerController {
 
         client.hGet('isCached', `cache-${storageName}`).then((isCached) => {
             if (isCached === 'true') {
-            let results = []
-            let items = client.hGetAll(storageName)
-            items.then((data) => {
-                Object.keys(data).forEach(function (key) {
+                let results = []
+                let items = client.hGetAll(storageName)
+                items.then((data) => {
+                    Object.keys(data).forEach(function (key) {
                         let file = {...JSON.parse(data[key]), id : key};
                         results.push(file);
+                    });
+                    res.status(200).send(results);
+                }).catch((err) => {
+                    res.status(500).send({ error: err });
                 });
-                res.status(200).send(results);
-            }).catch((err) => {
-                res.status(500).send({ error: err });
-            });
 
             }else{
-            this.firebaseHelper.getDocsFromFirebaseDatabase(storageName).then((data) => {
-                for (const doc of data) {
-                    client.hSet(storageName, doc['id'], JSON.stringify(doc));
-                }
+                this.firebaseHelper.getDocsFromFirebaseDatabase(storageName).then((data) => {
+                    for (const doc of data) {
+                        client.hSet(storageName, doc['id'], JSON.stringify(doc));
+                    }
                     client.hSet('isCached', `cache-${storageName}`, 'true');
                     res.status(200).send(data);
-            }).catch((err) => {
-                console.error(err);
-                res.status(502).send({
-                    error: 'Failed to get necessary data'
-                })
+                }).catch((err) => {
+                    console.error(err);
+                    res.status(502).send({
+                        error: 'Failed to get necessary data'
+                    })
                 });
             }
 
 
-            })
+        })
 
     };
 
@@ -137,7 +137,7 @@ module.exports = class ServerController {
                     res.status(200).send(({ message: 'deleted successfully' }));
                 }).catch((err) => res.status(500).send({ error: err }))
             }).catch((err) => res.status(500).send({ error: err }));
-           
+
         }).catch((err) => {
             console.error(err);
             res.status(502).send({
@@ -159,12 +159,12 @@ module.exports = class ServerController {
             Object.keys(data).forEach(function (key) {
                 let oldItem = JSON.parse(data[key])
                 let newObject = { ...oldItem, active: false }
-                
+
                 if (key === id) {
                     newObject = { ...newObject, active: true }
                 }
                 updatedItems.push(newObject);
-                
+
             });
             this.firebaseHelper.updateMultipleDocsInFirebaseDatabase(storageName, updatedItems).then((_) => {
                 updatedItems.forEach((doc) => {
@@ -176,8 +176,8 @@ module.exports = class ServerController {
             });
         }).catch((err) => {
             res.status(500).send({ error: `Error reading from cache: ${err}` });
-        }); 
-        
+        });
+
     }
 
     postDoc = async (req, res) => {
@@ -187,7 +187,7 @@ module.exports = class ServerController {
 
         this.firebaseHelper.postDocToFirebaseDatabase(storageName, doc).then((data) => {
             let doc = data['doc'];
-            
+
             client.hSet(storageName, doc['id'], JSON.stringify(doc));
             res.status(200).send({ message: 'Posted successfully' });
         }).catch((err) => {
@@ -208,5 +208,5 @@ module.exports = class ServerController {
                 reject({ err: error });
             }
         });
-    }     
+    }
 }
