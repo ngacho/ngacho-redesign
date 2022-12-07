@@ -188,15 +188,20 @@ const updateFile = (req, res) => {
                 // delete file
                 firebaseHelper.deleteFileFromStorage(storageName, oldFile).then((_) => {
                     // upload new file with new data.
-                    redisClient.del(id);
 
-                    firebaseHelper.postFileToStorage(file, newFileData, storageName).then((data) => {
-                        let doc = data['doc'];
-                        fileObject = { ...doc };
-                        // update client cache
-                        redisClient.hSet(storageName, doc['id'], JSON.stringify(fileObject));
-                    });
-                    res.status(200).send({ error: "Successfully updated file" });
+                    let deleteRef = client.hdel(storageName, id);
+                    deleteRef.then((_) => {
+                        
+                        firebaseHelper.postFileToStorage(file, newFileData, storageName).then((data) => {
+                            let doc = data['doc'];
+                            fileObject = { ...doc };
+                            // update client cache
+                            redisClient.hSet(storageName, id, JSON.stringify(fileObject));
+                        });
+                        res.status(200).send({ error: "Successfully updated file" });
+
+                    }).catch((err) => res.status(500).send({ error: err }))
+        
                 }).catch((err) => {
                     console.error(err);
                     res.status(500).send({ error: "failed to delete file" });
