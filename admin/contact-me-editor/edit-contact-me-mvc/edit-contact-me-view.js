@@ -19,6 +19,16 @@ export class EditContactMeView{
         });
     }
 
+
+    setUpContactMe(data) {
+
+        this.contactMeTitleInput.value = data['title'];
+        this.contactMeTextInput.value = data['text'];
+
+        this.validate();
+    
+    }
+
     validate(){
         if(
             this.contactMeTitleInput.value.length != 0 &&
