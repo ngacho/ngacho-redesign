@@ -76,7 +76,7 @@ img{
 }
 
 .title,
-.languages,
+.bio-text,
 .extra-info
 {
     width: 360px;
@@ -95,7 +95,7 @@ img{
 }
 
 .title::placeholder,
-.languages::placeholder, .extra-info::placeholder {
+.bio-text::placeholder, .extra-info::placeholder {
     color: rgba(3, 49, 46, 0.7);
 }
 
