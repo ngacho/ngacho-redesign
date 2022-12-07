@@ -89,7 +89,7 @@ module.exports = class ServerController {
         let id = req.params.id;
         let updatedObject = req.body.doc;
 
-        this.firebaseHelper.updateDocOnFirebaseDatabase(storageName, file).then((_) => {
+        this.firebaseHelper.updateDocOnFirebaseDatabase(storageName, updatedObject).then((_) => {
             client.hGet(storageName, id).then((data) => {
                 let obj = JSON.parse(data);
 
@@ -98,14 +98,19 @@ module.exports = class ServerController {
                     return { ...accumulator, [key]: updatedObject[key] ? updatedObject[key] : obj[key] };
                 }, {});
                 
-                client.hSet(storageName, data['id'], JSON.stringify(newObj));
+                client.hSet(storageName, id, JSON.stringify(newObj));
+                res.status(200).send({message : "Successful update"});
             }).catch((err) => {
                 console.error(err);
                 res.status(502).send({
                     error: 'Failed to get necessary data'
                 });
             });
-        }).catch((err) => res.status(500).send({ error: err }))
+        }).catch((err) => {
+            console.error(err);
+            res.status(500).send({ error: err });
+        });
+        
 
     }
 
