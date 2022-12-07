@@ -13,14 +13,14 @@ export class BioListView {
 
             let figure = document.createElement('figure');
             let imageHolder = document.createElement('img');
-            imageHolder.src = bio['bio-photo-url'];
+            imageHolder.src = bio['publicUrl'];
             imageHolder.className = 'bio-photo';
 
             figure.appendChild(imageHolder);
 
             const bioTitle = document.createElement('h3');
             bioTitle.className = "bio-title"
-            var title = document.createTextNode(bio['bio-title']);
+            var title = document.createTextNode(bio['title']);
             bioTitle.onclick = function () {
                 location.href =  `/admin/edit-bio/?${id}`;
             }
@@ -29,7 +29,7 @@ export class BioListView {
 
             const bioText = document.createElement('p');
             bioText.className = "bio-text"
-            var text = document.createTextNode(bio['bio-text']);
+            var text = document.createTextNode(bio['text']);
             bioText.appendChild(text);
 
 
