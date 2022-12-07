@@ -7,14 +7,16 @@ export class EditContactMeModel extends ContactMeModel{
     }
 
     async uploadContactMe(contactMeObject) {    
-        // if has id, then it's update, else its post
-        const postRef = contactMeObject['id'] ?
-         await this.postContactMeText(contactMeObject) :
-         await this.updateContactMeText(contactMeObject);
-         
+        const postRef = await this.postContactMeText(contactMeObject);
         return postRef;
     }
 
+
+    async updateContactMe(contactMeObject){
+       const updateRef = await this.updateContactMeText(contactMeObject);
+       return updateRef;
+
+    }
 
     async fetchContactMeFromDb(id){
         const fetchRef = await this.fetchContactMe(id)
