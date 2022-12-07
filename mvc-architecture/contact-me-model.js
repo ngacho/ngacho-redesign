@@ -3,7 +3,6 @@ import { BaseModel } from "../mvc-architecture/base-model.js";
 export class ContactMeModel {
 
     constructor() {
-        this.baseUrl = 'http://localhost:3030/database/contact-me-texts'
         this.baseModel = new BaseModel('http://localhost:3030/database/contact-me-texts');
     }
 
