@@ -84,7 +84,7 @@ module.exports = class FirebaseHelperClass {
         delete doc.id;
         const fileRef = this.db.collection(database_name).doc(docName);
 
-
+        
         return new Promise((resolve, reject) => {
             fileRef.update(doc).then((_) => {
                 resolve("Successfully updated database")
