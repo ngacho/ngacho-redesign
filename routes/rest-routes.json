@@ -6,7 +6,7 @@
     "contactMe": "/database/contact-me-texts",
     "setActiveContactme" : "/database/contact-me-texts/set-active/:id",
     "specificContactMe": "/database/contact-me-texts/:id",
-    "bios": "/database/bios/:",
+    "bios": "/database/bios",
     "setActiveBio" : "/database/bios/set-active/:id", 
     "specificBio": "/database/bios/:id",
     "specificMisc": "/database/miscalleneous/:id",
