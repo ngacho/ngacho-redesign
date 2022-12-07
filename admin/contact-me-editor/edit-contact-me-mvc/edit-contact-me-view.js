@@ -42,8 +42,14 @@ export class EditContactMeView{
 
     bindHandlePublishContactMe(handler) {
         this.postContactMeButton.addEventListener("click", ()=>{
-            console.log("form clicked");
-            const contactMeObject = {
+            let objId = decodeURI(location.search).slice(1);
+            
+            const contactMeObject = objId ? {
+                id : objId,
+                title : this.contactMeTitleInput.value,
+                text : this.contactMeTextInput.value,
+                active : false
+            } : {
                 title : this.contactMeTitleInput.value,
                 text : this.contactMeTextInput.value,
                 active : false
