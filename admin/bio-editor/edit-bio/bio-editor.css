@@ -45,6 +45,10 @@ img{
     min-height: 480px;
     height: calc(100vh - 5rem);
     overflow-y: scroll;
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
     display: flex;
     justify-content: center;
     margin: auto;
