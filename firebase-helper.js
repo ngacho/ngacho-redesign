@@ -79,15 +79,14 @@ module.exports = class FirebaseHelperClass {
      * @param {document we are updating} updatedDoc 
      */
     async updateDocOnFirebaseDatabase(database_name, updatedDoc) {
-        const docName = this.getFileId(docObject);
+        const docName = this.getFileId(updatedDoc);
         const doc = { ...updatedDoc }
         delete doc.id;
         const fileRef = this.db.collection(database_name).doc(docName);
 
-        const updateRef = await fileRef.update(updatedDoc);
 
         return new Promise((resolve, reject) => {
-            updateRef.then((_) => {
+            fileRef.update(doc).then((_) => {
                 resolve("Successfully updated database")
             }).catch((err) => {
                 reject(err)
