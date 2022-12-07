@@ -114,12 +114,13 @@ module.exports = class ServerController {
         let client = this.redisClient;
         let id = req.params.id;
 
-        this.firebaseHelper.deleteDocOnFirebaseDatabase(storageName, id).then((_)=>{
-            let deleteRef = client.del(id)
-            deleteRef.then((_)=> {
-                res.status(200).send(({message : 'deleted successfully'}));
-            }).catch((err)=>res.status(500).send({error :  err}))
-        }).catch((err)=> res.status(500).send({error : err}));
+        this.firebaseHelper.deleteDocOnFirebaseDatabase(storageName, id).then((_) => {
+            let deleteRef = client.hdel(storageName, id);
+            deleteRef.then((_) => {
+                console.error("DELETED FROM HASH");
+                res.status(200).send(({ message: 'deleted successfully' }));
+            }).catch((err) => res.status(500).send({ error: err }))
+        }).catch((err) => res.status(500).send({ error: err }));
     }
 
     deleteFile = async (req, res) => {
