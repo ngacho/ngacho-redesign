@@ -1,22 +1,22 @@
 import { ContactMeModel } from "../../../../mvc-architecture/contact-me-model.js";
 
 export class ContactMeListModel extends ContactMeModel {
-    constructor(){
+    constructor() {
         super();
     }
 
-    async getContactMesList(){
+    async getContactMesList() {
         const getListRef = this.fetchContactMeList();
         return getListRef
     }
 
-    async deleteContactMeItem(contactMeId){
+    async deleteContactMeItem(contactMeId) {
         const deleteRef = this.deleteContactMeText(contactMeId);
         return deleteRef;
     }
 
 
-    async updateActiveContactMe(contactMeId){
+    async updateActiveContactMe(contactMeId) {
         const updateRef = this.updateContactMeStatus(contactMeId);
         return updateRef;
     }
