@@ -70,13 +70,17 @@ a:focus {
     background-color: #FFF;
     padding: 20px;
     overflow-y: scroll;
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
     position: absolute;
     width: 100%;
 }
 
 @media only screen and (max-width: 960px) {
     .dash-board-container {
-        width: 90%;
+        width: 80%;
         margin: auto;
         display: grid;
         grid-template-columns: 1fr;
