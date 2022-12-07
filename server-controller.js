@@ -97,7 +97,7 @@ module.exports = class ServerController {
                 let newObj = Object.keys(obj).reduce((accumulator, key) => {
                     return { ...accumulator, [key]: updatedObject[key] ? updatedObject[key] : obj[key] };
                 }, {});
-                
+
                 client.hSet(storageName, id, JSON.stringify(newObj));
                 res.status(200).send({message : "Successful update"});
             }).catch((err) => {
@@ -122,7 +122,6 @@ module.exports = class ServerController {
         this.firebaseHelper.deleteDocOnFirebaseDatabase(storageName, id).then((_) => {
             let deleteRef = client.hdel(storageName, id);
             deleteRef.then((_) => {
-                console.error("DELETED FROM HASH");
                 res.status(200).send(({ message: 'deleted successfully' }));
             }).catch((err) => res.status(500).send({ error: err }))
         }).catch((err) => res.status(500).send({ error: err }));
