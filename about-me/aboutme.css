@@ -28,6 +28,10 @@ a {
     justify-content: center;
     width: 60%;
     overflow: scroll;
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
     margin: 0 auto;
     height: calc(100vh - 5rem);
     min-height: calc(100vh - 5rem);
@@ -37,6 +41,10 @@ a {
     color: #03312E;
 
     overflow-y: scroll;
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
 
 }
 
