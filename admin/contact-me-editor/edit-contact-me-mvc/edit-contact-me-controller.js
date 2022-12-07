@@ -18,19 +18,12 @@ export class EditContactMeController{
             this.fetchContactMe(this.contactMeId);
         }
         
-        this.view.bindHandlePublishContactMe(this.handlePublishNewContactMe)
+        this.view.bindHandlePublishContactMe(this.handlePublishContactMe)
         
         
     }
 
-    handlePublishNewContactMe = async (updatedContactMeObject) => {
-        var contactMeObject = {...updatedContactMeObject}
-        if(this.contactMeId){
-            contactMeObject.id = this.contactMeId
-        }
-
-        this.model.uploadContactMe(contactMeObject);
-    }
+    handlePublishContactMe = async (contactMeObject) => this.model.uploadContactMe(contactMeObject);
     
     
 
