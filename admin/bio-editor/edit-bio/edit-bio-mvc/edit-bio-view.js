@@ -84,10 +84,10 @@ export class EditBioView {
         let bioText = bioData['text'];
         let publicUrl = bioData['publicUrl'];
 
-        this.bioTitleInput = bioTitle;
+        this.bioTitleInput.value = bioTitle;
         this.bioTextInput.value = bioText;
 
-        var project_cover = document.getElementById('project-cover');
+        var project_cover = document.getElementById('bio-cover');
         project_cover.setAttribute('src', publicUrl);
         
         this.validate();
