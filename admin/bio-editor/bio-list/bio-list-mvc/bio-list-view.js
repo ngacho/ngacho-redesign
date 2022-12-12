@@ -87,7 +87,6 @@ export class BioListView {
                     var status = handler(id);
                     status.then((_) => {
                         this.activateNewlySelectedTag(id);
-                        console.log(`Bio ${id} Active`);
                     }).catch((err) => {
                         console.error(err)
                     });
