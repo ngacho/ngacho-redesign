@@ -56,25 +56,29 @@ export class EditBioView {
         });
 
         this.postBioButton.addEventListener("click", ()=>{
-            if(bioCoverFile){
+            
+            let objId = decodeURI(location.search).slice(1);
 
-                let bioObject = {
-                    "title" : this.bioTitleInput.value,
-                    "text" : this.bioTitleInput.value,
-                    active : false
-                }
-                
-        
-                var status = handler(bioCoverFile, bioObject);
-                status.then((message)=>{
-                    console.log(message);
-                    this.resetForm();
-                }).catch((err)=>{
-                    console.log('error ' + err);
-                })
-            }else{
-                console.log("project cover file is null");
+            let bioObject = objId ?{
+                id : objId,
+                "title" : this.bioTitleInput.value,
+                "text" : this.bioTextInput.value,
+                active : false
+            } : {
+                "title" : this.bioTitleInput.value,
+                "text" : this.bioTextInput.value,
+                active : false
             }
+            
+            
+    
+            var status = handler(bioCoverFile, bioObject);
+            status.then((_)=>{
+                this.resetForm();
+            }).catch((err)=>{
+                console.log('error ' + err);
+            });
+            
         })
     }
 
