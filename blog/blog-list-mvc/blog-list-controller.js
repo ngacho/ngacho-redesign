@@ -11,10 +11,8 @@ export class BlogListController {
         // Display initial todos
         this.model.getBlogList().then((blogData) => {
             this.onBlogListChanged(blogData);
-            blogData.forEach(element => {
-                console.log("Blog Id " + element["blogId"]);
-            });
-
+        }).catch((err) => {
+            console.error(err);
         })
     }
 
