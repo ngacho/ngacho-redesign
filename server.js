@@ -233,6 +233,12 @@ const updateFile = (req, res) => {
                     redisClient.hDel(storageName, id).then((_) => {
                     // update client cache
                     redisClient.hSet(storageName, id, JSON.stringify(newFileData));
+                        
+                    }).catch((err)=>res.status(500).send({error : `failed with error ${err}`}));
+
+                    res.status(200).send({message : "Updated successfully"});
+
+
                 }
             });
 
