@@ -23,7 +23,7 @@ export class BioListController{
 
     }
 
-    handleDeleteBioStatus = async(bioId) => this.model.deleteBio(bioId);
+    handleDeleteBioStatus = async(bioId) => this.model.deleteBioFromDb(bioId);
     handleUpdateBioStatus = async(bioId) => this.model.updateActiveBio(bioId);
 
     onBioListChanged = (bios) => {
