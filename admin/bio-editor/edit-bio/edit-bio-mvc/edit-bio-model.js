@@ -17,6 +17,11 @@ export class EditBioModel extends BioModel {
         return fetchRef;
     }
     
+    async uploadUpdatedBioWithFile(file, bioObject){
+        let updateRef = await this.updateBioWithFile(file, bioObject);
+        return updateRef;
+
+    }
 
     async uploadUpdatedBioObjectWithoutFile(bioObject){
         let updateRef = await this.updateBio(bioObject);
