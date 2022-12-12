@@ -229,10 +229,10 @@ const updateFile = (req, res) => {
                     let newFileData = Object.keys(oldFile).reduce((accumulator, key) => {
                         return { ...accumulator, [key]: fileObject[key] ? fileObject[key] : oldFile[key] };
                     }, {});
-                    // delete new file with new data.
+                    // delete file with old data.
                     redisClient.hDel(storageName, id).then((_) => {
-                    // update client cache
-                    redisClient.hSet(storageName, id, JSON.stringify(newFileData));
+                        // update client cache
+                        redisClient.hSet(storageName, id, JSON.stringify(newFileData));
                         
                     }).catch((err)=>res.status(500).send({error : `failed with error ${err}`}));
 
