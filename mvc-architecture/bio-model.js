@@ -23,6 +23,14 @@ export class BioModel{
         return this.baseModel.updateItemStatus(bioId);
     }
 
+    async updateBioWithFile(file, bioObject){
+        return this.baseModel.updateFileItemObject(file, bioObject);
+    }
+
+    async updateBio(bioObject){
+        return this.baseModel.updateItem(bioObject);
+    }
+
     async publishBio(file, bioObject){
         return this.baseModel.createFileItem(file, bioObject);
     }
