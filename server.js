@@ -260,6 +260,7 @@ app.post([restRoutes.projects, restRoutes.bios, restRoutes.misc], upload.single(
 
 // Read
 app.get([restRoutes.blogs, restRoutes.projects, restRoutes.contactMe, restRoutes.bios, restRoutes.misc], serverController.fetchAllDocs)
+app.get(restRoutes.blogsByTag, serverController.fetchDocsByTag);
 app.get([restRoutes.specificBlog, restRoutes.specificProject, restRoutes.specificContactMe, restRoutes.specificBio, restRoutes.specificMisc], serverController.fetchDocById);
 
 

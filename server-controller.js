@@ -46,6 +46,55 @@ module.exports = class ServerController {
     };
 
 
+    fetchDocsByTag = async (req, res) => {
+        const storageName = req.url.split('/')[2];
+        let client = this.redisClient;
+
+        let tag = decodeURIComponent(req.params.tag);
+        if (!tag) res.status(400).send({ error: "No tag found in request" })
+
+        client.hGet('isCached', `cache-${storageName}`).then((isCached) => {
+            if (isCached === 'true') {
+                let results = []
+                let items = client.hGetAll(storageName)
+                items.then((data) => {
+                    Object.keys(data).forEach(function (key) {
+                        let file = {...JSON.parse(data[key]), id : key};
+                        if(file['tags'].includes(tag)){
+                            results.push(file);
+                        }
+                        
+                    });
+                    res.status(200).send(results);
+                }).catch((err) => {
+                    res.status(500).send({ error: err });
+                });
+
+            }else{
+                this.firebaseHelper.getDocsFromFirebaseDatabase(storageName).then((data) => {
+                    results = []
+                    for (const doc of data) {
+                        client.hSet(storageName, doc['id'], JSON.stringify(doc));
+                        if(doc['tags'].includes(tag)){
+                            results.push(file);
+                        }
+                    }
+                    client.hSet('isCached', `cache-${storageName}`, 'true');
+                    res.status(200).send(results);
+                }).catch((err) => {
+                    console.error(err);
+                    res.status(502).send({
+                        error: 'Failed to get necessary data'
+                    })
+                });
+            }
+
+
+        })
+
+    };
+
+
     fetchDocById = async (req, res) => {
         const storageName = req.url.split('/')[2];
         let client = this.redisClient;
