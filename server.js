@@ -189,7 +189,7 @@ const updateFile = (req, res) => {
                 firebaseHelper.deleteFileFromStorage(storageName, oldFile).then((_) => {
                     // upload new file with new data.
 
-                    let deleteRef = client.hdel(storageName, id);
+                    let deleteRef = redisClient.hDel(storageName, id);
                     deleteRef.then((_) => {
                         
                         firebaseHelper.postFileToStorage(file, newFileData, storageName).then((data) => {
@@ -230,8 +230,7 @@ const updateFile = (req, res) => {
                         return { ...accumulator, [key]: fileObject[key] ? fileObject[key] : oldFile[key] };
                     }, {});
                     // delete new file with new data.
-                    redisClient.del(id);
-
+                    redisClient.hDel(storageName, id).then((_) => {
                     // update client cache
                     redisClient.hSet(storageName, id, JSON.stringify(newFileData));
                 }
