@@ -120,7 +120,7 @@ module.exports = class ServerController {
         let id = req.params.id;
 
         this.firebaseHelper.deleteDocOnFirebaseDatabase(storageName, id).then((_) => {
-            let deleteRef = client.hdel(storageName, id);
+            let deleteRef = client.hDel(storageName, id);
             deleteRef.then((_) => {
                 res.status(200).send(({ message: 'deleted successfully' }));
             }).catch((err) => res.status(500).send({ error: err }))
@@ -136,7 +136,7 @@ module.exports = class ServerController {
             let file = JSON.parse(data);
 
             this.firebaseHelper.deleteFileFromStorage(file).then((_) => {
-                let deleteRef = client.del(id)
+                let deleteRef = client.hDel(storageName, id);
                 deleteRef.then((_) => {
                     res.status(200).send(({ message: 'deleted successfully' }));
                 }).catch((err) => res.status(500).send({ error: err }))
