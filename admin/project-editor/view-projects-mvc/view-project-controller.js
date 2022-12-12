@@ -10,7 +10,7 @@ export class ViewProjectController{
 
     init(){
         // Display initial projects
-        this.model.fetchProjects().then((projects) => {
+        this.model.getProjects().then((projects) => {
             this.onProjectListChanged(projects);
         });
 
@@ -23,7 +23,7 @@ export class ViewProjectController{
         this.view.displayProjects(projects);
     }
 
-    handleDeleteProject = async (projectData) => this.model.deleteProjectFromDB(projectData);
+    handleDeleteProject = async (id) => this.model.deleteProjectFromDB(id);
 
     handleEditProject = async (projectData) => this.model.editProject(projectData);
 }

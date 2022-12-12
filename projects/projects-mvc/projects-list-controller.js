@@ -10,7 +10,7 @@ export class ProjectListController{
 
     init(){
         // Display initial projects
-        this.model.fetchProjects().then((projects) => {
+        this.model.getProjects().then((projects) => {
             this.onProjectListChanged(projects);
         }).catch((err)=>{
             console.error("error " + err);

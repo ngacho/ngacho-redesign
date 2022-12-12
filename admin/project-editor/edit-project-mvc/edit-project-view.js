@@ -59,32 +59,29 @@ export class EditProjectView {
         });
 
         this.postProjectButton.addEventListener("click", ()=>{
-            if(projectCoverFile){
+                let objId = decodeURI(location.search).slice(1);
                 var projectObject = {
-                    projectCoverImage : projectCoverFile,
-                    projectTitle : this.projectTitleInput.value,
+                    id : objId,
+                    title : this.projectTitleInput.value,
                     projectLanguages : this.projectLanguagesInput.value,
                     projectExtraInfoUrl : this.moreInfoUrl.value
                 }
 
-                var status = handler(projectObject);
+                var status = handler(projectCoverFile, projectObject);
                 status.then((message)=>{
-                    console.log(message);
                     this.resetForm();
                 }).catch((err)=>{
                     console.log('error ' + err);
                 })
-            }else{
-                console.log("project cover file is null");
-            }
+            
         })
     }
 
     setUpProject(projectData){
-        var projectUrl =  projectData.projectInfoUrl
-        var projectLanguages = projectData.projectLanguages
-        var projectCoverUrl = projectData.projectCoverUrl
-        var projectID = projectData.projectId
+        var projectUrl =  projectData.projectExtraInfoUrl;
+        var projectLanguages = projectData.projectLanguages;
+        var projectCoverUrl = projectData.publicUrl;
+        var projectID = projectData.id;
 
         var project_cover = document.getElementById('project-cover');
         project_cover.setAttribute('src', projectCoverUrl);

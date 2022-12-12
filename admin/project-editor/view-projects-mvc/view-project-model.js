@@ -10,12 +10,9 @@ export class ViewProjectModel extends ProjectBaseModel {
         return deleteProjectStatus;
     }
 
-    async editProject(projectData){
-        return Promise.resolve("edit project");
-    }
 
-    async fetchProjects(){
-        var projects = await this.getProjects();
+    async getProjects(){
+        var projects = await this.fetchProjects();
         return projects;
     }  
 }

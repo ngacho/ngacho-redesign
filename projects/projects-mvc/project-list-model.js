@@ -5,8 +5,8 @@ export class ProjectListModel extends ProjectBaseModel {
         super();
     }
 
-    async fetchProjects(){
-        var projects = await this.getProjects();
+    async getProjects(){
+        var projects = await this.fetchProjects();
         return projects;
     }
 

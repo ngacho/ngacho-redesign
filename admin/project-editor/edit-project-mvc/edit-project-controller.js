@@ -19,26 +19,21 @@ export class EditProjectController{
         }
     }
 
-    fetchProject(projectId){
-        this.model.fetchSingleProject(projectId).then((projectData) => this.askViewToSetUpBlog(projectData))
-            .catch((err) => console.error(err))
-    }   
 
-    askViewToSetUpBlog(data) {
-        this.view.setUpProject(data);
-    }
-
-    handlePublishNewProject = async (projectObject) => this.model.uploadNewProject(projectObject);
-    handlePublishEditedProject = async (projectObject) => { 
-        // get project
-        this.model.fetchSingleProject(this.projectId).then((projectData) => {
-            var newProject = {...projectObject}
-            newProject.projectId = this.projectId;
-            newProject.projectCoverUrl = projectData.projectCoverUrl;
-            this.model.uploadEditedProject(newProject);
-        }).catch((err)=>{
-            console.error(err);
-        })
+    handlePublishNewProject = async (file, projectObject) => this.model.uploadNewProject(file, projectObject);
+    handlePublishEditedProject = async (file, projectObject) => { 
+        return file ? this.model.uploadUpdatedProjectWithFile(file, projectObject) : this.model.uploadUpdatedProjectObjectWithoutFile(projectObject);
         
     };
+
+
+    fetchProject(id){
+        this.model.fetchSingleProject(id).then(
+            (project) => this.view.setUpProject(project)
+        ).catch((errMessage) =>
+            console.log(errMessage)
+        );
+
+    }
+
 }

@@ -19,12 +19,12 @@ export class ProjectListView {
 
     displayBlogs(projects) {
         for (const project of projects) {
-            const projectId = project["projectId"];
+            const projectId = project["id"];
             const projectTitle = projectId.substring(0, projectId.length-5);
             
-            const projectCoverUrl = project["projectCoverUrl"];
+            const projectCoverUrl = project["publicUrl"];
             const projectLangs = project["projectLanguages"];
-            const projectExtraInfoLink = project["projectInfoUrl"];
+            const projectExtraInfoLink = project["projectExtraInfoUrl"];
 
             // create the (project-card animate-entry)
             var project_card = document.createElement('div');

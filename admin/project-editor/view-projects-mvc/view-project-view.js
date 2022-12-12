@@ -10,10 +10,9 @@ export class ViewProjectView{
 
     displayProjects(projects){
         for (const project of projects) {
-            const projectId = project["projectId"];
-            const projectTitle = projectId.substring(0, projectId.length-5);
-            
-            const projectCoverUrl = project["projectCoverUrl"];
+            const projectId = project["id"];
+            const projectTitle = project["title"]
+            const projectCoverUrl = project["publicUrl"];
 
 
             // create the parent item
@@ -81,13 +80,8 @@ export class ViewProjectView{
 
                 const gallery_item = e.target.parentNode.parentNode.parentNode.parentNode;
                 const projectImageUrl = gallery_item.children[0].children[0].src;            
-                const projectData = {
-                    projectCoverTitle : projectCoverTitle,
-                    projectId : projectId,
-                    projectCoverUrl : projectImageUrl
-                }
 
-                var deleteStatus = handler(projectData);
+                var deleteStatus = handler(projectId);
                 deleteStatus.then((_)=>{
                     const gallery_item = document.getElementById(projectId);
                     gallery_item.classList.toggle('hide');
