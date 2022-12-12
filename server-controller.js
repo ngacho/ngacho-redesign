@@ -135,7 +135,7 @@ module.exports = class ServerController {
         client.hGet(storageName, id).then((data) => {
             let file = JSON.parse(data);
 
-            this.firebaseHelper.deleteFileFromStorage(file).then((_) => {
+            this.firebaseHelper.deleteFileFromStorage(storageName, file).then((_) => {
                 let deleteRef = client.hDel(storageName, id);
                 deleteRef.then((_) => {
                     res.status(200).send(({ message: 'deleted successfully' }));
