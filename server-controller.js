@@ -72,7 +72,7 @@ module.exports = class ServerController {
 
             }else{
                 this.firebaseHelper.getDocsFromFirebaseDatabase(storageName).then((data) => {
-                    results = []
+                    let results = []
                     for (const doc of data) {
                         client.hSet(storageName, doc['id'], JSON.stringify(doc));
                         if(doc['tags'].includes(tag)){
