@@ -1,5 +1,6 @@
 {
     "blogs": "/database/blogs",
+    "blogsByTag": "/database/blogs/tags/:tag",
     "specificBlog": "/database/blogs/:id",
     "projects": "/database/projects",
     "specificProject": "/database/projects/:id",
