@@ -24,6 +24,26 @@ export class BaseModel{
         });
     }
 
+    async getListByTag(tag){
+        return new Promise((resolve, reject) => {
+            fetch(`${this.baseUrl}/tags/${encodeURIComponent(tag)}`)
+                .then(response => {
+                    // Process the response body and status code simultaneously
+                    Promise.all([response.json(), response.status])
+                        .then(([data, status]) => {
+                            if (status === 200) {
+                                resolve(data);
+                            } else {
+                                reject(`Failed with response ${status}`)
+                            }
+                        }).catch((err) => {
+                            reject(`Failed response: ${err}`);
+                        });
+                }).catch((err) => reject("Failed to fetch"));
+        });
+    }
+
+
     async getListItemById(id){
         return new Promise((resolve, reject) => {
             fetch(`${this.baseUrl}/${id}`).then((response) => {
