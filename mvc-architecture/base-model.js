@@ -5,6 +5,10 @@ export class BaseModel{
     }
 
 
+    /**
+     * 
+     * @returns {Promise with array of objects}
+     */
     async getList(){
         return new Promise((resolve, reject) => {
             fetch(this.baseUrl)
@@ -24,6 +28,11 @@ export class BaseModel{
         });
     }
 
+    /**
+     * 
+     * @param {a tag in series} tag 
+     * @returns promise of array of objects
+     */
     async getListByTag(tag){
         return new Promise((resolve, reject) => {
             fetch(`${this.baseUrl}/tags/${encodeURIComponent(tag)}`)
@@ -44,6 +53,11 @@ export class BaseModel{
     }
 
 
+    /**
+     * 
+     * @param {object id} id 
+     * @returns promise of single object
+     */
     async getListItemById(id){
         return new Promise((resolve, reject) => {
             fetch(`${this.baseUrl}/${id}`).then((response) => {
@@ -62,6 +76,11 @@ export class BaseModel{
         });
     }
 
+    /**
+     * 
+     * @param {item we want to create} contents 
+     * @returns status of item creation
+     */
     async createItem(contents){
         const payload = {
             doc: contents
@@ -94,6 +113,12 @@ export class BaseModel{
         });
     }
 
+    /**
+     * 
+     * @param {file we want to upload} file 
+     * @param {any data associated with the file} itemObject 
+     * @returns 
+     */
     async createFileItem(file, itemObject){
         
         const formData = new FormData();
@@ -132,6 +157,12 @@ export class BaseModel{
 
     }
 
+    /**
+     * 
+     * @param {file object we want to update} file 
+     * @param {data object for metadata of the file} contents 
+     * @returns the status of the update
+     */
     async updateFileItemObject(file, contents){
         const formData = new FormData();
         formData.append('file', file);
@@ -166,6 +197,11 @@ export class BaseModel{
 
     }
 
+    /**
+     * 
+     * @param {data object of item to be update} contents 
+     * @returns status of updated item
+     */
     async updateItem(contents){
         const payload = {
             doc: contents
@@ -201,6 +237,11 @@ export class BaseModel{
 
     }
 
+    /**
+     * used for activating and deactivating items
+     * @param {id of item we want to update} id 
+     * @returns status of update
+     */
     async updateItemStatus(id){
         return new Promise((resolve, reject) => {
             fetch(`${this.baseUrl}/set-active/${id}`, {
@@ -224,6 +265,11 @@ export class BaseModel{
 
     }
 
+    /**
+     * 
+     * @param {id of item to be deleted} id 
+     * @returns 
+     */
     async deleteItem(id){
         return new Promise((resolve, reject) => {
             fetch(`${this.baseUrl}/${id}`, {
