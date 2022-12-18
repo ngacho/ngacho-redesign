@@ -127,7 +127,7 @@ Flexbox and floats are used as a fallback so that browsers which don't support g
 
 /* project-gallery Section */
 
-.file-gallery {
+.files-gallery {
     padding: 5px;
     display: flex;
     flex-wrap: wrap;
@@ -190,10 +190,6 @@ Flexbox and floats are used as a fallback so that browsers which don't support g
     text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
 }
 
-.fa-clone,
-.fa-comment {
-    transform: rotateY(180deg);
-}
 
 .file-gallery-image {
     width: 100%;
@@ -221,5 +217,20 @@ Remove or comment-out the code block below to see how the browser will fall-back
     .files-gallery {
         width: auto;
         margin: 0;
+    }
+}
+
+@media screen and (max-width: 630px) {
+    .files-parent-container {
+        min-width: 320px;
+    }
+
+    .files-gallery {
+        margin: 0 10px 0 10px;
+    }
+
+    .file-gallery-item {
+        width: 300px;
+        margin: 0.5rem;
     }
 }
