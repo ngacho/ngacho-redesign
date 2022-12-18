@@ -13,7 +13,7 @@ export class BlogsToEditView {
                 // Your existing code unmodified...
                 var blog_item = document.createElement('tr');
                 blog_item.className = 'blog-item .new-item';
-                blog_item.id = post["blogId"];
+                blog_item.id = post["id"];
 
                 var blog_time_cell = document.createElement('td');
                 blog_time_cell.className = "blog-time-cell";
@@ -36,7 +36,7 @@ export class BlogsToEditView {
                 blog_title_cell.appendChild(post_title);
 
                 post_title.addEventListener('click', function () {
-                    location.href = `/admin/edit-blog/?${post["blogId"]}`;
+                    location.href = `/admin/edit-blog/?${post["id"]}`;
                 });
 
                 var blog_delete_icon_cell = document.createElement('td');
@@ -45,7 +45,7 @@ export class BlogsToEditView {
                 var trash_element = document.createElement('a');
                 var trash_icon = document.createElement('i');
                 trash_icon.className = 'fa fa-trash';
-                trash_icon.id = `fa-fa-trash-delete-${post["blogId"]}`
+                trash_icon.id = `fa-fa-trash-delete-${post["id"]}`
                 trash_icon.style = 'color: rgba(153, 15, 2, 1)';
                 trash_icon.ariaHidden = true;
 
