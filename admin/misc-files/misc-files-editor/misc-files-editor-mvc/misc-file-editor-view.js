@@ -44,7 +44,8 @@ export class EditFileView {
 
         this.postFileButton.addEventListener("click", ()=>{
                 var fileObject = {
-                    title : this.fileTitleInput.value
+                    title : this.fileTitleInput.value,
+                    type : fileCoverFile.type
                 }
 
 
