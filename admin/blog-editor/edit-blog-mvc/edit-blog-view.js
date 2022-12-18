@@ -10,7 +10,6 @@ export class EditBlogView {
         this.blog_div = document.querySelector('.blog');
 
         // blog options
-        this.blogId = '';
         this.blogPublishedDate = '';
         // months
         this.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -69,8 +68,6 @@ export class EditBlogView {
 
 
     setUpBlog(data) {
-        console.log('Setting up blog ' + JSON.stringify(data));
-        this.blogId = data["blogId"];
         this.blogTitleField.value = data['title'];
         let tags_List = data["tags"].join(", ") // bug is here.
         this.tagsField.value = tags_List;
@@ -103,20 +100,12 @@ export class EditBlogView {
             var snack_bar = document.querySelector('.edit-snack-bar');
             let date = new Date();
 
-            var blogData = this.blogId ? {
-                blogId: this.blogId,
+            var blogData = {
                 title: this.blogTitleField.value,
                 tags: this.tagsField.value.split(',').map((tag) => tag.trim()).filter(n => n),
                 descript: this.postDescriptField.value,
                 article: this.articleField.value,
                 publishedAt: this.blogPublishedDate,
-                lastModified: `${date.getDate()} ${this.months[date.getMonth()]} ${date.getFullYear()}`
-            } : {
-                title: this.blogTitleField.value,
-                tags: this.tagsField.value.split(',').map((tag) => tag.trim()).filter(n => n),
-                descript: this.postDescriptField.value,
-                article: this.articleField.value,
-                publishedAt: `${date.getDate()} ${this.months[date.getMonth()]} ${date.getFullYear()}`,
                 lastModified: `${date.getDate()} ${this.months[date.getMonth()]} ${date.getFullYear()}`
             }
 
