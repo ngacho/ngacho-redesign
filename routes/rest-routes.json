@@ -1,6 +1,7 @@
 {
     "blogs": "/database/blogs",
     "blogsByTag": "/database/blogs/tags/:tag",
+    "misc-files" : "/database/misc-files",
     "specificBlog": "/database/blogs/:id",
     "projects": "/database/projects",
     "specificProject": "/database/projects/:id",
@@ -10,6 +11,6 @@
     "bios": "/database/bios",
     "setActiveBio" : "/database/bios/set-active/:id", 
     "specificBio": "/database/bios/:id",
-    "specificMisc": "/database/miscalleneous/:id",
-    "misc": "/database/miscalleneous"
+    "misc": "/database/miscalleneous-files",
+    "specificMisc": "/database/miscalleneous-files/:id"
   }
