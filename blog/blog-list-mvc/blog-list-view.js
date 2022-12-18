@@ -32,12 +32,11 @@ export class BlogListView {
                 post_desc.appendChild(description);
 
                 post_title.addEventListener('click', function () {
-                    location.href = `/blog-post/?${post["blogId"]}`;
+                    location.href = `/blog-post/?${post["id"]}`;
                 });
 
                 post_desc.onclick = function () {
-                    // var blog_post_window = window.open("blog_post.html", "_self");
-                    location.href = `/blog-post/?${post["blogId"]}`;
+                    location.href = `/blog-post/?${post["id"]}`;
                 }
 
                 var tags = document.createElement('div');
