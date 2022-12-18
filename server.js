@@ -101,9 +101,15 @@ app.get(['/admin/new-project/', '/admin/edit-project/*'], authorizeAccess, (req,
 });
 
 
-app.get(['/admin/add-misc-photos'], authorizeAccess, (req, res) => {
+app.get(['/admin/misc-files'], authorizeAccess, (req, res) => {
     req.originalUrl;
-    res.sendFile(path.join(initial_path, "/admin/project-editor/project-editor.html"))
+    res.sendFile(path.join(initial_path, "/admin/misc-files/misc-files-list/misc-files-list.html"));
+});
+
+app.get(['/admin/add-misc-file', '/admin/edit-misc-file/*'], authorizeAccess, (req, res) => {
+    req.originalUrl;
+    res.sendFile(path.join(initial_path, "/admin/misc-files/misc-files-editor/misc-file-editor.html"));
+
 });
 
 // blog page
@@ -259,9 +265,13 @@ app.post([restRoutes.blogs, restRoutes.contactMe], serverController.postDoc);
 app.post([restRoutes.projects, restRoutes.bios, restRoutes.misc], upload.single('file'), uploadFile);
 
 // Read
-app.get([restRoutes.blogs, restRoutes.projects, restRoutes.contactMe, restRoutes.bios, restRoutes.misc], serverController.fetchAllDocs)
+app.get([restRoutes.blogs, restRoutes.projects, restRoutes.contactMe, restRoutes.bios], serverController.fetchAllDocs)
 app.get(restRoutes.blogsByTag, serverController.fetchDocsByTag);
-app.get([restRoutes.specificBlog, restRoutes.specificProject, restRoutes.specificContactMe, restRoutes.specificBio, restRoutes.specificMisc], serverController.fetchDocById);
+app.get([restRoutes.specificBlog, restRoutes.specificProject, restRoutes.specificContactMe, restRoutes.specificBio], serverController.fetchDocById);
+
+// reading misc files is protected
+app.get(restRoutes.specificMisc, authorizeAccess, serverController.fetchDocById);
+app.get(restRoutes.misc, authorizeAccess, serverController.fetchAllDocs)
 
 
 // Update
@@ -272,7 +282,7 @@ app.put([restRoutes.setActiveContactme, restRoutes.setActiveBio], serverControll
 
 // Delete
 app.delete([restRoutes.specificBlog, restRoutes.specificContactMe], authorizeAccess, serverController.deleteDoc);
-app.delete([restRoutes.specificProject, restRoutes.specificBio, restRoutes.misc], authorizeAccess, serverController.deleteFile);
+app.delete([restRoutes.specificProject, restRoutes.specificBio, restRoutes.specificMisc], authorizeAccess, serverController.deleteFile);
 
 
 
