@@ -7,7 +7,7 @@ export class MiscFileListController{
 
     init(){
         this.fetchMiscFiles();
-        this.view.bindCopyFileUrl(this.handleGetNewFileId);
+        this.view.bindCopyFileUrl(this.handleGetFileById);
         this.view.bindDeleteFile(this.handleDeleteFile);
     }
 
@@ -18,12 +18,6 @@ export class MiscFileListController{
         }).catch((errMessage) => console.log(errMessage));
     }
 
-    fetchMiscFileById(id){
-        this.model.getMiscFilesFromDbById(id).then((data) => {
-            // this.view.renderMiscFileList(data);
-        }).catch((errMessage) => console.log(errMessage));
-    }
-
-    handleGetNewFileId = async (id) => this.model.getMiscFilesFromDbById(id);
+    handleGetFileById = async (id) => this.model.getMiscFilesFromDbById(id);
     handleDeleteFile = async (id) => this.model.deleteMiscFileFromDb(id);
 }
