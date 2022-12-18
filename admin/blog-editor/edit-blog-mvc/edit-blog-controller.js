@@ -24,26 +24,16 @@ export class EditBlogController {
     }
 
     fetchBlog(id) {
+        this.model.fetchBlogFromDb(id).then((data)=>{
+            this.view.setUpBlog(data);
+        }).catch((errMessage) => console.log(errMessage));
 
-        this.model.fetchBlogFromDb(id).then(
-            (blog) => this.viewSetUpBlog(blog)
-        ).catch((errMessage) =>
-            console.log(errMessage)
-        );
 
     }
 
+    handleEditBlog = async (editedBlog) => this.model.updateBlog({id : this.blogId, ...editedBlog});
 
-    viewSetUpBlog(data) {
-        this.view.setUpBlog(data);
-    }
+    handlePublishNewBlog = async (newBlog) => this.model.publishNewBlog(newBlog);
 
-    handleEditBlog = async (editedBlog) => {
-        this.model.updateBlog(editedBlog);
-    }
-
-    handlePublishNewBlog = async (newBlog) => {
-        this.model.publishNewBlog(newBlog);
-
-    }
+    
 }
