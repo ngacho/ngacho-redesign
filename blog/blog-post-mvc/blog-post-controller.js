@@ -22,7 +22,6 @@ export class BlogPostController {
 
         this.model.fetchBlogFromDb(id).then(
             (blog) => {
-                console.log(blog)
                 this.viewSetUpBlog(blog)
             }
         ).catch((errMessage) =>
