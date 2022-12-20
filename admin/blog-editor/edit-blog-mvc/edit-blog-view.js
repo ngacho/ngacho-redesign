@@ -1,4 +1,4 @@
-import katex from "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js";
+// import katex from "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js";
 
 export class EditBlogView {
 
@@ -24,26 +24,13 @@ export class EditBlogView {
         this.blogPostDescriptPreviewField = document.querySelector('.post-description-preview');
         this.blogPostPreviewField = document.querySelector('.blog-post-article-preview');
 
-        var titleText = this.blogTitleField.value;
-        const titleHtmlStr = this.makeChangesToText(titleText);
-        this.blogTitlePreviewField.innerHTML = titleHtmlStr;
-
-        var postDescript = this.postDescriptField.value;
-        const descriptHtmlStr = this.makeChangesToText(postDescript);
-        this.blogPostDescriptPreviewField.innerHTML = descriptHtmlStr;
-
-        var articleText = this.articleField.value;
-        const articleTextHtmlStr = this.makeChangesToText(articleText);
-        this.blogPostPreviewField.innerHTML = articleTextHtmlStr;
-
-
 
 
         
         // event listeners for the title.
         this.blogTitleField.addEventListener("input", () => {
             var titleText = this.blogTitleField.value;
-            const htmlStr = this.makeChangesToText(titleText);
+            const htmlStr = this.parseMarkdown(titleText);
 
             this.blogTitlePreviewField.innerHTML = htmlStr;
 
@@ -51,9 +38,7 @@ export class EditBlogView {
 
         this.postDescriptField.addEventListener("input", ()=>{
             var postDescript = this.postDescriptField.value;
-
-            const htmlStr = this.makeChangesToText(postDescript);
-
+            const htmlStr = this.parseMarkdown(postDescript);
             this.blogPostDescriptPreviewField.innerHTML = htmlStr;
             
         })
@@ -61,8 +46,7 @@ export class EditBlogView {
         // event listeners for article
         this.articleField.addEventListener("input", () => {
             var articleText = this.articleField.value;
-            const htmlStr = this.makeChangesToText(articleText);
-
+            const htmlStr = this.parseMarkdown(articleText);
             this.blogPostPreviewField.innerHTML = htmlStr;
         });
 
@@ -74,18 +58,11 @@ export class EditBlogView {
         let tags_List = data["tags"].join(", ") // bug is here.
         this.tagsField.value = tags_List;
         this.postDescriptField.value = data["descript"];
-        this.articleField.value = data["article"];
+        this.articleField.value = data["text"];
         this.blogPublishedDate = data["publishedAt"];
         this.setUpPreviewBlogPreview(data);
     }
 
-    makeChangesToText(text) {
-        
-        // html string
-        const htmlStr = this.parseMarkdown(text);
-        
-        return htmlStr;
-    }
 
     publishBlog(handler) {
         if (this.articleField.value.length && this.blogTitleField.value.length) {
@@ -132,6 +109,7 @@ export class EditBlogView {
     }
 
     setUpPreviewBlogPreview(data) {
+
         var heading = document.createTextNode(data["title"]);
         this.blogTitlePreviewField.appendChild(heading);
 
@@ -145,9 +123,9 @@ export class EditBlogView {
             this.blogPostDescriptPreviewField.appendChild(blockQuote);
         }
 
-        var blog = data["text"]
 
-        // html string
+        // console.log(data['html']);
+        // // html string
         this.blogPostPreviewField.innerHTML = data['html'];
 
     }
