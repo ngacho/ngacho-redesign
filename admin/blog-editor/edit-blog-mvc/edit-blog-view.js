@@ -1,3 +1,5 @@
+import katex from "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js";
+
 export class EditBlogView {
 
     constructor() {
@@ -104,7 +106,7 @@ export class EditBlogView {
                 title: this.blogTitleField.value,
                 tags: this.tagsField.value.split(',').map((tag) => tag.trim()).filter(n => n),
                 descript: this.postDescriptField.value,
-                article: this.articleField.value,
+                text: this.articleField.value,
                 publishedAt: this.blogPublishedDate,
                 lastModified: `${date.getDate()} ${this.months[date.getMonth()]} ${date.getFullYear()}`
             }
@@ -143,32 +145,32 @@ export class EditBlogView {
             this.blogPostDescriptPreviewField.appendChild(blockQuote);
         }
 
-        var blog = data["article"]
+        var blog = data["text"]
 
         // html string
-        const htmlStr = this.parseMarkdown(blog);
-        this.blogPostPreviewField.innerHTML = htmlStr;
-
-        // texme.renderPage();
-    }
-
-    parseMarkdown(rawMarkdown) {
-        const htmlText = rawMarkdown.replace(/^### (.*$)/gim, '<h3>$1</h3>')
-            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-            .replace(/^```\s*([^]+?.*?[^]+?[^]+?)```/gim, '<br/><pre><code>$1</code></pre><br/>')
-            .replace(/^`(.*?)`/gim, '<code>$1</code>')
-            .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
-            .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
-            .replace(/\*(.*)\*/gim, '<i>$1</i>')
-            .replace(/!\[(.*?)\]\((.*?)\)/gim, "<img alt='$1' src='$2'/>")
-            .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2' target=\"_blank\" rel=\"noopener noreferrer\">$1</a>")
-            .replace(/\n$/gim, '<br />')
-            .replace(/\\tex(.*)\\tex/gim, '<textarea>$1</textarea>')
-
-
-        return htmlText.trim();
+        this.blogPostPreviewField.innerHTML = data['html'];
 
     }
+
+    parseMarkdown(markdownText) {
+        let regex = /\$(.*?)\$|([^$]+)/g;
+        let replaced = markdownText.replace(regex, (match, group1, group2) => {
+            if (group1) {
+                // If group1 is defined, then the match was between $ and $
+                return katex.renderToString(group1, { throwOnError: false, trust: true });
+            } else {
+                // Otherwise, the match was outside $ and $
+                return `<p>${group2}</p>`;
+            }
+        }).replace(/!\[(.*?)\]\((.*?)\)/gim, "<img alt='$1' src='$2' />")
+            .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
+            .replace(/\\htmlTag\{([^}]+)\}\{([^}]+)\}/, "<$1>$2</$1>");
+
+
+
+        return replaced;
+    }
+
+
 }
 
