@@ -26,9 +26,9 @@ export class BlogModel {
         return this.baseModel.getList();
     }
 
-    // singular blog.
-    async getBlog(blogId) {
-        return this.baseModel.getListItemById(blogId);
+    // singular blog raw vs ssr
+    async getBlog(blogId, serverSideRendering = false) {
+        return this.baseModel.getListItemById(blogId, serverSideRendering);
     }
 
     async deleteBlogById(blogId) {

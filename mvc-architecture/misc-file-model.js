@@ -9,8 +9,8 @@ export class MiscFileModel{
         return this.baseModel.getList();
     }
 
-    async fetchMiscFileById(id){
-        return this.baseModel.getListItemById(id);
+    async fetchMiscFileById(id, serverSideRendering = false){
+        return this.baseModel.getListItemById(id, serverSideRendering);
     }
 
     async deleteMiscFile(id){

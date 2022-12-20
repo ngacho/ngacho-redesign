@@ -10,8 +10,8 @@ export class ContactMeModel {
         return this.baseModel.getList();
     }
 
-    async fetchContactMe(contactMeId) {
-        return this.baseModel.getListItemById(contactMeId);
+    async fetchContactMe(contactMeId, serverSideRendering = false) {
+        return this.baseModel.getListItemById(contactMeId, serverSideRendering);
     }
 
 

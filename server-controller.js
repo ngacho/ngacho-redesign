@@ -1,9 +1,9 @@
-const FirebaseHelperClass = require('./firebase-helper');
-
+const MarkDownParser = require('./mark-down-parser')
 module.exports = class ServerController {
     constructor(redisClient, firebaseHelperClass) {
         this.firebaseHelper = firebaseHelperClass;
         this.redisClient = redisClient;
+        this.markDownParser = new MarkDownParser();
     }
 
 
@@ -102,11 +102,19 @@ module.exports = class ServerController {
         let id = req.params.id;
         if (!id) res.status(400).send({ error: "No id found in request" })
 
+        let serverSideRendering = req.params.ssr;
+
         let exists = client.exists(storageName, id);
         exists.then((reply) => {
             if (reply == 1) {
                 client.hGet(storageName, id).then((data) => {
-                    res.status(200).send(JSON.parse(data));
+                    let blog = {...JSON.parse(data)};
+                    if (serverSideRendering) {
+                        let html = this.markDownParser.parseMarkdown(blog['text']);
+                        blog['html'] = html;
+                    }
+
+                    res.status(200).send(blog);
                 }).catch((err) => {
                     res.status(502).send({
                         error: 'Failed to get necessary data'
@@ -115,9 +123,14 @@ module.exports = class ServerController {
             } else {
                 this.firebaseHelper.getSpecificDocFromFirebase(storageName, id).then((data) => {
                     client.hSet(storageName, id, JSON.stringify(data));
-                    res.status(200).send(data);
+                    let blog = {...data};
+                    if (serverSideRendering) {
+                        let html = this.markDownParser.parseMarkdown(blog['text']);
+                        blog['html'] = html;
+                    }
+
+                    res.status(200).send(blog);
                 }).catch((err) => {
-                    console.error(err);
                     res.status(502).send({
                         error: 'Failed to get necessary data'
                     });

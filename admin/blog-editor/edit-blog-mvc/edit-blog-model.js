@@ -7,7 +7,7 @@ export class EditBlogModel extends BlogModel {
     }
 
     async fetchBlogFromDb(id) {
-        let blogRef = await this.getBlog(id);
+        let blogRef = await this.getBlog(id, true);
         return blogRef;
     }
 

@@ -6,7 +6,7 @@ export class BlogPostModel extends BlogModel {
     }
 
     async fetchBlogFromDb(id){
-        var blogData = await this.getBlog(id);
+        var blogData = await this.getBlog(id, true);
         return blogData;
     }
 

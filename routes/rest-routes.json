@@ -2,15 +2,15 @@
     "blogs": "/database/blogs",
     "blogsByTag": "/database/blogs/tags/:tag",
     "misc-files" : "/database/misc-files",
-    "specificBlog": "/database/blogs/:id",
+    "specificBlog": "/database/blogs/:id/:ssr",
     "projects": "/database/projects",
-    "specificProject": "/database/projects/:id",
+    "specificProject": "/database/projects/:id/:ssr",
     "contactMe": "/database/contact-me-texts",
     "setActiveContactme" : "/database/contact-me-texts/set-active/:id",
-    "specificContactMe": "/database/contact-me-texts/:id",
+    "specificContactMe": "/database/contact-me-texts/:id/:ssr",
     "bios": "/database/bios",
     "setActiveBio" : "/database/bios/set-active/:id", 
-    "specificBio": "/database/bios/:id",
+    "specificBio": "/database/bios/:id/:ssr",
     "misc": "/database/miscalleneous-files",
-    "specificMisc": "/database/miscalleneous-files/:id"
+    "specificMisc": "/database/miscalleneous-files/:id/:ssr"
   }

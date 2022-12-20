@@ -13,8 +13,8 @@ export class ProjectBaseModel {
         
     }
 
-    async fetchProjectById(id) {
-        return this.baseModel.getListItemById(id);
+    async fetchProjectById(id, serverSideRendering = false) {
+        return this.baseModel.getListItemById(id, serverSideRendering);
     }
 
     async deleteProject(id){

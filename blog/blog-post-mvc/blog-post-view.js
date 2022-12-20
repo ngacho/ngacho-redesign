@@ -1,5 +1,8 @@
-export class BlogPostView {
+import { BaseView } from "../../mvc-architecture/base-view.js";
+
+export class BlogPostView extends BaseView {
     constructor() {
+        super();
         this.blog_heading_container = document.querySelector(".blog-heading-wrapper");
         this.blog_content_container = document.querySelector(".blog-content");
 
@@ -31,28 +34,10 @@ export class BlogPostView {
 
         var article_element = document.createElement('article');
         article_element.className = "blog-post";
-        var blog = data["article"]
 
         // html string
-        const htmlStr = this.parseBlogMarkdown(blog);
-        article_element.innerHTML = htmlStr;
+        article_element.innerHTML = data['html'];
         this.blog_content_container.appendChild(article_element);
     }
 
-    parseBlogMarkdown(rawMarkedDownBlog) {
-
-        const htmlText = rawMarkedDownBlog.replace(/^### (.*$)/gim, '<h3>$1</h3>')
-            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-            .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
-            .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
-            .replace(/\*(.*)\*/gim, '<i>$1</i>')
-            .replace(/!\[(.*?)\]\((.*?)\)/gim, "<img alt='$1' src='$2' />")
-            .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
-            .replace(/\n$/gim, '<br />')
-
-
-        return htmlText.trim();
-
-    }
 }
