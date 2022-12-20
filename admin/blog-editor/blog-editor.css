@@ -119,6 +119,11 @@ textarea::-webkit-scrollbar-thumb {
     overflow-y: scroll;
 }
 
+.katex{
+    display: table;
+    margin: 0 auto;
+}
+
 .blog-preview-container > .blog-content > article > a{
     text-decoration-line: underline;
     text-decoration-style: dashed;

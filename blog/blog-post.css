@@ -24,6 +24,11 @@
     margin-bottom: 3em;
 }
 
+.katex{
+    display: table;
+    margin: 0 auto;
+}
+
 .blog-container > .blog-content > article > a{
     text-decoration-line: underline;
     text-decoration-style: dashed;
