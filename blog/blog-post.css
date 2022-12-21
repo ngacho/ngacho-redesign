@@ -3,10 +3,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Source+Code+Pro:wght@300;500&display=swap');
 
 .blog-heading-wrapper {
-    height:120px;
+    height: fit-content;
     text-align: center;
+    padding: 20px;
     width: 100%;
-    line-height: 120px;
+    line-height: 1;
     background-image: url('../images/graph-background.png');
     color: #03312E;
 }
@@ -73,10 +74,8 @@
 
 @media only screen and (max-width: 1240px) {
     .blog-heading-wrapper {
-        height: 100px;
         padding: 15px;
         width: 100%;
-        line-height: 2.2rem;
     }
 
 }
@@ -85,11 +84,7 @@
 
 @media only screen and (max-width: 880px) {
     .blog-heading-wrapper {
-        height: 120px;
-        width: 100% !important;
         padding: 10px;
-        outline: 1px solid red;
-        line-height: 2.5rem;
     }
 
     .blog-container {
@@ -100,6 +95,11 @@
 }
 
 @media screen and (max-width: 630px) {
+
+    .blog-heading-wrapper {
+        outline: 1px solid green;
+        font-size: 0.9rem;
+    }
 
     .post-description {
         width: 100%;
