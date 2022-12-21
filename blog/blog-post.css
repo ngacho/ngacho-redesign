@@ -7,7 +7,7 @@
     text-align: center;
     padding: 20px;
     width: 100%;
-    line-height: 1;
+    line-height: 1.2;
     background-image: url('../images/graph-background.png');
     color: #03312E;
 }
@@ -97,7 +97,6 @@
 @media screen and (max-width: 630px) {
 
     .blog-heading-wrapper {
-        outline: 1px solid green;
         font-size: 0.9rem;
     }
 
