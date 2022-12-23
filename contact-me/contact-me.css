@@ -3,6 +3,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Source+Code+Pro:wght@300;500&display=swap');
 
 
+p > a{
+    text-decoration-line: underline;
+    text-decoration-style: dashed;
+    text-decoration-color: #03312E;
+    font-weight: 700;
+    text-decoration-thickness: 1.5px;
+    color: #03312E;
+}
+
 .contact-me-container {
     width: 75%;
     top: 4.2rem;
@@ -43,15 +52,6 @@
 
 .contact-me-container>.contact-me-wrapper>.contact-me-intro>.contact-me-text {
     text-align: left;
-}
-
-.contact-me-container>.contact-me-wrapper>.contact-me-intro>.contact-me-text>a {
-    text-decoration-line: underline;
-    text-decoration-style: dashed;
-    text-decoration-color: #03312E;
-    font-weight: 700;
-    text-decoration-thickness: 1.5px;
-    color: #03312E;
 }
 
 .contact-me-places {
@@ -226,7 +226,7 @@ textarea {
 
     }
 
-    .contact-me-container>.contact-me-wrapper>.contact-me-intro>.open-invite {
+    .contact-me-container>.contact-me-wrapper>.contact-me-intro {
         font-size: 1.2rem;
     }
 
