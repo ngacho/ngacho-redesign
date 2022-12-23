@@ -217,6 +217,7 @@ module.exports = class ServerController {
         const storageName = req.url.split('/')[2];
         let client = this.redisClient;
         let id = req.params.id;
+        let markDownParser = this.markDownParser;
 
         var updatedItems = []
 
@@ -224,10 +225,10 @@ module.exports = class ServerController {
         items.then((data) => {
             Object.keys(data).forEach(function (key) {
                 let oldItem = JSON.parse(data[key])
-                let newObject = { ...oldItem, active: false }
+                let newObject = { ...oldItem, active: false, html : '' };
 
                 if (key === id) {
-                    newObject = { ...newObject, active: true }
+                    newObject = { ...newObject, active: true , html : markDownParser.parseMarkdown(newObject['text'])}
                 }
                 updatedItems.push(newObject);
 
@@ -238,9 +239,11 @@ module.exports = class ServerController {
                 })
                 res.status(200).send({ message: 'Item set to active successfully' });
             }).catch((err) => {
+                console.error(err);
                 res.status(500).send({ error: `Error from db: ${err}` });
             });
         }).catch((err) => {
+            console.error(err);
             res.status(500).send({ error: `Error reading from cache: ${err}` });
         });
 

@@ -131,6 +131,7 @@ export class EditBlogView {
     }
 
     parseMarkdown(markdownText) {
+        var converter = new showdown.Converter()
         let regex = /\$(.*?)\$|([^$]+)/g;
         let replaced = markdownText.replace(regex, (match, group1, group2) => {
             if (group1) {
@@ -138,14 +139,10 @@ export class EditBlogView {
                 return katex.renderToString(group1, { throwOnError: false, trust: true });
             } else {
                 // Otherwise, the match was outside $ and $
-                return `<p>${group2}</p>`;
+                return converter.makeHtml(group2);
             }
-        }).replace(/!\[(.*?)\]\((.*?)\)/gim, "<img alt='$1' src='$2' />")
-            .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
-            .replace(/\\htmlTag\{([^}]+)\}\{([^}]+)\}/, "<$1>$2</$1>");
-
-
-
+        });
+        
         return replaced;
     }
 
