@@ -18,7 +18,7 @@ export class BlogListView {
 
                 var time_item = document.createElement('time');
                 time_item.className = 'post-date';
-                var time = document.createTextNode(post["publishedAt"]);
+                var time = document.createTextNode(post["lastModified"] ? post["lastModified"] : post["publishedAt"]);
                 time_item.appendChild(time);
 
                 var post_title = document.createElement('p');
@@ -45,6 +45,11 @@ export class BlogListView {
                 for (const tag of post_tags) {
                     var tag_ref = document.createElement('a');
                     tag_ref.className = 'tag';
+                    tag_ref.addEventListener('click', function () {
+                        let encodedTag = encodeURIComponent(tag);
+                        console.log(encodedTag)
+                        location.href = `/blog-list/tags/?${encodedTag}`;
+                    });
                     var tag_item = document.createTextNode(tag);
                     tag_ref.appendChild(tag_item);
                     tags.appendChild(tag_ref);
