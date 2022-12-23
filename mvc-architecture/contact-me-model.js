@@ -10,6 +10,19 @@ export class ContactMeModel {
         return this.baseModel.getList();
     }
 
+    async fetchActiveContactMe() {
+        let contactMeList = await this.baseModel.getList();
+        return new Promise((resolve, reject) => {
+            let activeContactMeList = contactMeList.filter(contactMe => contactMe.active === true);
+            if (activeContactMeList.length > 0) {
+                resolve(activeContactMeList[0]);
+            } else {
+                reject("No active contact me found");
+            }
+        });
+
+    }
+
     async fetchContactMe(contactMeId, serverSideRendering = false) {
         return this.baseModel.getListItemById(contactMeId, serverSideRendering);
     }
