@@ -2,6 +2,17 @@
 export class ViewContactMeView{
     constructor(){
         this.contact_me_content = document.querySelector(".contact-me-intro");
+
+        var text = "\htmlTag{a}{Open invite}";
+        // regular expression to match optional square brackets that have text inside
+        // let regex = /\\htmlTag{(.+?)}{(.+?)}/gi;
+        
+        let newText  = text.replace(/\\htmlTag{(.+?)}{(.+?)}/gi, (_, group1, group2) =>{
+            console.log(group1);
+            console.log(group2);
+            return `<${group1}>${group2}</${group1}>`;
+        });
+        console.log(newText);
     }
 
 
@@ -15,11 +26,11 @@ export class ViewContactMeView{
 
         var contact_me_element = document.createElement('p');
         contact_me_element.className = "contact-me-text animate-entry";
-        var contactMeText = contactMeContents["text"]
+        
 
         // html string
-        const htmlStr = this.parseBlogMarkdown(contactMeText);
-        contact_me_element.innerHTML = htmlStr;
+        // const htmlStr = this.parseBlogMarkdown(contactMeText);
+        contact_me_element.innerHTML = contactMeContents["html"];
         this.contact_me_content.append(contact_me_element);
 
     }

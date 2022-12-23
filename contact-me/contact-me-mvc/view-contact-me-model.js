@@ -6,7 +6,7 @@ export class ViewContactMeModel extends ContactMeModel{
     }
 
     async fetchContactMeFromDb(){
-        var blogData = await this.getContactMeText();
+        var blogData = await this.fetchActiveContactMe();
         return blogData;
     }
 }
