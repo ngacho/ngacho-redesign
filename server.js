@@ -121,11 +121,11 @@ app.get('/projects', (req, res) => {
     res.sendFile(path.join(initial_path, "/projects/projects.html"));
 });
 
-app.get('/aboutme', (req, res) => {
+app.get('/about-me', (req, res) => {
     res.sendFile(path.join(initial_path, "/about-me/aboutme.html"));
 });
 
-app.get('/contactme', (req, res) => {
+app.get('/contact-me', (req, res) => {
     res.sendFile(path.join(initial_path, "/contact-me/contact.html"));
 });
 
