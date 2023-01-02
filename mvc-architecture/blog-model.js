@@ -37,7 +37,7 @@ export class BlogModel {
 
     // filter blog by tags.
     async getBlogsByTags(tag) {
-        // TODO: implement this.
+        return this.baseModel.getListByTag(tag);
     }
 
 }

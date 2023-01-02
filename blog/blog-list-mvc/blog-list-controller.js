@@ -8,8 +8,11 @@ export class BlogListController {
     }
 
     init() {
+        let tag = decodeURI(location.search).slice(1);
+        let blogListRef = tag ? this.model.getBlogListByTag(tag) : this.model.getBlogList();
+        
         // Display initial todos
-        this.model.getBlogList().then((blogData) => {
+        blogListRef.then((blogData) => {
             this.onBlogListChanged(blogData);
         }).catch((err) => {
             console.error(err);
