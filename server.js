@@ -114,7 +114,11 @@ app.get(['/admin/add-misc-file', '/admin/edit-misc-file/*'], authorizeAccess, (r
 
 // blog page
 app.get('/blog', (req, res) => {
-    res.sendFile(path.join(initial_path, "/blog/blog.html"));
+    res.sendFile(path.join(initial_path, "/blog/blog-list-mvc/blog.html"));
+});
+
+app.get('/blog/tags/*', (req, res) => {
+    res.sendFile(path.join(initial_path, "/blog/blog-list-mvc/blog.html"));
 });
 
 app.get('/projects', (req, res) => {
@@ -132,7 +136,7 @@ app.get('/contact-me', (req, res) => {
 // listen for the blog-post page
 app.get('/blog-post', (req, res) => {
     req.originalUrl;
-    res.sendFile(path.join(initial_path, "/blog/blog_post.html"));
+    res.sendFile(path.join(initial_path, "/blog/blog-post-mvc/blog_post.html"));
 });
 
 // upload a file (move method to controller). Temporary fix ;-)
