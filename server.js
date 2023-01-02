@@ -291,13 +291,13 @@ app.delete([restRoutes.specificProject, restRoutes.specificBio, restRoutes.speci
 
 
 app.use((req, res) => {
-    res.sendStatus(404);
+    res.sendFile(path.join(initial_path, "/404.html"));
 });
 
 function authorizeAccess(req, res, next) {
     const reject = () => {
         res.setHeader('www-authenticate', 'Basic')
-        res.sendStatus(401)
+        res.sendFile(path.join(initial_path, "/403.html"));
     }
 
     // auth factors stored in an encrypted file.
