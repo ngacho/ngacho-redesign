@@ -1,8 +1,5 @@
-import { BaseView } from "../../mvc-architecture/base-view.js";
-
-export class BlogPostView extends BaseView {
+export class BlogPostView {
     constructor() {
-        super();
         this.blog_heading_container = document.querySelector(".blog-heading-wrapper");
         this.blog_content_container = document.querySelector(".blog-content");
 
