@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const path = require('path');
 const multer = require('multer')
 const redis = require('redis');
+require("dotenv").config();
+const PORT = process.env.PORT || 3030;
 const debug = require("debug")("server");
 const compression = require("compression");
 const helmet = require("helmet");
@@ -52,7 +54,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(initial_path, "index.html"));
 })
 
-app.listen("3030", () => {
+app.listen(PORT, () => {
     console.log('listening......');
 });
 
