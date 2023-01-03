@@ -354,3 +354,6 @@ MigrationBackup/
 firebase.js
 firebase-creds.json
 uploads
+
+//env
+.env
