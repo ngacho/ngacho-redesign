@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const path = require('path');
 const multer = require('multer')
 const redis = require('redis');
+const compression = require("compression");
+const helmet = require("helmet");
 const ServerController = require('./server-controller');
 const FirebaseHelperClass = require('./firebase-helper');
 const firebaseHelper = new FirebaseHelperClass();
@@ -25,6 +27,8 @@ let initial_path = path.join(__dirname, "");
 
 //express js server with initial path.
 const app = express();
+app.use(compression());
+app.use(helmet());
 app.use(express.static(initial_path));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
