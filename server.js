@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const path = require('path');
 const multer = require('multer')
 const redis = require('redis');
+const debug = require("debug")("server");
 const compression = require("compression");
 const helmet = require("helmet");
 const ServerController = require('./server-controller');
@@ -159,13 +160,13 @@ const uploadFile = (req, res) => {
                 message: 'successfully uploaded an image'
             })
         ).catch((err) => {
-            console.error(err);
+            debug(err);
             res.status(417).send({
                 error: 'failed to upload image'
             });
         })
     }).catch((error) => {
-        console.error(error);
+        debug(error);
         res.status(417).send({
             error: 'failed to upload image'
         });
@@ -217,7 +218,7 @@ const updateFile = (req, res) => {
                     }).catch((err) => res.status(500).send({ error: err }))
 
                 }).catch((err) => {
-                    console.error(err);
+                    debug(err);
                     res.status(500).send({ error: "failed to delete file" });
                 });
             } else {
@@ -226,7 +227,7 @@ const updateFile = (req, res) => {
             }
 
         }).catch((err) => {
-            console.error(err);
+            debug(err);
             res.status(500).send({ error: "Failed" });
 
         });
@@ -258,7 +259,7 @@ const updateFile = (req, res) => {
 
 
         }).catch((err) => {
-            console.error(err);
+            debug(err);
             res.status(500).send({ error: "failed to update file" });
 
         })
