@@ -33,7 +33,7 @@ module.exports = class ServerController {
                     client.hSet('isCached', `cache-${storageName}`, 'true');
                     res.status(200).send(data);
                 }).catch((err) => {
-                    console.error(err);
+                    debug(err);
                     res.status(502).send({
                         error: 'Failed to get necessary data'
                     })
@@ -82,7 +82,7 @@ module.exports = class ServerController {
                     client.hSet('isCached', `cache-${storageName}`, 'true');
                     res.status(200).send(results);
                 }).catch((err) => {
-                    console.error(err);
+                    debug(err);
                     res.status(502).send({
                         error: 'Failed to get necessary data'
                     })
@@ -137,7 +137,7 @@ module.exports = class ServerController {
                 })
             }
         }).catch((err) => {
-            console.error(err);
+            debug(err);
             res.status(502).send({
                 error: 'Failed to get necessary data'
             });
@@ -163,13 +163,13 @@ module.exports = class ServerController {
                 client.hSet(storageName, id, JSON.stringify(newObj));
                 res.status(200).send({message : "Successful update"});
             }).catch((err) => {
-                console.error(err);
+                debug(err);
                 res.status(502).send({
                     error: 'Failed to get necessary data'
                 });
             });
         }).catch((err) => {
-            console.error(err);
+            debug(err);
             res.status(500).send({ error: err });
         });
         
@@ -205,7 +205,7 @@ module.exports = class ServerController {
             }).catch((err) => res.status(500).send({ error: err }));
 
         }).catch((err) => {
-            console.error(err);
+            debug(err);
             res.status(502).send({
                 error: 'Failed to get necessary data'
             });
@@ -239,11 +239,11 @@ module.exports = class ServerController {
                 })
                 res.status(200).send({ message: 'Item set to active successfully' });
             }).catch((err) => {
-                console.error(err);
+                debug(err);
                 res.status(500).send({ error: `Error from db: ${err}` });
             });
         }).catch((err) => {
-            console.error(err);
+            debug(err);
             res.status(500).send({ error: `Error reading from cache: ${err}` });
         });
 
