@@ -42,7 +42,7 @@ let redisClient;
 (async () => {
     redisClient = redis.createClient();
 
-    redisClient.on("error", (error) => console.error(error));
+    redisClient.on("error", (error) => debug(error));
 
     await redisClient.connect();
 })();
