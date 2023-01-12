@@ -1,4 +1,4 @@
-import { BaseModel } from "../mvc-architecture/base-model.js";
+import { BaseModel } from "./base-model.js";
 
 export class ContactMeModel {
 

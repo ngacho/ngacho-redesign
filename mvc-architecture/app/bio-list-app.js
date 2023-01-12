@@ -1,5 +1,5 @@
 import { BioListController } from "../controller/bio-list-controller.js";
-import { BioListModel } from "./bio-list-model.js.js";
-import { BioListView } from "./bio-list-view.js.js";
+import { BioListModel } from "../model/bio-list-model.js";
+import { BioListView } from "../view/bio-list-view.js";
 
 const app = new BioListController(new BioListView(), new BioListModel());

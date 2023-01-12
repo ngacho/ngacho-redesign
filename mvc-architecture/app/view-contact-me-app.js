@@ -1,6 +1,6 @@
-import { ViewContactMeController } from "../../contact-me/contact-me-mvc/view-contact-me-controller.js"
-import { ViewContactMeView } from "../../contact-me/contact-me-mvc/view-contact-me-view.js"
-import { ViewContactMeModel } from "../../contact-me/contact-me-mvc/view-contact-me-model.js"
+import { ViewContactMeController } from "../controller/view-contact-me-controller.js"
+import { ViewContactMeView } from "../view/view-contact-me-view.js"
+import { ViewContactMeModel } from "../model/view-contact-me-model.js"
 
 
 

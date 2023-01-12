@@ -1,4 +1,4 @@
-import { BlogModel } from "../../../mvc-architecture/blog-model.js";
+import { BlogModel } from "./base-models/blog-model.js";
 
 export class BlogsToEditModel extends BlogModel {
 

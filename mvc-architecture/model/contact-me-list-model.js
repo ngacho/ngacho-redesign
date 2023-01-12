@@ -1,4 +1,4 @@
-import { ContactMeModel } from "../../../../mvc-architecture/contact-me-model.js";
+import { ContactMeModel } from "./base-models/contact-me-model.js";
 
 export class ContactMeListModel extends ContactMeModel {
     constructor() {

@@ -1,4 +1,4 @@
-import { MiscFileModel } from "../../../../mvc-architecture/misc-file-model.js";
+import { MiscFileModel } from "./base-models/misc-file-model.js";
 
 export class EditFileModel extends MiscFileModel {
     constructor(){

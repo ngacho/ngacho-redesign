@@ -1,4 +1,4 @@
-import { BioModel } from "../../../../mvc-architecture/bio-model.js";
+import { BioModel } from "./base-models/bio-model.js";
 
 export class BioListModel extends BioModel {
 

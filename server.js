@@ -87,12 +87,12 @@ app.get(['/admin/projects-to-edit'], authorizeAccess, (req, res) => {
 
 app.get(['/admin/choose-bio-to-edit'], authorizeAccess, (req, res) => {
     req.originalUrl
-    res.sendFile(path.join(initial_path, "/admin/bio-editor/bio-list/edit-bio-list.html"));
+    res.sendFile(path.join(initial_path, "/admin/bio-editor/edit-bio-list.html"));
 })
 
 app.get(['/admin/add-bio', '/admin/edit-bio/*'], authorizeAccess, (req, res) => {
     req.originalUrl
-    res.sendFile(path.join(initial_path, "/admin/bio-editor/edit-bio/bio-editor.html"));
+    res.sendFile(path.join(initial_path, "/admin/bio-editor/bio-editor.html"));
 });
 
 app.get(['/admin/choose-contact-me-to-edit'], authorizeAccess, (req, res) => {
@@ -125,11 +125,11 @@ app.get(['/admin/add-misc-file', '/admin/edit-misc-file/*'], authorizeAccess, (r
 
 // blog page
 app.get('/blog', (req, res) => {
-    res.sendFile(path.join(initial_path, "/blog/blog-list-mvc/blog.html"));
+    res.sendFile(path.join(initial_path, "/blog/blog.html"));
 });
 
 app.get('/blog/tags/*', (req, res) => {
-    res.sendFile(path.join(initial_path, "/blog/blog-list-mvc/blog.html"));
+    res.sendFile(path.join(initial_path, "/blog/blog.html"));
 });
 
 app.get('/projects', (req, res) => {
@@ -147,7 +147,7 @@ app.get('/contact-me', (req, res) => {
 // listen for the blog-post page
 app.get('/blog-post', (req, res) => {
     req.originalUrl;
-    res.sendFile(path.join(initial_path, "/blog/blog-post-mvc/blog_post.html"));
+    res.sendFile(path.join(initial_path, "/blog/blog_post.html"));
 });
 
 // upload a file (move method to controller). Temporary fix ;-)

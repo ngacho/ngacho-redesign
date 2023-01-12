@@ -1,4 +1,4 @@
-import { ProjectBaseModel } from "../../../mvc-architecture/projects-model.js";
+import { ProjectBaseModel } from "./base-models/projects-model.js";
 
 export class ViewProjectModel extends ProjectBaseModel {
     constructor(){
