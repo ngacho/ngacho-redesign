@@ -75,87 +75,87 @@ app.listen(PORT, () => {
  * admin page.
  * */
 app.get('/admin', authorizeAccess, (_, res) => {
-    res.sendFile(path.join(initial_path, "/admin/admin-home.html"));
+    res.sendFile(path.join(initial_path, "/app/view/admin/admin-home.html"));
 });
 
 app.get(['/admin/write-blog', '/admin/edit-blog/*'], authorizeAccess, (req, res) => {
     req.originalUrl;
-    res.sendFile(path.join(initial_path, "/admin/blog-editor/blog_editor.html"))
+    res.sendFile(path.join(initial_path, "/app/view/admin/blog-editor/blog_editor.html"))
 });
 
 app.get(['/admin/blogs-to-edit'], authorizeAccess, (req, res) => {
     req.originalUrl
-    res.sendFile(path.join(initial_path, "/admin/blog-editor/blogs_to_edit.html"))
+    res.sendFile(path.join(initial_path, "/app/view/admin/blog-editor/blogs_to_edit.html"))
 })
 
 app.get(['/admin/projects-to-edit'], authorizeAccess, (req, res) => {
     req.originalUrl
-    res.sendFile(path.join(initial_path, "/admin/project-editor/projects_to_edit.html"))
+    res.sendFile(path.join(initial_path, "/app/view/admin/project-editor/projects_to_edit.html"))
 });
 
 app.get(['/admin/choose-bio-to-edit'], authorizeAccess, (req, res) => {
     req.originalUrl
-    res.sendFile(path.join(initial_path, "/admin/bio-editor/edit-bio-list.html"));
+    res.sendFile(path.join(initial_path, "/app/view/admin/bio-editor/edit-bio-list.html"));
 })
 
 app.get(['/admin/add-bio', '/admin/edit-bio/*'], authorizeAccess, (req, res) => {
     req.originalUrl
-    res.sendFile(path.join(initial_path, "/admin/bio-editor/bio-editor.html"));
+    res.sendFile(path.join(initial_path, "/app/view/admin/bio-editor/bio-editor.html"));
 });
 
 app.get(['/admin/choose-contact-me-to-edit'], authorizeAccess, (req, res) => {
     req.originalUrl
-    res.sendFile(path.join(initial_path, "/admin/contact-me-editor/contact-me-list.html"))
+    res.sendFile(path.join(initial_path, "/app/view/admin/contact-me-editor/contact-me-list.html"))
 });
 
 app.get(['/admin/add-contact-me', '/admin/edit-contact-me/*'], authorizeAccess, (req, res) => {
     req.originalUrl
-    res.sendFile(path.join(initial_path, "/admin/contact-me-editor/edit-contact-me.html"))
+    res.sendFile(path.join(initial_path, "/app/view/admin/contact-me-editor/edit-contact-me.html"))
 });
 
 // listen for new project and edit project project page
 app.get(['/admin/new-project/', '/admin/edit-project/*'], authorizeAccess, (req, res) => {
     req.originalUrl;
-    res.sendFile(path.join(initial_path, "/admin/project-editor/project-editor.html"));
+    res.sendFile(path.join(initial_path, "/app/view/admin/project-editor/project-editor.html"));
 });
 
 
 app.get(['/admin/misc-files'], authorizeAccess, (req, res) => {
     req.originalUrl;
-    res.sendFile(path.join(initial_path, "/admin/misc-files/misc-files-list/misc-files-list.html"));
+    res.sendFile(path.join(initial_path, "/app/view/admin/misc-files/misc-files-list/misc-files-list.html"));
 });
 
 app.get(['/admin/add-misc-file', '/admin/edit-misc-file/*'], authorizeAccess, (req, res) => {
     req.originalUrl;
-    res.sendFile(path.join(initial_path, "/admin/misc-files/misc-files-editor/misc-file-editor.html"));
+    res.sendFile(path.join(initial_path, "/app/view/admin/misc-files/misc-files-editor/misc-file-editor.html"));
 
 });
 
 // blog page
 app.get('/blog', (req, res) => {
-    res.sendFile(path.join(initial_path, "/blog/blog.html"));
+    res.sendFile(path.join(initial_path, "/app/view/blog/blog.html"));
 });
 
 app.get('/blog/tags/*', (req, res) => {
-    res.sendFile(path.join(initial_path, "/blog/blog.html"));
+    res.sendFile(path.join(initial_path, "/app/view/blog/blog.html"));
 });
 
 app.get('/projects', (req, res) => {
-    res.sendFile(path.join(initial_path, "/projects/projects.html"));
+    res.sendFile(path.join(initial_path, "/app/view/projects/projects.html"));
 });
 
 app.get('/about-me', (req, res) => {
-    res.sendFile(path.join(initial_path, "/about-me/aboutme.html"));
+    res.sendFile(path.join(initial_path, "/app/view/bio/aboutme.html"));
 });
 
 app.get('/contact-me', (req, res) => {
-    res.sendFile(path.join(initial_path, "/contact-me/contact.html"));
+    res.sendFile(path.join(initial_path, "/app/view/contact-me/contact.html"));
 });
 
 // listen for the blog-post page
 app.get('/blog-post', (req, res) => {
     req.originalUrl;
-    res.sendFile(path.join(initial_path, "/blog/blog_post.html"));
+    res.sendFile(path.join(initial_path, "/app/view/blog/blog_post.html"));
 });
 
 // upload a file (move method to controller). Temporary fix ;-)
