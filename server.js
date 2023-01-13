@@ -1,5 +1,6 @@
 // import packages
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require("body-parser");
 const path = require('path');
 const multer = require('multer')
@@ -30,6 +31,13 @@ let initial_path = path.join(__dirname, "");
 
 //express js server with initial path.
 const app = express();
+
+
+const options = {
+    origin: ['https://gc.zgo.at', 'https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/'],
+}
+
+app.use(cors(options));
 app.use(compression());
 app.use(helmet());
 app.use(express.static(initial_path));
