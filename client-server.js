@@ -23,7 +23,7 @@ const app = express();
 
 
 const options = {
-    origin: ['https://gc.zgo.at', 'https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/'],
+    origin: ['http://localho.st:8080', 'https://gc.zgo.at', 'https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/'],
 }
 
 app.use(cors(options));

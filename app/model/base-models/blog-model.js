@@ -9,7 +9,7 @@ export class BlogModel {
      * addBlog
      */
     constructor() {
-        this.baseModel = new BaseModel("http://localhost:3030/database/blogs");
+        this.baseModel = new BaseModel("http://localhost:8080/database/blogs");
     }
 
     // pass me a new blog. I'll modify the id

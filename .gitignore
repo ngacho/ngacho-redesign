@@ -353,6 +353,7 @@ MigrationBackup/
 // firebase
 firebase.js
 firebase-creds.json
+/rest-server/firebase-creds.json
 uploads
 
 //env

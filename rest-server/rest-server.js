@@ -6,14 +6,14 @@ const path = require('path');
 const multer = require('multer')
 const redis = require('redis');
 require("dotenv").config();
-const PORT = process.env.PORT || 3030;
+const PORT = process.env.PORT || 8080;
 const debug = require("debug")("server");
 const compression = require("compression");
 const helmet = require("helmet");
 const ServerController = require('./server-controller');
 const FirebaseHelperClass = require('./firebase-helper');
 const firebaseHelper = new FirebaseHelperClass();
-const restRoutes = require('./routes/rest-routes.json');
+const restRoutes = require('../routes/rest-routes.json');
 // securing https : https://www.toptal.com/nodejs/secure-rest-api-in-nodejs
 
 // Obsfucation of code
@@ -48,11 +48,7 @@ app.use(bodyParser.json());
 let redisClient;
 
 (async () => {
-    redisClient = redis.createClient(
-        {
-            url : process.env.REDIS_URL
-          }
-    );
+    redisClient = redis.createClient();
 
     redisClient.on("error", (error) => debug(error));
 
@@ -61,102 +57,11 @@ let redisClient;
 
 const serverController = new ServerController(redisClient, firebaseHelper);
 
-// home page sending to port 3000.
-app.get('/', (req, res) => {
-    res.sendFile(path.join(initial_path, "index.html"));
-})
 
 app.listen(PORT, () => {
     console.log('listening......');
 });
 
-/**
- * Functions related to the admin page.
- * admin page.
- * */
-app.get('/admin', authorizeAccess, (_, res) => {
-    res.sendFile(path.join(initial_path, "/app/view/admin/admin-home.html"));
-});
-
-app.get(['/admin/write-blog', '/admin/edit-blog/*'], authorizeAccess, (req, res) => {
-    req.originalUrl;
-    res.sendFile(path.join(initial_path, "/app/view/admin/blog-editor/blog_editor.html"))
-});
-
-app.get(['/admin/blogs-to-edit'], authorizeAccess, (req, res) => {
-    req.originalUrl
-    res.sendFile(path.join(initial_path, "/app/view/admin/blog-editor/blogs_to_edit.html"))
-})
-
-app.get(['/admin/projects-to-edit'], authorizeAccess, (req, res) => {
-    req.originalUrl
-    res.sendFile(path.join(initial_path, "/app/view/admin/project-editor/projects_to_edit.html"))
-});
-
-app.get(['/admin/choose-bio-to-edit'], authorizeAccess, (req, res) => {
-    req.originalUrl
-    res.sendFile(path.join(initial_path, "/app/view/admin/bio-editor/edit-bio-list.html"));
-})
-
-app.get(['/admin/add-bio', '/admin/edit-bio/*'], authorizeAccess, (req, res) => {
-    req.originalUrl
-    res.sendFile(path.join(initial_path, "/app/view/admin/bio-editor/bio-editor.html"));
-});
-
-app.get(['/admin/choose-contact-me-to-edit'], authorizeAccess, (req, res) => {
-    req.originalUrl
-    res.sendFile(path.join(initial_path, "/app/view/admin/contact-me-editor/contact-me-list.html"))
-});
-
-app.get(['/admin/add-contact-me', '/admin/edit-contact-me/*'], authorizeAccess, (req, res) => {
-    req.originalUrl
-    res.sendFile(path.join(initial_path, "/app/view/admin/contact-me-editor/edit-contact-me.html"))
-});
-
-// listen for new project and edit project project page
-app.get(['/admin/new-project/', '/admin/edit-project/*'], authorizeAccess, (req, res) => {
-    req.originalUrl;
-    res.sendFile(path.join(initial_path, "/app/view/admin/project-editor/project-editor.html"));
-});
-
-
-app.get(['/admin/misc-files'], authorizeAccess, (req, res) => {
-    req.originalUrl;
-    res.sendFile(path.join(initial_path, "/app/view/admin/misc-files/misc-files-list/misc-files-list.html"));
-});
-
-app.get(['/admin/add-misc-file', '/admin/edit-misc-file/*'], authorizeAccess, (req, res) => {
-    req.originalUrl;
-    res.sendFile(path.join(initial_path, "/app/view/admin/misc-files/misc-files-editor/misc-file-editor.html"));
-
-});
-
-// blog page
-app.get('/blog', (req, res) => {
-    res.sendFile(path.join(initial_path, "/app/view/blog/blog.html"));
-});
-
-app.get('/blog/tags/*', (req, res) => {
-    res.sendFile(path.join(initial_path, "/app/view/blog/blog.html"));
-});
-
-app.get('/projects', (req, res) => {
-    res.sendFile(path.join(initial_path, "/app/view/projects/projects.html"));
-});
-
-app.get('/about-me', (req, res) => {
-    res.sendFile(path.join(initial_path, "/app/view/bio/aboutme.html"));
-});
-
-app.get('/contact-me', (req, res) => {
-    res.sendFile(path.join(initial_path, "/app/view/contact-me/contact.html"));
-});
-
-// listen for the blog-post page
-app.get('/blog-post', (req, res) => {
-    req.originalUrl;
-    res.sendFile(path.join(initial_path, "/app/view/blog/blog_post.html"));
-});
 
 // upload a file (move method to controller). Temporary fix ;-)
 const uploadFile = (req, res) => {
@@ -314,26 +219,5 @@ app.use((req, res) => {
 });
 
 function authorizeAccess(req, res, next) {
-    const reject = () => {
-        res.setHeader('www-authenticate', 'Basic')
-        res.sendFile(path.join(initial_path, "/403.html"));
-    }
-
-    // auth factors stored in an encrypted file.
-    const auth = { login: 'xxxxx', password: '12345' } // change this
-
-    const authorization = req.headers.authorization
-
-    if (!authorization) {
-        return reject()
-    }
-
-    const [username, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':')
-
-    if (!(username && password && username === auth.login && password === auth.password)) {
-        return reject()
-    }
-
     next();
-
 }

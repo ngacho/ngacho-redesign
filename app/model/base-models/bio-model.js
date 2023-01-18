@@ -2,7 +2,7 @@ import { BaseModel } from "./base-model.js";
 
 export class BioModel{
     constructor(){
-        this.baseModel = new BaseModel("http://localhost:3030/database/bios");
+        this.baseModel = new BaseModel("http://localhost:8080/database/bios");
         
     }
 

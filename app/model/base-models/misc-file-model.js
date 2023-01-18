@@ -2,7 +2,7 @@ import { BaseModel } from "./base-model.js";
 
 export class MiscFileModel{
     constructor(){
-        this.baseModel = new BaseModel("http://localhost:3030/database/miscalleneous-files");
+        this.baseModel = new BaseModel("http://localhost:8080/database/miscalleneous-files");
     }
 
     async fetchMiscFiles(){
