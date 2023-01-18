@@ -3,7 +3,7 @@ import { BaseModel } from "./base-model.js";
 export class ContactMeModel {
 
     constructor() {
-        this.baseModel = new BaseModel('http://localhost:3030/database/contact-me-texts');
+        this.baseModel = new BaseModel('http://localhost:8080/database/contact-me-texts');
     }
 
     async fetchContactMeList() {
