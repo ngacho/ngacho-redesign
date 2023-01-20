@@ -4,20 +4,22 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <title>Home</title>
     <meta name="viewport" content="device-width, initial-scale=1">
-    <base href=".">
-    <link rel="stylesheet" type="text/css" href="/homepage.css">
-    <link rel="stylesheet" href="/all.css">
-    <link rel="stylesheet" type="text/css" href="/app/view/navigation/nav-bar.css">
-    <link rel="shortcut icon" href="images/favicon.ico">
+    <base href="/app/view/blog/">
+    <link rel="stylesheet" href="./blog-post.css">
+    <link rel="stylesheet" href="../navigation/nav-bar.css">
+    <link rel="shortcut icon" href="../../../images/favicon.ico">
+    <link rel="stylesheet" href="../../../all.css">
+
+    <!-- Katex -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
     <!-- icon css sheet-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-
-
 </head>
 
 <body>
@@ -49,26 +51,22 @@
             </ul>
 
         </nav>
-
     </header>
 
-    <div class="intro-container">
-        <div class="intro-wrapper">
-            <p href="" class="typewrite intro" data-period="2000"
-                data-type='[ "Hi, I&#39;m Ngacho.", "I make Android and Web applications."]'>
-                <span class="wrap"></span>
-            </p>
+    <div class="blog-post-container">
+
+        <div class="blog-heading-wrapper">
         </div>
+
+        <div class="blog-container">
+            <div class="blog-content"></div>
+
+        </div>
+
+        <script src="../navigation/navigation.js"></script>
+        <script src="../../blog-post-app.js" type="module"></script>
+
     </div>
-
-    <noscript>
-        You must have javascript enabled to view this content.
-    </noscript>
-    <script src="/app/homepage-app.js" type="module"></script>
-    <script src="/app/view/navigation/navigation.js"></script>
-    <script data-goatcounter="https://code-father.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-
 </body>
 
 </html>

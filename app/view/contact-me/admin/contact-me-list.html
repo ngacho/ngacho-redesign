@@ -4,20 +4,18 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <title>Home</title>
+    <title>Contact Me List</title>
     <meta name="viewport" content="device-width, initial-scale=1">
-    <base href=".">
-    <link rel="stylesheet" type="text/css" href="/homepage.css">
-    <link rel="stylesheet" href="/all.css">
-    <link rel="stylesheet" type="text/css" href="/app/view/navigation/nav-bar.css">
-    <link rel="shortcut icon" href="images/favicon.ico">
+    <base href="/app/view/contact-me/admin/">
+    <link rel="stylesheet" href="../../navigation/nav-bar.css">
+    <link rel="stylesheet" href="../../../../all.css">
+    <link rel="icon shortcut" href="../../../../images/favicon.ico">
+    <link rel="stylesheet" href="./contact-me-list.css">
     <!-- icon css sheet-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -28,7 +26,6 @@
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
-
             <a href="/" class="nav-logo">Brandon Ngacho</a>
             <ul class="nav-menu">
                 <li class="nav-item">
@@ -47,27 +44,21 @@
                     <a class="nav-link" href="/contact-me">Contact Me</a>
                 </li>
             </ul>
-
         </nav>
-
     </header>
 
-    <div class="intro-container">
-        <div class="intro-wrapper">
-            <p href="" class="typewrite intro" data-period="2000"
-                data-type='[ "Hi, I&#39;m Ngacho.", "I make Android and Web applications."]'>
-                <span class="wrap"></span>
-            </p>
+    <div class="contact-me-gallery-wrapper">
+        <div class="contact-me-gallery">
+    
+
+            <div class="rounded-button" href="/admin/add-contact-me">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+            </div>
         </div>
     </div>
 
-    <noscript>
-        You must have javascript enabled to view this content.
-    </noscript>
-    <script src="/app/homepage-app.js" type="module"></script>
-    <script src="/app/view/navigation/navigation.js"></script>
-    <script data-goatcounter="https://code-father.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+    <script src="../../../contact-me-list-app.js" type="module"></script>
+    <script src="../../navigation/navigation.js"></script>
 
 </body>
 

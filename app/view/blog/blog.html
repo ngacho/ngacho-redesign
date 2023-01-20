@@ -1,23 +1,26 @@
+<!-- https://dev.to/kunaal438/fullstack-how-to-create-a-working-blogging-website-with-pure-html-css-and-js-in-2021-9di -->
+<!-- Node js : https://vegibit.com/node-js-blog-tutorial/ -->
+<!-- https://www.labnol.org/ , Blog design inspiration. Actually probably the final product.-->
+<!--Html template for seo: https://www.sitepoint.com/a-basic-html5-template/#thecompletehtml5boilerplate-->
+<!-- Node js: express js password https://benborgers.com/posts/express-password-protect-->
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <title>Home</title>
+    <title>Blog</title>
     <meta name="viewport" content="device-width, initial-scale=1">
-    <base href=".">
-    <link rel="stylesheet" type="text/css" href="/homepage.css">
-    <link rel="stylesheet" href="/all.css">
-    <link rel="stylesheet" type="text/css" href="/app/view/navigation/nav-bar.css">
-    <link rel="shortcut icon" href="images/favicon.ico">
+    <base href="/app/view/blog/">
+    <link rel="stylesheet" href="./blog.css">
+    <link rel="stylesheet" href="../navigation/nav-bar.css">
+    <link rel="shortcut icon" href="../../../images/favicon.ico">
+    <link rel="stylesheet" href="../../../all.css">
     <!-- icon css sheet-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-
-
 </head>
 
 <body>
@@ -49,26 +52,19 @@
             </ul>
 
         </nav>
-
     </header>
 
-    <div class="intro-container">
-        <div class="intro-wrapper">
-            <p href="" class="typewrite intro" data-period="2000"
-                data-type='[ "Hi, I&#39;m Ngacho.", "I make Android and Web applications."]'>
-                <span class="wrap"></span>
-            </p>
+
+
+    <div class="blog-container">
+        <div class="blog-heading-wrapper">
+            <h1 class="blog-heading">Commentary, random musings & ocassional rants.</h1>
+        </div>
+        <div class="blogs-wrapper">
         </div>
     </div>
-
-    <noscript>
-        You must have javascript enabled to view this content.
-    </noscript>
-    <script src="/app/homepage-app.js" type="module"></script>
-    <script src="/app/view/navigation/navigation.js"></script>
-    <script data-goatcounter="https://code-father.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-
+    <script src="../../blog-list-app.js" type="module"></script>
+    <script src="../navigation/navigation.js"></script>
 </body>
 
 </html>
