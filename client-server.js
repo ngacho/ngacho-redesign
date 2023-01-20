@@ -36,14 +36,16 @@ app.use(helmet.contentSecurityPolicy({
             "https://gc.zgo.at",
             "https://smtpjs.com/v3/smtp.js",
             "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.js",
-            "https://cdn.rawgit.com/showdownjs/showdown/2.1.0/dist/showdown.min.js"
+            "https://cdn.rawgit.com/showdownjs/showdown/2.1.0/dist/showdown.min.js",
+            "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js "
         ],
         "script-src-attr": ["'self'"],
         "style-src": ["'self'",
             "https://fonts.googleapis.com",
             "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css",
             "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
-            "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.css"
+            "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.css",
+            "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css"
         ],
         "connect-src": ["'self'", "http://localhost:8080"],
         "img-src": ["'self'",
