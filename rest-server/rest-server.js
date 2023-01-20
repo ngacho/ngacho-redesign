@@ -9,7 +9,6 @@ require("dotenv").config();
 const PORT = process.env.PORT || 8080;
 const debug = require("debug")("server");
 const compression = require("compression");
-const helmet = require("helmet");
 const ServerController = require('./server-controller');
 const FirebaseHelperClass = require('./firebase-helper');
 const firebaseHelper = new FirebaseHelperClass();
@@ -33,13 +32,7 @@ let initial_path = path.join(__dirname, "");
 const app = express();
 
 
-const options = {
-    origin: ['https://gc.zgo.at', 'https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/'],
-}
-
-app.use(cors(options));
 app.use(compression());
-app.use(helmet());
 app.use(express.static(initial_path));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
