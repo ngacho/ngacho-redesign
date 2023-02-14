@@ -170,6 +170,11 @@ app.get('/blog-post', (req, res) => {
     res.sendFile(path.join(initial_path, "/app/view/blog/blog_post.html"));
 });
 
+
+app.use((req, res) => {
+    res.sendFile(path.join(initial_path, "/404.html"));
+});
+
 function authorizeAccess(req, res, next) {
 
     const reject = () => {
