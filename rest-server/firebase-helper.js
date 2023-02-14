@@ -2,8 +2,8 @@
  * We're rewriting firebase probably.
  */
 
-// https://www.bezkoder.com/google-cloud-storage-nodejs-upload-file/
-const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
+
+const { initializeApp, cert } = require('firebase-admin/app');
 
 const { getFirestore } = require('firebase-admin/firestore');
 
