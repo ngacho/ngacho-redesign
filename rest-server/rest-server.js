@@ -43,10 +43,11 @@ app.use(bodyParser.json());
 let redisClient;
 
 (async () => {
-    // redisClient = redis.createClient({url : process.env.REDIS_URL});
-    redisClient = redis.createClient();
+    redisClient = redis.createClient({
+        url: process.env.REDIS_URL
+      });
 
-    redisClient.on("error", (error) => debug(error));
+    redisClient.on("error", (error) => console.log(error));
 
     await redisClient.connect();
 })();
