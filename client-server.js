@@ -195,7 +195,7 @@ function authorizeAccess(req, res, next) {
 
                     try {
                         res.cookie("access_token", token, {
-                            maxAge: 36000,
+                            maxAge: 3600,
                             httpOnly: true,
                             sameSite : "none",
                             secure: process.env.NODE_ENV === "production",
