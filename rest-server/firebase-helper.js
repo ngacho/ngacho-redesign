@@ -8,17 +8,15 @@ const { initializeApp, applicationDefault, cert } = require('firebase-admin/app'
 const { getFirestore } = require('firebase-admin/firestore');
 
 const { getStorage } = require('firebase-admin/storage');
-
-
-
-const serviceAccount = require('./firebase-creds.json');
+const { getAuth } = require('firebase-admin/auth');
+const constants = require('../credentials');
 
 
 module.exports = class FirebaseHelperClass {
 
     constructor() {
         initializeApp({
-            credential: cert(serviceAccount),
+            credential: cert(constants.serviceAccount),
             storageBucket: 'ngacho-blog.appspot.com'
         });
 
@@ -84,7 +82,7 @@ module.exports = class FirebaseHelperClass {
         delete doc.id;
         const fileRef = this.db.collection(database_name).doc(docName);
 
-        
+
         return new Promise((resolve, reject) => {
             fileRef.update(doc).then((_) => {
                 resolve("Successfully updated database")
@@ -197,14 +195,14 @@ module.exports = class FirebaseHelperClass {
             blobStream.on('finish', (_) => {
                 fileUpload.makePublic().then((_) => {
                     const publicUrl = fileUpload.publicUrl();
-                    if(typeof fileDataObject !== 'object'){
+                    if (typeof fileDataObject !== 'object') {
                         let obj = JSON.parse(fileDataObject);
-                        fileDataObject = {...obj}
+                        fileDataObject = { ...obj }
                     }
-                    
+
                     let id = this.getFileId(fileDataObject)
                     let docWithId = { ...fileDataObject, id: id, fileName: file.originalname, publicUrl: publicUrl };
-                    
+
                     self.postDocToFirebaseDatabase(storageName, docWithId).then((_) => {
                         resolve({ doc: docWithId, message: 'successfully uploaded file' });
                     }).catch((err) => {
@@ -249,10 +247,39 @@ module.exports = class FirebaseHelperClass {
 
     }
 
+    async createCustomToken(uid) {
+        return new Promise((resolve, reject) => {
+            getAuth()
+            .createCustomToken(uid)
+            .then((customToken) => {
+                // Send token back to client
+                resolve(customToken);
+            })
+            .catch((error) => {
+                console.log('Error creating custom token:', error);
+                reject(error);
+            });
+
+        });
+        
+
+    }
+
+    async verifyIdToken(idToken) {
+        return new Promise((resolve, reject) => {
+            getAuth().verifyIdToken(idToken).then((_) => {
+                resolve("Successfully verified token");
+            }).catch((error) => {
+                // Handle error
+                reject(error);
+            });
+        });
+    }
+
 
 
     getFileId(fileObject) {
-        
+
         if (fileObject.id) {
             return fileObject.id;
         } else {

@@ -2,11 +2,20 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const path = require('path');
-require("dotenv").config();
-const PORT = process.env.PORT || 3030;
+require("dotenv").config({ path: __dirname + '/.env' });
+const PORT = process.env.CLIENT_PORT || 3030;
 const compression = require("compression");
 const helmet = require("helmet");
+const { initializeApp } = require('firebase/app');
+const { getAuth, signInWithEmailAndPassword, createCustomToken } = require("firebase/auth");
+const constants = require('./credentials');
+const { Console } = require('console');
+const fetch = (...args) =>
+    import('node-fetch').then(({ default: fetch }) => fetch(...args));
+
+const jwt = require('jsonwebtoken');
 
 // securing https : https://www.toptal.com/nodejs/secure-rest-api-in-nodejs
 
@@ -16,7 +25,6 @@ const helmet = require("helmet");
 
 // initial folders
 let initial_path = path.join(__dirname, "");
-console.log(initial_path);
 
 //express js server with initial path.
 const app = express();
@@ -26,8 +34,8 @@ const options = {
     origin: ['http://localhost:8080', 'https://gc.zgo.at', 'https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/'],
 }
 
-// app.use(cors());
 app.use(compression());
+app.use(cookieParser());
 app.use(helmet.contentSecurityPolicy({
     useDefaults: true,
     directives: {
@@ -41,6 +49,7 @@ app.use(helmet.contentSecurityPolicy({
         ],
         "script-src-attr": ["'self'"],
         "style-src": ["'self'",
+            "'unsafe-inline'",
             "https://fonts.googleapis.com",
             "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css",
             "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
@@ -58,12 +67,11 @@ app.use(express.static(initial_path));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// initialize firebase
+const firebaseApp = initializeApp(
+    constants.firebaseConfig
+);
 
-// app.all('/*', function (req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//     next();
-// });
 
 // home page sending to port 3000.
 app.get('/', (req, res) => {
@@ -163,26 +171,67 @@ app.get('/blog-post', (req, res) => {
 });
 
 function authorizeAccess(req, res, next) {
-    // const reject = () => {
-    //     res.setHeader('www-authenticate', 'Basic')
-    //     res.sendFile(path.join(initial_path, "/403.html"));
-    // }
 
-    // // auth factors stored in an encrypted file.
-    // const auth = { login: 'xxxxx', password: '12345' } // change this
+    const reject = () => {
+        // res.setHeader('www-authenticate', 'Basic')
+        res.sendFile(path.join(initial_path, "/403.html"));
+    }
 
-    // const authorization = req.headers.authorization
+    const promptAuth = () => {
+        res.setHeader('www-authenticate', 'Basic')
+        res.sendStatus(401);
+    }
 
-    // if (!authorization) {
-    //     return reject()
-    // }
+    const signInUser = (email, password) => {
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                userCredential.user.getIdToken(true).then((token) => {
 
-    // const [username, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':')
+                    try {
+                        res.cookie("access_token", token, {
+                            maxAge: 36000,
+                            httpOnly: true,
+                            sameSite : "none",
+                            secure: process.env.NODE_ENV === "production",
+                        });
+                        
+                        next();
+                    } catch (error) {
+                        reject();
+                    }
+                    
+                    
+                }).catch((error) => {
+                    reject();
+                    
+                });
 
-    // if (!(username && password && username === auth.login && password === auth.password)) {
-    //     return reject()
-    // }
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
 
-    next();
+                promptAuth();
+            });
+
+    }
+
+
+    const token = req.cookies.access_token;
+    
+
+    if(!token) {
+        let authorization = req.headers.authorization;
+        if(!authorization) {
+            promptAuth();
+        }else{
+            const [email, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':');
+            signInUser(email, password);
+        }        
+    }else{
+        next();
+    }
+    
+
 
 }

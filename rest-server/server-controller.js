@@ -11,8 +11,10 @@ module.exports = class ServerController {
         const storageName = req.url.split('/')[2];
         let client = this.redisClient;
 
-        client.hGet('isCached', `cache-${storageName}`).then((isCached) => {
-            if (isCached === 'true') {
+        
+        client.hGet('isCached', `cache-${storageName}`).then((isCached) => {       
+            if (isCached && isCached === 'true') {
+            
                 let results = []
                 let items = client.hGetAll(storageName)
                 items.then((data) => {
@@ -39,9 +41,12 @@ module.exports = class ServerController {
                     })
                 });
             }
-
-
-        })
+        }).catch((err) => {
+            debug(err);
+            res.status(500).send({
+                error: 'Failed to get necessary data'
+            })
+        });
 
     };
 
@@ -89,8 +94,12 @@ module.exports = class ServerController {
                 });
             }
 
-
-        })
+        }).catch((err) => {
+            debug(err);
+            res.status(500).send({
+                error: 'Failed to get necessary data'
+            })
+        });
 
     };
 
@@ -277,5 +286,9 @@ module.exports = class ServerController {
                 reject({ err: error });
             }
         });
+    }
+
+    verifyToken(token){
+        return this.firebaseHelper.verifyIdToken(token);
     }
 }

@@ -2,11 +2,12 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const path = require('path');
 const multer = require('multer')
 const redis = require('redis');
 require("dotenv").config();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.SERVER_PORT || 8080;
 const debug = require("debug")("server");
 const compression = require("compression");
 const ServerController = require('./server-controller');
@@ -33,6 +34,7 @@ const app = express();
 
 
 app.use(compression());
+app.use(cookieParser());
 app.use(express.static(initial_path));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -41,6 +43,7 @@ app.use(bodyParser.json());
 let redisClient;
 
 (async () => {
+    // redisClient = redis.createClient({url : process.env.REDIS_URL});
     redisClient = redis.createClient();
 
     redisClient.on("error", (error) => debug(error));
@@ -182,13 +185,14 @@ const updateFile = (req, res) => {
 
 //REST API routes
 // Create
-app.post([restRoutes.blogs, restRoutes.contactMe], serverController.postDoc);
-app.post([restRoutes.projects, restRoutes.bios, restRoutes.misc], upload.single('file'), uploadFile);
+app.post([restRoutes.blogs, restRoutes.contactMe], authorizeAccess, serverController.postDoc);
+app.post([restRoutes.projects, restRoutes.bios, restRoutes.misc], authorizeAccess, upload.single('file'), uploadFile);
 
 // Read
 app.get([restRoutes.blogs, restRoutes.projects, restRoutes.contactMe, restRoutes.bios], serverController.fetchAllDocs)
 app.get(restRoutes.blogsByTag, serverController.fetchDocsByTag);
 app.get([restRoutes.specificBlogRender, restRoutes.specificProjectRender, restRoutes.specificContactMeRender, restRoutes.specificBioRender], serverController.fetchDocById);
+
 
 // reading misc files is protected
 app.get(restRoutes.specificMisc, authorizeAccess, serverController.fetchDocById);
@@ -196,9 +200,9 @@ app.get(restRoutes.misc, authorizeAccess, serverController.fetchAllDocs)
 
 
 // Update
-app.put([restRoutes.specificBlog, restRoutes.specificContactMe], serverController.updateDoc);
-app.put([restRoutes.specificProject, restRoutes.specificBio, restRoutes.specificMisc], upload.single('file'), updateFile);
-app.put([restRoutes.setActiveContactme, restRoutes.setActiveBio], serverController.setSingleItemToActive);
+app.put([restRoutes.specificBlog, restRoutes.specificContactMe], authorizeAccess, serverController.updateDoc);
+app.put([restRoutes.specificProject, restRoutes.specificBio, restRoutes.specificMisc], authorizeAccess, upload.single('file'), updateFile);
+app.put([restRoutes.setActiveContactme, restRoutes.setActiveBio], authorizeAccess, serverController.setSingleItemToActive);
 
 
 // Delete
@@ -212,5 +216,21 @@ app.use((req, res) => {
 });
 
 function authorizeAccess(req, res, next) {
-    next();
+    let authorization = req.cookies.access_token;
+    
+    if (!authorization) {
+        res.status(401).send({ error: "Unauthorized" });
+    }else{
+        serverController.verifyToken(authorization).then((_) => {
+            next();
+        }).catch((err) => {
+            console.log(`ERROR: ${err}`);
+            res.status(401).send({ error: "Unauthorized" });
+        });
+    }
+
+
+    
+
+    
 }
