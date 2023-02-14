@@ -11,7 +11,7 @@ export class BaseModel{
      */
     async getList(){
         return new Promise((resolve, reject) => {
-            fetch(this.baseUrl)
+            fetch(this.baseUrl, {credentials: 'include'})
                 .then(response => {
                     // Process the response body and status code simultaneously
                     Promise.all([response.json(), response.status])
@@ -60,7 +60,7 @@ export class BaseModel{
      */
     async getListItemById(id, serverSideRendering){
         return new Promise((resolve, reject) => {
-            fetch(`${this.baseUrl}/${id}/${serverSideRendering}`).then((response) => {
+            fetch(`${this.baseUrl}/${id}/${serverSideRendering}`, {credentials: 'include'}).then((response) => {
                 Promise.all([response.json(), response.status])
                     .then(([data, status]) => {
                         if (status === 200) {
@@ -89,6 +89,7 @@ export class BaseModel{
         const requestOptions = {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
+            credentials: 'include',
             body: JSON.stringify(payload)
         };
 
@@ -128,6 +129,7 @@ export class BaseModel{
 
         const requestOptions = {
             method: 'POST',
+            credentials: 'include',
             body: formData
         }
 
@@ -171,7 +173,8 @@ export class BaseModel{
 
         const requestOptions = {
             method: 'PUT',
-            body: formData
+            body: formData,
+            credentials: 'include'
         }
 
 
@@ -210,6 +213,7 @@ export class BaseModel{
         const requestOptions = {
             method: 'PUT',
             headers: new Headers({ 'Content-Type': 'application/json' }),
+            credentials: 'include',
             body: JSON.stringify(payload)
         }
 
@@ -245,7 +249,8 @@ export class BaseModel{
     async updateItemStatus(id){
         return new Promise((resolve, reject) => {
             fetch(`${this.baseUrl}/set-active/${id}`, {
-                method: 'PUT'
+                method: 'PUT',
+                credentials: 'include'
             }).then(response => {
                 // Process the response body and status code simultaneously
                 Promise.all([response.json(), response.status])
@@ -273,7 +278,8 @@ export class BaseModel{
     async deleteItem(id){
         return new Promise((resolve, reject) => {
             fetch(`${this.baseUrl}/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                credentials: 'include'
             }).then(response => {
                 // Process the response body and status code simultaneously
                 Promise.all([response.text(), response.status])
