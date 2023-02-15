@@ -10,7 +10,7 @@ const transport = new DailyRotateFile(
         zippedArchive: true, 
         maxSize: '20m', 
         maxFiles: '31d',
-        level : 'error'
+        level : 'warn'
     }
 );
 

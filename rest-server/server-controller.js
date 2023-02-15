@@ -176,6 +176,7 @@ module.exports = class ServerController {
                 }, {});
 
                 client.hSet(storageName, id, JSON.stringify(newObj));
+                logger.warn(`Updated document ${storageName}-${id} || ${req.ip} - ${req.headers['user-agent']}`);
                 res.status(200).send({message : "Successful update"});
             }).catch((err) => {
                 logger.error(`Failed to update doc in cache: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
@@ -199,6 +200,7 @@ module.exports = class ServerController {
         this.firebaseHelper.deleteDocOnFirebaseDatabase(storageName, id).then((_) => {
             let deleteRef = client.hDel(storageName, id);
             deleteRef.then((_) => {
+                logger.warn(`deleted document ${storageName}-${id} || ${req.ip} - ${req.headers['user-agent']}`);
                 res.status(200).send(({ message: 'deleted successfully' }));
             }).catch((err) => {
                 logger.error(`Failed to delete from cache: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
@@ -221,6 +223,7 @@ module.exports = class ServerController {
             this.firebaseHelper.deleteFileFromStorage(storageName, file).then((_) => {
                 let deleteRef = client.hDel(storageName, id);
                 deleteRef.then((_) => {
+                    logger.warn(`deleted file ${storageName}-${id} || ${req.ip} - ${req.headers['user-agent']}`);
                     res.status(200).send(({ message: 'deleted successfully' }));
                 }).catch((err) => {
                     logger.error(`Failed to delete from cache: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
@@ -264,6 +267,7 @@ module.exports = class ServerController {
                 updatedItems.forEach((doc) => {
                     client.hSet(storageName, doc['id'], JSON.stringify(doc));
                 })
+                logger.warn(`set ${storageName}-${id} to active successfully || ${req.ip} - ${req.headers['user-agent']}`);
                 res.status(200).send({ message: 'Item set to active successfully' });
             }).catch((err) => {
                 logger.error(`Failed to update on firebase: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
@@ -285,6 +289,7 @@ module.exports = class ServerController {
             let doc = data['doc'];
 
             client.hSet(storageName, doc['id'], JSON.stringify(doc));
+            logger.warn(`posted ${id} in ${storageName} successfully || ${req.ip} - ${req.headers['user-agent']}`);
             res.status(200).send({ message: 'Posted successfully' });
         }).catch((err) => {
             logger.error(`Failed to add file to firebase: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
