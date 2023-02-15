@@ -201,6 +201,7 @@ function authorizeAccess(req, res, next) {
                             secure: process.env.NODE_ENV === "production",
                         });
                         
+                        logger.warn(`Log in successful: ${req.ip} - ${req.headers['user-agent']}`);
                         next();
                     } catch (error) {
                         logger.error(`Error setting cookie: ${error}`);
@@ -237,6 +238,7 @@ function authorizeAccess(req, res, next) {
             signInUser(email, password);
         }        
     }else{
+        logger.warn(`Authorized with token: ${req.ip} - ${req.headers['user-agent']}`);
         next();
     }
     
