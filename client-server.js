@@ -15,7 +15,7 @@ const { Console } = require('console');
 const fetch = (...args) =>
     import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
-const jwt = require('jsonwebtoken');
+const logger  = require('./utils/client-logger');
 
 // securing https : https://www.toptal.com/nodejs/secure-rest-api-in-nodejs
 
@@ -79,7 +79,7 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log('listening......');
+    logger.info(`Server is running on port ${PORT}`);
 });
 
 /**
@@ -203,11 +203,13 @@ function authorizeAccess(req, res, next) {
                         
                         next();
                     } catch (error) {
+                        logger.error(`Error setting cookie: ${error}`);
                         reject();
                     }
                     
                     
                 }).catch((error) => {
+                    logger.error(`Error getting token: ${error}`);
                     reject();
                     
                 });
@@ -215,6 +217,7 @@ function authorizeAccess(req, res, next) {
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
+                logger.error(`Error signing in user: ${errorCode} - ${errorMessage} || ${req.ip} - ${req.headers['user-agent']}`);
 
                 promptAuth();
             });

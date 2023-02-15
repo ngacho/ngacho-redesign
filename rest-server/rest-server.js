@@ -14,6 +14,7 @@ const ServerController = require('./server-controller');
 const FirebaseHelperClass = require('./firebase-helper');
 const firebaseHelper = new FirebaseHelperClass();
 const restRoutes = require('../routes/rest-routes.json');
+const logger  = require('./utils/server-logger');
 // securing https : https://www.toptal.com/nodejs/secure-rest-api-in-nodejs
 
 // Obsfucation of code
@@ -44,10 +45,10 @@ let redisClient;
 
 (async () => {
     redisClient = redis.createClient({
-        url: process.env.REDIS_URL
+        // url: 'rediss://default:de34c3d8277b43be8747100e453be6c6@usw2-moving-stag-30235.upstash.io:30235'
       });
 
-    redisClient.on("error", (error) => console.log(error));
+    redisClient.on("error", (error) => logger.error(error));
 
     await redisClient.connect();
 })();
@@ -56,7 +57,7 @@ const serverController = new ServerController(redisClient, firebaseHelper);
 
 
 app.listen(PORT, () => {
-    console.log('listening......');
+    logger.info("Server is listening on port " + PORT);
 });
 
 
@@ -220,12 +221,13 @@ function authorizeAccess(req, res, next) {
     let authorization = req.cookies.access_token;
     
     if (!authorization) {
+        logger.error(`Unauthorized access attempt: ${req.ip} - ${req.url} - ${req.method} - ${req.headers['user-agent']}`);
         res.status(401).send({ error: "Unauthorized" });
     }else{
         serverController.verifyToken(authorization).then((_) => {
             next();
         }).catch((err) => {
-            console.log(`ERROR: ${err}`);
+            logger.error(`Failed to verify token: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
             res.status(401).send({ error: "Unauthorized" });
         });
     }

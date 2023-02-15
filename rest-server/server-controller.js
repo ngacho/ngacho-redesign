@@ -1,4 +1,5 @@
-const MarkDownParser = require('./mark-down-parser')
+const MarkDownParser = require('./mark-down-parser');
+const logger  = require('./utils/server-logger');
 module.exports = class ServerController {
     constructor(redisClient, firebaseHelperClass) {
         this.firebaseHelper = firebaseHelperClass;
@@ -24,6 +25,7 @@ module.exports = class ServerController {
                     });
                     res.status(200).send(results);
                 }).catch((err) => {
+                    logger.error(`Failed to fetch cache: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
                     res.status(500).send({ error: err });
                 });
 
@@ -35,14 +37,14 @@ module.exports = class ServerController {
                     client.hSet('isCached', `cache-${storageName}`, 'true');
                     res.status(200).send(data);
                 }).catch((err) => {
-                    debug(err);
+                    logger.error(`Failed to fetch from firebase: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
                     res.status(502).send({
                         error: 'Failed to get necessary data'
                     })
                 });
             }
         }).catch((err) => {
-            debug(err);
+            logger.error(`Failed to fetch from cache status: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
             res.status(500).send({
                 error: 'Failed to get necessary data'
             })
@@ -56,6 +58,7 @@ module.exports = class ServerController {
         let client = this.redisClient;
 
         let tag = decodeURIComponent(req.params.tag);
+        logger.error(`No tag in request: ${req.url} - ${req.ip} - ${req.headers['user-agent']}`);
         if (!tag) res.status(400).send({ error: "No tag found in request" })
 
         client.hGet('isCached', `cache-${storageName}`).then((isCached) => {
@@ -72,6 +75,7 @@ module.exports = class ServerController {
                     });
                     res.status(200).send(results);
                 }).catch((err) => {
+                    logger.error(`Failed to fetch from cache: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
                     res.status(500).send({ error: err });
                 });
 
@@ -87,7 +91,7 @@ module.exports = class ServerController {
                     client.hSet('isCached', `cache-${storageName}`, 'true');
                     res.status(200).send(results);
                 }).catch((err) => {
-                    debug(err);
+                    logger.error(`Failed to fetch from firebase: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
                     res.status(502).send({
                         error: 'Failed to get necessary data'
                     })
@@ -95,7 +99,7 @@ module.exports = class ServerController {
             }
 
         }).catch((err) => {
-            debug(err);
+            logger.error(`Failed to fetch cache status: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
             res.status(500).send({
                 error: 'Failed to get necessary data'
             })
@@ -125,6 +129,7 @@ module.exports = class ServerController {
 
                     res.status(200).send(blog);
                 }).catch((err) => {
+                    logger.error(`Failed to fetch from cache: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
                     res.status(502).send({
                         error: 'Failed to get necessary data'
                     });
@@ -140,13 +145,14 @@ module.exports = class ServerController {
 
                     res.status(200).send(blog);
                 }).catch((err) => {
+                    logger.error(`Failed to fetch from firebase: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
                     res.status(502).send({
                         error: 'Failed to get necessary data'
                     });
                 })
             }
         }).catch((err) => {
-            debug(err);
+            logger.error(`Failed to fetch cache status: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
             res.status(502).send({
                 error: 'Failed to get necessary data'
             });
@@ -172,13 +178,13 @@ module.exports = class ServerController {
                 client.hSet(storageName, id, JSON.stringify(newObj));
                 res.status(200).send({message : "Successful update"});
             }).catch((err) => {
-                debug(err);
+                logger.error(`Failed to update doc in cache: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
                 res.status(502).send({
                     error: 'Failed to get necessary data'
                 });
             });
         }).catch((err) => {
-            debug(err);
+            logger.error(`Failed to update doc in firebase: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
             res.status(500).send({ error: err });
         });
         
@@ -194,8 +200,14 @@ module.exports = class ServerController {
             let deleteRef = client.hDel(storageName, id);
             deleteRef.then((_) => {
                 res.status(200).send(({ message: 'deleted successfully' }));
-            }).catch((err) => res.status(500).send({ error: err }))
-        }).catch((err) => res.status(500).send({ error: err }));
+            }).catch((err) => {
+                logger.error(`Failed to delete from cache: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
+                res.status(500).send({ error: err })
+            })
+        }).catch((err) => { 
+            logger.error(`Failed to delete from firebase: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
+            res.status(500).send({ error: err }) 
+    });
     }
 
     deleteFile = async (req, res) => {
@@ -210,11 +222,17 @@ module.exports = class ServerController {
                 let deleteRef = client.hDel(storageName, id);
                 deleteRef.then((_) => {
                     res.status(200).send(({ message: 'deleted successfully' }));
-                }).catch((err) => res.status(500).send({ error: err }))
-            }).catch((err) => res.status(500).send({ error: err }));
+                }).catch((err) => {
+                    logger.error(`Failed to delete from cache: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
+                    res.status(500).send({ error: err })
+                })
+            }).catch((err) => { 
+                logger.error(`Failed to delete from firebase: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
+                res.status(500).send({ error: err })
+            });
 
         }).catch((err) => {
-            debug(err);
+            logger.error(`Failed to fetch cache status: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
             res.status(502).send({
                 error: 'Failed to get necessary data'
             });
@@ -248,11 +266,11 @@ module.exports = class ServerController {
                 })
                 res.status(200).send({ message: 'Item set to active successfully' });
             }).catch((err) => {
-                debug(err);
+                logger.error(`Failed to update on firebase: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
                 res.status(500).send({ error: `Error from db: ${err}` });
             });
         }).catch((err) => {
-            debug(err);
+            logger.error(`Failed to update item : ${err} || ${req.ip} - ${req.headers['user-agent']}`);
             res.status(500).send({ error: `Error reading from cache: ${err}` });
         });
 
@@ -269,6 +287,7 @@ module.exports = class ServerController {
             client.hSet(storageName, doc['id'], JSON.stringify(doc));
             res.status(200).send({ message: 'Posted successfully' });
         }).catch((err) => {
+            logger.error(`Failed to add file to firebase: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
             res.status(500).send({ error: err });
         });
     }
@@ -283,6 +302,7 @@ module.exports = class ServerController {
                 client.hSet(storageName, doc['id'], JSON.stringify(doc));
                 resolve({ message: 'Successfully saved' });
             } catch (error) {
+                logger.error(`Failed to cache file info: ${err} || ${req.ip} - ${req.headers['user-agent']}`);
                 reject({ err: error });
             }
         });
