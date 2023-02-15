@@ -2,17 +2,6 @@
 export class ViewContactMeView{
     constructor(){
         this.contact_me_content = document.querySelector(".contact-me-intro");
-
-        var text = "\htmlTag{a}{Open invite}";
-        // regular expression to match optional square brackets that have text inside
-        // let regex = /\\htmlTag{(.+?)}{(.+?)}/gi;
-        
-        let newText  = text.replace(/\\htmlTag{(.+?)}{(.+?)}/gi, (_, group1, group2) =>{
-            console.log(group1);
-            console.log(group2);
-            return `<${group1}>${group2}</${group1}>`;
-        });
-        console.log(newText);
     }
 
 
