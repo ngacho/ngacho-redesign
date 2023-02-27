@@ -56,25 +56,9 @@ p > a{
 
 .contact-me-places {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     column-gap: 3rem;
     margin-top: 3rem;
-}
-
-
-.contact-me-places>.contact-form-wrapper input,
-textarea {
-    width: 95%;
-    padding: 12px;
-    border: 1px solid #03312E;
-    box-sizing: border-box;
-    color: #03312E;
-    font-family: 'Source Code Pro', sans-serif;
-    margin: 10px;
-}
-
-.contact-me-places>.contact-form-wrapper textarea {
-    resize: vertical;
 }
 
 .attribution{
@@ -84,24 +68,6 @@ textarea {
     letter-spacing: 0.05em;
 }
 
-
-
-.contact-me-places>.contact-form-wrapper>input.send-message {
-    width: 40%;
-    color: #fff;
-    background-color: #03312E;
-    padding: 10px;
-    font-size: 16px;
-    transition: transform .2s;
-    background-repeat: no-repeat;
-}
-
-.contact-me-places>.contact-form-wrapper>input.send-message:hover {
-    background-color: #5dfdcb;
-    color: #03312E;
-    transform: scale(1.1);
-    cursor: pointer;
-}
 
 .contact-me-places>.social-media-contacts>h1.follow-me-prompt {
     font-weight: 150;
@@ -119,15 +85,15 @@ textarea {
 }
 
 .animate-entry {
-    -webkit-animation: fadein 3s;
+    -webkit-animation: fadein 1s;
     /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 3s;
+    -moz-animation: fadein 1s;
     /* Firefox < 16 */
-    -ms-animation: fadein 3s;
+    -ms-animation: fadein 1s;
     /* Internet Explorer */
-    -o-animation: fadein 3s;
+    -o-animation: fadein 1s;
     /* Opera < 12.1 */
-    animation: fadein 3s;
+    animation: fadein 1s;
 }
 
 @keyframes fadein {

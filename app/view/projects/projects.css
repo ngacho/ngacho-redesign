@@ -89,7 +89,7 @@
     position: absolute;
     top: 80%;
     width: 100%;
-    transition: box-shadow .3s ease-in-out,
+    transition: box-shadow .1s ease-in-out,
         top .3s ease-in-out;
 }
 
@@ -159,15 +159,15 @@
 
 
 .animate-entry {
-    -webkit-animation: fadein 3s;
+    -webkit-animation: fadein 1s;
     /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 3s;
+    -moz-animation: fadein 1s;
     /* Firefox < 16 */
-    -ms-animation: fadein 3s;
+    -ms-animation: fadein 1s;
     /* Internet Explorer */
-    -o-animation: fadein 3s;
+    -o-animation: fadein 1s;
     /* Opera < 12.1 */
-    animation: fadein 3s;
+    animation: fadein 1s;
 }
 
 @keyframes fadein {
