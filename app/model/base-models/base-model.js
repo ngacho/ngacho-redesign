@@ -19,12 +19,17 @@ export class BaseModel{
                             if (status === 200) {
                                 resolve(data);
                             } else {
+                                console.log(err);
                                 reject(`Failed with response ${status}`)
                             }
                         }).catch((err) => {
+                            console.log(err);
                             reject(`Failed response: ${err}`);
                         });
-                }).catch((err) => reject("Failed to fetch"));
+                }).catch((err) => {
+                    console.log(err);
+                    reject("Failed to fetch")
+            });
         });
     }
 

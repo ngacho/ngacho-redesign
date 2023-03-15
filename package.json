@@ -2,9 +2,9 @@
   "name": "ngacho-new",
   "version": "1.0.0",
   "description": "A redesign of my web portfolio",
-  "main": "homepage.js",
+  "main": "client-server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon client-server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

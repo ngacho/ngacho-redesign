@@ -56,8 +56,9 @@ app.use(helmet.contentSecurityPolicy({
             "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.css",
             "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css"
         ],
-        "connect-src": ["'self'", "http://localhost:8080"],
-        "img-src": ["'self'",
+        "connect-src": ["'self'", "https://api.ngacho.com"],
+        "img-src": ["'self' data:", 
+	    "https://via.placeholder.com/180",
             "https://www.freeiconspng.com",
             "https://firebasestorage.googleapis.com/v0/b/ngacho-blog.appspot.com/",
             "https://*.googleapis.com/ngacho-blog.appspot.com/"],
@@ -112,7 +113,7 @@ app.get(['/admin/choose-bio-to-edit'], authorizeAccess, (req, res) => {
 
 app.get(['/admin/add-bio', '/admin/edit-bio/*'], authorizeAccess, (req, res) => {
     req.originalUrl
-    res.sendFile(path.join(initial_path, "/app/view/contact-me/admin/bio-editor.html"));
+    res.sendFile(path.join(initial_path, "/app/view/bio/admin/bio-editor.html"));
 });
 
 app.get(['/admin/choose-contact-me-to-edit'], authorizeAccess, (req, res) => {
@@ -195,9 +196,10 @@ function authorizeAccess(req, res, next) {
 
                     try {
                         res.cookie("access_token", token, {
-                            maxAge: 3600,
+                            maxAge: 3600000,
                             httpOnly: true,
-                            sameSite : "none",
+				sameSite : "strict",
+			    domain : 'ngacho.com',
                             secure: process.env.NODE_ENV === "production",
                         });
                         

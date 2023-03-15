@@ -3,7 +3,7 @@ import { BaseModel } from "./base-model.js";
 export class ProjectBaseModel {
 
     constructor() { 
-        this.baseModel = new BaseModel("http://localhost:8080/database/projects");
+        this.baseModel = new BaseModel("https://api.ngacho.com/database/projects");
     }
     
 
