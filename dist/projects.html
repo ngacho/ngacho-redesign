@@ -1,26 +1,22 @@
-<!-- https://dev.to/kunaal438/fullstack-how-to-create-a-working-blogging-website-with-pure-html-css-and-js-in-2021-9di -->
-<!-- Node js : https://vegibit.com/node-js-blog-tutorial/ -->
-<!-- https://www.labnol.org/ , Blog design inspiration. Actually probably the final product.-->
-<!--Html template for seo: https://www.sitepoint.com/a-basic-html5-template/#thecompletehtml5boilerplate-->
-<!-- Node js: express js password https://benborgers.com/posts/express-password-protect-->
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <title>Blog</title>
-    <meta name="viewport" content="device-width, initial-scale=1">
+    <title>Projects</title>
     <base href=".">
-    
+    <meta name="viewport" content="device-width, initial-scale=1">
+    <link rel="shortcut icon" href="../../../images/favicon.ico">
     <!-- icon css sheet-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="allStyles.js"></script><script defer src="navigation.js"></script><script defer src="projects.js"></script><script defer src="projectPageStyles.js"></script></head>
 </head>
 
 <body>
+
     <header class="main-navigation">
         <nav class="nav-bar">
             <div class="hamburger-menu">
@@ -49,18 +45,20 @@
             </ul>
 
         </nav>
-    </header>
 
+        <div class="projects-container">
 
-
-    <div class="blog-container">
-        <div class="blog-heading-wrapper">
-            <h1 class="blog-heading">Commentary, random musings & ocassional rants.</h1>
+            <div class="projects-wrapper">
+                <div class="projects-items-wrapper">
+                    <a class="left-control carousel-control">‹</a>
+                    <div class="projects-carousel">
+                    </div>
+                    <a class="right-control carousel-control" >›</a>
+                </div>
+            </div>
         </div>
-        <div class="blogs-wrapper">
-        </div>
-    </div>
 
+        
 </body>
 
 </html>

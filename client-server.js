@@ -24,7 +24,7 @@ const logger  = require('./utils/client-logger');
 
 
 // initial folders
-let initial_path = path.join(__dirname, "");
+let initial_path = path.join(__dirname, "dist");
 
 //express js server with initial path.
 const app = express();
@@ -146,23 +146,23 @@ app.get(['/admin/add-misc-file', '/admin/edit-misc-file/*'], authorizeAccess, (r
 
 // blog page
 app.get('/blog', (req, res) => {
-    res.sendFile(path.join(initial_path, "/app/view/blog/blog.html"));
+    res.sendFile(path.join(initial_path, "blog.html"));
 });
 
 app.get('/blog/tags/*', (req, res) => {
-    res.sendFile(path.join(initial_path, "/app/view/blog/blog.html"));
+    res.sendFile(path.join(initial_path, "blog.html"));
 });
 
 app.get('/projects', (req, res) => {
-    res.sendFile(path.join(initial_path, "/app/view/projects/projects.html"));
+    res.sendFile(path.join(initial_path, "projects.html"));
 });
 
 app.get('/about-me', (req, res) => {
-    res.sendFile(path.join(initial_path, "/app/view/bio/aboutme.html"));
+    res.sendFile(path.join(initial_path, "aboutme.html"));
 });
 
 app.get('/contact-me', (req, res) => {
-    res.sendFile(path.join(initial_path, "/app/view/contact-me/contact.html"));
+    res.sendFile(path.join(initial_path, "contact.html"));
 });
 
 // listen for the blog-post page
