@@ -5,8 +5,8 @@ const path = require('path');
 require("dotenv").config({ path: __dirname + '/.env' });
 
 module.exports = {
-  mode : process.env.NODE_ENV,
-  devtool: process.env.NODE_ENV === 'production' ? false : 'inline-source-map',
+  mode : 'production',
+  devtool: false,
 
   // https://webpack.js.org/concepts/entry-points/#multi-page-application
   entry: {
