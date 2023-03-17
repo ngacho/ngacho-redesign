@@ -3,9 +3,10 @@ const TerserPlugin = require("terser-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const path = require('path');
 
+
 module.exports = {
-  mode : 'production',
-  devtool: "source-map",
+  mode : process.env.NODE_ENV,
+  devtool: process.env.NODE_ENV === 'production' ? false : 'inline-source-map',
 
   // https://webpack.js.org/concepts/entry-points/#multi-page-application
   entry: {
