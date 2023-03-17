@@ -4,7 +4,7 @@
   "description": "A redesign of my web portfolio",
   "main": "client-server.js",
   "scripts": {
-    "start": "nodemon client-server.js",
+    "start": "webpack --config webpack.config.js && nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +22,7 @@
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "css-loader": "^6.7.3",
     "debug": "^4.3.4",
     "express.js": "^1.0.0",
     "firebase": "^9.16.0",
@@ -33,10 +34,13 @@
     "nodemon": "^2.0.16",
     "redis": "^4.5.1",
     "showdown": "^2.1.0",
+    "style-loader": "^3.3.2",
     "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
-    "dotenv": "^16.0.3"
+    "copy-webpack-plugin": "^11.0.0",
+    "dotenv": "^16.0.3",
+    "terser-webpack-plugin": "^5.3.7"
   }
 }

@@ -1,0 +1,3 @@
+/*! For license information please see navigation.js.LICENSE.txt */
+(()=>{const e=document.querySelector(".hamburger-menu"),t=document.querySelector(".nav-menu"),c=document.querySelectorAll(".nav-link");function n(){e.classList.remove("active"),t.classList.remove("active")}e.addEventListener("click",(function(){e.classList.toggle("active"),t.classList.toggle("active")})),c.forEach((e=>e.addEventListener("click",n)))})();
+//# sourceMappingURL=navigation.js.map

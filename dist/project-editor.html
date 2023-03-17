@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <!-- icon css sheet-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Add a project</title>
+<script defer src="allStyles.js"></script><script defer src="navigation.js"></script><script defer src="projectEditorAdmin.js"></script><script defer src="projectEditorAdminPageStyles.js"></script></head>
+
+<body>
+    <header class="main-navigation">
+        <nav class="nav-bar">
+            <div class="hamburger-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+            <a href="/" class="nav-logo">Brandon Ngacho</a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/projects">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about-me">About Me</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact-me">Contact Me</a>
+                </li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <div class="header-wrapper">
+        <h2>Enter the details of your project</h2>
+    </div>
+
+    <div class="add_projects_container">
+
+        <div class="add_projects_wrapper">
+
+            <form class="project-details-form">
+                <div class="project-cover-container">
+                    <img id="project-cover" src="http://placehold.it/180" alt="project cover" />
+                </div>
+
+                <div class="project-cover-input-container">
+                    <input id="image-upload-input" type="file" accept="image/*" />
+                </div>
+                <div class="project-title-container">
+                    <textarea id="project-title-input"  type="text" class="title" placeholder="Project Name..."></textarea>
+                </div>
+                <div class="project-languages-container">
+                    <textarea type="text" class="languages"
+                        id="project-languages-input"
+                        placeholder="Please enter languages you used in this project."></textarea>
+                </div>
+                <div class="project-url-container">
+                    <textarea type="text" class="extra-info"
+                        id="project-more-info-url"
+                        placeholder="Please enter the more information url for this language."></textarea>
+                </div>
+
+                <div class="post-project">
+                    <button type="button" id="post-project-button" class="btn dark publish-btn">Post Project</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+
+</body>
