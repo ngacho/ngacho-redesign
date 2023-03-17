@@ -177,77 +177,75 @@ app.use((req, res) => {
 });
 
 
+
 function authorizeAccess(req, res, next) {
-    next();
-}
-// function authorizeAccess(req, res, next) {
 
-//     const reject = () => {
-//         // res.setHeader('www-authenticate', 'Basic')
-//         res.sendFile(path.join(initial_path, "403.html"));
-//     }
+    const reject = () => {
+        // res.setHeader('www-authenticate', 'Basic')
+        res.sendFile(path.join(initial_path, "403.html"));
+    }
 
-//     const promptAuth = () => {
-//         res.setHeader('www-authenticate', 'Basic')
-//         res.sendStatus(401);
-//     }
+    const promptAuth = () => {
+        res.setHeader('www-authenticate', 'Basic')
+        res.sendStatus(401);
+    }
 
-//     const signInUser = (email, password) => {
-//         const auth = getAuth();
-//         signInWithEmailAndPassword(auth, email, password)
-//             .then((userCredential) => {
-//                 userCredential.user.getIdToken(true).then((token) => {
+    const signInUser = (email, password) => {
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                userCredential.user.getIdToken(true).then((token) => {
 
-//                     try {
-//                         res.cookie("access_token", token, {
-//                             maxAge: 3600000,
-//                             httpOnly: true,
-// 				sameSite : "strict",
-// 			    domain : 'ngacho.com',
-//                             secure: process.env.NODE_ENV === "production",
-//                         });
+                    try {
+                        res.cookie("access_token", token, {
+                            maxAge: 3600000,
+                            httpOnly: true,
+				sameSite : "strict",
+			    domain : 'ngacho.com',
+                            secure: process.env.NODE_ENV === "production",
+                        });
                         
-//                         logger.warn(`Log in successful: ${req.ip} - ${req.headers['user-agent']}`);
-//                         next();
-//                     } catch (error) {
-//                         logger.error(`Error setting cookie: ${error}`);
-//                         reject();
-//                     }
+                        logger.warn(`Log in successful: ${req.ip} - ${req.headers['user-agent']}`);
+                        next();
+                    } catch (error) {
+                        logger.error(`Error setting cookie: ${error}`);
+                        reject();
+                    }
                     
                     
-//                 }).catch((error) => {
-//                     logger.error(`Error getting token: ${error}`);
-//                     reject();
+                }).catch((error) => {
+                    logger.error(`Error getting token: ${error}`);
+                    reject();
                     
-//                 });
+                });
 
-//             }).catch((error) => {
-//                 const errorCode = error.code;
-//                 const errorMessage = error.message;
-//                 logger.error(`Error signing in user: ${errorCode} - ${errorMessage} || ${req.ip} - ${req.headers['user-agent']}`);
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                logger.error(`Error signing in user: ${errorCode} - ${errorMessage} || ${req.ip} - ${req.headers['user-agent']}`);
 
-//                 promptAuth();
-//             });
+                promptAuth();
+            });
 
-//     }
+    }
 
 
-//     const token = req.cookies.access_token;
+    const token = req.cookies.access_token;
     
 
-//     if(!token) {
-//         let authorization = req.headers.authorization;
-//         if(!authorization) {
-//             promptAuth();
-//         }else{
-//             const [email, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':');
-//             signInUser(email, password);
-//         }        
-//     }else{
-//         logger.warn(`Authorized with token: ${req.ip} - ${req.headers['user-agent']}`);
-//         next();
-//     }
+    if(!token) {
+        let authorization = req.headers.authorization;
+        if(!authorization) {
+            promptAuth();
+        }else{
+            const [email, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':');
+            signInUser(email, password);
+        }        
+    }else{
+        logger.warn(`Authorized with token: ${req.ip} - ${req.headers['user-agent']}`);
+        next();
+    }
     
 
 
-// }
+}
