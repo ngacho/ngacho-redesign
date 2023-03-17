@@ -162,7 +162,7 @@ app.get(['/about-me', '/about'], (req, res) => {
 });
 
 app.get(['/contact-me', '/contact'], (req, res) => {
-    res.sendFile(path.join(initial_path, "contact.html"));
+    res.sendFile(path.join(initial_path, "/app/view/contact-me/contact.html"));
 });
 
 // listen for the blog-post page
