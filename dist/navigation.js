@@ -1,24 +1,3 @@
-/******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-/*!*******************************************!*\
-  !*** ./app/view/navigation/navigation.js ***!
-  \*******************************************/
-const hamburger = document.querySelector(".hamburger-menu");
-const navMenu = document.querySelector(".nav-menu");
-const navLink = document.querySelectorAll(".nav-link");
-
-hamburger.addEventListener("click", mobileMenu);
-navLink.forEach(n => n.addEventListener("click", closeMenu));
-
-function mobileMenu() {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
-}
-
-function closeMenu() {
-    hamburger.classList.remove("active");
-    navMenu.classList.remove("active");
-}
-/******/ })()
-;
+/*! For license information please see navigation.js.LICENSE.txt */
+(()=>{const e=document.querySelector(".hamburger-menu"),t=document.querySelector(".nav-menu"),c=document.querySelectorAll(".nav-link");function n(){e.classList.remove("active"),t.classList.remove("active")}e.addEventListener("click",(function(){e.classList.toggle("active"),t.classList.toggle("active")})),c.forEach((e=>e.addEventListener("click",n)))})();
 //# sourceMappingURL=navigation.js.map

@@ -88,59 +88,59 @@ app.listen(PORT, () => {
  * admin page.
  * */
 app.get('/admin', authorizeAccess, (_, res) => {
-    res.sendFile(path.join(initial_path, "/app/view/admin/admin-home.html"));
+    res.sendFile(path.join(initial_path, "admin-home.html"));
 });
 
 app.get(['/admin/write-blog', '/admin/edit-blog/*'], authorizeAccess, (req, res) => {
     req.originalUrl;
-    res.sendFile(path.join(initial_path, "/app/view/blog/admin/blog_editor.html"))
+    res.sendFile(path.join(initial_path, "blog_editor.html"))
 });
 
 app.get(['/admin/blogs-to-edit'], authorizeAccess, (req, res) => {
     req.originalUrl
-    res.sendFile(path.join(initial_path, "/app/view/blog/admin/blogs_to_edit.html"))
+    res.sendFile(path.join(initial_path, "blogs_to_edit.html"))
 })
 
 app.get(['/admin/projects-to-edit'], authorizeAccess, (req, res) => {
     req.originalUrl
-    res.sendFile(path.join(initial_path, "/app/view/projects/admin/projects_to_edit.html"))
+    res.sendFile(path.join(initial_path, "projects_to_edit.html"))
 });
 
 app.get(['/admin/choose-bio-to-edit'], authorizeAccess, (req, res) => {
     req.originalUrl
-    res.sendFile(path.join(initial_path, "/app/view/bio/admin/edit-bio-list.html"));
+    res.sendFile(path.join(initial_path, "edit-bio-list.html"));
 })
 
 app.get(['/admin/add-bio', '/admin/edit-bio/*'], authorizeAccess, (req, res) => {
     req.originalUrl
-    res.sendFile(path.join(initial_path, "/app/view/bio/admin/bio-editor.html"));
+    res.sendFile(path.join(initial_path, "bio-editor.html"));
 });
 
 app.get(['/admin/choose-contact-me-to-edit'], authorizeAccess, (req, res) => {
     req.originalUrl
-    res.sendFile(path.join(initial_path, "/app/view/contact-me/admin/contact-me-list.html"))
+    res.sendFile(path.join(initial_path, "contact-me-list.html"))
 });
 
 app.get(['/admin/add-contact-me', '/admin/edit-contact-me/*'], authorizeAccess, (req, res) => {
     req.originalUrl
-    res.sendFile(path.join(initial_path, "/app/view/contact-me/admin/edit-contact-me.html"))
+    res.sendFile(path.join(initial_path, "edit-contact-me.html"))
 });
 
 // listen for new project and edit project project page
 app.get(['/admin/new-project/', '/admin/edit-project/*'], authorizeAccess, (req, res) => {
     req.originalUrl;
-    res.sendFile(path.join(initial_path, "/app/view/projects/admin/project-editor.html"));
+    res.sendFile(path.join(initial_path, "project-editor.html"));
 });
 
 
 app.get(['/admin/misc-files'], authorizeAccess, (req, res) => {
     req.originalUrl;
-    res.sendFile(path.join(initial_path, "/app/view/admin/misc-files/misc-files-list.html"));
+    res.sendFile(path.join(initial_path, "misc-files-list.html"));
 });
 
 app.get(['/admin/add-misc-file', '/admin/edit-misc-file/*'], authorizeAccess, (req, res) => {
     req.originalUrl;
-    res.sendFile(path.join(initial_path, "/app/view/admin/misc-files/misc-file-editor.html"));
+    res.sendFile(path.join(initial_path, "misc-file-editor.html"));
 
 });
 
@@ -168,82 +168,86 @@ app.get('/contact-me', (req, res) => {
 // listen for the blog-post page
 app.get('/blog-post', (req, res) => {
     req.originalUrl;
-    res.sendFile(path.join(initial_path, "/app/view/blog/blog_post.html"));
+    res.sendFile(path.join(initial_path, "blog_post.html"));
 });
 
 
 app.use((req, res) => {
-    res.sendFile(path.join(initial_path, "/404.html"));
+    res.sendFile(path.join(initial_path, "404.html"));
 });
 
+
 function authorizeAccess(req, res, next) {
-
-    const reject = () => {
-        // res.setHeader('www-authenticate', 'Basic')
-        res.sendFile(path.join(initial_path, "/403.html"));
-    }
-
-    const promptAuth = () => {
-        res.setHeader('www-authenticate', 'Basic')
-        res.sendStatus(401);
-    }
-
-    const signInUser = (email, password) => {
-        const auth = getAuth();
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                userCredential.user.getIdToken(true).then((token) => {
-
-                    try {
-                        res.cookie("access_token", token, {
-                            maxAge: 3600000,
-                            httpOnly: true,
-				sameSite : "strict",
-			    domain : 'ngacho.com',
-                            secure: process.env.NODE_ENV === "production",
-                        });
-                        
-                        logger.warn(`Log in successful: ${req.ip} - ${req.headers['user-agent']}`);
-                        next();
-                    } catch (error) {
-                        logger.error(`Error setting cookie: ${error}`);
-                        reject();
-                    }
-                    
-                    
-                }).catch((error) => {
-                    logger.error(`Error getting token: ${error}`);
-                    reject();
-                    
-                });
-
-            }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                logger.error(`Error signing in user: ${errorCode} - ${errorMessage} || ${req.ip} - ${req.headers['user-agent']}`);
-
-                promptAuth();
-            });
-
-    }
-
-
-    const token = req.cookies.access_token;
-    
-
-    if(!token) {
-        let authorization = req.headers.authorization;
-        if(!authorization) {
-            promptAuth();
-        }else{
-            const [email, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':');
-            signInUser(email, password);
-        }        
-    }else{
-        logger.warn(`Authorized with token: ${req.ip} - ${req.headers['user-agent']}`);
-        next();
-    }
-    
-
-
+    next();
 }
+// function authorizeAccess(req, res, next) {
+
+//     const reject = () => {
+//         // res.setHeader('www-authenticate', 'Basic')
+//         res.sendFile(path.join(initial_path, "403.html"));
+//     }
+
+//     const promptAuth = () => {
+//         res.setHeader('www-authenticate', 'Basic')
+//         res.sendStatus(401);
+//     }
+
+//     const signInUser = (email, password) => {
+//         const auth = getAuth();
+//         signInWithEmailAndPassword(auth, email, password)
+//             .then((userCredential) => {
+//                 userCredential.user.getIdToken(true).then((token) => {
+
+//                     try {
+//                         res.cookie("access_token", token, {
+//                             maxAge: 3600000,
+//                             httpOnly: true,
+// 				sameSite : "strict",
+// 			    domain : 'ngacho.com',
+//                             secure: process.env.NODE_ENV === "production",
+//                         });
+                        
+//                         logger.warn(`Log in successful: ${req.ip} - ${req.headers['user-agent']}`);
+//                         next();
+//                     } catch (error) {
+//                         logger.error(`Error setting cookie: ${error}`);
+//                         reject();
+//                     }
+                    
+                    
+//                 }).catch((error) => {
+//                     logger.error(`Error getting token: ${error}`);
+//                     reject();
+                    
+//                 });
+
+//             }).catch((error) => {
+//                 const errorCode = error.code;
+//                 const errorMessage = error.message;
+//                 logger.error(`Error signing in user: ${errorCode} - ${errorMessage} || ${req.ip} - ${req.headers['user-agent']}`);
+
+//                 promptAuth();
+//             });
+
+//     }
+
+
+//     const token = req.cookies.access_token;
+    
+
+//     if(!token) {
+//         let authorization = req.headers.authorization;
+//         if(!authorization) {
+//             promptAuth();
+//         }else{
+//             const [email, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':');
+//             signInUser(email, password);
+//         }        
+//     }else{
+//         logger.warn(`Authorized with token: ${req.ip} - ${req.headers['user-agent']}`);
+//         next();
+//     }
+    
+
+
+// }

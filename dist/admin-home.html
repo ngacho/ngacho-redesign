@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Admin Dashboard</title>
+    <meta name="viewport" content="device-width, initial-scale=1">
+    <base href=".">
+    <!-- icon css sheet-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script defer src="allStyles.js"></script><script defer src="navigation.js"></script><script defer src="adminPageStyles.js"></script></head>
+
+<body>
+    <header class="main-navigation">
+        <nav class="nav-bar">
+            <div class="hamburger-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+            <a href="/" class="nav-logo">Brandon Ngacho</a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/projects">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about-me">About Me</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact-me">Contact Me</a>
+                </li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <div class="dash-board-container">
+
+        <a class="action-card" href="/admin/write-blog">
+            <h1 class="action-prompt action-details">
+                Write a blog
+            </h1>
+        </a>
+
+        <a class="action-card" href="/admin/blogs-to-edit">
+            <h1 class="action-prompt action-details">
+                Edit a blog
+            </h1>
+        </a>
+
+        <a class="action-card"  href="/admin/projects-to-edit">
+            <h1 class="action-prompt action-details">
+                Add/Edit a Project
+            </h1>
+        </a>
+
+        <a class="action-card" href="/admin/choose-bio-to-edit">
+            <h1 class="action-prompt action-details">
+                Edit Bio
+            </h1>
+        </a>
+
+        <a class="action-card" href="/admin/choose-contact-me-to-edit">
+            <h1 class="action-prompt action-details">
+                Edit Contact Me
+            </h1>
+        </a>
+
+        <a class="action-card" href="/admin/misc-files">
+            <h1 class="action-prompt action-details">
+                Add files
+            </h1>
+        </a>
+
+    </div>
+
+
+</body>
