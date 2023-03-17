@@ -157,11 +157,11 @@ app.get('/projects', (req, res) => {
     res.sendFile(path.join(initial_path, "projects.html"));
 });
 
-app.get('/about-me', (req, res) => {
+app.get(['/about-me', '/about'], (req, res) => {
     res.sendFile(path.join(initial_path, "aboutme.html"));
 });
 
-app.get('/contact-me', (req, res) => {
+app.get(['/contact-me', '/contact'], (req, res) => {
     res.sendFile(path.join(initial_path, "contact.html"));
 });
 
