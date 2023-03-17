@@ -361,3 +361,6 @@ uploads
 
 /logs
 /rest-server/logs
+
+// dist folder
+dist

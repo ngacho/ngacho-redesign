@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const path = require('path');
 
 module.exports = {
@@ -88,6 +89,12 @@ module.exports = {
 
   // https://webpack.js.org/concepts/plugins/
   plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: "images", to: "images" },
+      ],
+    }),
+
     new HtmlWebpackPlugin({
       template: './403.html',
       inject: true,

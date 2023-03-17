@@ -39,6 +39,7 @@
     "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
     "dotenv": "^16.0.3",
     "terser-webpack-plugin": "^5.3.7"
   }
