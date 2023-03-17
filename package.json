@@ -4,7 +4,7 @@
   "description": "A redesign of my web portfolio",
   "main": "client-server.js",
   "scripts": {
-    "start": "webpack --config webpack.config.js && nodemon server",
+    "start": "webpack --config webpack.config.js && rm -r app && nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

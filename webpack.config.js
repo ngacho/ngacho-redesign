@@ -4,7 +4,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const path = require('path');
 
 module.exports = {
-  mode : 'development',
+  mode : 'production',
   devtool: "source-map",
 
   // https://webpack.js.org/concepts/entry-points/#multi-page-application
