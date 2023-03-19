@@ -159,15 +159,15 @@
 
 
 .animate-entry {
-    -webkit-animation: fadein 1s;
+    -webkit-animation: fadein .8s;
     /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 1s;
+    -moz-animation: fadein .8s;
     /* Firefox < 16 */
-    -ms-animation: fadein 1s;
+    -ms-animation: fadein .8s;
     /* Internet Explorer */
-    -o-animation: fadein 1s;
+    -o-animation: fadein .8s;
     /* Opera < 12.1 */
-    animation: fadein 1s;
+    animation: fadein .8s;
 }
 
 @keyframes fadein {
