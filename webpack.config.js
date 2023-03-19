@@ -92,6 +92,10 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: "images", to: "images" },
+        {
+          from : path.resolve(__dirname, "robots.txt"),
+          to : ''
+        }
       ],
     }),
 
