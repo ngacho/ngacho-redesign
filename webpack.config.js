@@ -138,6 +138,13 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
+      template: './app/view/blog/blog-tags.html',
+      inject: true,
+      chunks: ['blog', 'navigation', 'allStyles', 'blogPageStyles'],
+      filename: 'blog-tags.html'
+    }),
+
+    new HtmlWebpackPlugin({
       template: './app/view/bio/aboutme.html',
       inject: true,
       chunks: ['bio', 'navigation', 'allStyles', 'bioPageStyles'],
