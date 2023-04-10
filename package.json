@@ -24,6 +24,7 @@
     "cors": "^2.8.5",
     "css-loader": "^6.7.3",
     "debug": "^4.3.4",
+    "ejs": "^3.1.9",
     "express.js": "^1.0.0",
     "firebase": "^9.16.0",
     "firebase-admin": "^11.2.0",
