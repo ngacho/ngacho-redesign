@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Source+Code+Pro:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;500&display=swap');
+
+
+.descript-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    overflow: scroll;
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
+    margin: 0 auto;
+    height: calc(100vh - 5rem);
+    min-height: calc(100vh - 5rem);
+}
+
+.descript-wrapper {
+    color: #03312E;
+
+    overflow-y: scroll;
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
+
+}
+
+.descript {
+    font-family: 'Montserrat', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 200;
+    margin: auto 0 auto 2em;
+    font-size: 1rem;
+    line-height: 1.7em;
+    padding: 0.5rem;
+    color: #03312E;
+}
+
+.description {
+    padding: 10px;
+}
+
+.tools-intro {
+    font-size: 0.8em;
+    margin-top: 1em;
+}
+
+.tools-list {
+    font-size: 0.7em;
+    padding: 0 10px;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+
+
+.profile-photo {
+    max-width: 40%;
+    height: auto;
+    float: right;
+    margin-left: 2em;
+    padding: 1rem;
+    object-fit: contain;
+}
+
+.animate-entry {
+    -webkit-animation: fadein .8s;
+    /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein .8s;
+    /* Firefox < 16 */
+    -ms-animation: fadein .8s;
+    /* Internet Explorer */
+    -o-animation: fadein .8s;
+    /* Opera < 12.1 */
+    animation: fadein .8s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media only screen and (max-width: 530px) {
+
+    .descript-wrapper {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    .descript {
+        margin: auto;
+        padding: 1.2rem;
+    }
+
+    .profile-photo {
+        max-width: 80%;
+        margin: 0 auto 0 auto;
+        padding-top: 1.2rem;
+        flex-shrink: 0;
+    }
+
+
+
+}
+
+@media only screen and (min-width: 530px) and (max-width: 600px) {
+
+    .descript-container {
+        width: 95%;
+        display: flex;
+        margin: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    .descript-wrapper {
+        display: flex;
+        flex-direction: column;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    .descript {
+        margin: auto;
+        padding: 1.2rem;
+        width: 100%;
+        font-size: 1rem;
+        line-height: 1.6rem;
+    }
+
+    .tools-list {
+        font-size: 0.8em;
+    }
+
+
+    .profile-photo {
+        max-width: 50%;
+        margin: auto;
+        padding-top: 1rem;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 950px) {
+
+    .descript-container {
+        width: 95%;
+    }
+
+    .profile-photo {
+        max-width: 50%;
+        margin: auto;
+        padding-top: 1rem;
+    }
+
+
+
+}
+
+
+@media screen and (min-width: 950px) and (max-width: 1250px) {
+    .descript-container {
+        width: 83%;
+    }
+
+    .profile-photo {
+        max-width: 40%;
+        margin: auto;
+        padding-top: 1rem;
+    }
+}
+
+
+
+@media only screen and (max-width: 517px) {
+
+    /*footer issues on smaller devices*/
+    .descript-container {
+        display: flex;
+        width: 100%;
+        text-align: justify;
+        text-justify: auto;
+        height: calc(100vh - 5rem);
+        min-height: calc(100vh - 5rem);
+    }
+
+}
