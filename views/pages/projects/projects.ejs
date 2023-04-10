@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="/assets/style/projects/projects.css" rel="stylesheet" type="text/css">
+
+    <%- include('../../partials/head'); %>
+</head>
+
+<body class="container">
+    <header>
+        <%- include('../../partials/navigation-bar'); %>
+    </header>
+
+    <% if (projects.length> 0) { %>
+        <div class="projects-container">
+            <div class="projects-wrapper">
+                <div class="projects-items-wrapper">
+                    <a class="left-control carousel-control">‹</a>
+                    <div class="projects-carousel">
+                        <% for (let project of projects){ %>
+                            <div class="project-card animate-entry">
+                                <figure><img src="<%= project.publicUrl %>" alt="photo of <%= project.title %>">
+                                </figure>
+                                <section class="project-details">
+                                    <div class="min-details">
+                                        <h1>
+                                            <%= project.title %><span>
+                                                    <%= project.projectLanguages %>
+                                                </span>
+                                        </h1>
+                                    </div><a class="btn" href="<%= project.projectExtraInfoUrl %>" target="_blank"
+                                        rel="noopener noreferrer">Learn More</a>
+                                </section>
+                            </div>
+                        <% } %>
+                    </div>
+                    <a class="right-control carousel-control">›</a>
+                </div>
+            </div>
+        </div>
+    <%} else { %>
+        <div class="projects-container">
+            <div class="projects-wrapper">
+                <h1>No projects to show</h1>
+            </div>
+        </div>
+    <% } %>
+
+</body>
+
+</html>
