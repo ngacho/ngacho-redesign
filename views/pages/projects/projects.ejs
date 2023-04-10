@@ -11,7 +11,6 @@
     <header>
         <%- include('../../partials/navigation-bar'); %>
     </header>
-
     <% if (projects.length> 0) { %>
         <div class="projects-container">
             <div class="projects-wrapper">
@@ -20,7 +19,8 @@
                     <div class="projects-carousel">
                         <% for (let project of projects){ %>
                             <div class="project-card animate-entry">
-                                <figure><img src="<%= project.publicUrl %>" alt="photo of <%= project.title %>">
+                                <figure><img loading="lazy" src="<%= project.publicUrl %>"
+                                        alt="photo of <%= project.title %>">
                                 </figure>
                                 <section class="project-details">
                                     <div class="min-details">
@@ -39,14 +39,15 @@
                 </div>
             </div>
         </div>
-    <%} else { %>
-        <div class="projects-container">
-            <div class="projects-wrapper">
-                <h1>No projects to show</h1>
+        <%} else { %>
+            <div class="projects-container">
+                <div class="projects-wrapper">
+                    <h1>No projects to show</h1>
+                </div>
             </div>
-        </div>
-    <% } %>
+        <% } %>
 
+        <script src="/scripts/projects/projects-list-app.js" type="module"></script>
 </body>
 
 </html>
