@@ -20,8 +20,8 @@
             <% if (blogs.length> 0) { %>
                 <% for (let blog of blogs){ %>
                     <div class="blog-item animate-entry"><time class="post-date"> <%= blog.lastModified %> </time>
-                        <p class="post-title"><a href="/blog-post/<%= blog.id %>"><%= blog.title %></a></p>
-                        <p class="post-short-desc"><a href="/blog-post/<%= blog.id %>"><%= blog.descript %></a></p>
+                        <p class="post-title"><a href="/blog-post/<%= blog.id %>/"><%= blog.title %></a></p>
+                        <p class="post-short-desc"><a href="/blog-post/<%= blog.id %>/"><%= blog.descript %></a></p>
                         <div class="tags">
                         <% for (let tag of blog.tags){ %>
                             <a class="tag" href="/blog/tags/<%= tag %>"><%= tag %></a>
