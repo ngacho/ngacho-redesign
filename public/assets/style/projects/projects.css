@@ -239,6 +239,14 @@
 
 @media screen and (max-width: 630px) {
 
+    .projects-container {
+        display: table;
+        text-align: center;
+        height: 100vh;
+        height: calc(100vh - 5rem);
+        min-height: calc(100vh - 5rem);
+    }
+
     /*
     Projects-wrapper >> project-items-wrapper >> projects-carousel
     */
