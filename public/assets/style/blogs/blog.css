@@ -56,6 +56,23 @@
     cursor: pointer;
 }
 
+.post-title > a, 
+.post-title > a:hover,
+.post-title > a:visited,
+.post-title > a:active,
+.post-title > a:focus{
+    color: inherit;
+    text-decoration: none;
+}
+
+.post-short-desc > a,
+.post-short-desc > a:hover,
+.post-short-desc > a:visited,
+.post-short-desc > a:active,
+.post-short-desc > a:focus {
+    color: rgba(6, 10, 9, 0.6);
+}
+
 .blog-item > .tags > .tag{
     font-family: 'Poppins', sans-serif;
     background-color: #03312E;
