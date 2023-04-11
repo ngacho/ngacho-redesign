@@ -14,7 +14,7 @@ const constants = require('./credentials');
 const { Console } = require('console');
 const fetch = (...args) =>
     import('node-fetch').then(({ default: fetch }) => fetch(...args));
-const baseurl = process.env.baseurl;
+const baseurl = process.env.apiBaseUrl;
 
 const logger  = require('./utils/client-logger');
 
