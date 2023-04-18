@@ -4,7 +4,7 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const path = require('path');
-require("dotenv").config({ path: __dirname + '/.env' });
+const envariable = require("dotenv").config({ path: __dirname + '/.env' });
 const PORT = process.env.CLIENT_PORT || 3030;
 const compression = require("compression");
 const helmet = require("helmet");
@@ -14,8 +14,7 @@ const constants = require('./credentials');
 const { Console } = require('console');
 const fetch = (...args) =>
     import('node-fetch').then(({ default: fetch }) => fetch(...args));
-const baseurl = process.env.baseurl;
-
+const baseurl = process.env.API_BASE_URL;
 const logger  = require('./utils/client-logger');
 
 // securing https : https://www.toptal.com/nodejs/secure-rest-api-in-nodejs
@@ -102,6 +101,7 @@ app.get('/projects', function (req, res) {
     })
   })
   .catch((e)=>{
+	  console.log(e);
     res.status(500).send('Error retrieving data');
   })
   
