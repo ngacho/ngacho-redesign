@@ -4,7 +4,6 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const path = require('path');
-const envariable = require("dotenv").config({ path: __dirname + '/.env' });
 const PORT = process.env.CLIENT_PORT || 3030;
 const compression = require("compression");
 const helmet = require("helmet");
@@ -12,8 +11,6 @@ const { initializeApp } = require('firebase/app');
 const { getAuth, signInWithEmailAndPassword, createCustomToken } = require("firebase/auth");
 const constants = require('./credentials');
 const { Console } = require('console');
-const fetch = (...args) =>
-  import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const baseurl = process.env.API_BASE_URL;
 const logger = require('./utils/client-logger');
 const BaseModel = require('./models/base-model');
@@ -195,7 +192,47 @@ app.get(['/contact-me', '/contact'], function (req, res) {
 })
 
 
+app.get('/admin', authorizeAccess, (_, res)=>{
+
+  const cards = [
+    {
+      title : "Write a blog",
+      link : "/admin/write-blog"
+    }, 
+    {
+      title : "Edit a Blog",
+      link : "/admin/write-blog"
+    },
+    {
+      title : "Add/Edit a Project",
+      link : "/admin/projects-to-edit"
+    },
+    {
+      title : "Edit Bio",
+      link : "/admin/choose-bio-to-edit"
+    },
+    {
+      title : "Edit Contact Me",
+      link : "/admin/choose-contact-me-to-edit"
+    },
+    {
+      title : "Add files",
+      link : "/admin/misc-files"
+    }
+  ]
+
+  res.render('pages/admin', {
+    title : 'Admin Home',
+    adminCards : cards
+  })
+})
+
 app.listen(3030, () => {
   console.log('Server is listening on port 3030');
 });
 
+
+
+function authorizeAccess(req, res, next) {
+  next();
+}

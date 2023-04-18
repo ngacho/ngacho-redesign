@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Source+Code+Pro:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Source+Code+Pro:wght@300;500&display=swap');
+
+.dash-board-container {
+    width: 80%;
+    height: calc(100vh - 5rem);
+    margin: auto;
+    margin-top: 1rem;
+    display: grid;
+    overflow-y: scroll;
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 10px;
+}
+
+.action-card {
+    position: relative;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    height: 180px;
+    outline: 1px solid rgba(3, 49, 46, 0.2);
+    overflow-wrap: break-word;
+    display: table;
+    overflow: hidden;
+    text-align: center;
+    margin: 20px;
+    transition: transform .2s;
+    color: #03312E;
+    width: 100%;
+}
+
+.action-card:hover {
+    cursor: pointer;
+    color: rgba(3, 49, 46, 1);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.action-details {
+    line-height: 140px;
+    display: table-cell;
+    vertical-align: middle;
+    background-color: #FFF;
+    padding: 20px;
+    overflow-y: scroll;
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
+    position: absolute;
+    width: 100%;
+}
+
+@media only screen and (max-width: 960px) {
+    .dash-board-container {
+        width: 80%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+}
