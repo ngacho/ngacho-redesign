@@ -15,6 +15,9 @@ const { Console } = require('console');
 const fetch = (...args) =>
     import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const baseurl = process.env.apiBaseUrl;
+const BaseModel = require('./models/base-model');
+const fetchModel = new BaseModel();
+
 
 const logger  = require('./utils/client-logger');
 
@@ -85,9 +88,8 @@ app.get('/', function (req, res) {
     res.render('pages/index', { title: "Home" });
   });
   
-  app.get('/projects', function (req, res) {
-    fetch(`${baseurl}/database/projects`)
-    .then(response => response.json())
+app.get('/projects', function (req, res) {
+  fetchModel.getList(`${baseurl}/database/projects`)
     .then((data) => {
       res.render('pages/projects/projects-list', {
         title: "Projects",
@@ -103,8 +105,7 @@ app.get('/', function (req, res) {
   
   app.get('/blog', function(req, res){
   
-    fetch(`${baseurl}/database/blogs`)
-    .then(response => response.json())
+    fetchModel.getList(`${baseurl}/database/blogs`)
     .then((data) => {
       res.render('pages/blogs/blogs-list', {
         title : 'Blog',
@@ -124,8 +125,7 @@ app.get('/', function (req, res) {
     // default server side rendering.
     let ssr = req.params.ssr ? true : req.params.ssr 
   
-    fetch(`${baseurl}/database/blogs/${id}/${ssr}`)
-    .then(response => response.json())
+    fetchModel.getList(`${baseurl}/database/blogs/${id}/${ssr}`)
     .then((data) => {
       res.render('pages/blogs/blog-post', {
         title : data.title,
@@ -142,8 +142,7 @@ app.get('/', function (req, res) {
   app.get('/blog/tags/:tag', function(req, res){
     let tag = req.params.tag
   
-    fetch(`${baseurl}/database/blogs/tags/${tag}`)
-    .then(response => response.json())
+    fetchModel.getList(`${baseurl}/database/blogs/tags/${tag}`)
     .then((data) => {
       res.render('pages/blogs/blogs-list', {
         title : 'Blog Tags',
@@ -160,8 +159,7 @@ app.get('/', function (req, res) {
   
   // about page
   app.get(['/about-me', '/about'], function (req, res) {
-    fetch(`${baseurl}/database/bios`)
-    .then(response => response.json())
+    fetchModel.getList(`${baseurl}/database/bios`)
     .then((data) => {
       let activeBio = data.filter(bio => bio.active === true)[0];
    
@@ -179,8 +177,7 @@ app.get('/', function (req, res) {
   
   app.get(['/contact-me', '/contact'], function(req, res){
   
-    fetch(`${baseurl}/database/contact-me-texts`)
-    .then(response => response.json())
+    fetchModel.getList(`${baseurl}/database/contact-me-texts`)
     .then((data) => {
       let contact = data.filter(contact => contact.active === true)[0];
    
