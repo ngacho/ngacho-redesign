@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Source+Code+Pro:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Source+Code+Pro:wght@300;500&display=swap');
+
+
+img{
+    max-width: 350px;
+    height: auto;
+}
+
+.header-wrapper{
+    margin: auto;
+    width: max-content;
+}
+
+
+.bio-details-form{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 14px; 
+}
+
+
+.add-bio-container{
+    width: 80%;
+    min-width: 380px;
+    min-height: 480px;
+    height: calc(100vh - 5rem);
+    overflow-y: scroll;
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.add-bio-wrapper{
+    flex-direction: column;
+    align-self: center;
+    padding: 12px;
+    width: max-content;
+    
+}
+
+.add-bio-wrapper > img{
+    max-width: 360px;
+    outline: 1px solid red;
+}
+
+.bio-cover-container{
+    width: max-content;
+    margin: auto;
+}
+.bio-cover-input-container{
+    margin: 8px;
+}
+
+.title,
+.bio-text,
+.extra-info
+{
+    width: 360px;
+    height: auto;
+    outline: none;
+    min-width: 250px;
+    font-size: 20px;
+    font-weight: 200;
+    color: rgba(3, 49, 46, 0.9);
+    resize: none;
+    border: none;
+    padding: 4px;
+    outline: 1px solid rgba(3, 49, 46, 0.2);
+    border-radius: 4px;
+    margin: 8px;
+}
+
+.title::placeholder,
+.bio-text::placeholder, .extra-info::placeholder {
+    color: rgba(3, 49, 46, 0.7);
+}
+
+.post-bio{
+    margin: 12px auto 0px auto;
+}
+
+.btn {
+    width: 100%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 3px;
+    font-size: 20px;
+    background: rgba(3, 49, 46, 1);
+    color: #fff;
+}
+
+#post-bio-button[disabled]{
+    background: rgba(3, 49, 46, 0.7);
+    cursor: not-allowed;
+}

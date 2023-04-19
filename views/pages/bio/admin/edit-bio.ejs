@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="/assets/style/bio/admin/edit-bio.css" rel="stylesheet" type="text/css">
+
+    <%- include('../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/navigation-bar'); %>
+    </header>
+
+
+    <main>
+
+        <div class="header-wrapper">
+            <h2>Enter the details of your Bio</h2>
+        </div>
+    
+        <div class="add-bio-container">
+    
+            <div class="add-bio-wrapper">
+    
+                <form class="bio-details-form">
+                    <div class="bio-cover-container">
+                        <img id="bio-cover" src="http://placehold.it/180" alt="Bio Image" />
+                    </div>
+    
+                    <div class="bio-cover-input-container">
+                        <input id="image-upload-input" type="file" accept="image/*" />
+                    </div>
+                    <div class="bio-title-container">
+                        <textarea id="bio-title-input"  type="text" class="title" placeholder="Bio title..."></textarea>
+                    </div>
+                    <div class="bio-text-container">
+                        <textarea type="text" class="bio-text"
+                            id="bio-text-input"
+                            placeholder="Please enter a description of this bio."></textarea>
+                    </div>
+    
+                    <div class="post-bio">
+                        <button type="submit" id="post-bio-button" class="btn dark publish-btn">Post Bio</button>
+                    </div>
+                </form>
+    
+            </div>
+        </div>
+
+
+    </main>
+
+</body>
+
+</html>
