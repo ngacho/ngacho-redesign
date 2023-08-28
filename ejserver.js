@@ -201,11 +201,11 @@ app.get('/admin', authorizeAccess, (_, res)=>{
     }, 
     {
       title : "Edit a Blog",
-      link : "/admin/write-blog"
+      link : "/admin/choose-blog-to-edit"
     },
     {
       title : "Add/Edit a Project",
-      link : "/admin/projects-to-edit"
+      link : "/admin/choose-project-to-edit"
     },
     {
       title : "Edit Bio",
@@ -225,6 +225,75 @@ app.get('/admin', authorizeAccess, (_, res)=>{
     title : 'Admin Home',
     adminCards : cards
   })
+})
+
+app.get('/admin/choose-blog-to-edit', authorizeAccess, (_, res)=>{
+
+  fetchModel.getList(`${baseurl}/database/blogs`)
+    .then((data) => {
+
+      res.render('pages/blogs/admin/edit-blog-list', {
+        title: 'Edit a Blog',
+        blogs: data
+      });
+    })
+    .catch((e) => {
+      logger.error(`Error fetching data: ${e}`);
+      res.status(500).send('Error retrieving data');
+    })
+
+})
+
+app.get('/admin/choose-project-to-edit', authorizeAccess, (_, res)=>{
+
+  fetchModel.getList(`${baseurl}/database/projects`)
+    .then((data) => {
+
+      res.render('pages/projects/admin/edit-project-list', {
+        title: 'Edit a Project',
+        projects : data
+      });
+    })
+    .catch((e) => {
+      logger.error(`Error fetching data: ${e}`);
+      res.status(500).send('Error retrieving data');
+    })
+
+})
+
+app.get('/admin/choose-bio-to-edit', authorizeAccess, (_, res)=>{
+
+  fetchModel.getList(`${baseurl}/database/bios`)
+    .then((data) => {
+
+      res.render('pages/bio/admin/edit-bio-list', {
+        title: 'Edit a Bio',
+        bios: data
+      });
+    })
+    .catch((e) => {
+      logger.error(`Error fetching data: ${e}`);
+      res.status(500).send('Error retrieving data');
+    })
+
+})
+
+
+app.get('/admin/choose-contact-me-to-edit', authorizeAccess, (_, res)=>{
+
+  fetchModel.getList(`${baseurl}/database/contact-me-texts`)
+    .then((data) => {
+
+      res.render('pages/contact-me/admin/edit-contact-me-list', {
+        title: 'Edit a Contact Me',
+        contactMes: data
+      });
+    })
+    .catch((e) => {
+      logger.error(`Error fetching data: ${e}`);
+      res.status(500).send('Error retrieving data');
+    })
+
 })
 
 app.listen(3030, () => {

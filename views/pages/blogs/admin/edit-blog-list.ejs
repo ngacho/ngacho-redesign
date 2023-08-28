@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="/assets/style/blogs/admin/edit-blog-list.css" rel="stylesheet" type="text/css">
+
+    <%- include('../../../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../../../partials/navigation-bar'); %>
+    </header>
+
+
+    <main>
+
+
+        <div class="blog-gallery-wrapper">
+            <div class="blog-gallery">
+
+                <% for (let blog of blogs){ %>
+
+                    <div class="blog-item">
+                        <h3 class="blog-title"><a href="/admin/edit-blog/?<%= blog.id %>"><%= blog.title %></a></h3>
+                        <p class="blog-text"><a href="/admin/edit-blog/?<%= blog.id %>"><%= blog.text %></a>  </p>
+                        <div class="icons-wrapper">
+                           <i
+                                class="fa-solid fa-trash delete"></i></div>
+                    </div>
+
+
+                <% } %>
+
+            </div>
+            <a href="/admin/add-blog">
+                <div class="rounded-button">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </div>
+            </a>
+        </div>
+
+    </main>
+
+</body>
+
+</html>
