@@ -28,6 +28,7 @@ const fetchModel = new BaseModel();
 
 //express js server with initial path.
 const app = express();
+let initial_path = path.join(__dirname, "views/");
 
 // where static files are.
 
@@ -44,6 +45,7 @@ app.use(helmet.contentSecurityPolicy({
     ...helmet.contentSecurityPolicy.getDefaultDirectives(),
     "script-src": ["'self'",
       "https://gc.zgo.at",
+      "https://cdn.quilljs.com/1.3.6/quill.js",
       "https://smtpjs.com/v3/smtp.js",
       "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.js",
       "https://cdn.rawgit.com/showdownjs/showdown/2.1.0/dist/showdown.min.js",
@@ -53,6 +55,7 @@ app.use(helmet.contentSecurityPolicy({
     "style-src": ["'self'",
       "'unsafe-inline'",
       "https://fonts.googleapis.com",
+      "https://cdn.quilljs.com/1.3.6/quill.snow.css",
       "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css",
       "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
       "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.css",
@@ -226,6 +229,11 @@ app.get('/admin', authorizeAccess, (_, res)=>{
     adminCards : cards
   })
 })
+
+
+app.get(['/admin/write-blog', '/admin/edit-blog/*'], authorizeAccess, (_, res) => {
+  res.sendFile(path.join(initial_path, "pages/blogs/admin/edit-blog.html"))
+});
 
 app.get('/admin/choose-blog-to-edit', authorizeAccess, (_, res)=>{
 
