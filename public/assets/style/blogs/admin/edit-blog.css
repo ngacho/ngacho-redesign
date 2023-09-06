@@ -2,6 +2,8 @@
     padding: 20px;
     margin: 0 auto;
     width: 85%; /* Default width for large screens */
+    overflow-y: scroll;
+    max-height: calc(100vh - 50px);
 }
 
 
@@ -16,6 +18,62 @@
     border-radius: 2px;
 }
 
+.blog-summary-input {
+    font-size: 15px;
+    font-weight: medium;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    resize: vertical;
+    border-radius: 2px;
+}
+
+/* Styles for Material UI buttons */
+.mui-button-container {
+    text-align: center; /* Center-align the buttons */
+}
+
+.mui-button {
+    display: inline-block;
+    background-color: #25e478; /* Primary color */
+    color: #fff;
+    margin: 10px;
+    padding: 10px 30px; /* Wider padding for the buttons */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    width: 20%;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.mui-button:hover {
+    background-color: #03312E; /* Darker shade on hover */
+}
+
+/* Styles for Draft button */
+.draft-button {
+    background-color: #FFF; /* Amber color for Draft */
+    color: #0f0f0f;
+    border: 1px solid #03312E;
+}
+
+.cancel-button{
+    background-color: #ee867d;
+}
+
+.cancel-button:hover{
+    background-color: #E34234;
+
+}
+
+.draft-button:hover {
+    background-color: #FFA000; /* Darker shade on hover */
+}
 
 /* styles.css */
 .editor-tags {
