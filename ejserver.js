@@ -30,13 +30,6 @@ const fetchModel = new BaseModel();
 const app = express();
 let initial_path = path.join(__dirname, "views/");
 
-// where static files are.
-
-
-const options = {
-  origin: ['http://localhost:8080', 'https://gc.zgo.at', 'https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/'],
-}
-
 app.use(compression());
 app.use(cookieParser());
 app.use(helmet.contentSecurityPolicy({
