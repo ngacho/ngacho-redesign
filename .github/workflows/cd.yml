@@ -70,4 +70,4 @@ jobs:
           git pull origin ejs-templates
           git status
           npm install
-          pm2 restart rest-server
+          pm2 restart ejserver
