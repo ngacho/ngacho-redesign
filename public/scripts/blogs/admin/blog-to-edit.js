@@ -1,3 +1,5 @@
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
 var toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
     ['blockquote', 'code-block'],
@@ -43,26 +45,120 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-quill.on('text-change', function(delta, oldDelta, _) {
-    console.log(quill.getContents());
-});
-
-
 const submitButton = document.querySelector('.submit-button');
 submitButton.addEventListener('click', () => {
-    launch_toast('Submitted', 'Your blog was published.');
+    const title = document.querySelector('.editor-title').value;
+    const description = document.querySelector('.blog-summary-input').value;
+    const tags = document.querySelector('.tag-input').value;
+    const content = quill.root.innerHTML;
+    let date = new Date();
+
+    var blogData = {
+      id : `test-${date.getTime()}`,
+      title: title,
+      tags: tags.split(',').map((tag) => tag.trim()).filter(n => n),
+      descript: description,
+      html : content,
+      isPublished : true,
+      lastModified: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
+    }
+
+    const payload = {
+      doc: blogData
+    }
+
+  const requestOptions = {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      credentials: 'include',
+      body: JSON.stringify(payload)
+  };
+
+  fetch('http://localhost:8080/database/blogs', requestOptions).then(response => {
+    // Process the response body and status code simultaneously
+    Promise.all([response.text(), response.status]).then(([_, status]) => {
+            if (status === 200) {
+              clearForm();
+              launch_toast('Submitted', 'Your blog was published.');
+            } else {
+              
+              launch_toast('Error', 'Your blog was could not be published');
+              console.error(`ERROR LEVEL 3: ${status}`);
+            }
+        }).catch((err) => {
+            console.error(`ERROR LEVEL 2: ${err}`);
+            launch_toast('Error', 'Your blog was could not be published');
+        });
+    }).catch((err) => {
+        console.error(`ERROR LEVEL 1: ${err}`);
+        launch_toast('Error', 'Your blog was could not be published');
+  });
 });
 
 
 const draftButton = document.querySelector('.draft-button')
 draftButton.addEventListener('click', () => {
-    launch_toast('Saved', 'Your blog was saved as a draft.');
+    const title = document.querySelector('.editor-title').value;
+    const description = document.querySelector('.blog-summary-input').value;
+    const tags = document.querySelector('.tag-input').value;
+    const content = quill.root.innerHTML;
+    let date = new Date();
+
+
+    var blogData = {
+      id : `${title}-${date.getTime()}`,
+      title: title,
+      tags: tags.split(',').map((tag) => tag.trim()).filter(n => n),
+      descript: description,
+      html : content,
+      isPublished : false,
+      lastModified: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
+    }
+
+    const payload = {
+      doc: blogData
+    }
+
+  const requestOptions = {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      credentials: 'include',
+      body: JSON.stringify(payload)
+  };
+
+  fetch('http://localhost:8080/database/blogs', requestOptions).then(response => {
+    // Process the response body and status code simultaneously
+    Promise.all([response.text(), response.status]).then(([_, status]) => {
+            if (status === 200) {
+              clearForm();
+              launch_toast('Saved', 'Your blog was saved as a draft.');
+            } else {
+              launch_toast('Error', 'Your blog was could not be saved as draft');
+              console.error(`ERROR LEVEL 3: ${status}`);
+            }
+        }).catch((err) => {
+            console.error(`ERROR LEVEL 2: ${err}`);
+            launch_toast('Error', 'Your blog was could not be saved as draft');
+        });
+    }).catch((err) => {
+        console.error(`ERROR LEVEL 1: ${err}`);
+        launch_toast('Error', 'Your blog was could not be saved as draft');
+  });
+
 });
 
 const cancelButton = document.querySelector('.cancel-button')
 cancelButton.addEventListener('click', () => {
+    clearForm();
     launch_toast('Cancelled', 'Your blog was not saved.');
 });
+
+function clearForm() {
+    document.querySelector('.editor-title').value = '';
+    document.querySelector('.blog-summary-input').value = '';
+    document.querySelector('.tag-input').value = '';
+    quill.root.innerHTML = '';
+}
 
 
 
