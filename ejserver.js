@@ -106,10 +106,10 @@ app.get('/blog', function (req, res) {
 
   fetchModel.getList(`${baseurl}/database/blogs`)
     .then((data) => {
-      data = data.filter(blog => blog.isPublished === true);
+      const blogs = data.filter(blog => blog.isPublished === true);
       res.render('pages/blogs/blogs-list', {
-        title: 'Blog',
-        blogs: data
+        title: 'Blogs',
+        blogs: blogs
       })
     })
     .catch((e) => {
@@ -145,10 +145,10 @@ app.get('/blog/tags/:tag', function (req, res) {
 
   fetchModel.getListByTag(`${baseurl}/database/blogs`, tag)
     .then((data) => {
-      data = data.filter(blog => blog.isPublished === true);
+      const blogs = data.filter(blog => blog.isPublished === true);
       res.render('pages/blogs/blogs-list', {
         title: 'Blog Tags',
-        blogs: data,
+        blogs: blogs,
       })
     })
     .catch((e) => {
