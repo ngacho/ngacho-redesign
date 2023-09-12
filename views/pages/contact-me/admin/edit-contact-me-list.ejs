@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="/assets/style/contact-me/admin/edit-contact-me-list.css" rel="stylesheet" type="text/css">
+
+    <%- include('../../../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../../../partials/navigation-bar'); %>
+    </header>
+
+
+    <main>
+
+
+        <div class="contact-me-gallery-wrapper">
+            <div class="contact-me-gallery">
+
+                <% for (let contactMeItem of contactMes){ %>
+
+                    <div class="contact-me-item">
+                        <figure><img
+                                src="<%= contactMeItem.publicUrl %>"
+                                class="bio-photo"></figure>
+                        <h3 class="contact-me-title"><a href="/admin/edit-contact-me/?<%= contactMeItem.id %>"><%= contactMeItem.title %></a></h3>
+                        <p class="contact-me-text"><a href="/admin/edit-contact-me/?<%= contactMeItem.id %>"><%= contactMeItem.text %></a>  </p>
+                        <div class="icons-wrapper">
+                            <i
+                                class="fa-solid fa-circle-check activate <%= contactMeItem.active ? 'active' : '' %>"></i><i
+                                class="fa-solid fa-trash delete"></i></div>
+                    </div>
+
+
+                    <% } %>
+
+            </div>
+            <a href="/admin/add-contact-me">
+                <div class="rounded-button">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </div>
+            </a>
+        </div>
+
+    </main>
+
+</body>
+
+</html>

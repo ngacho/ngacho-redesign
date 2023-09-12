@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Source+Code+Pro:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;500&display=swap');
+
+.nav-container {
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #03312E;
+    padding: 1rem 1.5rem;
+}
+
+.nav-bar > .nav-container > .nav-logo {
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: 500;
+    color: white;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.nav-item {
+    margin-left: 3rem;
+    font-family: 'Source Code Pro', sans-serif;
+    padding: 0px 10px 0px 0px;
+    margin: 3px;
+}
+
+.nav-link {
+    font-size: 19px;
+    color: white;
+}
+
+.nav-link:hover {
+    color: #1ae5f7;
+    transition: 0.3s ease;
+}
+
+.nav-container >ul li:not(:last-child) {
+    border-right: 1.5px solid #F3DFBF;
+}
+
+.nav-container input[type="checkbox"] {
+    display: none;
+}
+
+.nav-container .hamburger-menu-label {
+    display: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: white;
+}
+
+@media only screen and (max-width: 800px) {
+
+    .nav-container .hamburger-menu-label {
+        display: block;
+        cursor: pointer;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 4.2rem;
+        flex-direction: column;
+        background-color: #03312E;
+        align-items: center;
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        text-align: center;
+        transition: 0.3s;
+        z-index: 9999;
+
+    }
+
+    .hamburger-menu input:checked + .hamburger-menu-label + .nav-menu{
+        display:  none;
+    }
+
+    .nav-container input[type="checkbox"]:checked + .hamburger-menu-label ~ .nav-menu {
+        left: 0;
+    }
+
+    .nav-item {
+        margin: 1rem 0;
+    }
+
+    .nav-container >ul li:not(:last-child) {
+        width: 100%;
+        padding-bottom: 1rem;
+        border-right: none;
+        border-bottom: 1.5px solid #F3DFBF;
+    }
+
+    .nav-container input[type="checkbox"]:checked + .hamburger-menu-label .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-container input[type="checkbox"]:checked + .hamburger-menu-label .bar:nth-child(1) {
+        -webkit-transform: translateY(8px) rotate(45deg);
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .nav-container input[type="checkbox"]:checked + .hamburger-menu-label .bar:nth-child(3) {
+        -webkit-transform: translateY(-8px) rotate(-45deg);
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+}

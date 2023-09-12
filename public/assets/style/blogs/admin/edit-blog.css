@@ -1,0 +1,272 @@
+.editor-container {
+    padding: 20px;
+    margin: 0 auto;
+    width: 85%;
+    /* Default width for large screens */
+    overflow-y: hidden;
+    max-height: calc(100vh - 50px);
+}
+
+#editor{
+    max-height: 400px;
+    overflow: auto;
+}
+
+
+.editor-title {
+    font-size: 24px;
+    font-weight: bold;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    resize: vertical;
+    border-radius: 2px;
+}
+
+.blog-summary-input {
+    font-size: 15px;
+    font-weight: medium;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    resize: vertical;
+    border-radius: 2px;
+}
+
+/* Styles for Material UI buttons */
+.mui-button-container {
+    text-align: center;
+    /* Center-align the buttons */
+}
+
+.mui-button {
+    display: inline-block;
+    background-color: #25e478;
+    /* Primary color */
+    color: #fff;
+    margin: 10px;
+    padding: 10px 30px;
+    /* Wider padding for the buttons */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+    text-align: center;
+    width: 20%;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.mui-button:hover {
+    background-color: #03312E;
+    /* Darker shade on hover */
+}
+
+/* Styles for Draft button */
+.draft-button {
+    background-color: #FFF;
+    /* Amber color for Draft */
+    color: #0f0f0f;
+    border: 1px solid #03312E;
+}
+
+.cancel-button {
+    background-color: #ee867d;
+}
+
+.cancel-button:hover {
+    background-color: #E34234;
+
+}
+
+.draft-button:hover {
+    background-color: #FFA000;
+    /* Darker shade on hover */
+}
+
+/* styles.css */
+.editor-tags {
+    margin-bottom: 10px;
+}
+
+.tag-input {
+    font-size: 16px;
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 1px;
+    resize: none;
+}
+
+.blog-content-editor {
+    margin: 10px auto;
+}
+
+#toast {
+    visibility: hidden;
+    max-width: 150px;
+    height: 50px;
+    /*margin-left: -125px;*/
+    margin: auto;
+    background-color: #158c49;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    font-size: 17px;
+    white-space: nowrap;
+}
+
+#toast #img {
+    height: 50px;
+    float: left;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    box-sizing: border-box;
+    background-color: #03312E;
+    color: #fff;
+}
+
+#toast #desc {
+    color: #fff;
+    padding: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#toast.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 2s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fadeout 0.5s 4.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes expand {
+    from {
+        min-width: 50px
+    }
+
+    to {
+        min-width: 350px
+    }
+}
+
+@keyframes expand {
+    from {
+        min-width: 50px
+    }
+
+    to {
+        min-width: 350px
+    }
+}
+
+@-webkit-keyframes stay {
+    from {
+        min-width: 350px
+    }
+
+    to {
+        min-width: 350px
+    }
+}
+
+@keyframes stay {
+    from {
+        min-width: 350px
+    }
+
+    to {
+        min-width: 350px
+    }
+}
+
+@-webkit-keyframes shrink {
+    from {
+        min-width: 350px;
+    }
+
+    to {
+        min-width: 50px;
+    }
+}
+
+@keyframes shrink {
+    from {
+        min-width: 350px;
+    }
+
+    to {
+        min-width: 50px;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 60px;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 60px;
+        opacity: 0;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* For iPad and smaller screens */
+    .editor-container {
+        width: 100%;
+    }
+
+    .mui-button {
+        width: fit-content;
+        padding: 10px;
+        font-size: 18px;
+    }
+}

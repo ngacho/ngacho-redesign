@@ -4,8 +4,8 @@ const CopyPlugin = require("copy-webpack-plugin");
 const path = require('path');
 
 module.exports = {
-  mode : 'development',
-  devtool: "source-map",
+  mode : 'production',
+  devtool: false,
 
   // https://webpack.js.org/concepts/entry-points/#multi-page-application
   entry: {
@@ -92,6 +92,10 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: "images", to: "images" },
+        {
+          from : path.resolve(__dirname, "robots.txt"),
+          to : ''
+        }
       ],
     }),
 
@@ -135,6 +139,13 @@ module.exports = {
       inject: true,
       chunks: ['blog', 'navigation', 'allStyles', 'blogPageStyles'],
       filename: 'blog.html'
+    }),
+
+    new HtmlWebpackPlugin({
+      template: './app/view/blog/blog-tags.html',
+      inject: true,
+      chunks: ['blog', 'navigation', 'allStyles', 'blogPageStyles'],
+      filename: 'blog-tags.html'
     }),
 
     new HtmlWebpackPlugin({

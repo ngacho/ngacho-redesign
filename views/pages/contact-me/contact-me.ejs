@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="/assets/style/contact-me/contact-me.css" rel="stylesheet" type="text/css">
+
+    <%- include('../../partials/head'); %>
+</head>
+
+<body class="container">
+    <header>
+        <%- include('../../partials/navigation-bar'); %>
+    </header>
+
+    <div class="contact-me-container">
+        <div class="contact-me-wrapper">
+            <div class="contact-me-intro">
+                <h1 class="open-invite animate-entry"><%= contact.title %></h1>
+                <!-- This is how you output raw html to a template. -->
+                <%- contact.html %>
+            </div>
+            <div class="contact-me-places">
+                <div class="social-media-contacts">
+                    <h1 class="follow-me-prompt animate-entry">Find me on these social networks:</h1>
+                    <div class="social-logos"><a class="animate-entry" href="https://github.com/ngacho"
+                            rel="noopener noreferrer" target="_blank"><img src="/assets/images/github-logo.png"
+                                width="25"></a><a class="animate-entry" href="https://cutt.ly/brandon-linkedin"
+                            rel="noopener noreferrer" target="_blank"><img src="/assets/images/linked-in-logo.png"
+                                width="25"></a></div>
+                    <div class="license">
+                        <p class="attribution">Created and Designed by Brandon Ngacho. Licensed under the Creative
+                            Commons Attribution-NonCommercial-ShareAlike 4.0 International License</p><a
+                            class="animate-entry license-terms" rel="noopener noreferrer" target="_blank"
+                            href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img
+                                src="/assets/images/by-nc-sa.png" alt="Licence image" height="40"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

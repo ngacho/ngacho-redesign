@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="/assets/style/bio/admin/edit-bio-list.css" rel="stylesheet" type="text/css">
+
+    <%- include('../../../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../../../partials/navigation-bar'); %>
+    </header>
+
+
+    <main>
+
+
+        <div class="bio-gallery-wrapper">
+            <div class="bio-gallery">
+
+                <% for (let bio of bios){ %>
+
+                    <div class="bio-item">
+                        <figure><img
+                                src="<%= bio.publicUrl %>"
+                                class="bio-photo"></figure>
+                        <h3 class="bio-title"><a href="/admin/edit-bio/?<%= bio.id %>"><%= bio.title %></a></h3>
+                        <p class="bio-text"><a href="/admin/edit-bio/?<%= bio.id %>"><%= bio.text %></a>  </p>
+                        <div class="icons-wrapper">
+                            <i
+                                class="fa-solid fa-circle-check <%= bio.active ? 'active' : '' %>"></i><i
+                                class="fa-solid fa-trash"></i></div>
+                    </div>
+
+
+                    <% } %>
+
+            </div>
+            <a href="/admin/add-bio">
+                <div class="rounded-button">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </div>
+            </a>
+        </div>
+
+    </main>
+
+</body>
+
+</html>

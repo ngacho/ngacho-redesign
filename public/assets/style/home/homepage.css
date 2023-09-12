@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Source+Code+Pro:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;500&display=swap');
+
+.intro-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    height: calc(100vh - 6.5rem);
+    min-height: calc(100vh - 6.5rem);
+}
+
+.intro-wrapper {
+    color: #03312E;
+}
+
+.intro {
+    padding: 10px;
+    font-weight: 400;
+    font-size: 5em;
+}
+
+.wrap {
+    border-right: 0.08em solid #28807a
+}
+
+@media only screen and (max-width: 768px) {
+
+    .intro {
+        padding: 10px;
+        font-weight: 300;
+        font-size: 3em;
+    }
+
+}
+
+@media only screen and (max-width: 517px) {
+
+    /*footer issues on smaller devices*/
+    .intro-container {
+        height: calc(100vh - 7rem);
+        min-height: calc(100vh - 7rem);
+    }
+}

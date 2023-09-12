@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="/assets/style/bio/aboutme.css" rel="stylesheet" type="text/css">
+
+    <%- include('../../partials/head'); %>
+</head>
+
+<body class="container">
+    <header>
+        <%- include('../../partials/navigation-bar'); %>
+    </header>
+
+    <div class="descript-container">
+        <div class="descript-wrapper">
+            <img class="profile-photo animate-entry"
+                loading="lazy"
+                src="<%= bio.publicUrl %>">
+            <div class="descript">
+                <p><%= bio.text %></p>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

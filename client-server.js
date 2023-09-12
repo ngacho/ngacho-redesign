@@ -14,6 +14,10 @@ const constants = require('./credentials');
 const { Console } = require('console');
 const fetch = (...args) =>
     import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const baseurl = process.env.apiBaseUrl;
+const BaseModel = require('./models/base-model');
+const fetchModel = new BaseModel();
+
 
 const logger  = require('./utils/client-logger');
 
@@ -73,16 +77,120 @@ const firebaseApp = initializeApp(
     constants.firebaseConfig
 );
 
-
-// home page sending to port 3000.
-app.get('/', (req, res) => {
-    res.sendFile(path.join(initial_path, "index.html"));
-})
-
 app.listen(PORT, () => {
     logger.info(`Server is running on port ${PORT}`);
 });
 
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+
+app.get('/', function (req, res) {
+    res.render('pages/index', { title: "Home" });
+  });
+  
+app.get('/projects', function (req, res) {
+  fetchModel.getList(`${baseurl}/database/projects`)
+    .then((data) => {
+      res.render('pages/projects/projects-list', {
+        title: "Projects",
+        projects: data
+      })
+    })
+    .catch((error)=>{
+        logger.error(`Error fetching projects: ${error}`);
+      res.status(500).send('Error retrieving data');
+    })
+    
+  })
+  
+  app.get('/blog', function(req, res){
+  
+    fetchModel.getList(`${baseurl}/database/blogs`)
+    .then((data) => {
+      res.render('pages/blogs/blogs-list', {
+        title : 'Blog',
+        blogs : data
+      })
+    })
+    .catch((e)=>{
+    logger.error(`Error fetching blogs: ${e}`);
+      res.status(500).send('Error retrieving data');
+    })
+  
+    
+  })
+  
+  app.get('/blog-post/:id/*', function(req, res){
+    let id = req.params.id
+    // default server side rendering.
+    let ssr = req.params.ssr ? true : req.params.ssr 
+  
+    fetchModel.getList(`${baseurl}/database/blogs/${id}/${ssr}`)
+    .then((data) => {
+      res.render('pages/blogs/blog-post', {
+        title : data.title,
+        blog : data
+      })
+    })
+    .catch((e)=>{
+        logger.error(`Error fetching blog: ${id} - ${e}`);
+      res.status(500).send('Error retrieving data');
+    })
+  
+  })
+  
+  app.get('/blog/tags/:tag', function(req, res){
+    let tag = req.params.tag
+  
+    fetchModel.getList(`${baseurl}/database/blogs/tags/${tag}`)
+    .then((data) => {
+      res.render('pages/blogs/blogs-list', {
+        title : 'Blog Tags',
+        blogs : data,
+      })
+    })
+    .catch((e)=>{
+        logger.error(`Error fetching blogs by tag ${tag}: ${e}`);
+      res.status(500).send('Error retrieving data');
+    })
+    
+    
+  })
+  
+  // about page
+  app.get(['/about-me', '/about'], function (req, res) {
+    fetchModel.getList(`${baseurl}/database/bios`)
+    .then((data) => {
+      let activeBio = data.filter(bio => bio.active === true)[0];
+   
+      res.render('pages/bio/about-me', {
+        title : 'About Me',
+        bio : activeBio
+      });
+    })
+    .catch((e)=>{
+        logger.error(`Error fetching data: ${e}`);
+      res.status(500).send('Error retrieving data');
+    })
+  
+  });
+  
+  app.get(['/contact-me', '/contact'], function(req, res){
+  
+    fetchModel.getList(`${baseurl}/database/contact-me-texts`)
+    .then((data) => {
+      let contact = data.filter(contact => contact.active === true)[0];
+   
+      res.render('pages/contact-me/contact-me', {
+        title : 'Contact Me',
+        contact : contact
+      })
+    })
+    .catch((e)=>{
+        logger.error(`Error fetching data: ${e}`);
+      res.status(500).send('Error retrieving data');
+    })
+  })
 /**
  * Functions related to the admin page.
  * admin page.
@@ -143,34 +251,6 @@ app.get(['/admin/add-misc-file', '/admin/edit-misc-file/*'], authorizeAccess, (r
     res.sendFile(path.join(initial_path, "misc-file-editor.html"));
 
 });
-
-// blog page
-app.get('/blog', (req, res) => {
-    res.sendFile(path.join(initial_path, "blog.html"));
-});
-
-app.get('/blog/tags/*', (req, res) => {
-    res.sendFile(path.join(initial_path, "blog.html"));
-});
-
-app.get('/projects', (req, res) => {
-    res.sendFile(path.join(initial_path, "projects.html"));
-});
-
-app.get(['/about-me', '/about'], (req, res) => {
-    res.sendFile(path.join(initial_path, "aboutme.html"));
-});
-
-app.get(['/contact-me', '/contact'], (req, res) => {
-    res.sendFile(path.join(initial_path, "/app/view/contact-me/contact.html"));
-});
-
-// listen for the blog-post page
-app.get('/blog-post', (req, res) => {
-    req.originalUrl;
-    res.sendFile(path.join(initial_path, "blog_post.html"));
-});
-
 
 app.use((req, res) => {
     res.sendFile(path.join(initial_path, "404.html"));

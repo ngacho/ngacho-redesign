@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="/assets/style/projects/admin/edit-project-list.css" rel="stylesheet" type="text/css">
+
+    <%- include('../../../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../../../partials/navigation-bar'); %>
+    </header>
+
+
+    <main>
+        <div class="projects-parent-container">
+            <div class="header-wrapper">
+                <h2 class="project-list-header">
+                    Pick a project to edit
+                </h2>
+            </div>
+            
+        
+            <div class="project-list-container">
+        
+                <div class="project-gallery">  
+                        
+                    <% for (let project of projects){ %>
+        
+                        <div class="project-gallery-item">
+                            <figure>
+                                <img
+                                    src="<%= project.publicUrl %>"
+                                    alt="photo of <%= project.title %>"
+                                    class="project-gallery-image">
+                            </figure>
+                            <div class="project-gallery-item-actions"
+                                id="<%= project.id %>"
+                            >
+                                <ul>
+                                    <li class="project-gallery-item-edit">
+                                        <i class="fas fa-pen <%= project.title %>"
+                                            id="edit <%= project.id %>"
+                                            aria-hidden="true">
+
+                                        </i>
+                                    </li>
+                                    <li class="project-gallery-item-delete">
+                                        <i class="fas fa-trash <%= project.title %>"
+                                            id="delete <%= project.id %>"
+                                            aria-hidden="true">
+
+                                        </i>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <h3 class="project-title"><a href="/admin/edit-project/?<%= project.id %>"><%= project.title %></a></h3>   
+                        </div>
+        
+                    <% } %>
+
+                </div>
+        
+            </div>
+        
+            <a href="/admin/new-project">
+                <div class="rounded-button">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </div>
+            </a>
+            
+        </div>
+
+    </main>
+</body>
+</html>
+
