@@ -252,7 +252,6 @@ app.get(['/admin/add-misc-file', '/admin/edit-misc-file/*'], authorizeAccess, (r
 
 });
 
-
 app.use((req, res) => {
     res.sendFile(path.join(initial_path, "404.html"));
 });
