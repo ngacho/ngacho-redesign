@@ -4,7 +4,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "ejs-templates" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
