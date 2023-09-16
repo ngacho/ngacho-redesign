@@ -54,7 +54,6 @@ submitButton.addEventListener('click', () => {
     let date = new Date();
 
     var blogData = {
-      id : `test-${date.getTime()}`,
       title: title,
       tags: tags.split(',').map((tag) => tag.trim()).filter(n => n),
       descript: description,
@@ -63,8 +62,17 @@ submitButton.addEventListener('click', () => {
       lastModified: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
     }
 
+    let id = getFileId(blogData);
+    blogData = {...blogData, id: id};
+
     const payload = {
       doc: blogData
+    }
+
+
+    if(!title || !description || !tags || !content) {
+      launch_toast('Error', 'Please fill all the fields', 'error');
+      return;
     }
 
   const requestOptions = {
@@ -73,6 +81,8 @@ submitButton.addEventListener('click', () => {
       credentials: 'include',
       body: JSON.stringify(payload)
   };
+
+  
 
   fetch('http://localhost:8080/database/blogs', requestOptions).then(response => {
     // Process the response body and status code simultaneously
@@ -106,7 +116,6 @@ draftButton.addEventListener('click', () => {
 
 
     var blogData = {
-      id : `${title}-${date.getTime()}`,
       title: title,
       tags: tags.split(',').map((tag) => tag.trim()).filter(n => n),
       descript: description,
@@ -118,6 +127,14 @@ draftButton.addEventListener('click', () => {
     const payload = {
       doc: blogData
     }
+
+    if(!title || !description || !tags || !content) {
+      launch_toast('Error', 'Please fill all the fields', 'error');
+      return;
+    }
+
+    let id = getFileId(blogData);
+    blogData = {...blogData, id: id};
 
   const requestOptions = {
       method: 'POST',
@@ -186,4 +203,24 @@ function launch_toast(title, text) {
     x.appendChild(textDiv);
 
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+}
+
+function getFileId(fileObject) {
+      if(fileObject.id) {
+        return fileObject.id;
+      }
+
+      var id = ''
+      let letters = 'abcdefghijklmnopqrstuvwxyz';
+      // generate project id.
+      let fileTitle = fileObject.title.split(" ").join("-");
+      let noPunctuationTitle = fileTitle.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+      let fixedTitle = noPunctuationTitle.replace(/\s{2,}/g," ");
+      for (let i = 0; i < 4; i++) {
+          id += letters[Math.floor(Math.random() * letters.length)];
+      }
+      const fileId = `${fixedTitle}-${id}`;
+
+      return fileId;
+
 }
