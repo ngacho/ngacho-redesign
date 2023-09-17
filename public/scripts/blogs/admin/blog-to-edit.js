@@ -1,4 +1,4 @@
-months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 var toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -24,6 +24,12 @@ var quill = new Quill('#editor', {
     theme: 'snow',
     placeholder: 'Start writing your blog...',
 });
+
+// check if link has anything.
+let path_extension = decodeURI(location.search);
+var blogId = path_extension.slice(1);
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
     
@@ -59,11 +65,11 @@ submitButton.addEventListener('click', () => {
       descript: description,
       html : content,
       isPublished : true,
-      lastModified: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
+      lastModified: `${date.getDate()}-${months[date.getMonth()]}-${date.getFullYear()}`
     }
 
-    let id = getFileId(blogData);
-    blogData = {...blogData, id: id};
+    let id = getFileId(blogData.title);
+    blogData = {...blogData, id: blogId ?? id};
 
     const payload = {
       doc: blogData
@@ -133,15 +139,15 @@ draftButton.addEventListener('click', () => {
       return;
     }
 
-    let id = getFileId(blogData);
-    blogData = {...blogData, id: id};
+    let id = getFileId(blogData.title);
+    blogData = {...blogData, id: blogId ?? id};
 
-  const requestOptions = {
-      method: 'POST',
-      headers: new Headers({ 'Content-Type': 'application/json' }),
-      credentials: 'include',
-      body: JSON.stringify(payload)
-  };
+    const requestOptions = {
+        method: 'POST',
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+        credentials: 'include',
+        body: JSON.stringify(payload)
+    };
 
   fetch('http://localhost:8080/database/blogs', requestOptions).then(response => {
     // Process the response body and status code simultaneously
@@ -175,6 +181,7 @@ function clearForm() {
     document.querySelector('.blog-summary-input').value = '';
     document.querySelector('.tag-input').value = '';
     quill.root.innerHTML = '';
+    blogId = '';
 }
 
 
@@ -205,15 +212,12 @@ function launch_toast(title, text) {
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
 }
 
-function getFileId(fileObject) {
-      if(fileObject.id) {
-        return fileObject.id;
-      }
+function getFileId(title) {
 
       var id = ''
       let letters = 'abcdefghijklmnopqrstuvwxyz';
       // generate project id.
-      let fileTitle = fileObject.title.split(" ").join("-");
+      let fileTitle = title.split(" ").join("-");
       let noPunctuationTitle = fileTitle.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
       let fixedTitle = noPunctuationTitle.replace(/\s{2,}/g," ");
       for (let i = 0; i < 4; i++) {
