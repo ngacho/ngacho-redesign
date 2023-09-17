@@ -22,12 +22,12 @@
 
                 <% for (let blog of blogs){ %>
 
-                    <div class="blog-item">
+                    <div class="blog-item" id="<%= blog.id %>">
                         <h3 class="blog-title"><a href="/admin/edit-blog/?<%= blog.id %>"><%= blog.title %></a></h3>
                         <p class="blog-text"><a href="/admin/edit-blog/?<%= blog.id %>"><%= blog.text %></a>  </p>
                         <div class="icons-wrapper">
                            <i
-                                class="fa-solid fa-trash delete"></i></div>
+                                class="fa-solid fa-trash delete-<%= blog.id %>"></i></div>
                     </div>
 
 
@@ -42,6 +42,8 @@
         </div>
 
     </main>
+
+    <script src="/scripts/blogs/admin/blogs-list.js"></script>
 
 </body>
 
