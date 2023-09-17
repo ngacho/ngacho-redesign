@@ -1,3 +1,4 @@
+const baseUrl = "https://api.ngacho.com";
 const blogGallery = document.querySelector('.blog-gallery');
 blogGallery.addEventListener('click', e => {
     if (e.target && e.target.nodeName == 'I' && e.target.className.includes("fa-trash")) {
@@ -5,7 +6,7 @@ blogGallery.addEventListener('click', e => {
         const id = e.target.className.replace("fa-solid fa-trash delete-", '');
         console.log(`delete ${id}`);
 
-        fetch(`https://api.ngacho.com/database/blogs/${id}`, {
+        fetch(`${baseUrl}/database/blogs/${id}`, {
             method: 'DELETE',
             credentials: 'include'
         }).then(response => {

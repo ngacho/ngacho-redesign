@@ -1,3 +1,4 @@
+const baseUrl = "https://api.ngacho.com";
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 var toolbarOptions = [
@@ -90,7 +91,7 @@ submitButton.addEventListener('click', () => {
 
   
 
-  fetch('http://localhost:8080/database/blogs', requestOptions).then(response => {
+  fetch(`${baseUrl}/database/blogs`, requestOptions).then(response => {
     // Process the response body and status code simultaneously
     Promise.all([response.text(), response.status]).then(([_, status]) => {
             if (status === 200) {
@@ -150,7 +151,7 @@ draftButton.addEventListener('click', () => {
         body: JSON.stringify(payload)
     };
 
-  fetch('http://localhost:8080/database/blogs', requestOptions).then(response => {
+  fetch(`${baseUrl}/database/blogs`, requestOptions).then(response => {
     // Process the response body and status code simultaneously
     Promise.all([response.text(), response.status]).then(([_, status]) => {
             if (status === 200) {
@@ -242,7 +243,7 @@ function setUpBlog(blogId){
     credentials: 'include',
 };
 
-  fetch(`http://localhost:8080/database/blogs/${blogId}`, requestOptions).then(response => {
+  fetch(`${baseUrl}/database/blogs/${blogId}`, requestOptions).then(response => {
     // Process the response body and status code simultaneously
     Promise.all([response.text(), response.status]).then(([data, status]) => {
 
