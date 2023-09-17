@@ -52,6 +52,7 @@ jobs:
         port: 22
         script: |
           cd /srv/ngacho-redesign
+          redis-cli flushall
           pm2 stop ejserver
           ssh -vT git@github.com
           git pull origin main          
