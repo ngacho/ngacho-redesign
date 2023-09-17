@@ -28,7 +28,7 @@ var quill = new Quill('#editor', {
 // check if link has anything.
 let path_extension = decodeURI(location.search);
 var blogId = path_extension.slice(1);
-
+if(blogId) setUpBlog(blogId)
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -130,6 +130,9 @@ draftButton.addEventListener('click', () => {
       lastModified: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
     }
 
+    let id = getFileId(blogData.title);
+    blogData = {...blogData, id: blogId ?? id};
+
     const payload = {
       doc: blogData
     }
@@ -139,8 +142,6 @@ draftButton.addEventListener('click', () => {
       return;
     }
 
-    let id = getFileId(blogData.title);
-    blogData = {...blogData, id: blogId ?? id};
 
     const requestOptions = {
         method: 'POST',
@@ -153,6 +154,7 @@ draftButton.addEventListener('click', () => {
     // Process the response body and status code simultaneously
     Promise.all([response.text(), response.status]).then(([_, status]) => {
             if (status === 200) {
+              window.history.replaceState({}, document.title, "/" + "admin/write-blog");
               clearForm();
               launch_toast('Saved', 'Your blog was saved as a draft.');
             } else {
@@ -227,4 +229,38 @@ function getFileId(title) {
 
       return fileId;
 
+}
+
+
+function setUpBlog(blogId){
+  console.log(`called set up blog : ${blogId}`);
+  if(!blogId) return;
+
+  const requestOptions = {
+    method: 'GET',
+    headers: new Headers({ 'Content-Type': 'application/json' }),
+    credentials: 'include',
+};
+
+  fetch(`http://localhost:8080/database/blogs/${blogId}`, requestOptions).then(response => {
+    // Process the response body and status code simultaneously
+    Promise.all([response.text(), response.status]).then(([data, status]) => {
+
+      if (status === 200) {
+        const blog = JSON.parse(data);
+        document.querySelector('.editor-title').value = blog.title;
+        document.querySelector('.blog-summary-input').value = blog.descript;
+        document.querySelector('.tag-input').value = blog.tags.join(', ');
+        quill.root.innerHTML = blog.html;
+      } else {
+        launch_toast('Error', 'Blog could not be loaded');
+        console.error(`ERROR LEVEL 3: ${status}`);
+      }
+            
+    }).catch((err) => {
+        console.error(`ERROR LEVEL 2: ${err}`);
+    });
+  }).catch((err) => {
+      console.error(`ERROR LEVEL 1: ${err}`);
+  });
 }
