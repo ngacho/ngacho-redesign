@@ -120,13 +120,10 @@ app.get('/blog', function (req, res) {
 
 })
 
-app.get('/blog-post/:id/*', function (req, res) {
+app.get('/blog-post/:id', function (req, res) {
   let id = req.params.id
-  // default server side rendering.
-  let ssr = req.params.ssr ? true : req.params.ssr
 
-
-  fetchModel.getListItemById(`${baseurl}/database/blogs`, id, ssr)
+  fetchModel.getListItemById(`${baseurl}/database/blogs`, id)
     .then((data) => {
       res.render('pages/blogs/blog-post', {
         title: data.title,

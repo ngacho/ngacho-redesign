@@ -63,9 +63,9 @@ module.exports = class BaseModel{
      * @param {object id} id 
      * @returns promise of single object
      */
-    async getListItemById(url, id, serverSideRendering){
+    async getListItemById(url, id){
         return new Promise((resolve, reject) => {
-            fetch(`${url}/${id}/${serverSideRendering}`, {credentials: 'include'}).then((response) => {
+            fetch(`${url}/${id}`, {credentials: 'include'}).then((response) => {
                 Promise.all([response.json(), response.status])
                     .then(([data, status]) => {
                         if (status === 200) {
