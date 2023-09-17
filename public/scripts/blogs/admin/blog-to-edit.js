@@ -234,7 +234,6 @@ function getFileId(title) {
 
 
 function setUpBlog(blogId){
-  console.log(`called set up blog : ${blogId}`);
   if(!blogId) return;
 
   const requestOptions = {
