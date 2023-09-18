@@ -238,9 +238,10 @@ function setUpBlog(blogId){
 
   const requestOptions = {
     method: 'GET',
+    mode : 'cors',
     headers: new Headers({ 'Content-Type': 'application/json' }),
     credentials: 'include',
-};
+  };
 
   fetch(`${baseUrl}/database/blogs/${blogId}`, requestOptions).then(response => {
     // Process the response body and status code simultaneously
