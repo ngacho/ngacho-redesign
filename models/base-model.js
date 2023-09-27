@@ -9,9 +9,9 @@ module.exports = class BaseModel{
      * 
      * @returns {Promise with array of objects}
      */
-    async getList(url){
+    async getList(url, includeCredentials = false){
         return new Promise((resolve, reject) => {
-            fetch(url, {credentials: 'include'})
+            fetch(url, {credentials: includeCredentials ? 'include' : 'omit'})
                 .then(response => {
                     // Process the response body and status code simultaneously
                     Promise.all([response.json(), response.status])
@@ -63,9 +63,9 @@ module.exports = class BaseModel{
      * @param {object id} id 
      * @returns promise of single object
      */
-    async getListItemById(url, id){
+    async getListItemById(url, id, includeCredentials = false){
         return new Promise((resolve, reject) => {
-            fetch(`${url}/${id}`, {credentials: 'include'}).then((response) => {
+            fetch(`${url}/${id}`, {credentials: includeCredentials ? 'include' : 'omit'}).then((response) => {
                 Promise.all([response.json(), response.status])
                     .then(([data, status]) => {
                         if (status === 200) {
